@@ -1,0 +1,190 @@
+Table User {
+  id serial [pk]
+  username varchar
+  hashed_password varchar
+  email varchar
+  clan_id integer
+}
+
+Table Clan {
+  id serial [pk]
+  clan_name varchar(32)
+  owner_user_id integer
+}
+
+Table Message {
+  id serial [pk]
+  user_id integer [not null]
+  clan_id integer [not null]
+  message varchar [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table ChallengeType {
+  id serial [pk]
+  type varchar
+}
+
+Table Mode {
+  id serial [pk]
+  mode varchar [not null]
+}
+
+Table WeaponType {
+  id serial [pk]
+  type varchar
+}
+
+Table Legend {
+  id serial [pk]
+  name varchar [not null]
+  type varchar [not null]
+  }
+
+Table Weapon {
+  id serial [pk]
+  name varchar [not null, unique]
+  type integer
+  subtype integer
+}
+
+Table AbilityObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  ability varchar [not null]
+  legend_id integer [not null]
+}
+
+Table CollectObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table DMGObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table FinishObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+
+Table HealthObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table KKDAObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table LootObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table PlayObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table PurchaseObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table ScanObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table SurviveObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table WinObjective {
+  id serial [pk]
+  challenge_id integer [not null]
+  objective varchar [not null]
+}
+
+Table UserChallenge {
+  id serial [pk]
+  challenge_label varchar [not null]
+  challenge_type_id integer [not null]
+  user_id integer [not null]
+  status varchar [not null, default: "open"]
+  value integer [not null]
+}
+
+Table UserChallengeDimensionTable {
+  id serial [pk]
+  user_challenge_id integer [not null]
+  weapon_id integer [not null]
+  mode_id integer [not null]
+  legend_id integer [not null]
+  value integer [not null]
+}
+
+Ref: "User"."clan_id" - "Clan"."id"
+
+Ref: "Clan"."owner_user_id" - "User"."id"
+
+Ref: "ChallengeType"."id" < "AbilityObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "CollectObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "DMGObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "FinishObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "HealthObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "KKDAObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "LootObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "PlayObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "PurchaseObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "ScanObjective"."challenge_id"
+
+Ref: "Weapon"."type" > "WeaponType"."type"
+
+Ref: "WeaponType"."type" < "Weapon"."subtype"
+
+Ref: "ChallengeType"."id" < "SurviveObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "WinObjective"."challenge_id"
+
+Ref: "ChallengeType"."id" < "UserChallenge"."challenge_type_id"
+
+Ref: "User"."id" < "UserChallenge"."user_id"
+
+Ref: "UserChallengeDimensionTable"."user_challenge_id" < "UserChallenge"."id"
+
+Ref: "UserChallengeDimensionTable"."weapon_id" < "Weapon"."id"
+
+Ref: "Mode"."id" < "UserChallengeDimensionTable"."mode_id"
+
+Ref: "Legend"."id" < "UserChallengeDimensionTable"."legend_id"
+
+Ref: "User"."id" < "Message"."user_id"
+
+Ref: "Clan"."id" < "Message"."clan_id"
