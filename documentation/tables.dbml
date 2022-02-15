@@ -10,6 +10,8 @@ Table Clan {
   id serial [pk]
   clan_name varchar(32)
   owner_user_id integer
+  created_at timestamp [not null]
+  updated_at timestamp
 }
 
 Table Message {
@@ -18,7 +20,7 @@ Table Message {
   clan_id integer [not null]
   message varchar [not null]
   created_at timestamp [not null]
-  updated_at timestamp [not null]
+  updated_at timestamp
 }
 
 Table ChallengeType {
@@ -73,7 +75,6 @@ Table FinishObjective {
   challenge_id integer [not null]
   objective varchar [not null]
 }
-
 
 Table HealthObjective {
   id serial [pk]
@@ -130,6 +131,8 @@ Table UserChallenge {
   user_id integer [not null]
   status varchar [not null, default: "open"]
   value integer [not null]
+  created_at timestamp [not null]
+  updated_at timestamp
 }
 
 Table UserChallengeDimensionTable {
@@ -139,6 +142,8 @@ Table UserChallengeDimensionTable {
   mode_id integer [not null]
   legend_id integer [not null]
   value integer [not null]
+  created_at timestamp [not null]
+  updated_at timestamp
 }
 
 Ref: "User"."clan_id" - "Clan"."id"
