@@ -1,5 +1,7 @@
 # Database Schema for Optimize Apex
-![Optimize-Apex-DB](https://https://raw.githubusercontent.com/cat-friend/optimize-apex/main/documentation/dbschema.png)
+![Optimize-Apex-DB](https://raw.githubusercontent.com/cat-friend/optimize-apex/main/documentation/dbschema.png)
+
+
 
 ## users
 |column name| data type| detail |
