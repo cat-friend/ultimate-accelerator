@@ -9,3 +9,6 @@ __pycache__/
 **/code.*
 **/code*.*
 **/test*.*
+**/*.ai
+**/*.psd
+

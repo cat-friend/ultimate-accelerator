@@ -64,35 +64,35 @@
 
 ### Create Challenges
 * As a logged in user, when I am on the `/challenges` page, I can create challenges to share with other users.
-    * I can see a `Create New Deck` button when I am on the `/challenges` page.
-* When I click the `Create New Deck` button, I see a form for creating a new challenge.
+    * I can see a `Create New Challenge` button when I am on the `/challenges` page.
+* When I click the `Create New Challenge` button, I see a form for creating a new challenge.
     * I must add at least one card in order to create the challenge.
-* When I enter invalid data on the `Create New Deck` form, the page will inform me of the failed validations and repopulate the form with the valid entries
+* When I enter invalid data on the `Create New Challenge` form, the page will inform me of the failed validations and repopulate the form with the valid entries
     * so that I can try again without needing to refill every input field.
 * I can see a button to submit the challenge.
 
 #### Acceptance Criteria.
-- [ ] A logged in user who is on the `/challenges` page sees a `Create New Deck` button.
-- [ ] After clicking the `Create New Deck` button, a form for creating a challenge is rendered.
-- [ ] The form has inputs where the user can fill out the title of the challenge, description, and tags.
-- [ ] When user enters invalid data on the `Create New Deck` form, the page will inform the user of the failed validations and repopulate the form with the valid entries, so that the user can try again without needing to refill every input field.
+- [ ] A logged in user who is on the `/challenges` page sees a `Create New Challenge` button.
+- [ ] After clicking the `Create New Challenge` button, a form for creating a challenge is rendered.
+- [ ] The form has inputs where the user can fill out the label of the challenge.
+- [ ] When user enters invalid data on the `Create New Challenge` form, the page will inform the user of the failed validations and repopulate the form with the valid entries, so that the user can try again without needing to refill every input field.
 - [ ] A button to submit the challenge is shown.
 - [ ] When a user submits the challenge, the user will be redirected to `/challenges:challengeId`, where it can be viewed by other users.
 
 ### Viewing Challenges
-* As an authenticated user, I can view all challenges by clicking a button in the navigation bar.
+* As an authenticated user, I can view all of my challenges by clicking a button in the navigation bar.
 * If I want to view specific details about a challenge, I can click on a challenge to be redirected to `/challenges/:challengeId` to see its title, description, challenge composition, and tags.
 
 #### Acceptance Criteria
-- [ ] Navigation bar must have a button for viewing all challenges (`/challenges`)
+- [ ] Navigation bar must have a button for viewing all of the authenticated user's challenges (`/users/:userId/challenges`)
 - [ ] The user can click on a challenge to view its details (title, description, challenge composition (including number of cards), tags).
 - [ ] Only logged in users can view `/challenges`.
 - [ ] Only logged in users can view `/challenges/:challengeId`.
 
 ### Editing Challenges
 * As a logged-in user visiting `/challenges/:challengeId`, I can edit the challenges that I have created
-    * so that I can change the title or description of the challenge, add or remove cards, edit tags associated with the challenge.
-* I should not be able to edit any challenges that I have not created.
+    * so that I can update the status of the challenge to `in progress` or `completed`.
+* I should not be able to edit any challenges that belong to other users.
 
 #### Acceptance Criteria
 - [ ] When the user is viewing a challenge that they have created, the user can click a button to edit the challenge.
@@ -110,261 +110,148 @@
 #### Acceptance Criteria
 - [ ] When the user is viewing a challenge that they have created, the user can click a button to delete their challenge.
 - [ ] When the user clicks the button, the challenge and all cards associated with the challenge will be deleted.
+- [ ] If a user is not authorized to delete a challenge, an error will occur and the user will be alerted that they are not authorized to delete the challenge.
 
-## Cards
+## Clans
 
-### Creating a Card
-* As a logged in user, I can create cards on which to write study material.
-* When I am viewing a deck that I have created, in order to create a new card, I can click a button to create a new card and a `Create a New Card` form will appear.
-* When I enter invalid data on the `Create a New Card` form, the page will inform me of the failed validations and repopulate the form with the valid entries
+### Creating a Clan
+* As a logged in user, I can create a clan, a group for other players to join.
+* When I am viewing `/clans`, if I have not created a clan in the past and want to create a new clan, I can click a button to create a new clan and a `Create a New Clan` form will appear.
+* When I enter invalid data on the `Create a New Clan` form, the page will inform me of the failed validations and repopulate the form with the valid entries
     * so that I can try again without needing to refill every input field.
-* When I enter valid data, the card will be shown in my deck.
+* When I enter valid data, the clan will be shown in my user profile and I will be redirected to `/clans/:clanId`.
 
 #### Acceptance Criteria
-- [ ] When a logged-in user is viewing a deck that they have created, they can click a `Create a New Card` button to add a new card to the deck.
+- [ ] When a logged-in user is viewing a deck that they have created, they can click a `Create a New Clan` button to add a new card to the deck.
 - [ ] The button will show a form for the user to put card information.
 - [ ] When a user enters invalid data, error messages will appear and fields that have been correctly populated will remain the same.
+- [ ] When a user enters valid data, the user will be redirected to `/clans/:clanId`.
 
-### Reading a Card
-* As a logged-in user who is viewing a card from a deck on the `/decks/:deckId/:cardId` page, I can view the front and back of card.
-
-#### Acceptance Criteria
-- [ ] When a logged-in user is viewing a card from a deck on the `/decks/:deckId/:cardId` page, the user can see the front and back of the card.
-
-### Updating a Card
-* As a logged-in user, while viewing a card that I have created (`/decks/:deckId/:cardId`), I have the option to edit the card.
-* When I select the option to edit the card, a form will appear. Information already present on the card will be autopopulated within the form.
-* After I have updated the card, I can see the changes that I have made.
+### Viewing a Clan
+* As a logged-in user who is viewing a clan on the `/clans/:clanId` page, I can view the clan name, members, and description. If I am not part of the clan, I cannot view the comments.
 
 #### Acceptance Criteria
-- [ ] When a logged-in user is viewing a card that they have created (`/decks/:deckId/:cardId`), they have the option to edit the card.
-- [ ] When the user selects the option to edit the card, the user will be taken to a pre-filled form with the card's information. The user can then change any of the sections that the user would like.
-- [ ] After the user has submitted their changes, they can view the updated card.
+- [ ] When a logged-in user is viewing a card from a deck on the `/clans/:clanId` page, the user can see the front and back of the card.
 
-### Deleting a Card
-* As a logged-in user and viewing a deck that they have created (`/decks/:deckId/`), I can delete a card that I have created.
-* I will only see a `Delete Card` button if I am the user who created the card.
-* When I click the `Delete Card` button, the card will no longer exist.
-* If I try to navigate to the URL of the card that I have deleted, I will get a `404` error.
-* I will not be able to delete the cards that other users have created.
-* I will be able to create a new card with the same information as the card that I have deleted.
-* After I have successfully deleted a card, the `/decks/:deckId/` page will re-render.
-
-#### Acceptance Criteria
-- [ ] When a user is viewing a deck that they have created (`/decks/:deckId/`), a `Delete Card` button will be visible.
-- [ ] The user will only see a `Delete Card` button only if they are the user who created the card.
-- [ ] When the user clicks the `Delete Card` button, the card will be deleted.
-- [ ] If the user tries to navigate to the URL of the card that they have deleted, they will get a `404` error.
-- [ ] A user cannot delete a card that they have not created.
-- [ ] A user will be able to create a new card with the same name as the card that they have deleted.
-- [ ] Upon successful deletion of a card, the `/decks/:deckId/` page will re-render.
-
-## Study Challenges
-
-### Adding Challenges to or Removing Challenges From `Study List`
-* As an authenticated user, when I am viewing a deck (`/decks/:deckId/`), I can add any deck to my `Study List`.
-    * I can remove a deck from my `Study List` when I am viewing a deck (`/decks/:deckId/`).
-    * I can re-add a deck to my `Study List` that I had previously removed from my `Study List`.
-
-#### Acceptance Criteria
-- [ ] When an authenticated user is viewing a deck (`/decks/:deckId/`), they can add any deck to their `Study List`.
-- [ ] When an authenticated user is viewing a deck (`/decks/:deckId/`), they can remove any deck that they have added to their `Study List`.
-- [ ] When an authenticated user is viewing a deck (`/decks/:deckId/`), they can re-add any deck that they have previously removed from their `Study List`.
-
-
-### Viewing Challenges Added To `Study List`
-* As an authenticated user, when I am viewing a deck (`/decks/:deckId/`) and I have previously added that deck to my `Study List`, I will see that I have previously added the deck to my `Study List`.
-* As an authenticated user, I will see a `Study List` link on the navigation bar.
-    * When I click that link, I will be routed to `/user-study-deck/:userId`.
-* When I am viewing `/user-study-deck/:userId`, I can see all decks that I have added to my `Study List`.
-    * If I have not added any decks to my `Study List`, I will see a message that says I have not added any decks to my `Study List`.
-
-#### Acceptance Criteria
-- [ ] When an authenticated user is viewing a deck (`/decks/:deckId/`) that they have previously added to their `Study List`, they will see that they have previously added the deck to their `Study List`.
-- [ ] An authenticated user will see a `Study List` link on the navigation bar.
-    - [ ] When they click that link, they will be routed to `/user-study-deck/:userId` and all decks that they have marked as `Study List` will be displayed.
-- [ ] If an authenticated user has not marked any decks as `Study List`, when they view `/user-study-deck/:userId`, they will see a message that indicates that they have not marked any decks as `Study List`.
-
-### Studying a Deck
-* As an authenticated user, I will be able to study decks that I have marked as `Study List`.
-* When I am viewing a deck (`/decks/:deckId/`) that I have previously marked as `Study List`, I can click a button that says `Study`.
-* When I am viewing a deck (`/decks/:deckId/`) that I have not previously marked as `Study List`, I can click a button that says `Study`. Clicking the `Study` button will add the deck to my `Study List` and initiate a study session.
-* When I click the `Study` button, I will see one card at a time. I will only see the front side of the card. In order to see the answer, I will have to click a `Reveal Answer` button.
-* When I click the `Reveal Answer` button, I can indicate if I got the answer right or not.
-    * If I indicate that I have gotten the answer correct, the card will change color to indicate that I got the answer correct.
-    * If I indicate that I have gotten the answer wrong, the card will not change color.
-* I can see each card at least once while studying a deck.
-* If I have indicated that I have gotten all answers in a deck correct, the deck will remain in my `Study List`.
-
-#### Acceptance Criteria
-- [ ] Authenticated users can study any deck.
-- [ ] When they are viewing a deck (`/decks/:deckId/`) that they have previously added to their `Study List`, they can click a button that says `Study`.
-- [ ] When they are viewing a deck (`/decks/:deckId/`) that they have not previously added to their `Study List`, they can click a button that says `Study`. The deck will be added to their `Study List` and a study session will begin.
-- [ ] When they click the `Study` button, they will see one card at a time. They will only see the front side of the card. In order to see the answer, they will have to click a `Reveal Answer` button.
-- [ ] When they click the `Reveal Answer` button, they can indicate if they got the answer right or wrong.
-    - [ ] If they indicate that they have gotten the answer correct, the card will change color.
-    - [ ] If they indicate that they have gotten the answer wrong, the card will not change color.
-- [ ] The user can see each card at least once while studying a deck.
-- [ ] If the user has indicated that they have gotten all answers in a deck correct, the deck will remain in their `Study List`.
-
-## Deck Tags
-
-### Creating a Tag for a Deck
-* As a logged-in user, when I am viewing a deck that I have created on the `/decks/:deckId` page, I can add a tag to that deck
-    * by clicking on an `Add a Tag` button.
-* When I click the `Add a Tag` button, I will see a form where I can enter tags for that deck.
-* When I enter invalid data on the `Add a Tag` form, the page will inform me of the failed validations and repopulate the form with the valid entries
+### Updating a Clan
+* As a logged-in user, while viewing a clan that I have created (`/clans/:clanId`), I have the option to edit the clan's name, description, and avatar.
+* When I select the option to edit the clan, a form will appear. Information already present on the clan's page will be autopopulated within the form.
+* When I enter invalid data on the `Edit Clan` form, the page will inform me of the failed validations and repopulate the form with the valid entries
     * so that I can try again without needing to refill every input field.
-* I will see a `Submit` button for my tags.
-* When I click on the `Submit` button, my tags will appear on the page
-* When I have successfully created tags for the deck, the page will re-render and I can see the tags for that deck.
-* I should not be able to add tags to a deck that another user has created.
+* If I have not created the clan, I will not be able to edit any details about t he clan.
+* After I have updated the clan, I can see the changes that I have made.
 
 #### Acceptance Criteria
-- [ ] When logged-in users are viewing a deck that they have created on the `/decks/:deckId` page, they will see a `Add a Tag` button.
-- [ ] Only the user who has created the deck is authorized to create tags for that deck.
-- [ ] When authorized users click on the `Add a Tag` button, they will see a form in which to enter tags one at a time.
-- [ ] When users enter invalid data on the `Add a Tag` form, the page will inform them of the failed validations.
-- [ ] Users will see a `Submit` button for their tags.
-- [ ] When the user submits their valid tags, the page will re-render and show the tags that they have created.
+- [ ] When a logged-in user is viewing a clan that they have created (`/clans/:clanId`), they have the option to edit the clan.
+- [ ] When the user selects the option to edit the clan, the user will be taken to a pre-filled form with the clan's information. The user can then change any of the sections that the user would like.
+- [ ] When a user enters invalid data, error messages will appear and fields that have been correctly populated will remain the same.
+- [ ] Only users who have created the clan can edit the clan's information.
+- [ ] After the user has submitted their changes, they can view the updated clan.
 
-
-### Viewing Tags of a Deck
-* As an authenticated user, when I am on a deck's (`/decks/:deckId`) page, I can view all tags of the deck.
-    * When I click on a tag, a search results page will appear and all decks with the tag that I clicked on will appear.
-
-#### Acceptance Criteria
-- [ ] When an authenticated user is viewing a deck's (`/decks/:deckId`) page, they can see all tags associated with that deck.
-    - [ ] When an authenticated user is viewing a deck's (`/decks/:deckId`) page and clicks on a tag, the API will conduct a search, and the page will display all decks associated with that tag.
-
-### Updating Tags of a Deck
-* As an authenticated user, when I am viewing the deck that I have created on the `/decks/:deckId` page, I can edit the tags for that deck.
-* I will see an interactable `Edit Tags` button.
-* I will not be able to edit the tags of a deck that I did not create.
-* When I click the `Edit Tags` button, a form will render where I can edit the tags.
-* When I enter invalid data on the `Edit Tags` form, the page will inform me of the failed validations.
-* I will see a `Submit` button for my tags.
-* When I click on the `Submit` button, my updated tags will appear on the page.
-* I will not be able to edit tags on a deck that another user has created.
+### Joining a Clan
+* As a logged-in user, if I have not joined a clan, I can join a clan while viewing a clan's page (`/clans/:clanId`). I will have the option to join the clan.
+    * I can only join a clan if I am currently not in a clan.
+* Once I join the clan, I will show up in the member's list and I will be authorized to post messages.
 
 #### Acceptance Criteria
-- [ ] When logged-in users are viewing a deck on the `/decks/:deckId` page, authorized users will see an `Edit Tags` button.
-    - [ ] Only the user who has created the deck will be authorized to edit the tags.
-- [ ] After pressing the `Edit Tags` button, they will see a form that is pre-filled with the deck's current tags. They can then change any existing tags or add new tags.
-- [ ] When users enter invalid data on the `Edit Tags` form, the page will inform them of the failed validations.
-- [ ] Users will see a `Submit` button for their tags.
-- [ ] When the user submits their edited tags, the tags will appear on the page.
+- [ ] When users are viewing a clan's page (`/clans/:clanId`), they can join that clan if and only if they are not currently a member in a clan.
+- [ ] Once they join the clan, their username will appear in the list of members and they will be able to post messages.
 
-### Deleting a Tag of a Deck
-* As a logged-in user, when I am viewing a deck that I have created on the `/decks/:deckId` page, I can delete any tags that I have added.
-* I will be able to see an interactable `Delete` button next to the tag that I have created.
-* If I click the `Delete` button, my tag will be deleted and will not appear on the page.
-* I will not be able to delete tags on a deck that another user has created.
-* I will be able to leave another tag for the same deck without any issues.
-* I will be able to create a tag with the same name as the tag that I have just deleted.
+### Leaving a Clan
+* As an authenticated user, if I want to leave my clan, I will have the option to do so while viewing a clan's page (`/clans/:clanId`).
+    * I can only leave a clan if I am currently in the clan.
+* Once I leave the clan, I will not appear in the list of members and I will not be authorized to post messages.
+* I can rejoin the clan if I wish.
 
 #### Acceptance Criteria
-- [ ] When logged in users are viewing a deck that they have created on the `/decks/:deckId` page, they will see an interactable `Delete` button next to tags that they have created.
-    - [ ] Only the user who has created the deck will be authorized to delete the tags for that deck.
-- [ ] After pressing the `Delete` button, the tag will disappear.
-- [ ] Only the user who has left the tag will be authorized to delete the tag.
-- [ ] The user will be able to leave another tag for the same deck.
-- [ ] The user will be able to create another tag with the same name as the tag that they have just created.
+- [ ] When users are viewing a clan's page (`/clans/:clanId`), they can leave that clan if and only if they are  currently a member in that clan.
+- [ ] Once they leave the clan, their username will disappear from the list of members and they will not be able to post messages.
+- [ ] The user can re-join the clan if they wish.
+
+
+### Deleting a Clan
+* As a logged-in user and viewing a clan that they have created (`/clans/:clanId`), I can delete the clan.
+* I will only see a `Delete Clan` button if I am the user who created the clan.
+* When I click the `Delete Clan` button, the clan will no longer exist.
+* If I try to navigate to the URL of the clan that I have deleted, I will get a `404` error.
+* I will not be able to delete the clans that other users have created.
+* I will be able to create a new clan with the same information as the card that I have deleted.
+* After I have successfully deleted a clan, I will be redirected to `/decks` page will re-render.
+
+#### Acceptance Criteria
+- [ ] When a user is viewing a clan that they have created (`/clans/:clanId`), a `Delete Clan` button will be visible.
+- [ ] The user will only see a `Delete Clan` button only if they are the user who created the clan.
+- [ ] When the user clicks the `Delete Clan` button, the clan will be deleted.
+- [ ] If the user tries to navigate to the URL of the clan that they have deleted, they will get a `404` error.
+- [ ] A user cannot delete a clan that they have not created.
+- [ ] A user will be able to create a new clan with the same name as the clan that they have deleted.
+- [ ] Upon successful deletion of a clan, they will be redirected to `/clans`.
+
+## Clan Messages
+
+### Posting Clan Messages
+* As an authenticated user, when I am viewing a clan that I have joined (`/clans/:clanId`), I can post messages to that clan's page by clicking a `JUST POST` button.
+* A `JUST POST` form will appear and I can enter a message.
+    * If I enter invalid data, the the page will inform me of the failed validations.
+* I cannot post messages to clans that I have not joined.
+* Once I successfully post a message, the form will disappear and I can see my message on the clan's page.
+
+#### Acceptance Criteria
+- [ ] When an authenticated user is viewing a clan that they have joined (`/clans/:clanId`), they can post messages to that clan's page by clicking a `JUST POST` button.
+- [ ] A `JUST POST` form will appear and they can enter a message.
+- [ ] When a user enters invalid data, error messages will appear and fields that have been correctly populated will remain the same.
+- [ ] When the user successfully posts a message, their message will appear on the page.
+
+
+### Viewing Clan Messages
+* As an authenticated user, when I am viewing a clan that I have joined (`/clans/:clanId`), I can view messages that have been posted to that clan's page.
+
+
+#### Acceptance Criteria
+- [ ] When an authenticated user is viewing a clan that they have joined (`/clans/:clanId`), can see all messages that other members have posted.
+- [ ] A user who is not a member of that specific clan is unable to see messages that clan members have posted.
+
+### Editing a Message
+* As an authenticated user and administrator of a clan, when I am viewing that clan's page (`/clans/:clanId`, I will be able to edit messages posted.
+* When I select the option to edit the messagea form will appear. Information already present in the message page will be autopopulated within the form.
+* When I enter invalid data on the `Edit Message` form, the page will inform me of the failed validations and repopulate the form with the valid entries
+    * so that I can try again without needing to refill every input field.
+* If I have not created the message or am not the clan administrator, I will not be able to edit any details about the clan.
+
+
+#### Acceptance Criteria
+- [ ] When an authenticated user is viewing a clan that they have created (`/clans/:clanId`), they will have the option to edit all messages for that clan.
+- [ ] When an authenticated user is viewing a clan's page (`/clans/:clanId`), they will only be able to edit messages that they have posted.
+- [ ] When the user selects the option to edit the message, the user will be taken to a pre-filled form with the message's information. The user can then change any of the sections that the user would like.
+- [ ] When a user enters invalid data, error messages will appear and fields that have been correctly populated will remain the same.
+- [ ] After the user has submitted their changes, they can view the updated message.
+
+
+### Deleting a Clan Message
+* When I am viewing messages on the clan page (`/clans/:clanId`), as an administrator of a clan I can delete any clan message.
+    * I will only see a `Delete Message` button if I am the user who created the clan.
+* When I am viewing messages on the clan page (`/clans/:clanId`), if I am the user who created the message, I can delete message if and only if I am still a member of the clan.
+    * I will only see a `Delete Message` button if I am the user who created the message.
+    * I will not be able to delete the messages that other users have created.
+* When I click the `Delete Message` button, the message will no longer exist and it will not appear on the page.
+* I will be able to create a new message with the same information as the card that I have deleted.
+
+#### Acceptance Criteria
+- [ ] When a user is viewing a clan that they have created (`/clans/:clanId`), a `Delete Message` button will be visible next to any and all messages.
+- [ ] Non-clan administrators will only see a `Delete Message` button only if they are the user who created the message.
+    - [ ] A regular clan member cannot delete a message that they have not created.
+- [ ] When the user clicks the `Delete Message` button, the message will be deleted.
+- [ ] A user will be able to create a new message with the same information as the message that they have deleted.
+- [ ] Upon successful deletion of a message, the message will not appear on the page.
 
 ## Search
 
 ### Performing a Search
 * As an authenticated user, I can see a search bar on the navigation bar.
-    * When I enter a search query, I will be rerouted to `/search-results`. I will see decks, tags, and card contents that match my search query.
-        * I will see the search results grouped by the resource type. For example, all decks that match the search query will appear together, all tags that match the search query will appear together, etc.
+    * When I enter a search query, I will be rerouted to `/search`. I will see challenges, clans, and usernames that match the search query.
+        * I will see the search results grouped by the resource type. For example, all challenges that match the search query will appear together, all usernames that match the search query will appear together, etc.
 
 #### Acceptance Criteria
 - [ ] When logged-in users are viewing any page, they will see an interactable search bar in the navigation bar.
-- [ ] When the authenticated user enters a search term, they will be rerouted to `/search-results`, the page will display all decks, tags, and cards that match the search term.
+- [ ] When the authenticated user enters a search term, they will be rerouted to `/search`, the page will display all challenges, clans, and usernames that match the search term.
 - [ ] Search results will be grouped by resource type.
-
-
-# Bonus
-
-## Deck Comments
-
-### Create a Comment
-* As an authenticated user, when I am viewing a deck on the `/decks/:deckId` page, I can leave a comment.
-    * I can see a `Leave a Comment` button.
-        * When I click the `Leave a Comment` button, I will see a form where I can enter a comment for that deck.
-* When I enter invalid data on the `Leave a Comment` form, the page will inform me of the failed validations.
-* I will see a `Submit` button for my comment.
-* When I click on the `Submit` button, my comment will appear on the `/decks/:deckId` page.
-
-#### Acceptance Criteria
-- [ ] When an authenticated user is viewing a deck on the `/decks/:deckId` page, they can leave a comment.
-    - [ ] They can see a `Leave a Comment` button.
-        - [ ] When they click the `Leave a Comment` button, they will see a form where they can enter a comment for that deck.
-- [ ] When they enter invalid data on the `Leave a Comment` form, the page will inform them of the failed validations.
-- [ ] They will see a `Submit` button for their comment.
-- [ ] When they click on the `Submit` button, the comment will appear on the `/decks/:deckId` page.
-
-### Read All Comments for a Deck
-* As an authenticated user, when I am viewing a deck on the `/decks/:deckId` page, I can view all comments for that deck.
-
-#### Acceptance Criteria
-- [ ] When an authenticated user is viewing a deck on the `/decks/:deckId` page, they can view all comments for that deck.
-
-### Edit a Comment
-* As an authenticated user, when I am viewing a deck on the `/decks/:deckId` page, I can edit a comment that I have left.
-    * I can see an `Edit a Comment` button.
-        * When I click the `Edit a Comment` button, I will see a form where I can edit my comment for that deck. The form will prepopulate with the current comment.
-* When I enter invalid data on the `Edit a Comment` form, the page will inform me of the failed validations.
-* I will see a `Submit` button for my edited comment.
-* When I click on the `Submit` button, my edited comment will appear on the `/decks/:deckId` page.
-* I will be unable to edit a comment left by another user.
-
-#### Acceptance Criteria
-- [ ] When an authenticated user is viewing a deck on the `/decks/:deckId` page, they can edit a comment that they have left.
-    - [ ] They can see an `Edit a Comment` button.
-        - [ ] When they click the `Edit a Comment` button, they will see a form where they can edit a comment for that deck. The form will prepopulate with the current comment.
-- [ ] When they enter invalid data on the `Edit a Comment` form, the page will inform them of the failed validations.
-- [ ] They will see a `Submit` button for their edited comment.
-- [ ] When they click on the `Submit` button, the edited comment will appear on the `/decks/:deckId` page.
-- [ ] A user is only authorized to edit a comment that they have made.
-
-### Delete a Comment
-* As an authenticated user, when I am viewing a deck on the `/decks/:deckId` page, I can delete a comment that I have left.
-    * I will be able to see an interactable `Delete` button.
-* If I click the `Delete` button, my comment will be deleted and will not appear on the page.
-* I will not be able to delete another user's comment.
-* I will be able to leave another comment for the same deck without any issues.
-
-#### Acceptance Criteria
-- [ ] When logged-in users are viewing a deck on the `/decks/:deckId` page, they will see an interactable `Delete` button for comments that they have created.
-- [ ] After pressing the `Delete` button, the comment will disappear.
-- [ ] Only the user who has left the comment will be authorized to delete the comment.
-- [ ] The user will be able to leave another comment for the same deck.
-
-## User Profile Page
-### Viewing a User Profile Page
-* As an authenticated user, I can view any user's profile when I navigate to `/users/:userId`.
-* I can see their username and decks that they have added to their `Study List`.
-
-#### Acceptance Criteria
-- [ ] Only authenticated users can navigate to `/users/:userId`.
-- [ ] Username, biography, and decks that a user has added to their `Study List` will be displayed on `/users/:userId`.
-
-### Editing a User Profile
-* As an authenticated user, when I am viewing my own profile (`/users/:userId`), I can edit my profile.
-    * I will see an `Edit Profile` button.
-* When I click the `Edit Profile` button, a form will appear with prepopulated data that is currently in my profile.
-* I will be able to edit my biography.
-* When I enter invalid data on the `Edit Profile` form, the page will inform me of the failed validations.
-* I will see a `Submit` button for my edited user profile.
-* When I click on the `Submit` button, my edited profile will appear on the `/users/:userId` page.
-* I will be unable to edit another user's profile.
-
-#### Acceptance Criteria
-- [ ] When an authenticated user is viewing their own profile (`/users/:userId`), they can edit their profile.
-    - [ ] They can see an `Edit Profile` button.
-        - [ ] When they click the `Edit Profile` button, they will see a form where they can edit their biography. The form will prepopulate with the current profile data.
-- [ ] When they enter invalid data on the `Edit Profile` form, the page will inform them of the failed validations.
-- [ ] They will see a `Submit` button for their edited profile.
-- [ ] When they click on the `Submit` button, the edited profile will appear on the `/users/:userId` page.
-- [ ] A user is only authorized to edit their own profile.
