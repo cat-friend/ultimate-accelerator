@@ -7,6 +7,7 @@ class Mode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     mode = db.Column(db.String(40), nullable=False)
 
+    user_challenge_dimension_table = db.relationship("UserChallengeDimensionTable", back_populates="modes")
     def to_dict(self):
         return {
             'id': self.id,
