@@ -15,41 +15,39 @@ body {
 }
 
 
-/* <div style="display:flex;justify-content:center;align-items:center;font-size:30px;">Text Content</div> */
-
-
 div#root {
     margin: 0 auto;
     max-width: 80%;
-    min-width: 600px;
     margin-top: 30px;
 }
 
 div.header-parent {
-    min-width: 100%;
+    width: 100%;
+    /* height: 100px; */
+    transform: skew(40deg);
+    background: #993333;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 0 40px;
-    /* background-image: url('./assets/header-bwd.svg'); */
-    /* background-repeat: no-repeat;
-    background-size: auto 40px;
-    background-size: cover; */
+    /* align-items: flex-end; */
+    height: fit-content;
+    padding: 10px;
+    align-items: end;
 }
 
-.header-img {
-    z-index: auto;
+img.header-img {
+    /* width: 100%; */
+    height: auto;
+    object-fit: fill;
+
 }
+
 
 div.header-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    left: 50%;
-    padding: 5px;
+    margin: 0 40px;
     color: white;
-    z-index: 1;
 }
 
 h1, h2, h3 {
@@ -59,7 +57,12 @@ h1, h2, h3 {
 }
 
 h2 {
-    font-size: 30px;
+    font-weight: normal;
+    font-size: 100px;
+    font-family: 'teko';
+    color: white;
+    transform: skew(-40deg);
+    margin: 10px;
 }
 
 @font-face {
@@ -70,8 +73,6 @@ h2 {
     font-style: normal;
 
 }
-
-
 
 
 @font-face {
