@@ -1,1 +1,10 @@
-/* TODO Add site wide styles */
+body {
+    background-color: #dfd7cc;
+    background-image: url('./background.svg');
+    background-size: 80%, contain;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-position: 50% 50%;
+    background-origin: border-box;
+    margin: 0;
+}
