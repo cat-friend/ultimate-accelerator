@@ -13,9 +13,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    member_of_clan = db.Relationship("Clan", back_populates="members")
     owned_clan = db.relationship("Clan", uselist=False, back_populates="owner")
-    clan_message_user = db.Relationship("Message", back_populates="user")
+    members = db.relationship("Clan", back_populates="clan")
+    clan_message_user = db.relationship("Message", back_populates="user")
     user_challenges_userid = db.relationship("User", back_populates="user")
 
 

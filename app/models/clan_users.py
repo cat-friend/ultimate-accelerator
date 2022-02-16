@@ -1,0 +1,27 @@
+from .db import db
+from sqlalchemy.sql import func
+
+
+class ClanUsers(db.Model):
+    __tablename__ = 'clanusers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    clan_id = db.Column(db.Integer, db.ForeignKey("clans.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, unique=True)
+    created_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, onupdate=func.now())
+
+    user = db.relationship("User", back_populates="clan_message_user")
+    clan = db.relationship("Clan", back_populates="members")
+
+
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'owner_user_id': self.owner_user_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
