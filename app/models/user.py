@@ -9,8 +9,15 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     bio = db.Column(db.String(511))
+    clan_id = db.Column(db.Integer, db.ForeignKey("clans.id"))
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    member_of_clan = db.Relationship("Clan", back_populates="members")
+    owned_clan = db.relationship("Clan", uselist=False, back_populates="owner")
+    clan_message_user = db.Relationship("Message", back_populates="user")
+    user_challenges_userid = db.relationship("User", back_populates="user")
+
 
     @property
     def password(self):
@@ -19,6 +26,7 @@ class User(db.Model, UserMixin):
     @password.setter
     def password(self, password):
         self.hashed_password = generate_password_hash(password)
+
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
