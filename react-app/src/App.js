@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import CSSTester from './components/CSSTester';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +29,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact={true}>
+          <CSSTester />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />

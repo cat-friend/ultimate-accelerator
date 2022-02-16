@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 body {
     background-color: #dfd7cc;
     background-image: url('./background.svg');
@@ -6,5 +9,101 @@ body {
     height: 100vh;
     background-position: 50% 50%;
     background-origin: border-box;
+    margin: 0 auto;
+    font-family: 'Franklin Gothic Medium', Helvetica, sans-serif;
+    font-family: 'tekobold';
+}
+
+
+/* <div style="display:flex;justify-content:center;align-items:center;font-size:30px;">Text Content</div> */
+
+
+div#root {
+    margin: 0 auto;
+    max-width: 80%;
+    min-width: 600px;
+    margin-top: 30px;
+}
+
+div.header-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    background-image: url('./assets/header-bwd.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+div.header-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    color: white;
+}
+
+h1, h2, h3 {
+    padding: 0;
     margin: 0;
+    font-family: 'teko';
+}
+
+h2 {
+    font-size: 30px;
+}
+
+@font-face {
+    font-family: 'apexregular';
+    src: url('./assets/fonts/apex_regular-webfont.woff2') format('woff2'),
+         url('./assets/fonts/apex_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tekobold';
+    src: url('./assets/fonts/teko-bold-webfont.woff2') format('woff2'),
+         url('./assets/fonts/teko-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'tekomedium';
+    src: url('./assets/fonts/teko-medium-webfont.woff2') format('woff2'),
+         url('./assets/fonts/teko-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'teko';
+    src: url('./assets/fonts/teko-regular-webfont.woff2') format('woff2'),
+         url('./assets/fonts/teko-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'tekosemibold';
+    src: url('./assets/fonts/teko-semibold-webfont.woff2') format('woff2'),
+         url('./assets/fonts/teko-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
