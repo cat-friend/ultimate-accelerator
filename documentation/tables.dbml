@@ -126,9 +126,9 @@ Table WinObjective {
 
 Table UserChallenge {
   id serial [pk]
+  user_id integer [not null]
   challenge_label varchar [not null]
   challenge_type_id integer [not null]
-  user_id integer [not null]
   status varchar [not null, default: "open"]
   value integer [not null]
   created_at timestamp [not null]
