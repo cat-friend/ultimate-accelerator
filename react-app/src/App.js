@@ -30,6 +30,7 @@ function App() {
       <Switch>
         <Route path='/' exact={true}>
           <CSSTester />
+          <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
