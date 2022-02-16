@@ -26,21 +26,30 @@ div#root {
 }
 
 div.header-parent {
+    min-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 40px;
-    background-image: url('./assets/header-bwd.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* background-image: url('./assets/header-bwd.svg'); */
+    /* background-repeat: no-repeat;
+    background-size: auto 40px;
+    background-size: cover; */
 }
+
+.header-img {
+    z-index: auto;
+}
+
 div.header-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    position: absolute;
+    left: 50%;
     padding: 5px;
     color: white;
+    z-index: 1;
 }
 
 h1, h2, h3 {
