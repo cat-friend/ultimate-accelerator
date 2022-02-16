@@ -9,14 +9,13 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     bio = db.Column(db.String(511))
-    clan_id = db.Column(db.Integer, db.ForeignKey("clans.id"))
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
     owned_clan = db.relationship("Clan", uselist=False, back_populates="owner")
-    members = db.relationship("Clan", back_populates="clan")
+    clan_users = db.relationship("ClanUsers", uselist=False, back_populates="user")
     clan_message_user = db.relationship("Message", back_populates="user")
-    user_challenges_userid = db.relationship("User", back_populates="user")
+    user_challenges_userid = db.relationship("UserChallenge", back_populates="user")
 
 
     @property

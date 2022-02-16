@@ -9,8 +9,7 @@ class Legend(db.Model):
     name = db.Column(db.String(40), nullable=False, unique=True)
     type = db.Column(db.String(40), nullable=False)
 
-    legends = db.relationship("Legend", back_populates="user_challenge_dimension_table")
-    user_challenge_dimension_table = db.relationship("Legend", back_populates="legends")
+    user_challenge_dimension_table = db.relationship("UserChallengeDimensionTable", back_populates="legends")
 
     def to_dict(self):
         return {

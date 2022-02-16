@@ -11,7 +11,7 @@ class ClanUsers(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
-    user = db.relationship("User", back_populates="clan_message_user")
+    user = db.relationship("User", back_populates="clan_users")
     clan = db.relationship("Clan", back_populates="members")
 
 

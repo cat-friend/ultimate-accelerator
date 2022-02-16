@@ -2,6 +2,7 @@ from .db import db
 from .user import User
 from .challenge_type import ChallengeType
 from .clan import Clan
+from .clan_users import ClanUsers
 from .legend import Legend
 from .message import Message
 from .mode import Mode

@@ -12,7 +12,7 @@ class Clan(db.Model):
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
     owner = db.relationship("User", back_populates="owned_clan", cascade="all, delete")
-    members = db.relationship("User", back_populates="clan", cascade="all, delete")
+    members = db.relationship("ClanUsers", back_populates="clan", cascade="all, delete")
     clan_messages = db.relationship("Message", back_populates="clan", cascade="all, delete")
 
 
