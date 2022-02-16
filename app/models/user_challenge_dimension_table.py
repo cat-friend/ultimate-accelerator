@@ -21,10 +21,10 @@ class UserChallengeDimensionTable(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
-            'challenge_label': self.challenge_label,
-            'challenge_type_id': self.challenge_type_id,
-            'status': self.status,
+            'user_challenge_id': self.user_challenge_id,
+            'weapon_id': self.weapon_id,
+            'mode_id': self.mode_id,
+            'legend_id': self.legend_id,
             'value': self.value,
             'created_at': self.created_at,
             'updated_at': self.updated_at

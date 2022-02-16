@@ -20,8 +20,8 @@ class ClanUsers(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.name,
-            'owner_user_id': self.owner_user_id,
+            'clan_id': self.clan_id,
+            'user_id': self.user_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
