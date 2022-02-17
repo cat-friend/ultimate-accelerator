@@ -1,6 +1,6 @@
 from flask import Blueprint, session, request
 from app.models import Clan, User, db
-from app.forms import ClanForm
+from app.forms import ClanForm, EditClanForm, DeleteClanForm
 
 clan_routes = Blueprint('clans', __name__)
 
@@ -30,5 +30,10 @@ def default():
         form = ClanForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            return {}, 200
-    return 'hello'
+            user_id = form.data['user_id']
+            name = form.data['name']
+            description = form.data['description']
+            new_clan = Clan(owner_user_id=user_id, name=name, description=description)
+            db.session.add(new_clan)
+            db.session.add()
+            return new_clan.to_dict()
