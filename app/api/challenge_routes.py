@@ -75,7 +75,12 @@ def edit_challenge(id):
 
 
 @challenge_routes.route('/<int:id>', methods=['DELETE'])
-def edit_challenge(id):
+def delete_challenge(id):
+    """
+    Retrieves a user_challenge with id of `:id` then deletes it from the database.
+    Returns response status 200 if the user_challenge was deleted.
+    Return response status 404 if the user_challenge wasn't found.
+    """
     form = DeleteChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

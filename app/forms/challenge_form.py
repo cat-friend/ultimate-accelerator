@@ -20,12 +20,14 @@ class ChallengeForm(FlaskForm):
 
 class EditChallengeForm(FlaskForm):
     user_challenge_id = IntegerField("", validators=[DataRequired()])
-    user_id = IntegerField("", validators=[DataRequired()])
-    curr_user_id = IntegerField("", validators=[DataRequired()])
+    challenge_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
+        'curr_user_id', message='Error! You are not authorized to delete this challenge')])
+    curr_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
+        'challenge_user_id', message='Error! You are not authorized to delete this challenge')])
     status = StringField("", validators=[AnyOf(["open", "in progress", "completed"], message="Error! No valid status detected.")])
 
 class DeleteChallengeForm(FlaskForm):
-    user_challenge_id = IntegerField("", validators=[DataRequired()])
+    user_challenge_id = IntegerField("", validators=[DataRequired(message="Oops! Not enough info. Please try again!")])
     curr_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
         'challenge_user_id', message='Error! You are not authorized to delete this challenge')])
     challenge_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
