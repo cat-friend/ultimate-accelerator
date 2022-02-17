@@ -85,7 +85,7 @@
 
 #### Acceptance Criteria
 - [ ] Navigation bar must have a button for viewing all of the authenticated user's challenges (`/users/:userId/challenges`)
-- [ ] The user can click on a challenge to view its details (title, description, challenge composition (including number of cards), tags).
+- [ ] The user can click on a challenge to view its details (title, description, challenge composition (including number of stars)).
 - [ ] Only logged in users can view `/challenges`.
 - [ ] Only logged in users can view `/challenges/:challengeId`.
 
@@ -131,7 +131,7 @@
 * As a logged-in user who is viewing a clan on the `/clans/:clanId` page, I can view the clan name, members, and description. If I am not part of the clan, I cannot view the comments.
 
 #### Acceptance Criteria
-- [ ] When a logged-in user is viewing a card from a deck on the `/clans/:clanId` page, the user can see the front and back of the card.
+- [ ] When a logged-in user is viewing a card from a deck on the `/clans/:clanId` page, the user can see the details of a clan.
 
 ### Updating a Clan
 * As a logged-in user, while viewing a clan that I have created (`/clans/:clanId`), I have the option to edit the clan's name, description, and avatar.

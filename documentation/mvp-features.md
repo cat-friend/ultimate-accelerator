@@ -15,11 +15,11 @@
 * Authenticated users can delete a challenge that they have created.
 
 ## 3. Clans
-* All authenticated users create at most one clan.
-* All authenticated users can join an unlimited number of clans.
+* All authenticated users can create at most one clan.
+* All authenticated users can at most one clan.
 * All authenticated users can view any clan.
 * If an authenticated user has created a clan, they are considered the administrator of the clan and can edit the clan's details or delete the clan..
-* Clans that a user has joined will appear on their user page.
+* A clan that a user has joined will appear on their user page.
 
 ## 4. Clan messages
 * If an authenticated user has joined a clan, they can post messages on their clan page.
