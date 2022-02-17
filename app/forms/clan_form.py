@@ -27,6 +27,8 @@ class EditClanForm(FlaskForm):
         'curr_user_id', message='Error! You are not authorized to perform this action!')])
     curr_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
         'owner_user_id', message='Error! You are not authorized to perform this action!')])
+    name = StringField("", validators=[DataRequired(message="Please enter a name for your clan!"), Length(
+        min=2, max=40, message="Please limit your clan name to be at least 2 characters and at most 40 characters.")])
     description = TextAreaField("", validators=[Length(
         max=512, message="Please limit your biography to 512 characters! Your life is super cool but hamsters power our servers.")])
 
