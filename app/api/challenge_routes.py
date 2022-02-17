@@ -1,5 +1,5 @@
 from flask import Blueprint, session, request
-from app.models import ChallengeType, User, db, UserChallengeDimensionTable
+from app.models import UserChallenge, User, db, UserChallengeDimensionTable
 from app.forms import ChallengeForm, EditChallengeForm, DeleteChallengeForm
 
 challenge_routes = Blueprint('challenges', __name__)
@@ -26,6 +26,7 @@ def new_dimension_table_entry(user_challenge_id, weapon_ids, mode_ids, legend_id
                 db.session.commit()
     return
 
+
 @challenge_routes.route('/', methods=['POST'])
 def all_challenges():
     """
@@ -34,27 +35,53 @@ def all_challenges():
     route returns JSON data needed for the front end. Else, the route
     returns error messages.
     """
-    # form = ChallengeForm()
-    # form['csrf_token'].data = request.cookies['csrf_token']
-    # if form.validate_on_submit():
-    #     challenge_label = form.data['challenge_label']
-    #     challenge_type_id = form.data['challenge_type_id']
-    #     user_id = form.data['user_id']
-    #     value = form.data['value']
-    #     new_challenge = ChallengeType(
-    #         challenge_label=challenge_label,
-    #         challenge_type_id=challenge_type_id,
-    #         user_id=user_id,
-    #         value=value)
-    #     db.session.add(new_challenge)
-    #     db.session.commit()
-    #     weapon_id = form.data['weapon_id']
-    #     mode_id = form.data['mode_id']
-    #     legend_id = form.data['legend_id']
-    #     user_challenge_id = new_challenge.id
-    #     new_dimension_table_entry(
-    #         user_challenge_id, weapon_id, mode_id, legend_id, value)
-    #     return new_challenge.to_dict()
-    # else:
-    #     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    pass
+    form = ChallengeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        challenge_label = form.data['challenge_label']
+        challenge_type_id = form.data['challenge_type_id']
+        user_id = form.data['user_id']
+        value = form.data['value']
+        new_challenge = UserChallenge(
+            challenge_label=challenge_label,
+            challenge_type_id=challenge_type_id,
+            user_id=user_id,
+            value=value)
+        db.session.add(new_challenge)
+        db.session.commit()
+        weapon_id = form.data['weapon_id']
+        mode_id = form.data['mode_id']
+        legend_id = form.data['legend_id']
+        user_challenge_id = new_challenge.id
+        new_dimension_table_entry(
+            user_challenge_id, weapon_id, mode_id, legend_id, value)
+        return new_challenge.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@challenge_routes.route('/<int:id>', methods=['PUT'])
+def edit_challenge(id):
+    form = EditChallengeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user_challenge = UserChallenge.query.get(id)
+        user_challenge.status = form.data['status']
+        db.session.add(user_challenge)
+        db.session.commit()
+        return user_challenge.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@challenge_routes.route('/<int:id>', methods=['DELETE'])
+def edit_challenge(id):
+    form = DeleteChallengeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user_challenge = UserChallenge.query.get(id)
+        db.session.delete(user_challenge)
+        db.session.commit()
+        return {}, 200
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401

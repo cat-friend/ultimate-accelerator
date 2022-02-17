@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.models import User, db
+from app.models import User, db, UserChallenge
 from app.forms import UserForm
 
 user_routes = Blueprint('users', __name__)
@@ -20,6 +20,12 @@ def validation_errors_to_error_messages(validation_errors):
 def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+@user_routes.route('/<int:id>/challenges', methods=['GET'])
+def user_challenges(id):
+    challenges = UserChallenge.query.filter(UserChallenge.user_id == id).all()
+    return {"challenges": [challenge.to_dict() for challenge in challenges]}
+
 
 
 @user_routes.route('/<int:id>', methods=['GET', 'PUT'])
