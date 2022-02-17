@@ -7,9 +7,9 @@ class UserChallengeDimensionTable(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_challenge_id = db.Column(db.Integer, db.ForeignKey("userchallenges.id"), nullable=False)
-    weapon_id = db.Column(db.Integer, db.ForeignKey("weapons.id"))
+    weapon_id = db.Column(db.Integer, db.ForeignKey("weapons.id"), default=None)
     mode_id = db.Column(db.Integer, db.ForeignKey("modes.id"), nullable=False)
-    legend_id = db.Column(db.Integer, db.ForeignKey("legends.id"))
+    legend_id = db.Column(db.Integer, db.ForeignKey("legends.id"), default=None)
     value = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())

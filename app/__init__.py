@@ -6,13 +6,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
 from .models import db, User
-from .api.user_routes import user_routes
-from .api.auth_routes import auth_routes
-from .api.challenge_routes import challenge_routes
-from .api.clan_routes import clan_routes
-from .api.message_routes import message_routes
-from .api.search_routes import search_routes
-
+from .api import auth_routes, clan_routes, challenge_routes, message_routes, search_routes, user_routes
 from .seeds import seed_commands
 
 from .config import Config

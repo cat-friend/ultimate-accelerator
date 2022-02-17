@@ -1,6 +1,6 @@
 from flask import Blueprint, session, request
 from app.models import Message, User, db
-from app.forms import MessageForm
+# from app.forms import MessageForm
 
 message_routes = Blueprint('messages', __name__)
 def validation_errors_to_error_messages(validation_errors):
@@ -12,3 +12,7 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{error}')
     return errorMessages
+
+message_routes.route('/')
+def default():
+    return 'hello'

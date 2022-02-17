@@ -1,6 +1,4 @@
-from tokenize import String
 from flask_wtf import FlaskForm
-from sqlalchemy import Integer
 from wtforms import SubmitField, IntegerField, TextAreaField, StringField
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange, AnyOf
 
@@ -12,7 +10,6 @@ class ChallengeForm(FlaskForm):
         message="Error! Something went wrong (challenge_type).")])
     user_id = IntegerField("", validators=[DataRequired(
         message="Error! Something went wrong (user_id)")])
-    status = StringField("")
     value = IntegerField("", validators=[DataRequired(
         message="Error! Please enter a value for this challenge."),
         NumberRange(min=1, max=10, message="Please enter a value for this challenge between 1 and 10")])
@@ -25,7 +22,7 @@ class EditChallengeForm(FlaskForm):
     user_challenge_id = IntegerField("", validators=[DataRequired()])
     user_id = IntegerField("", validators=[DataRequired()])
     curr_user_id = IntegerField("", validators=[DataRequired()])
-    status = StringField("", validators=[AnyOf("open", "in progress", "completed", message="Error! No status detected.")])
+    status = StringField("", validators=[AnyOf(["open", "in progress", "completed"], message="Error! No valid status detected.")])
 
 class DeleteChallengeForm(FlaskForm):
     user_challenge_id = IntegerField("", validators=[DataRequired()])
