@@ -8,6 +8,7 @@ class Clan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), nullable=False, unique=True)
     owner_user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, unique=True)
+    description = db.Column(db.Text)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 

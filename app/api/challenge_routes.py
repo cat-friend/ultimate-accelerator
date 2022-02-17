@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-def new_dimension_table_entry(user_challenge_id, weapon_ids, mode_ids, legend_ids, value):
+def new_dimension_table_entry(user_challenge_id, value, weapon_ids=[], mode_ids=[1, 2, 3], legend_ids=[]):
     for weapon_id in weapon_ids:
         for mode_id in mode_ids:
             for legend_id in legend_ids:
@@ -54,7 +54,7 @@ def all_challenges():
         legend_id = form.data['legend_id']
         user_challenge_id = new_challenge.id
         new_dimension_table_entry(
-            user_challenge_id, weapon_id, mode_id, legend_id, value)
+            user_challenge_id, value, weapon_id, mode_id, legend_id)
         return new_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
