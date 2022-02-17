@@ -17,6 +17,8 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 clan_routes.route('/', methods=['GET', 'POST'])
+
+
 def default():
     """
     GET method returns all clans.
@@ -33,7 +35,10 @@ def default():
             user_id = form.data['user_id']
             name = form.data['name']
             description = form.data['description']
-            new_clan = Clan(owner_user_id=user_id, name=name, description=description)
+            new_clan = Clan(owner_user_id=user_id, name=name,
+                            description=description)
             db.session.add(new_clan)
             db.session.add()
             return new_clan.to_dict()
+        else:
+            return {'errors': validation_errors_to_error_messages(form.errors)}, 401
