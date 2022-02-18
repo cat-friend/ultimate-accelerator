@@ -3,7 +3,7 @@ from app.models import db, Message
 
 # Adds a demo user, you can add other users here if you want
 def seed_messages():
-    clans = [1, 2, 3, 1, 2, 3, 1, 2, 3, 1]
+    clans = [1, 2, 3, 1, 2, 3, 1, 2, 3, 3]
     users = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     messages = ["hello", "mememmememememmemememmeme", "hehe das right MY BRUDDA", "hellooOOO", "i'm a computer", "baKAWWWW",
                 "*man holding out hand* is this counterstrike? *butterly*", "that dog song is about me", "crypto main here", "yeah, YUP"]
