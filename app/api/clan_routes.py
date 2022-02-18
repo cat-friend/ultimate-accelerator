@@ -27,7 +27,9 @@ def default():
     """
     if request.method == 'GET':
         clans = Clan.query.all()
-        return {"clans": clan.to_dict() for clan in clans}
+        print("clans", clans)
+        print({"clans": clan.to_dict() for clan in clans})
+        return {"clans": [clan.to_dict() for clan in clans]}
     if request.method == 'POST':
         form = ClanForm()
         form['csrf_token'].data = request.cookies['csrf_token']
@@ -62,7 +64,7 @@ def join_leave_clan(id):
             user_id = form.data['user_id']
             clan_id = id
             new_member = ClanUsers(user_id=user_id, clan_id=clan_id)
-            clan_member = ClanUsers.query.get(new_member.id).join(User)
+            clan_member = ClanUsers.query.join(User).filter(User.id == user_id).first()
             db.session.add(new_member)
             db.session.commit()
             return {"clan_members": clan_member.to_dict()}
@@ -73,7 +75,7 @@ def join_leave_clan(id):
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             user_id = form.data['user_id']
-            member = ClanUsers.query.filter_by(user_id=user_id)
+            member = ClanUsers.query.filter_by(user_id=user_id).first()
             db.session.delete(member)
             db.session.commit()
             return {}, 200
@@ -91,7 +93,8 @@ def one_clan(id):
     """
     if request.method == 'GET':
         clan = Clan.query.get(id)
-        clan_members = ClanUsers.query.get(id).join(User)
+        clan_members = ClanUsers.query.join(User).filter(ClanUsers.clan_id == id).all()
+        print("HELLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO", clan_members)
         return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
     if request.method == 'PUT':
         form = EditClanForm()
