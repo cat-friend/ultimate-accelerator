@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import CSSTester from './components/CSSTester';
+import AddChallengeForm from './components/ChallengesForms/AddChallengeForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,6 +32,7 @@ function App() {
         <Route path='/' exact={true}>
           <CSSTester />
           <LoginForm />
+          <AddChallengeForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
