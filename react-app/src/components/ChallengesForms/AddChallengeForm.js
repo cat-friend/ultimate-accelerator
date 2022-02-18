@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { weaponsDict, legendsDict, challengeTypeDict } from "./dictionaries"
+import { challengeTypeRegex, abilitiesRegex, legendsRegex, weaponsRegex } from "./regexes"
 
 function AddChallengeForm() {
     const dispatch = useDispatch();
@@ -8,12 +10,12 @@ function AddChallengeForm() {
     const [errors, setErrors] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false);
     const [checked, setChecked] = useState(new Array(3).fill(true))
+    const [stars, setStars] = useState("")
+
+
     const modeNames = ["Battle Royale", "Arena", "LTM"]
     const modes = [1, 2, 3]
-    const modeValues = (input) => {
-    }
     let checkedModes
-
     const handleCheckboxOnChange = (index) => {
         const updatedCheckedState = checked.map((ele, i) => index === i ? !ele : ele)
         setChecked(updatedCheckedState)
@@ -24,21 +26,28 @@ function AddChallengeForm() {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        const payload = {
+            challenge_label: input,
+            user_id: 1,
+            value: 10,
+            mode_id: checkedModes,
+            legend_id: [],
+        }
         setErrors([]);
+        const challengeArray = input.toLowerCase().match(challengeTypeRegex)
+        const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
+        const legendsArray = input.toLowerCase().match(legendsRegex)
+        const weaponsArray = input.toLowerCase().match(weaponsRegex)
+        console.log("challArray", challengeArray)
+        console.log("abilArray", abilitiesArray)
+        console.log("legArray", legendsArray)
+        console.log("weaponsRegex", weaponsArray)
+        payload.challenge_type_id = true ? [1] : challengeTypeDict.challengeArray[0];
+        payload.weapon_id = weaponsArray ? weaponsDict.weaponsArray[0] : [null];
+        legendsArray ? legendsArray.forEach((ele) => {
+            payload.legend_id.push(...legendsDict[ele])
+        }) : payload.legend_id.push(null);
 
-        // return dispatch(cardActions.createCard(payload))
-        //     .then(
-        //         (response) => {
-        //             if (response.errors) {
-        //                 setErrors(response.errors)
-        //                 return
-        //             }
-        //             setSuccess("Success!");
-        //             setTimeout(() => {
-        //                 setShowModal(false);
-        //             }, 1500);
-        //         }
-        //     );
     };
 
     return (<><div className="header-parent"><h2>Add a Challenge</h2></div>
@@ -48,10 +57,10 @@ function AddChallengeForm() {
                     <li key={idx} className="errors">{error}</li>
                 ))}
             </ul>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Ex: Deal 5000 as Bangalore, Seer, or Rampart"
+                    placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     name="user-challenge-input"
@@ -81,6 +90,21 @@ function AddChallengeForm() {
                         </div>
                     </>)
                 })}
+                <div className="modes">
+                    <div className="label-top">
+                        <label htmlFor="stars">
+                            Stars
+                        </label>
+                    </div>
+                    <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        onChange={(e) => setStars(e.target.value)}
+                        placeholder={5}
+                        id="stars" />
+                </div>
+                <button type="submit">SUBMIT</button>
 
 
                 {/*
