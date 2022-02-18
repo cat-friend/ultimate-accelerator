@@ -11,7 +11,6 @@ from .weapon_types import seed_weapon_types, undo_weapon_types
 from .weapons import seed_weapon, undo_weapon
 from .users import seed_users, undo_users
 from .user_challenges import seed_user_challenge, undo_user_challenge
-# from .user_challenge_dimension_tables import seed_user_challenge_dimension_table, undo_seed_user_challenge_dimension_table
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -51,6 +50,9 @@ def undo():
 
 @seed_commands.command('reset')
 def reset():
+    """
+    `flask seed reset` unseeds all of the data and then reseeds
+    """
     undo_challenge_types()
     undo_users()
     undo_legends()
