@@ -22,6 +22,7 @@ class ClanUsers(db.Model):
             'id': self.id,
             'clan_id': self.clan_id,
             'user_id': self.user_id,
+            'member': self.user.clan(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

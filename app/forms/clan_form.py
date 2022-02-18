@@ -2,8 +2,15 @@ from flask_wtf import FlaskForm
 from wtforms import IntegerField, TextAreaField, StringField
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange, AnyOf, ValidationError
 
-from app.models import Clan
+from app.models import Clan, ClanUsers
 
+
+def check_membership(form, field):
+    user_id = field.data
+    user_check = ClanUsers.query.filter_by(user_id=user_id).first()
+    if user_check:
+        raise ValidationError(
+            "Oops! You've already joined a clan! You can only join one clan.")
 
 def check_unique_owner(form, field):
     user_id = field.data
@@ -38,3 +45,16 @@ class DeleteClanForm(FlaskForm):
         'curr_user_id', message='Error! You are not authorized to perform this action!')])
     curr_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
         'owner_user_id', message='Error! You are not authorized to perform this action!')])
+
+
+class JoinClan(FlaskForm):
+    user_id = IntegerField("", validators=[DataRequired(
+        message="Oops! No user id detected!"), check_membership])
+    clan_id = IntegerField("", validators=[DataRequired(
+        message="Oops! No user id detected!")])
+
+class LeaveClan(FlaskForm):
+    user_id = IntegerField("", validators=[DataRequired(
+        message="Oops! No user id detected!")])
+    clan_id = IntegerField("", validators=[DataRequired(
+        message="Oops! No user id detected!")])

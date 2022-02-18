@@ -36,3 +36,8 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
+
+    def clan(self):
+        return {
+            'username': self.username
+        }
