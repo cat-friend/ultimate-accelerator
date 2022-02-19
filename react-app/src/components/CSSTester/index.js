@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 function CSSTester() {
     return (
         <>
@@ -8,7 +9,7 @@ function CSSTester() {
             </div>
             <div className="content-container">
                 <div className="content">
-                    <p>HELLO</p>
+                    <p><Link to="/users/1/challenges">THIS IS A LINK</Link></p>
                     <p>HELLO</p>
                     <p>HELLO</p>
                     <p>HELLO</p>
