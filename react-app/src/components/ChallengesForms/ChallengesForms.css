@@ -2,3 +2,21 @@
     display: flex;
     flex-direction: column;
 }
+#stars {
+    width: 40px;
+}
+input {
+    outline: none;
+    border: none;
+}
+input:focus {
+    outline: #993333 solid 2px;
+}
+
+label {
+    font-size: 14px;
+}
+
+#user-challenge-input {
+    width: 100%;
+}

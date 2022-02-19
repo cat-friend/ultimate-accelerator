@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { weaponsDict, legendsDict, challengeTypeDict } from "./dictionaries"
 import { challengeTypeRegex, abilitiesRegex, legendsRegex, weaponsRegex } from "./regexes"
+import "./ChallengesForms.css"
 
 function AddChallengeForm() {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function AddChallengeForm() {
 
     const modeNames = ["Battle Royale", "Arena", "LTM"]
     const modes = [1, 2, 3]
-    let checkedModes
+    let checkedModes = [1, 2, 3]
     const handleCheckboxOnChange = (index) => {
         const updatedCheckedState = checked.map((ele, i) => index === i ? !ele : ele)
         setChecked(updatedCheckedState)
@@ -29,28 +29,32 @@ function AddChallengeForm() {
         const payload = {
             challenge_label: input,
             user_id: 1,
-            value: 10,
+            value: +stars,
             mode_id: checkedModes,
             legend_id: [],
+            challenge_type_id: [null]
         }
         setErrors([]);
         const challengeArray = input.toLowerCase().match(challengeTypeRegex)
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
         const legendsArray = input.toLowerCase().match(legendsRegex)
         const weaponsArray = input.toLowerCase().match(weaponsRegex)
-        console.log("challArray", challengeArray)
+        console.log("challArray", challengeArray, Array.isArray(challengeArray))
         console.log("abilArray", abilitiesArray)
         console.log("legArray", legendsArray)
         console.log("weaponsRegex", weaponsArray)
-        payload.challenge_type_id = true ? [1] : challengeTypeDict.challengeArray[0];
-        payload.weapon_id = weaponsArray ? weaponsDict.weaponsArray[0] : [null];
+        console.log(challengeArray[0])
+
+        payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : [1]);
+        payload.weapon_id = weaponsArray ? weaponsDict[weaponsArray[0]] : [null];
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
-
+        console.log("payload", payload)
     };
 
-    return (<><div className="header-parent"><h2>Add a Challenge</h2></div>
+    return (<>
+        <div className="header-parent"><h2>Add a Challenge</h2></div>
         <div className="content">
             <ul className="error-list">
                 {errors.map((error, idx) => (
@@ -66,15 +70,14 @@ function AddChallengeForm() {
                     name="user-challenge-input"
                     id="user-challenge-input"
                     required
-                    minlength="10"
-                    size="50"
+                    minLength="10"
                     data-lpignore="true"
                 />
                 {modeNames.map((ele, index) => {
                     return (<>
-                        <div className="modes">
+                        <div className="modes" key={`div-${index}`}>
                             <div className="label-top" key={index}>
-                                <label htmlFor={`mode-checkbox-${index}`}>
+                                <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
                                     {ele}
                                 </label>
                             </div>
@@ -82,6 +85,7 @@ function AddChallengeForm() {
                                 <input
                                     type="checkbox"
                                     id={`mode-checkbox-${index}`}
+                                    key={`mode-checkbox-${index}`}
                                     name={ele}
                                     checked={checked[index]}
                                     onChange={() => handleCheckboxOnChange(index)}
@@ -102,29 +106,16 @@ function AddChallengeForm() {
                         max={10}
                         onChange={(e) => setStars(e.target.value)}
                         placeholder={5}
-                        id="stars" />
+                        id="stars"
+                        size="4"
+                        required />
                 </div>
-                <button type="submit">SUBMIT</button>
-
-
-                {/*
-                < input
-                    type="checkbox"
-                    id="br"
-                    name="mode"
-                    value={1}
-                    onClick={modeValues(e.target)} />
-                <label for="br">Battle Royale</label>
-                <input type="checkbox" id="arena" name="mode" value={2} />
-                <label for="arena">Arena</label>
-                <input type="checkbox" id="ltm" name="mode" value={3} />
-                <label for="ltm">LTM</label> */}
-
+                <button
+                    type="submit"
+                    disabled={showSuccess}>{showSuccess && "Success!"}SUBMIT</button>
             </form>
         </div>
-    </>
-
-    );
+    </>);
 }
 
 export default AddChallengeForm;
