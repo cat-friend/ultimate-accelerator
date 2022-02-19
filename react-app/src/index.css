@@ -6,21 +6,19 @@
 body {
     background-color: #dfd7cc;
     background-image: url('./background.svg');
-    background-size: 90%, contain;
+    background-size: 95%, contain;
     background-repeat: no-repeat;
     height: 100vh;
     background-position: 50% 65%;
     background-attachment: fixed;
     background-origin: border-box;
-    margin: 0 auto;
     font-family: 'Franklin Gothic Medium', Helvetica, sans-serif;
     font-size: 1rem;
 }
 
 div#root {
-    margin: 0 auto;
+    margin: 3rem auto 2rem auto;
     width: 80%;
-    margin-top: 30px;
 }
 
 div.header-parent {
@@ -41,22 +39,21 @@ div.header-child {
     display: flex;
     justify-content: left;
     align-items: center;
-    padding: 10px;
-    height: 50px;
+    padding: 1em;
 }
 
 
 div.left-corner {
     width: 0;
-    height: 0;
-    border-bottom: 50px solid #333;
-    border-left: 50px solid transparent;
+    border-bottom: 5em solid #333;
+    border-left: 4em solid transparent;
     margin: 0;
+    height: 0;
 }
 
 div.right-corner {
-    border-bottom: 50px solid #581c1c;
-    border-right: 15px solid transparent;
+    border-bottom: 5em solid #581c1c;
+    border-right: 1em solid transparent;
 }
 
 div.bottom-left-corner {
@@ -88,13 +85,23 @@ div.bottom-right-corner {
 .content-container {
     /* background: rgb(51, 51, 51);
     background: linear-gradient(98deg, rgba(51, 51, 51, 1) 0%, rgba(107, 57, 57, 1) 42%, rgba(175, 19, 19, 1) 76%); */
-    border: 1px #333 solid;
+    border: 1px #999 solid;
+    box-shadow: inset 0 0 .2em #666;
+    display: flex;
+    justify-content: center;
+    padding: .25em;
+    background-color: rgba(255, 255, 255, .85);
+
 }
 
 div.content {
-    background-color: rgba(255, 255, 255, .85);
+    background-color: rgba(255, 255, 255, .65);
+    display: block;
+    width: 100%;
     margin: 0;
-    padding: 10px;
+    padding: 1em;
+    border: 1px solid white;
+    box-shadow: 0 0 .2em #666;
 }
 
 
