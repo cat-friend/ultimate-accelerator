@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import * as challengeActions from "../../store/challenge"
+import EditChallenge from "../ChallengesForms/EditChallenges";
 
 function ChallengesBrowser() {
+    console.log("henlo?")
     const { userId } = useParams();
     const dispatch = useDispatch();
+    const currUserId = useSelector(state => state.session?.user.id)
     useEffect(() => {
         dispatch(challengeActions.loadChallenges(userId))
     }, [dispatch, userId])
@@ -23,14 +26,15 @@ function ChallengesBrowser() {
                     return (
                         <>
                             <div className={`challenge-label-${index % 2}`} key={`challenge-label-${index}`}>
-                                {challenge.challenge_label}
+                                {challenge?.challenge_label}
                             </div>
-                            <div className={`status-${index % 2}`} key={`status-${index}`}>
-                                {challenge.status}
-                            </div>
+                            {challenge?.user_id === currUserId ? <EditChallenge challengeId={challenge.id} />: <div className={`status-${index % 2}`} key={`status-${index}`}>
+                                {challenge?.status}
+                            </div>}
                             <div className={`value-${index % 2}`} key={`value-${index}`}>
-                                {challenge.value}
+                                {challenge?.value}
                             </div>
+                            <div className={`trans-index-${index % 2}` }>{challenge?.user_id === currUserId && <i class="fa-solid fa-trash"></i>}</div>
                         </>
                     )
                 })}

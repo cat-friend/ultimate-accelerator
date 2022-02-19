@@ -62,6 +62,12 @@ def all_challenges():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+@challenge_routes.route('/<int:id>', methods=['GET'])
+def get_challenge(id):
+    user_challenge = UserChallenge.query.get(id)
+    return user_challenge.to_dict()
+
+
 @challenge_routes.route('/<int:id>', methods=['PUT'])
 def edit_challenge(id):
     form = EditChallengeForm()
@@ -69,6 +75,7 @@ def edit_challenge(id):
     if form.validate_on_submit():
         user_challenge = UserChallenge.query.get(id)
         user_challenge.status = form.data['status']
+        print("USER CHALLENGE STATUS", user_challenge.status)
         db.session.add(user_challenge)
         db.session.commit()
         return user_challenge.to_dict()

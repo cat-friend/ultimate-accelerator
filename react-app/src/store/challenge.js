@@ -18,11 +18,12 @@ const deleteOneChallenge = challenge => ({
 });
 
 export const createChallenge = (payload) => async (dispatch) => {
-    const response = await fetch("/api/challenges/", {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    });
+    const response = await fetch("/api/challenges/",
+        {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
     const challenge = await response.json();
     if (response.ok) {
         dispatch(addOneChallenge(challenge));
@@ -30,14 +31,41 @@ export const createChallenge = (payload) => async (dispatch) => {
     return challenge
 }
 
-export const loadChallenges = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/users/${payload}/challenges`)
+export const loadChallenges = (id) => async (dispatch) => {
+    const response = await fetch(`/api/users/${id}/challenges`)
     const challenges = await response.json();
     if (response.ok) {
         dispatch(loadAllChallenges(challenges));
     }
     return challenges;
 }
+
+export const getOneChallenge = (id) => async (dispatch) => {
+    const response = await fetch(`/api/challenges/${id}`)
+    const challenge = await response.json();
+    if (response.ok) {
+        dispatch(addOneChallenge(challenge));
+    }
+    return challenge;
+}
+
+
+export const editChallenge = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/challenges/${payload.user_challenge_id}`,
+        {
+            method: 'PUT',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }
+    );
+    const challenge = await response.json();
+    if (response.ok) {
+        dispatch(addOneChallenge(challenge));
+    }
+    return challenge
+}
+
+
 
 
 const challengeReducer = (state = {}, action) => {
