@@ -1,60 +1,102 @@
 * {
     box-sizing: border-box;
+    margin: 0;
 }
 
 body {
     background-color: #dfd7cc;
     background-image: url('./background.svg');
-    background-size: 80%, contain;
+    background-size: 90%, contain;
     background-repeat: no-repeat;
     height: 100vh;
-    background-position: 50% 50%;
+    background-position: 50% 65%;
+    background-attachment: fixed;
     background-origin: border-box;
     margin: 0 auto;
     font-family: 'Franklin Gothic Medium', Helvetica, sans-serif;
-    font-size: 14pt;
+    font-size: 1rem;
 }
-
 
 div#root {
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     margin-top: 30px;
 }
 
 div.header-parent {
-    width: 100%;
-    transform: skew(40deg);
-    background: #993333;
     display: flex;
-    justify-content: center;
-    padding: 10px;
-    align-items: end;
-    margin-bottom: 0;
-}
-div.header-parent > * {
-    transform: skew(-40deg);
-}
-
-div.content {
-    background-color: rgba(255, 255, 255, .9);
-    margin: 0;
-}
-img.header-img {
-    /* width: 100%; */
-    height: auto;
-    object-fit: fill;
-
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 
 div.header-child {
+    width: 100%;
+    /* transform: skew(40deg); */
+    /* background: rgb(51, 51, 51);
+    background: linear-gradient(90deg, rgba(51, 51, 51, 1) 0%, rgba(153, 51, 51, 1) 35%, rgba(186, 61, 34, 1) 57%, rgba(153, 102, 102, 1) 100%); */
+
+    background: rgb(51, 51, 51);
+    background: linear-gradient(98deg, rgba(51, 51, 51, 1) 0%, rgba(88, 28, 28, 1) 33%, rgba(175, 19, 19, 1) 64%, rgba(88, 28, 28, 1) 100%);
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    margin: 0 40px;
-    color: white;
+    padding: 10px;
+    height: 50px;
 }
+
+
+div.left-corner {
+    width: 0;
+    height: 0;
+    border-bottom: 50px solid #333;
+    border-left: 50px solid transparent;
+    margin: 0;
+}
+
+div.right-corner {
+    border-bottom: 50px solid #581c1c;
+    border-right: 15px solid transparent;
+}
+
+div.bottom-left-corner {
+    width: 50px;
+    height: 0;
+    border-top: 20px solid #333;
+    margin: 0;
+}
+
+div.bottom-right-corner {
+    border-bottom: 20px solid #996666;
+    border-right: 15px solid transparent;
+}
+
+
+/* div.header-child::after{
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 80px solid black;
+    border-left: 80px solid transparent;
+    width: 0;
+} */
+
+/* div.header-parent>* {
+    transform: skew(-40deg);
+} */
+
+.content-container {
+    /* background: rgb(51, 51, 51);
+    background: linear-gradient(98deg, rgba(51, 51, 51, 1) 0%, rgba(107, 57, 57, 1) 42%, rgba(175, 19, 19, 1) 76%); */
+    border: 1px #333 solid;
+}
+
+div.content {
+    background-color: rgba(255, 255, 255, .85);
+    margin: 0;
+    padding: 10px;
+}
+
 
 h1, h2, h3 {
     padding: 0;
@@ -64,16 +106,16 @@ h1, h2, h3 {
 
 h2 {
     font-weight: normal;
-    font-size: 20px;
+    font-size: 3rem;
     font-family: 'teko';
     color: white;
-    margin: 10px;
+    letter-spacing: .2em;
 }
 
 @font-face {
     font-family: 'apexregular';
     src: url('./assets/fonts/apex_regular-webfont.woff2') format('woff2'),
-         url('./assets/fonts/apex_regular-webfont.woff') format('woff');
+        url('./assets/fonts/apex_regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -83,7 +125,7 @@ h2 {
 @font-face {
     font-family: 'tekobold';
     src: url('./assets/fonts/teko-bold-webfont.woff2') format('woff2'),
-         url('./assets/fonts/teko-bold-webfont.woff') format('woff');
+        url('./assets/fonts/teko-bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -93,7 +135,7 @@ h2 {
 @font-face {
     font-family: 'tekomedium';
     src: url('./assets/fonts/teko-medium-webfont.woff2') format('woff2'),
-         url('./assets/fonts/teko-medium-webfont.woff') format('woff');
+        url('./assets/fonts/teko-medium-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -105,7 +147,7 @@ h2 {
 @font-face {
     font-family: 'teko';
     src: url('./assets/fonts/teko-regular-webfont.woff2') format('woff2'),
-         url('./assets/fonts/teko-regular-webfont.woff') format('woff');
+        url('./assets/fonts/teko-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -115,7 +157,7 @@ h2 {
 @font-face {
     font-family: 'tekosemibold';
     src: url('./assets/fonts/teko-semibold-webfont.woff2') format('woff2'),
-         url('./assets/fonts/teko-semibold-webfont.woff') format('woff');
+        url('./assets/fonts/teko-semibold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
