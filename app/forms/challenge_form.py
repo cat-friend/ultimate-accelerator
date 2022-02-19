@@ -1,7 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, IntegerField, TextAreaField, StringField
+from wtforms import SubmitField, IntegerField, TextAreaField, StringField, FieldList, Field
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange, AnyOf
 
+class ListField(Field):
+    def process_formdata(self, valuelist):
+        self.data = valuelist
 
 class ChallengeForm(FlaskForm):
     challenge_label = TextAreaField("", validators=[DataRequired(), Length(
@@ -13,9 +16,9 @@ class ChallengeForm(FlaskForm):
     value = IntegerField("", validators=[DataRequired(
         message="Error! Please enter a value for this challenge."),
         NumberRange(min=1, max=10, message="Please enter a value for this challenge between 1 and 10")])
-    weapon_id = IntegerField("")
-    mode_id = IntegerField("")
-    legend_id = IntegerField("")
+    weapon_id = ListField(validators=[])
+    mode_id = ListField(validators=[])
+    legend_id = ListField(validators=[])
     submit = SubmitField("Submit")
 
 class EditChallengeForm(FlaskForm):

@@ -38,6 +38,7 @@ def all_challenges():
     form = ChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print("FORM DOT DATA ", form.data)
         challenge_label = form.data['challenge_label']
         challenge_type_id = form.data['challenge_type_id']
         user_id = form.data['user_id']

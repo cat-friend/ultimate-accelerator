@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { weaponsDict, legendsDict, challengeTypeDict } from "./dictionaries"
 import { challengeTypeRegex, abilitiesRegex, legendsRegex, weaponsRegex } from "./regexes"
 import "./ChallengesForms.css"
+import * as challengeActions from "../../store/challenge"
 
 function AddChallengeForm() {
     const dispatch = useDispatch();
@@ -50,7 +51,21 @@ function AddChallengeForm() {
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
-        console.log("payload", payload)
+        console.log("payload", payload);
+
+        return dispatch(challengeActions.createChallenge(payload))
+            .then(
+                (response) => {
+                    if (response.errors) {
+                        setErrors(response.errors)
+                        return
+                    }
+                    setShowSuccess(true);
+                    setTimeout(() => {
+                        setShowSuccess(false);
+                    }, 1000);
+                }
+            );
     };
 
     return (<>
