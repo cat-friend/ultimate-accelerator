@@ -6,31 +6,33 @@ import "./ChallengesForms.css"
 import * as challengeActions from "../../store/challenge"
 
 function EditChallenge({ challengeId }) {
+    const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
     const status = useSelector(state => state.challenges[challengeId].status)
-    const [errors, setErrors] = useState([]);
     const [newStatus, setNewStatus] = useState(status);
     const [showSuccess, setShowSuccess] = useState(false);
     const curr_user_id = useSelector(state => state.session.user.id)
     const challenge_user_id = useSelector(state => state.challenges[challengeId].user_id)
-    const [showModal, setShowModal] = useState(false);
-
-
+    let prop;
     const handleUpdate = (e) => {
         setErrors([]);
         const payload = {
             user_challenge_id: challengeId,
             curr_user_id,
-            challenge_user_id,
+            // challenge_user_id,
             status: e.target.value
         }
         console.log("payload", payload)
         return dispatch(challengeActions.editChallenge(payload))
             .then(
                 (response) => {
+                    console.log("responsme.errors", response.errors)
                     if (response.errors) {
+                        prop = true;
                         setErrors(response.errors)
-                        setShowModal(true)
+                        setTimeout(() => {
+                            setErrors([]);
+                        }, 1500);
                         return
                     }
                     dispatch(challengeActions.getOneChallenge(challengeId))
@@ -41,13 +43,11 @@ function EditChallenge({ challengeId }) {
                 }
             );
     }
-    const errorModal = (
-        <Modal onClose={() => setShowModal(false)}>
-            <ErrorBody setShowModal={setShowModal} errors={errors} />
-        </Modal>)
 
     return (<>
-        {showModal && errorModal}
+        {errors.map((ele, i) => {
+            return <p key={i} className="">{ele}</p>
+        })}
         {showSuccess ? "SUCCESS!" :
             <form>
                 <select name="status" id="change-status" onChange={
@@ -55,10 +55,11 @@ function EditChallenge({ challengeId }) {
                         setNewStatus(e.target.value)
                         handleUpdate(e)
                     }}
-                    value={newStatus}>
-                    <option value="open" selected={newStatus === "open"}>open</option>
-                    <option value="in progress" selected={newStatus === "in progress"}>in progress</option>
-                    <option value="completed" selected={newStatus === "completed"}>completed</option>
+                    value={newStatus}
+                >
+                    <option value="open">open</option>
+                    <option value="in progress">in progress</option>
+                    <option value="completed">completed</option>
                 </select>
             </form>
         }
