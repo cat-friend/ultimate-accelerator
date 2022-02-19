@@ -56,6 +56,7 @@ def all_challenges():
         user_challenge_id = new_challenge.id
         new_dimension_table_entry(
             user_challenge_id, value, weapon_id, mode_id, legend_id)
+        print("NEEEEEEEEEW CHALLENGE", new_challenge.to_dict())
         return new_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import AddChallengesForm from "../ChallengesForms/AddChallengeForm";
+import ChallengesBrowser from "../ChallengesBrowser";
+import AddChallengeForm from "../ChallengesForms/AddChallengeForm";
 
 function Challenges() {
-    <AddChallengeForm />
+    return (
+        <>
+            <AddChallengeForm />
+            <ChallengesBrowser />
+        </>)
 }
+
+export default Challenges;

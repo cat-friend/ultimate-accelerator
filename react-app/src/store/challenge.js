@@ -3,7 +3,7 @@ const ADD_CHALLENGE = "ultimate-accelerator/challenges/ADD_CHALLENGE"
 const DELETE_CHALLENGE = "ultimate-accelerator/challenges/DEL_CHALLENGE"
 
 
-const load = challenges => ({
+const loadAllChallenges = challenges => ({
     type: LOAD_CHALLENGES,
     challenges: challenges.challenges
 });
@@ -29,3 +29,38 @@ export const createChallenge = (payload) => async (dispatch) => {
     }
     return challenge
 }
+
+export const loadChallenges = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/users/${payload}/challenges`)
+    const challenges = await response.json();
+    if (response.ok) {
+        dispatch(loadAllChallenges(challenges));
+    }
+    return challenges;
+}
+
+
+const challengeReducer = (state = {}, action) => {
+    switch (action.type) {
+        case LOAD_CHALLENGES: {
+            const allChallenges = {};
+            action.challenges.forEach((challenge) => {
+                allChallenges[challenge.id] = challenge;
+            });
+            return allChallenges;
+        }
+        case ADD_CHALLENGE: {
+            const newState = { ...state };
+            newState[action.challenge.id] = action.challenge;
+            return newState;
+        }
+        case DELETE_CHALLENGE: {
+            const allChallenges = { ...state };
+            delete allChallenges[action.challenge.id]
+            return allChallenges;
+        }
+        default: return state;
+    }
+}
+
+export default challengeReducer;

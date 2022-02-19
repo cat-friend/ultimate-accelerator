@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import CSSTester from './components/CSSTester';
 import AddChallengeForm from './components/ChallengesForms/AddChallengeForm';
+import Challenges from './components/Challenges';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,8 +40,8 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+        <ProtectedRoute path='/users/:userId/challenges' exact={true} >
+          <Challenges />
         </ProtectedRoute>
         <ProtectedRoute path='/challenges' exact={true} >
           <AddChallengeForm />

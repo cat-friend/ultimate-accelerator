@@ -127,7 +127,7 @@ function AddChallengeForm() {
                 </div>
                 <button
                     type="submit"
-                    disabled={showSuccess}>{showSuccess && "Success!"}SUBMIT</button>
+                    disabled={showSuccess}>{showSuccess ? "Success!" : "SUBMIT"}</button>
             </form>
         </div>
     </>);
