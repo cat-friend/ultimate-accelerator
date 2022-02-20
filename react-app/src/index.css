@@ -22,13 +22,14 @@ div#root {
 }
 
 a {
-    transition: text-decoration .5s ease-in;
+    transition: all .5s ease-in;
     text-decoration: none;
     color: #993333;
 }
 
 a:hover {
-    text-decoration: underline overline #999 .2rem;
+    color: #581c1c;
+    font-size: 1.1rem;
 }
 
 a:active {
@@ -51,7 +52,6 @@ div.header-child {
     padding: 1rem;
 }
 
-
 div.left-corner {
     width: 0;
     border-bottom: 5rem solid #333;
@@ -64,8 +64,6 @@ div.right-corner {
     border-bottom: 5rem solid #581c1c;
     border-right: 1rem solid transparent;
 }
-
-
 
 .content-container {
     border: 1px #999 solid;

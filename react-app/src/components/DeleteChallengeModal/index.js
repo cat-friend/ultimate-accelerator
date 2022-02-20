@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { NavLink } from 'react-router-dom';
 import DeleteChallengeForm from './DeleteChallengeForm';
 
 function DeleteChallengeModal({ challenge }) {
     const [showModal, setShowModal] = useState(false);
-    console.log("inside delete modal")
-    console.log("challenge", challenge)
+    useEffect(() => {
+        return () => setShowModal(false)
+    }, [setShowModal])
     return (
         <>{console.log("inside delete modal return")}
-            <button
+            <NavLink
                 onClick={(e) => {
+                    e.preventDefault();
                     setShowModal(true);
-                    console.log("showModal", showModal)
                 }}
                 to=""
-                className=''>DELETE
-                {/* <i className="fa-solid fa-trash"></i> */}
-            </button>
+                className=''>
+                <i className="fa-solid fa-trash"></i>
+            </NavLink>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <DeleteChallengeForm />
-                    {/* <DeleteChallengeForm setShowModal={setShowModal} challenge={challenge} /> */}
+                    <DeleteChallengeForm setShowModal={setShowModal} challenge={challenge}/>
                 </Modal>
             )}
         </>

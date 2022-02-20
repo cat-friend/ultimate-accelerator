@@ -14,7 +14,8 @@ const addOneChallenge = challenge => ({
 });
 
 const deleteOneChallenge = challenge => ({
-    type: DELETE_CHALLENGE
+    type: DELETE_CHALLENGE,
+    challenge
 });
 
 export const createChallenge = (payload) => async (dispatch) => {
@@ -79,7 +80,7 @@ export const deleteChallenge = (payload) => async (dispatch) => {
                 body: JSON.stringify(payload)
             }
         );
-        
+
         if (delChallenge.ok) {
             const challenge = await getCurrChallenge.json();
             dispatch(deleteOneChallenge(challenge));

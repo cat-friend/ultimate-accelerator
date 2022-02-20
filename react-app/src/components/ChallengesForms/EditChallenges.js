@@ -7,7 +7,7 @@ import * as challengeActions from "../../store/challenge"
 
 
 function EditChallenge({ challengeId }) {
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(true)
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch();
     const status = useSelector(state => state.challenges[challengeId].status)
@@ -20,20 +20,17 @@ function EditChallenge({ challengeId }) {
         const payload = {
             user_challenge_id: challengeId,
             curr_user_id,
-            // challenge_user_id,
+            challenge_user_id,
             status: e.target.value
         }
         return dispatch(challengeActions.editChallenge(payload))
             .then(
                 (response) => {
                     if (response.errors) {
-
-                        setTimeout(() => {setErrors(response.errors);}, 5);
-
-                        setTimeout(() => {setShowModal(true);}, 10);
-                        // setTimeout(() => {
-                        //     setErrors([]);
-                        // }, 1500);
+                        setErrors(response.errors);
+                        setTimeout(() => {
+                            setErrors([]);
+                        }, 2000);
                         return
                     }
                     dispatch(challengeActions.getOneChallenge(challengeId))
@@ -45,32 +42,26 @@ function EditChallenge({ challengeId }) {
             );
     }
 
-    return (<>{showModal ?
-        < Modal onClose={() => setShowModal(false)}>
-            <ErrorBody setShowModal={setShowModal} errors={errors} />
-        </Modal>
-        : null
-    }
-        {/* {errors.map((ele, i) => {
-            return <p key={i} className="">{ele}</p>
-        })} */}
-        {
-            showSuccess ? "SUCCESS!" :
-                <form>
-                    <select name="status" id="change-status" onChange={
-                        (e) => {
-                            setNewStatus(e.target.value)
-                            handleUpdate(e)
-                        }}
-                        value={newStatus}
-                    >
-                        <option value="open">open</option>
-                        <option value="in progress">in progress</option>
-                        <option value="completed">completed</option>
-                    </select>
-                </form>
-        }
 
+    return (<> {errors.map((ele, i) => {
+        return <p key={i} className="">{ele}</p>
+    })
+    }
+        {showSuccess ? "SUCCESS!" :
+            <form>
+                <select name="status" id="change-status" onChange={
+                    (e) => {
+                        setNewStatus(e.target.value)
+                        handleUpdate(e)
+                    }}
+                    value={newStatus}
+                >
+                    <option value="open">open</option>
+                    <option value="in progress">in progress</option>
+                    <option value="completed">completed</option>
+                </select>
+            </form>
+        }
     </>)
 }
 
