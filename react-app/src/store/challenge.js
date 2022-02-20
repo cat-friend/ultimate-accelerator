@@ -13,7 +13,7 @@ const addOneChallenge = challenge => ({
     challenge
 });
 
-const deleteOneChallenge = challenge => ({
+export const deleteOneChallenge = challenge => ({
     type: DELETE_CHALLENGE,
     challenge
 });
@@ -83,7 +83,6 @@ export const deleteChallenge = (payload) => async (dispatch) => {
 
         if (delChallenge.ok) {
             const challenge = await getCurrChallenge.json();
-            dispatch(deleteOneChallenge(challenge));
             return challenge;
         }
         else return delChallenge.json()

@@ -1,28 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as challengeActions from "../../store/challenge";
 
-function DeleteChallengeForm({ setShowModal, challenge }) {
+function DeleteChallengeForm({ setShowModal, challenge, showModal }) {
     const dispatch = useDispatch();
     const { userId } = useParams();
     const currUserId = useSelector(state => state.session.user.id);
     const [success, setSuccess] = useState("");
     const [errors, setErrors] = useState([]);
-    let timer = setTimeout(() => {
-        setShowModal(false);
-    }, 1500);
 
-    useEffect(() => {
-        let timer = setTimeout(() => {
-            setShowModal(false);
-        }, 1500);
+    // useEffect(() => {
+    //     if (success === "") return;
+    //     const timer = setTimeout(() => setShowModal(false), 1000);
+    //     return () => clearTimeout(timer)
+    // }, [showModal])
 
-        return () => clearTimeout(timer)
-    }, [dispatch, success])
-
-    const submitDelete = (e) => {
-        e.preventDefault();
+    const submitDelete = () => {
         setErrors([]);
         const payload = {
             user_challenge_id: challenge.id,
@@ -36,13 +30,24 @@ function DeleteChallengeForm({ setShowModal, challenge }) {
                         setErrors(response.errors)
                         return
                     }
-                    setSuccess("Success!");
+                    else {
+                        setSuccess("Success!");
+                        setTimeout(() => {
+                            setShowModal(false);
+                            dispatch(challengeActions.deleteOneChallenge(challenge))
+                        }, 1000);
+
+
+                        return;
+                    }
+                    // setTimeout(() => showModal = reference.current, 1000);
                 }
             );
     };
 
     return (
         <div className="delete">
+            <h2>{success}</h2>
             <h3>Are you sure you want to delete this challenge?</h3>
             This cannot be undone.
             <ul className="error-list">
@@ -50,12 +55,9 @@ function DeleteChallengeForm({ setShowModal, challenge }) {
                     <li key={idx} className="errors">{error}</li>
                 ))}
             </ul>
-            <form onSubmit={submitDelete}>
-                <button type="submit" className="">Yes</button>
-                <button type="button" onClick={(e) => setShowModal(false)} className="">No</button>
-            </form>
-            <h2>{success}</h2>
-        </div>)
+            <button type="button" onClick={() => submitDelete()} className="">Yes</button>
+            <button type="button" onClick={(e) => setShowModal(false)} className="">No</button>
+        </div >)
 }
 
 export default DeleteChallengeForm;
