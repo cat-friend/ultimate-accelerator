@@ -16,7 +16,7 @@ body {
     font-size: 1rem;
 }
 
-div#root {
+div.root {
     margin: 3rem auto 2rem auto;
     width: 80%;
 }
