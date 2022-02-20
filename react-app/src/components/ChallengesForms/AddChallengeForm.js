@@ -62,6 +62,8 @@ function AddChallengeForm() {
                         return
                     }
                     setShowSuccess(true);
+                    setInput("")
+                    setStars("")
                     setTimeout(() => {
                         setShowSuccess(false);
                     }, 1000);
@@ -70,66 +72,72 @@ function AddChallengeForm() {
     };
 
     return (<>
-        <div className="header-parent"><h2>Add a Challenge</h2></div>
-        <div className="content">
-            <ul className="error-list">
-                {errors.map((error, idx) => (
-                    <li key={idx} className="errors">{error}</li>
-                ))}
-            </ul>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    name="user-challenge-input"
-                    id="user-challenge-input"
-                    required
-                    minLength="10"
-                    data-lpignore="true"
-                />
-                {modeNames.map((ele, index) => {
-                    return (<>
-                        <div className="modes" key={`div-${index}`}>
-                            <div className="label-top" key={index}>
-                                <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
-                                    {ele}
-                                </label>
-                            </div>
-                            <div className="checkbox-bottom" key={`box-${index}`}>
-                                <input
-                                    type="checkbox"
-                                    id={`mode-checkbox-${index}`}
-                                    key={`mode-checkbox-${index}`}
-                                    name={ele}
-                                    checked={checked[index]}
-                                    onChange={() => handleCheckboxOnChange(index)}
-                                />
-                            </div>
-                        </div>
-                    </>)
-                })}
-                <div className="modes">
-                    <div className="label-top">
-                        <label htmlFor="stars">
-                            Stars
-                        </label>
-                    </div>
+        <div className="header-parent">
+            <div className="left-corner"></div>
+            <div className="header-child"><h2>Add a Challenge</h2></div>
+            <div className="right-corner"></div>
+        </div>
+        <div className="content-container">
+            <div className="content">
+                <ul className="error-list">
+                    {errors.map((error, idx) => (
+                        <li key={idx} className="errors">{error}</li>
+                    ))}
+                </ul>
+                <form onSubmit={handleSubmit}>
                     <input
-                        type="number"
-                        min={1}
-                        max={10}
-                        onChange={(e) => setStars(e.target.value)}
-                        placeholder={5}
-                        id="stars"
-                        size="4"
-                        required />
-                </div>
-                <button
-                    type="submit"
-                    disabled={showSuccess}>{showSuccess ? "Success!" : "SUBMIT"}</button>
-            </form>
+                        type="text"
+                        placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        name="user-challenge-input"
+                        id="user-challenge-input"
+                        required
+                        minLength="10"
+                        data-lpignore="true"
+                    />
+                    {modeNames.map((ele, index) => {
+                        return (
+                            <div className="modes" key={`div-${index}`}>
+                                <div className="label-top" key={index}>
+                                    <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
+                                        {ele}
+                                    </label>
+                                </div>
+                                <div className="checkbox-bottom" key={`box-${index}`}>
+                                    <input
+                                        type="checkbox"
+                                        id={`mode-checkbox-${index}`}
+                                        key={`mode-checkbox-${index}`}
+                                        name={ele}
+                                        checked={checked[index]}
+                                        onChange={() => handleCheckboxOnChange(index)}
+                                    />
+                                </div>
+                            </div>
+                        )
+                    })}
+                    <div className="modes">
+                        <div className="label-top">
+                            <label htmlFor="stars">
+                                Stars
+                            </label>
+                        </div>
+                        <input
+                            type="number"
+                            min={1}
+                            max={10}
+                            onChange={(e) => setStars(e.target.value)}
+                            placeholder=""
+                            id="stars"
+                            size="4"
+                            required />
+                    </div>
+                    <button
+                        type="submit"
+                        disabled={showSuccess}>{showSuccess ? "Success!" : "SUBMIT"}</button>
+                </form>
+            </div>
         </div>
     </>);
 }

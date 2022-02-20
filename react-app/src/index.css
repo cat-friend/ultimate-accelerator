@@ -24,12 +24,13 @@ div#root {
 a {
     transition: all .5s ease-in;
     text-decoration: none;
-    color: #993333;
+    color: red;
+    font-size: 1.1rem;
 }
 
 a:hover {
     color: #581c1c;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 a:active {
@@ -39,13 +40,23 @@ a:active {
 div.header-parent {
     display: flex;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
 }
 
 div.header-child {
     width: 100%;
     background: rgb(51, 51, 51);
-    background: linear-gradient(98deg, rgba(51, 51, 51, 1) 0%, rgba(88, 28, 28, 1) 33%, rgba(175, 19, 19, 1) 64%, rgba(88, 28, 28, 1) 100%);
+    background: linear-gradient(98deg, rgba(51, 51, 51, 1) 0%, rgba(88, 28, 28, 1) 23%, rgba(175, 19, 19, 1) 55%, rgba(188, 53, 30, 1) 65%, rgba(194, 51, 35, .8) 81%, rgba(200, 49, 39, .55) 95%);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 1rem;
+}
+
+div.header-child-b {
+    width: 100%;
+    background: rgb(51, 51, 51);
+    background: linear-gradient(98deg, rgba(51, 51, 51, 1) 0%, rgba(88, 28, 28, 1) 15%, rgba(175, 19, 19, 1) 47%, rgba(188, 53, 30, 1) 65%, rgba(194, 51, 35, 0.6) 81%, rgba(200, 49, 39, 1) 95%);
     display: flex;
     justify-content: left;
     align-items: center;
@@ -61,8 +72,21 @@ div.left-corner {
 }
 
 div.right-corner {
-    border-bottom: 5rem solid #581c1c;
+    border-bottom: 5rem solid rgba(200, 49, 39, .55);
     border-right: 1rem solid transparent;
+}
+
+div.left-corner-b {
+    width: 0;
+    border-bottom: 5rem solid #333;
+    border-left: 1rem solid transparent;
+    margin: 0;
+    height: 0;
+}
+
+div.right-corner-b {
+    border-bottom: 5rem solid rgba(200, 49, 39, 1);
+    border-right: 4rem solid transparent;
 }
 
 .content-container {
@@ -72,15 +96,17 @@ div.right-corner {
     justify-content: center;
     padding: .25em;
     background-color: rgba(255, 255, 255, .85);
+    margin-bottom: 2rem;
 }
 
 div.content {
-    background-color: rgba(255, 255, 255, .65);
+    background-color: rgba(0, 0, 0, .65);
+    color: white;
     display: block;
     width: 100%;
     margin: 0;
     padding: 1em;
-    border: 1px solid white;
+    border: 1px solid black;
     box-shadow: 0 0 .2em #666;
 }
 
@@ -106,6 +132,7 @@ h3 {
     color: white;
     letter-spacing: .1em;
 }
+
 @font-face {
     font-family: 'apexregular';
     src: url('./assets/fonts/apex_regular-webfont.woff2') format('woff2'),
