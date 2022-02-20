@@ -24,9 +24,9 @@ class ChallengeForm(FlaskForm):
 class EditChallengeForm(FlaskForm):
     user_challenge_id = IntegerField("", validators=[DataRequired()])
     challenge_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
-        'curr_user_id', message='Error! You are not authorized to delete this challenge')])
+        'curr_user_id', message='Error! You are not authorized to edit this challenge')])
     curr_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
-        'challenge_user_id', message='Error! You are not authorized to delete this challenge')])
+        'challenge_user_id', message='Error! You are not authorized to edit this challenge')])
     status = StringField("", validators=[AnyOf(["open", "in progress", "completed"], message="Error! No valid status detected.")])
 
 class DeleteChallengeForm(FlaskForm):

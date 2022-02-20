@@ -65,7 +65,30 @@ export const editChallenge = (payload) => async (dispatch) => {
     return challenge
 }
 
-
+export const deleteChallenge = (payload) => async (dispatch) => {
+    const getCurrChallenge = await fetch(`/api/challenges/${payload.user_challenge_id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (getCurrChallenge.ok) {
+        const delChallenge = await fetch(`/api/challenges/${payload.user_challenge_id}`,
+            {
+                method: 'DELETE',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }
+        );
+        
+        if (delChallenge.ok) {
+            const challenge = await getCurrChallenge.json();
+            dispatch(deleteOneChallenge(challenge));
+            return challenge;
+        }
+        else return delChallenge.json()
+    }
+    return getCurrChallenge.json()
+}
 
 
 const challengeReducer = (state = {}, action) => {

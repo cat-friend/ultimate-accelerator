@@ -5,15 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ChallengesForms.css"
 import * as challengeActions from "../../store/challenge"
 
+
 function EditChallenge({ challengeId }) {
-    const [errors, setErrors] = useState([]);
+    const [showModal, setShowModal] = useState(false)
+    const [errors, setErrors] = useState([])
     const dispatch = useDispatch();
     const status = useSelector(state => state.challenges[challengeId].status)
     const [newStatus, setNewStatus] = useState(status);
     const [showSuccess, setShowSuccess] = useState(false);
     const curr_user_id = useSelector(state => state.session.user.id)
     const challenge_user_id = useSelector(state => state.challenges[challengeId].user_id)
-    let prop;
     const handleUpdate = (e) => {
         setErrors([]);
         const payload = {
@@ -22,17 +23,17 @@ function EditChallenge({ challengeId }) {
             // challenge_user_id,
             status: e.target.value
         }
-        console.log("payload", payload)
         return dispatch(challengeActions.editChallenge(payload))
             .then(
                 (response) => {
-                    console.log("responsme.errors", response.errors)
                     if (response.errors) {
-                        prop = true;
-                        setErrors(response.errors)
-                        setTimeout(() => {
-                            setErrors([]);
-                        }, 1500);
+
+                        setTimeout(() => {setErrors(response.errors);}, 5);
+
+                        setTimeout(() => {setShowModal(true);}, 10);
+                        // setTimeout(() => {
+                        //     setErrors([]);
+                        // }, 1500);
                         return
                     }
                     dispatch(challengeActions.getOneChallenge(challengeId))
@@ -44,24 +45,30 @@ function EditChallenge({ challengeId }) {
             );
     }
 
-    return (<>
-        {errors.map((ele, i) => {
+    return (<>{showModal ?
+        < Modal onClose={() => setShowModal(false)}>
+            <ErrorBody setShowModal={setShowModal} errors={errors} />
+        </Modal>
+        : null
+    }
+        {/* {errors.map((ele, i) => {
             return <p key={i} className="">{ele}</p>
-        })}
-        {showSuccess ? "SUCCESS!" :
-            <form>
-                <select name="status" id="change-status" onChange={
-                    (e) => {
-                        setNewStatus(e.target.value)
-                        handleUpdate(e)
-                    }}
-                    value={newStatus}
-                >
-                    <option value="open">open</option>
-                    <option value="in progress">in progress</option>
-                    <option value="completed">completed</option>
-                </select>
-            </form>
+        })} */}
+        {
+            showSuccess ? "SUCCESS!" :
+                <form>
+                    <select name="status" id="change-status" onChange={
+                        (e) => {
+                            setNewStatus(e.target.value)
+                            handleUpdate(e)
+                        }}
+                        value={newStatus}
+                    >
+                        <option value="open">open</option>
+                        <option value="in progress">in progress</option>
+                        <option value="completed">completed</option>
+                    </select>
+                </form>
         }
 
     </>)

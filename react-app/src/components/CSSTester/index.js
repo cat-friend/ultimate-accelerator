@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import TestModal from "./TestModal"
 function CSSTester() {
     return (
         <>
@@ -10,7 +11,7 @@ function CSSTester() {
             <div className="content-container">
                 <div className="content">
                     <p><Link to="/users/1/challenges">THIS IS A LINK</Link></p>
-                    <p>HELLO</p>
+                    <p><TestModal /></p>
                     <p>HELLO</p>
                     <p>HELLO</p>
                     <p>HELLO</p>
@@ -28,7 +29,5 @@ function CSSTester() {
             </div>
         </>
     )
-
-
 }
 export default CSSTester
