@@ -28,26 +28,28 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path='/' exact={true}>
-          <CSSTester />
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/challenges' exact={true} >
-          <Challenges />
-        </ProtectedRoute>
-        <ProtectedRoute path='/challenges' exact={true} >
-          <AddChallengeForm />
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
+    <div className='root'>
+      <BrowserRouter>
+        <Switch>
+          <Route path='/' exact={true}>
+            <CSSTester />
+            <LoginForm />
+          </Route>
+          <Route path='/sign-up' exact={true}>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path='/users' exact={true} >
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId/challenges' exact={true} >
+            <Challenges />
+          </ProtectedRoute>
+          <ProtectedRoute path='/challenges' exact={true} >
+            <AddChallengeForm />
+          </ProtectedRoute>
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
