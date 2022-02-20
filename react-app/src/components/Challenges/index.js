@@ -5,10 +5,10 @@ import AddChallengeForm from "../ChallengesForms/AddChallengeForm";
 
 function Challenges() {
     return (
-        <div className="root">
+        <>
             <AddChallengeForm />
             <ChallengesBrowser />
-        </div>)
+        </>)
 }
 
 export default Challenges;
