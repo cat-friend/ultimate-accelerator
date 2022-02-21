@@ -147,7 +147,7 @@ h3 {
 }
 
 input, select {
-    outline: none;
+    outline: 1px solid black;
     border: none;
     border-radius: 2px;
     display: block;
