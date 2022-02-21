@@ -22,16 +22,16 @@ function App() {
     })();
   }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
+  // if (!loaded) {
+  //   return null;
+  // }
 
   return (<>
     <nav><NavBar loaded={loaded} /></nav>
     <div className='root'>
       <Switch>
         <Route path='/' exact={true}>
-          <Auth />
+          <Auth loaded={loaded}/>
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
