@@ -12,19 +12,6 @@ function CSSTester() {
                 <div className="content">
                     <p><Link to="/users/1/challenges">THIS IS A LINK</Link></p>
                     <p><TestModal /></p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
-                    <p>HELLO</p>
                 </div>
             </div>
         </>

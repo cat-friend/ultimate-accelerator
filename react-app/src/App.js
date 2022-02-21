@@ -10,6 +10,7 @@ import CSSTester from './components/CSSTester';
 import AddChallengeForm from './components/ChallengesForms/AddChallengeForm';
 import Challenges from './components/Challenges';
 import Auth from './components/Auth';
+import Clans from './components/Clans';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +43,12 @@ function App() {
         <ProtectedRoute path='/challenges' exact={true} >
           <AddChallengeForm />
         </ProtectedRoute>
+        <ProtectedRoute path='/clans' exact={true} >
+          <Clans />
+        </ProtectedRoute>
+        <Route>
+          oops!
+        </Route>
       </Switch>
     </div>
   </>

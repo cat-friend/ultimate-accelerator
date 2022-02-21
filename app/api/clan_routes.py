@@ -27,8 +27,6 @@ def default():
     """
     if request.method == 'GET':
         clans = Clan.query.all()
-        print("clans", clans)
-        print({"clans": clan.to_dict() for clan in clans})
         return {"clans": [clan.to_dict() for clan in clans]}
     if request.method == 'POST':
         form = ClanForm()
@@ -64,10 +62,10 @@ def join_leave_clan(id):
             user_id = form.data['user_id']
             clan_id = id
             new_member = ClanUsers(user_id=user_id, clan_id=clan_id)
-            clan_member = ClanUsers.query.join(User).filter(User.id == user_id).first()
+            clan_members = ClanUsers.query.join(User).filter(User.id == user_id).first()
             db.session.add(new_member)
             db.session.commit()
-            return {"clan_members": clan_member.to_dict()}
+            return {"clan_members": [clan_member.to_dict() for clan_member in clan_members]}
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     if request.method == 'DELETE':

@@ -24,7 +24,6 @@ function AddChallengeForm() {
             if (updatedCheckedState[i]) return true;
             return false;
         })
-        console.log(checkedModes)
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,11 +40,6 @@ function AddChallengeForm() {
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
         const legendsArray = input.toLowerCase().match(legendsRegex)
         const weaponsArray = input.toLowerCase().match(weaponsRegex)
-        console.log("challArray", challengeArray, Array.isArray(challengeArray))
-        console.log("abilArray", abilitiesArray)
-        console.log("legArray", legendsArray)
-        console.log("weaponsRegex", weaponsArray)
-        console.log(challengeArray[0])
 
         payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : [1]);
         payload.weapon_id = weaponsArray ? weaponsDict[weaponsArray[0]] : [null];
