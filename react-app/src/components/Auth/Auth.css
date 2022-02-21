@@ -28,6 +28,10 @@
     grid-area: d;
 }
 
+#demo {
+    grid-area: e;
+}
+
 #grid-gap {
     grid-area: c;
     width: 100%;

@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import './Auth.css'
+import { NavLink } from 'react-router-dom';
 
 function Auth() {
     const user = useSelector(state => state.session.user);
+
 
     return (
         <div id="auth">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { signUp, login } from '../../store/session';
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -12,6 +12,12 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
+  const demoLogin = () => {
+    const email = 'demo@aa.io';
+    const password = 'password';
+    return dispatch(login(email, password));
+  }
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -55,7 +61,7 @@ const SignUpForm = () => {
     <div className='content-container'>
       <div className='content'>
         <form className='form' onSubmit={onSignUp}>
-        <div>
+          <div>
             {errors.map((error, ind) => (
               <div key={ind} className="errors">{error}</div>
             ))}
@@ -93,8 +99,11 @@ const SignUpForm = () => {
             required={true}
             className='input'
           ></input>
-          <div className='form-button-container'>
+          <div>
             <button className='form-button' type='submit'>Sign Up</button>
+          </div>
+          <div>
+            <button type='button' onClick={demoLogin}>Demo</button>
           </div>
         </form>
       </div>
