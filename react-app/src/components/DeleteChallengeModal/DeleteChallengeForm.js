@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as challengeActions from "../../store/challenge";
 
-function DeleteChallengeForm({ setShowModal, challenge, showModal }) {
+function DeleteChallengeForm({ setShowModal, challenge}) {
     const dispatch = useDispatch();
     const { userId } = useParams();
     const currUserId = useSelector(state => state.session.user.id);
@@ -11,13 +11,11 @@ function DeleteChallengeForm({ setShowModal, challenge, showModal }) {
     const [errors, setErrors] = useState([]);
 
     // useEffect(() => {
-    //     if (success === "") return;
-    //     const timer = setTimeout(() => setShowModal(false), 1000);
-    //     return () => clearTimeout(timer)
-    // }, [showModal])
+    //     challengeActions.getOneChallenge(challenge.id)
+    // }, [dispatch, challenge])
 
     const submitDelete = () => {
-        setErrors([]);
+        // setErrors([]);
         const payload = {
             user_challenge_id: challenge.id,
             challenge_user_id: userId,
@@ -40,7 +38,6 @@ function DeleteChallengeForm({ setShowModal, challenge, showModal }) {
 
                         return;
                     }
-                    // setTimeout(() => showModal = reference.current, 1000);
                 }
             );
     };
@@ -55,8 +52,8 @@ function DeleteChallengeForm({ setShowModal, challenge, showModal }) {
                     <li key={idx} className="errors">{error}</li>
                 ))}
             </ul>
-            <button type="button" onClick={() => submitDelete()} className="">Yes</button>
-            <button type="button" onClick={(e) => setShowModal(false)} className="">No</button>
+            <button type="button" onClick={submitDelete} className="">Yes</button>
+            <button type="button" onClick={() => setShowModal(false)} className="">No</button>
         </div >)
 }
 

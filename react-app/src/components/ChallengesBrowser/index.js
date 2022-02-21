@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import * as challengeActions from "../../store/challenge"
 import EditChallenge from "../ChallengesForms/EditChallenges";
 import DeleteChallengeModal from "../DeleteChallengeModal"
+import OneChallenge from "../OneChallenge";
 function ChallengesBrowser() {
     const { userId } = useParams();
     const dispatch = useDispatch();
@@ -29,18 +30,7 @@ function ChallengesBrowser() {
                     {challenges.map((challenge, index) => {
                         return (
                             <div key={index} className="challenge-data">
-                                <div className={`challenge-label-${index % 2}`} key={`challenge-label-${index}`}>
-                                    {challenge?.challenge_label}
-                                </div>
-                                {challenge?.user_id === currUserId ? <EditChallenge challengeId={challenge.id} key={`edit-status-${index}`} /> : <div className={`status-${index % 2}`} key={`status-${index}`}>
-                                    {challenge?.status}
-                                </div>}
-                                <div className={`value-${index % 2}`} key={`value-${index}`}>
-                                    {challenge?.value}
-                                </div>
-                                <div className={`trash-index-${index % 2}`} key={`trash-index-${index}`}>
-                                    {challenge?.user_id === currUserId && <DeleteChallengeModal challenge={challenge} key={`modal-trash-index-${index}`} />}
-                                </div>
+                                <OneChallenge challenge={challenge} index={index}/>
                             </div>
                         )
                     })}

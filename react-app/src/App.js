@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NavBar from './components/NavBar'
 import ProtectedRoute from './components/Auth/ProtectedRoute';
@@ -22,9 +22,9 @@ function App() {
     })();
   }, [dispatch]);
 
-  // if (!loaded) {
-  //   return null;
-  // }
+  if (!loaded) {
+    return null;
+  }
 
   return (<>
     <nav><NavBar loaded={loaded} /></nav>

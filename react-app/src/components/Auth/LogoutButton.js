@@ -1,14 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const LogoutButton = () => {
+  const history = useHistory();
   const dispatch = useDispatch()
   const onLogout = async (e) => {
     e.preventDefault();
     await dispatch(logout());
-    <Redirect to='/' />
+    history.push("/")
   };
 
   return <NavLink onClick={(e) => onLogout(e)} to="#">Logout</NavLink>;

@@ -5,20 +5,10 @@ import DeleteChallengeForm from './DeleteChallengeForm';
 
 function DeleteChallengeModal({ challenge }) {
     const [showModal, setShowModal] = useState(false);
-    useEffect(() => {
-        return () => setShowModal(true)
-    }, [showModal])
     return (
         <>
-            <NavLink
-                onClick={(e) => {
-                    e.preventDefault();
-                    setShowModal(true);
-                }}
-                to=""
-                className=''>
-                <i className="fa-solid fa-ban"></i>
-            </NavLink>
+
+                <button type="button" id="trash" onClick={() => setShowModal(true)}><i className="fa-solid fa-ban"></i></button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <DeleteChallengeForm setShowModal={setShowModal} challenge={challenge}/>
