@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar'
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -27,29 +27,31 @@ function App() {
     return null;
   }
 
-  return (
+  return (<>
+    <nav><NavBar loaded={loaded} /></nav>
     <div className='root'>
-      <BrowserRouter>
-        <Switch>
-          <Route path='/' exact={true}>
-            <CSSTester />
-            <LoginForm />
-          </Route>
-          <Route path='/sign-up' exact={true}>
-            <SignUpForm />
-          </Route>
-          <ProtectedRoute path='/users' exact={true} >
-            <UsersList />
-          </ProtectedRoute>
-          <ProtectedRoute path='/users/:userId/challenges' exact={true} >
-            <Challenges />
-          </ProtectedRoute>
-          <ProtectedRoute path='/challenges' exact={true} >
-            <AddChallengeForm />
-          </ProtectedRoute>
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <ProtectedRoute path='/' exact={true} >
+        </ProtectedRoute>
+        <Route path='/login' exact={true}>
+          <LoginForm />
+          <h1>Hello?</h1>
+        </Route>
+        <Route path='/sign-up' exact={true}>
+          <SignUpForm />
+        </Route>
+        <ProtectedRoute path='/users' exact={true} >
+          <UsersList />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/challenges' exact={true} >
+          <Challenges />
+        </ProtectedRoute>
+        <ProtectedRoute path='/challenges' exact={true} >
+          <AddChallengeForm />
+        </ProtectedRoute>
+      </Switch>
     </div>
+  </>
   );
 }
 

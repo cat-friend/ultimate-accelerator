@@ -14,6 +14,11 @@ body {
     background-origin: border-box;
     font-family: 'Franklin Gothic Medium', Helvetica, sans-serif;
     font-size: 1rem;
+    color: white;
+}
+
+#body {
+    width: 100%;
 }
 
 div.root {
@@ -101,7 +106,6 @@ div.right-corner-b {
 
 div.content {
     background-color: rgba(0, 0, 0, .65);
-    color: white;
     display: block;
     width: 100%;
     margin: 0;
@@ -114,23 +118,20 @@ div.content {
 h1, h2, h3 {
     padding: 0;
     margin: 0;
-    font-family: 'teko';
+    font-family: 'tekosemibold';
+    color: white;
 }
 
 h2 {
     font-weight: normal;
-    font-size: 3rem;
-    font-family: 'teko';
-    color: white;
-    letter-spacing: .2em;
+    font-size: 2rem;
+    letter-spacing: .1rem;
 }
 
 h3 {
     font-weight: normal;
     font-size: 1.5rem;
-    font-family: 'teko';
-    color: white;
-    letter-spacing: .1em;
+    letter-spacing: .1rem;
 }
 
 @font-face {
