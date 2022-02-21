@@ -41,13 +41,13 @@ function AddChallengeForm() {
         const legendsArray = input.toLowerCase().match(legendsRegex)
         const weaponsArray = input.toLowerCase().match(weaponsRegex)
 
-        payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : [1]);
+        payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : abilitiesArray ? [1] :
+            null
+        );
         payload.weapon_id = weaponsArray ? weaponsDict[weaponsArray[0]] : [null];
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
-        console.log("payload", payload);
-
         return dispatch(challengeActions.createChallenge(payload))
             .then(
                 (response) => {
@@ -73,11 +73,9 @@ function AddChallengeForm() {
         </div>
         <div className="content-container">
             <div className="content">
-                <ul className="error-list">
-                    {errors.map((error, idx) => (
-                        <li key={idx} className="errors">{error}</li>
-                    ))}
-                </ul>
+                {errors.map((error, idx) => (
+                    <p key={idx} className="errors">{error}</p>
+                ))}
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"

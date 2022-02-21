@@ -34,7 +34,6 @@ export const createClan = (payload) => async (dispatch) => {
 export const loadClans = () => async (dispatch) => {
     const response = await fetch(`/api/clans`)
     const clans = await response.json();
-    console.log("clans from server", clans)
     if (response.ok) {
         dispatch(loadAllClans(clans));
     }
@@ -93,7 +92,6 @@ const clanReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_CLANS: {
             const allClans = {};
-            console.log("action.clans=", action.clans)
             action.clans.forEach((clan) => {
                 allClans[clan.id] = clan;
             });
