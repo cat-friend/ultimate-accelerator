@@ -11,6 +11,7 @@ import AddChallengeForm from './components/ChallengesForms/AddChallengeForm';
 import Challenges from './components/Challenges';
 import Auth from './components/Auth';
 import Clans from './components/Clans';
+import ClanPage from './components/ClanPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +33,7 @@ function App() {
     <div className='root'>
       <Switch>
         <Route path='/' exact={true}>
-          <Auth loaded={loaded}/>
+          <Auth loaded={loaded} />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
@@ -45,6 +46,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/clans' exact={true} >
           <Clans />
+        </ProtectedRoute>
+        <ProtectedRoute path='/clans/:clanId' exact={true} >
+          <ClanPage />
         </ProtectedRoute>
         <Route>
           oops!

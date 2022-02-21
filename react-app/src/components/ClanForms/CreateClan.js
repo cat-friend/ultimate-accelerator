@@ -9,7 +9,7 @@ function CreateClan() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState([]);
-    const [showSucces, setShowSuccess] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
     const user = useSelector(state => state.session.user);
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,7 +27,7 @@ function CreateClan() {
                 setShowSuccess(true);
                 setTimeout(() => {
                     setShowSuccess(false);
-                    history.push(`/clans/${response[clan.id]}`)
+                    history.push(`/clans/${response['clan'['id']]}`)
                 }, 500);
             }
         );

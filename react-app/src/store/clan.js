@@ -42,10 +42,21 @@ export const loadClans = () => async (dispatch) => {
 
 export const getOneClan = (id) => async (dispatch) => {
     const response = await fetch(`/api/clans/${id}`)
-    const clan = await response.json();
+    const clan_data = await response.json();
+    console.log("clan returned from backend", clan_data)
+    const clan = {};
     if (response.ok) {
-        dispatch(addOneClan(clan));
+        clan.id = clan_data.clan.id;
+        clan.name = clan_data.clan.name;
+        clan.owner_user_id = clan_data.clan.owner_user_id;
+        clan.members = {};
+        clan.created_at = clan_data.clan.created_at;
     }
+    clan_data.clan_members.forEach((ele) => {
+        clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
+    });
+    console.log("clan after manip", clan);
+    dispatch(addOneClan(clan));
     return clan;
 }
 
@@ -96,6 +107,11 @@ const clanReducer = (state = {}, action) => {
                 allClans[clan.id] = clan;
             });
             return allClans;
+        }
+        case ADD_CLAN: {
+            const newState = {...state};
+            newState[action.clan.id] = action.clan;
+            return newState;
         }
         default: return state;
     }
