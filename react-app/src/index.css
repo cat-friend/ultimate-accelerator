@@ -61,6 +61,8 @@ div.header-child {
     justify-content: left;
     align-items: center;
     padding: 1rem;
+    margin: 0;
+    margin-left: -1px;
 }
 
 div.header-child-b {
@@ -71,6 +73,7 @@ div.header-child-b {
     justify-content: left;
     align-items: center;
     padding: 1rem;
+    margin: 0 -1px;
 }
 
 div.left-corner {
@@ -79,12 +82,12 @@ div.left-corner {
     border-left: 5rem solid transparent;
     border-right: 1rem solid #333;
     height: 0;
-    margin-right: -1px;
 }
 
 div.right-corner {
     border-bottom: 5rem solid rgba(200, 49, 39, .55);
     border-right: 1rem solid transparent;
+    border-left: 1px rgba(200, 49, 39, .55) solid;
 }
 
 div.left-corner-b {
@@ -98,10 +101,12 @@ div.left-corner-b {
 div.right-corner-b {
     border-bottom: 5rem solid rgba(200, 49, 39, 1);
     border-right: 4rem solid transparent;
+    border-left: 1px solid rgba(200, 49, 39, 1)
 }
 
 .content-container {
     border: 1px #999 solid;
+    border-radius: 2px;
     box-shadow: inset 0 0 .2em #666;
     display: flex;
     justify-content: center;
@@ -111,7 +116,8 @@ div.right-corner-b {
 }
 
 div.content {
-    background-color: rgba(0, 0, 0, .65);
+    background-color: rgba(0, 0, 0, .75);
+    border-radius: 2px;
     display: block;
     width: 100%;
     margin: 0;
@@ -139,6 +145,32 @@ h3 {
     font-size: 1.5rem;
     letter-spacing: .1rem;
 }
+
+input, select {
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    display: block;
+    margin: .5rem auto;
+}
+input:focus, select:focus   {
+    outline: #c23f3f solid 2px;
+}
+
+button {
+    display: block;
+    margin: 1rem auto 0rem auto;
+    padding: .5rem;
+    border: 1px solid white;
+    font-family: 'teko';
+    font-size: 1.5rem;
+    letter-spacing: .1rem;
+    background-color: aliceblue;
+    box-shadow: inset 0 0 .2em #333;
+    border-radius: 3px;
+}
+
+
 
 @font-face {
     font-family: 'apexregular';

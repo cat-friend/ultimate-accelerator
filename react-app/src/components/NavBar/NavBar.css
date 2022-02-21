@@ -13,6 +13,7 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     padding: 0;
+    align-items: center;
 
     /* align-items: center; */
 }

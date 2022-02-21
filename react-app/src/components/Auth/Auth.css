@@ -10,11 +10,6 @@
     transform: translate(-50%, -50%);
 }
 
-input.input {
-    display: block;
-    width: 100%;
-    margin: .5rem;
-}
 
 /* #auth>div {
 width: 100%;
