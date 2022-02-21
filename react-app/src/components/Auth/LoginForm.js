@@ -30,7 +30,12 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
-  return (
+  return (<>
+    <div className='header-parent'>
+      <div className="left-corner"></div><div className="header-child">
+        <h2>Log In</h2></div><div className="right-corner">
+      </div>
+    </div>
     <form onSubmit={onLogin}>
       <div>
         {errors.map((error, ind) => (
@@ -59,6 +64,7 @@ const LoginForm = () => {
         <button type='submit'>Login</button>
       </div>
     </form>
+  </>
   );
 };
 

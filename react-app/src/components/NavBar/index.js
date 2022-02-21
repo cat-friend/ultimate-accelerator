@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from './logo.svg'
 import "./NavBar.css"
-import LogoutButton from '../auth/LogoutButton';
+import LogoutButton from '../Auth/LogoutButton';
 
 const NavBar = ({ loaded }) => {
   const dispatch = useDispatch();
