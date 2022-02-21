@@ -157,6 +157,9 @@ input:focus, select:focus   {
     outline: #c23f3f solid 2px;
 }
 
+.errors {
+    border:rgba(175, 19, 19, 1) 1px solid
+}
 button {
     display: block;
     margin: 1rem auto 0rem auto;
