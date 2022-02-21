@@ -6,12 +6,15 @@ import './Auth.css'
 function Auth() {
     return (
         <div id="auth">
-            <div className=''>
+
+            <div className="auth-forms" id='b'>
                 <SignUpForm />
             </div>
-            <div className=''>
+            <div id='grid-gap'></div>
+            <div className="auth-forms" id='d'>
                 <LoginForm />
             </div>
+
         </div>
     )
 }
