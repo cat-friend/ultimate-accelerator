@@ -8,7 +8,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 0;
+}
+
+input.input {
+    display: block;
+    width: 100%;
+    margin: .5rem;
 }
 
 /* #auth>div {

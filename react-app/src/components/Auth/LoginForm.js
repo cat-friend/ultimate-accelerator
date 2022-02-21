@@ -32,38 +32,46 @@ const LoginForm = () => {
 
   return (<>
     <div className='header-parent'>
-      <div className="left-corner"></div><div className="header-child">
-        <h2>Log In</h2></div><div className="right-corner">
+      <div className="left-corner"></div>
+      <div className="header-child">
+        <h2>Log In</h2>
+      </div>
+      <div className="right-corner"></div>
+    </div>
+    <div className="content-container">
+      <div className='content'>
+        <form onSubmit={onLogin}>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div>
+            <input
+              className='input'
+              name='email'
+              type='text'
+              placeholder='Email'
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div>
+            <input
+              className='input'
+              name='password'
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={updatePassword}
+            />
+            <div>
+              <button type='submit'>Login</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
   </>
   );
 };
