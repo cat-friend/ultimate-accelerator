@@ -28,7 +28,7 @@ export const createClan = (payload) => async (dispatch) => {
     if (response.ok) {
         dispatch(addOneClan(clan));
     }
-    return clan
+    return clan;
 }
 
 export const loadClans = () => async (dispatch) => {
@@ -53,6 +53,7 @@ export const getOneClan = (id) => async (dispatch) => {
         clan.name = clan_data.clan.name;
         clan.owner_user_id = clan_data.clan.owner_user_id;
         clan.members = {};
+        clan.description = clan_data.clan.description;
         clan.created_at = clan_data.clan.created_at;
         clan_data.clan_members.forEach((ele) => {
             clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
@@ -90,13 +91,13 @@ export const editClan = (payload) => async (dispatch) => {
 }
 
 export const deleteClan = (payload) => async (dispatch) => {
-    const getCurrClan = await fetch(`/api/clans/${payload.clan.id}`, {
+    const getCurrClan = await fetch(`/api/clans/${payload.clanId}`, {
         headers: {
             "Content-Type": "application/json"
         }
     });
     if (getCurrClan.ok) {
-        const delClan = await fetch(`/api/clans/${payload.clan.id}`,
+        const delClan = await fetch(`/api/clans/${payload.clanId}`,
             {
                 method: 'DELETE',
                 headers: { "Content-Type": "application/json" },

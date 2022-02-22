@@ -25,10 +25,11 @@ function CreateClan() {
                     return
                 }
                 setShowSuccess(true);
+                console.log(response);
                 setTimeout(() => {
                     setShowSuccess(false);
-                    history.push(`/clans/${response['clan'['id']]}`)
-                }, 500);
+                    history.push(`/clans/${response.id}`)
+                }, 750);
             }
         );
     }

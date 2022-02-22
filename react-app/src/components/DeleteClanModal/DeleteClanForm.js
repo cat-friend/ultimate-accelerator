@@ -6,6 +6,7 @@ import "./DeleteClanForm.css"
 
 function DeleteClanForm({ setShowModal, clan }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { clanId } = useParams();
     const currUserId = useSelector(state => state.session.user.id);
     const [success, setSuccess] = useState("");
@@ -13,12 +14,11 @@ function DeleteClanForm({ setShowModal, clan }) {
 
 
     const submitDelete = () => {
-        const history = useHistory();
         setErrors([]);
         const payload = {
-            user_clan_id: clan.id,
-            clan_user_id: userId,
-            curr_user_id: currUserId
+            owner_user_id: clan.owner_user_id,
+            curr_user_id: currUserId,
+            clanId: clanId
         }
         return dispatch(clanActions.deleteClan(payload))
             .then(

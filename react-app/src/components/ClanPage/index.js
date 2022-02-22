@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as clanActions from "../../store/clan"
+import DeleteClanModal from "../DeleteClanModal";
 import EditClanModal from "../EditClanModal";
 
 function ClanPage() {
@@ -23,7 +24,10 @@ function ClanPage() {
         <div className="content-container">
             <div className="content">
                 <h3>Description:  {clan?.description}</h3>
+                <div className="button-div">
                 {clan?.owner_user_id === userId && <EditClanModal clan={clan} />}
+                {clan?.owner_user_id === userId && <DeleteClanModal clan={clan} />}
+                </div>
             </div>
             <div className="content">
                 <h3>Members:</h3>

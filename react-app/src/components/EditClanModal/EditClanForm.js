@@ -12,11 +12,13 @@ function EditClanForm({ setShowModal, clan }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         setErrors([]);
         const payload = {
             description: description,
             owner_user_id: clan.owner_user_id,
             curr_user_id: userId,
+            clan_id: clan.id,
             name
         }
         return (dispatch(clanActions.editClan(payload)).then(
@@ -60,6 +62,7 @@ function EditClanForm({ setShowModal, clan }) {
                             placeholder="Super cool clan name"
                         />
                         <textarea
+                            data-lpignore="true"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             required
@@ -68,7 +71,7 @@ function EditClanForm({ setShowModal, clan }) {
                             <button
                                 type="submit"
                                 className="">
-                                Yes
+                                SUBMIT
                             </button>
                             <button
                                 type="button"
