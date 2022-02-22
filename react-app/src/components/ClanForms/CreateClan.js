@@ -21,7 +21,7 @@ function CreateClan() {
         return dispatch(clanActions.createClan(payload)).then(
             (response) => {
                 if (response.errors) {
-                    setErrors(response.errors)
+                    setErrors(response.errors);
                     return
                 }
                 setShowSuccess(true);

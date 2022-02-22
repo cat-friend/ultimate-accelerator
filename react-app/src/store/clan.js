@@ -43,7 +43,6 @@ export const loadClans = () => async (dispatch) => {
 export const getOneClan = (id) => async (dispatch) => {
     const response = await fetch(`/api/clans/${id}`)
     const clan_data = await response.json();
-    console.log("clan returned from backend", clan_data)
     const clan = {};
     if (response.ok) {
         clan.id = clan_data.clan.id;
@@ -51,29 +50,37 @@ export const getOneClan = (id) => async (dispatch) => {
         clan.owner_user_id = clan_data.clan.owner_user_id;
         clan.members = {};
         clan.created_at = clan_data.clan.created_at;
+        clan_data.clan_members.forEach((ele) => {
+            clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
+        });
+        dispatch(addOneClan(clan));
     }
-    clan_data.clan_members.forEach((ele) => {
-        clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
-    });
-    console.log("clan after manip", clan);
-    dispatch(addOneClan(clan));
     return clan;
 }
 
-// export const editChallenge = (payload) => async (dispatch) => {
-//     const response = await fetch(`/api/challenges/${payload.user_challenge_id}`,
-//         {
-//             method: 'PUT',
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify(payload)
-//         }
-//     );
-//     const challenge = await response.json();
-//     if (response.ok) {
-//         dispatch(addOneChallenge(challenge));
-//     }
-//     return challenge
-// }
+export const editClan = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/clans/${payload.clan_id}`,
+        {
+            headers: { "Content-Type": "application/json" },
+            method: 'PUT',
+            body: JSON.stringify(payload)
+        }
+    );
+    const clan_data = await response.json();
+    const clan = {}
+    if (response.ok) {
+        clan.id = clan_data.clan.id;
+        clan.name = clan_data.clan.name;
+        clan.owner_user_id = clan_data.clan.owner_user_id;
+        clan.members = {};
+        clan.created_at = clan_data.clan.created_at;
+        clan_data.clan_members.forEach((ele) => {
+            clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
+        });
+        dispatch(addOneClan(clan));
+    }
+    return clan
+}
 
 export const deleteClan = (payload) => async (dispatch) => {
     const getCurrClan = await fetch(`/api/clans/${payload.clan.id}`, {
@@ -109,7 +116,7 @@ const clanReducer = (state = {}, action) => {
             return allClans;
         }
         case ADD_CLAN: {
-            const newState = {...state};
+            const newState = { ...state };
             newState[action.clan.id] = action.clan;
             return newState;
         }

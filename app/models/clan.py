@@ -22,6 +22,7 @@ class Clan(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'description': self.description,
             'owner_user_id': self.owner_user_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at

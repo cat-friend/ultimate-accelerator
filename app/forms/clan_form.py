@@ -31,7 +31,7 @@ class ClanForm(FlaskForm):
 
 class EditClanForm(FlaskForm):
     owner_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
-        'curr_user_id', message='Error! You are not authorized to perform this action!')])
+        'curr_user_id', message='')])
     curr_user_id = IntegerField("", validators=[DataRequired(), EqualTo(
         'owner_user_id', message='Error! You are not authorized to perform this action!')])
     name = StringField("", validators=[DataRequired(message="Please enter a name for your clan!"), Length(
@@ -51,7 +51,7 @@ class JoinClan(FlaskForm):
     user_id = IntegerField("", validators=[DataRequired(
         message="Oops! No user id detected!"), check_membership])
     clan_id = IntegerField("", validators=[DataRequired(
-        message="Oops! No user id detected!")])
+        message="Oops! No clan id detected!")])
 
 class LeaveClan(FlaskForm):
     user_id = IntegerField("", validators=[DataRequired(
