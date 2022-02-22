@@ -26,16 +26,26 @@ function ChallengesBrowser() {
         <div className="content-container">
             <div className="content">
                 <div className="challenges">
-                    <div className="challenges-header">Challenge</div>
+                    <div className="challenges-header">Battlepass Challenge</div>
                     <div className="challenges-header">Status</div>
                     <div className="challenges-header">Stars</div>
                     <div className="challenges-header"></div>
                     {challenges.map((challenge, index) => {
-                        return (
-                            <div key={index} className="challenge-data">
-                                <OneChallenge challenge={challenge} index={index}/>
+                        return (<>
+                            <div className={`challenge-label-${index % 2}`} key={`challenge-label-${index}`}>
+                                {challenge.challenge_label}
                             </div>
-                        )
+                            <div className={`status-${index % 2}`} key={`status-${index}`}>{
+                                challenge?.user_id === currUser.id ? <EditChallenge challengeId={challenge.id} key={`edit-status-${index}`} /> :
+                                    challenge.status}
+                            </div>
+                            <div className={`value-${index % 2}`} key={`value-${index}`}>
+                                {challenge.value}
+                            </div>
+                            <div className={`trash-index-${index % 2}`} key={`trash-index-${index}`}>
+                                {challenge.user_id === currUser.id && <DeleteChallengeModal challenge={challenge} />}
+                            </div>
+                        </>)
                     })}
                 </div>
             </div>

@@ -1,0 +1,8 @@
+.challenges {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+}
+
+.challenges-header {
+    grid-row: 1/2;
+}
