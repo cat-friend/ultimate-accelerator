@@ -37,7 +37,7 @@ class EditClanForm(FlaskForm):
     name = StringField("", validators=[DataRequired(message="Please enter a name for your clan!"), Length(
         min=2, max=40, message="Please limit your clan name to be at least 2 characters and at most 40 characters.")])
     description = TextAreaField("", validators=[Length(
-        max=512, message="Please limit your biography to 512 characters! Your life is super cool but hamsters power our servers.")])
+        max=512, message="Please limit your clan description to 512 characters! Your clan is super cool but hamsters power our servers.")])
 
 
 class DeleteClanForm(FlaskForm):

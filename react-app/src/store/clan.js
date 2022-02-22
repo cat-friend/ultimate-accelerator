@@ -71,6 +71,7 @@ export const editClan = (payload) => async (dispatch) => {
     if (response.ok) {
         clan.id = clan_data.clan.id;
         clan.name = clan_data.clan.name;
+        clan.description = clan_data.clan.description;
         clan.owner_user_id = clan_data.clan.owner_user_id;
         clan.members = {};
         clan.created_at = clan_data.clan.created_at;

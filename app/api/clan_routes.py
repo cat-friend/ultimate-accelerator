@@ -94,6 +94,7 @@ def one_clan(id):
         clan_members = ClanUsers.query.join(User).filter(ClanUsers.clan_id == id).all()
         return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
     if request.method == 'PUT':
+        print("PUT ROUTE PUT ROUTE")
         form = EditClanForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
@@ -101,11 +102,11 @@ def one_clan(id):
             clan_members = ClanUsers.query.join(User).filter(ClanUsers.clan_id == id).all()
             description = form.data['description']
             name = form.data['name']
+            print("DESCRIPTION       !!!!", description)
             clan.description = description
             clan.name = name
             db.session.add(clan)
             db.session.commit()
-            print("CLANCLANACLAKCN", clan.to_dict())
             return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401

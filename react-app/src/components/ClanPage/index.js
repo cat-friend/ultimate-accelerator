@@ -12,9 +12,7 @@ function ClanPage() {
         dispatch(clanActions.getOneClan(+clanId));
     }, [dispatch])
     const clan = useSelector(state => state.clans[+clanId])
-    const members = useSelector(state => {
-        if (clan) return Object.values(state.clans[clanId].members)
-    });
+    const members = clan ? Object.values(clan.members) : null;
     return (<>
         <div className="header-parent">
             <div className="left-corner"></div>

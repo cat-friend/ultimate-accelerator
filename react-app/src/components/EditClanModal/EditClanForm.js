@@ -14,12 +14,13 @@ function EditClanForm({ setShowModal, clan }) {
         e.preventDefault();
         setErrors([]);
         const payload = {
-            description,
+            description: description,
             clan_id: clan.id,
             owner_user_id: clan.owner_user_id,
             curr_user_id: userId,
             name
         }
+        console.log("payload", payload)
         return (dispatch(clanActions.editClan(payload)).then(
             (response) => {
                 if (response.errors) {
@@ -68,7 +69,6 @@ function EditClanForm({ setShowModal, clan }) {
                         <div className="button-div">
                             <button
                                 type="submit"
-                                onClick={() => setDescription(clan.description)}
                                 className="">
                                 Yes
                             </button>
