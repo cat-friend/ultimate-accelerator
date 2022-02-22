@@ -23,7 +23,9 @@ body {
 
 div.root {
     margin: 3rem auto 2rem auto;
-    width: 80%;
+    max-width: 80%;
+    background-color: rgba(255, 255, 255, .5);
+    padding: 3rem;
 }
 
 a {
@@ -115,17 +117,18 @@ div.right-corner-b {
     padding: .25em;
     background-color: rgba(255, 255, 255, .85);
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 div.content {
     background-color: rgba(0, 0, 0, .75);
     border-radius: 2px;
     display: block;
-    width: 100%;
     margin: 0;
     padding: 1em;
     border: 1px solid black;
     box-shadow: 0 0 .2em #666;
+    width: 100%;
 }
 
 
@@ -150,6 +153,7 @@ h3 {
     font-weight: normal;
     font-size: 1.5rem;
     letter-spacing: .1rem;
+    font-family: 'teko';
 }
 
 input, select {
