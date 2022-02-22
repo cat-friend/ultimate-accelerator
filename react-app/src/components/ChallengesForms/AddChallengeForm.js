@@ -76,14 +76,22 @@ function AddChallengeForm() {
                 {errors.map((error, idx) => (
                     <p key={idx} className="errors">{error}</p>
                 ))}
-                <div className="add-challenge-container">
-                    <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
+                    <div className="add-challenge-container">
                         <div>
-                        <label htmlFor="user_challenge-input">Battlepass Challenge</label></div>
-                        <div>
-                        <label htmlFor="br">Battle Royale</label></div>
-
-
+                            <label htmlFor="user_challenge-input">Battlepass Challenge</label>
+                            <input
+                                type="text"
+                                placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                name="user-challenge-input"
+                                id="user-challenge-input"
+                                required
+                                minLength="10"
+                                data-lpignore="true"
+                            />
+                        </div>
                         <div className="modes">
                             {modeNames.map((ele, index) => {
                                 return (
@@ -118,16 +126,30 @@ function AddChallengeForm() {
                                 min={1}
                                 max={10}
                                 onChange={(e) => setStars(e.target.value)}
-                                placeholder=""
+                                placeholder="5"
                                 id="stars"
                                 size="4"
-                                required />
+                                required
+                                value={stars} />
                         </div>
+                    </div>
+                    <div className="button-div">
                         <button
                             type="submit"
-                            disabled={showSuccess}>{showSuccess ? "Success!" : "SUBMIT"}</button>
-                    </form>
-                </div>
+                            disabled={showSuccess}>
+                            {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setInput("");
+                                setChecked(new Array(3).fill(true));
+                                setStars("")
+                            }}>
+                                RESET
+                            </button>
+
+                    </div>
+                </form>
             </div>
         </div>
     </>);
