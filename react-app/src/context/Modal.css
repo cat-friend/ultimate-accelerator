@@ -11,7 +11,7 @@
 
   #modal-background {
     background-color: rgba(223, 215, 204, .90);
-    background-image: url('./background.svg');
+    /* background-image: url('./background.svg'); */
     background-size: 95%, contain;
     background-repeat: no-repeat;
     background-position: 50% 65%;

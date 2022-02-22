@@ -76,59 +76,58 @@ function AddChallengeForm() {
                 {errors.map((error, idx) => (
                     <p key={idx} className="errors">{error}</p>
                 ))}
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        name="user-challenge-input"
-                        id="user-challenge-input"
-                        required
-                        minLength="10"
-                        data-lpignore="true"
-                    />
-                    {modeNames.map((ele, index) => {
-                        return (
-                            <div className="modes" key={`div-${index}`}>
-                                <div className="label-top" key={index}>
-                                    <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
-                                        {ele}
-                                    </label>
-                                </div>
-                                <div className="checkbox-bottom" key={`box-${index}`}>
-                                    <input
-                                        type="checkbox"
-                                        id={`mode-checkbox-${index}`}
-                                        key={`mode-checkbox-${index}`}
-                                        name={ele}
-                                        checked={checked[index]}
-                                        onChange={() => handleCheckboxOnChange(index)}
-                                    />
-                                </div>
-                            </div>
-                        )
-                    })}
-                    <div className="modes">
-                        <div className="label-top">
-                            <label htmlFor="stars">
-                                Stars
-                            </label>
+                <div className="add-challenge-container">
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                        <label htmlFor="user_challenge-input">Battlepass Challenge</label></div>
+                        <div>
+                        <label htmlFor="br">Battle Royale</label></div>
+
+
+                        <div className="modes">
+                            {modeNames.map((ele, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div className="label-top" key={index}>
+                                            <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
+                                                {ele}
+                                            </label>
+                                        </div>
+                                        <div className="checkbox-bottom" key={`box-${index}`}>
+                                            <input
+                                                type="checkbox"
+                                                id={`mode-checkbox-${index}`}
+                                                key={`mode-checkbox-${index}`}
+                                                name={ele}
+                                                checked={checked[index]}
+                                                onChange={() => handleCheckboxOnChange(index)}
+                                            />
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
-                        <input
-                            type="number"
-                            min={1}
-                            max={10}
-                            onChange={(e) => setStars(e.target.value)}
-                            placeholder=""
-                            id="stars"
-                            size="4"
-                            required />
-                    </div>
-                    <button
-                        type="submit"
-                        disabled={showSuccess}>{showSuccess ? "Success!" : "SUBMIT"}</button>
-                </form>
+                        <div className="stars">
+                            <div className="label-top">
+                                <label htmlFor="stars">
+                                    Stars
+                                </label>
+                            </div>
+                            <input
+                                type="number"
+                                min={1}
+                                max={10}
+                                onChange={(e) => setStars(e.target.value)}
+                                placeholder=""
+                                id="stars"
+                                size="4"
+                                required />
+                        </div>
+                        <button
+                            type="submit"
+                            disabled={showSuccess}>{showSuccess ? "Success!" : "SUBMIT"}</button>
+                    </form>
+                </div>
             </div>
         </div>
     </>);
