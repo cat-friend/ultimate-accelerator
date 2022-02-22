@@ -15,12 +15,10 @@ function EditClanForm({ setShowModal, clan }) {
         setErrors([]);
         const payload = {
             description: description,
-            clan_id: clan.id,
             owner_user_id: clan.owner_user_id,
             curr_user_id: userId,
             name
         }
-        console.log("payload", payload)
         return (dispatch(clanActions.editClan(payload)).then(
             (response) => {
                 if (response.errors) {
@@ -28,9 +26,9 @@ function EditClanForm({ setShowModal, clan }) {
                     return
                 }
                 setShowSuccess(true);
-                // setTimeout(() => {
-                //     setShowModal(false);
-                // }, 750);
+                setTimeout(() => {
+                    setShowModal(false);
+                }, 750);
             }))
     }
 

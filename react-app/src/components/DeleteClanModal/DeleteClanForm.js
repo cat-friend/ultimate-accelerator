@@ -1,25 +1,26 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import * as challengeActions from "../../store/challenge";
-import "./DeleteChallengeForm.css"
+import { useHistory, useParams } from "react-router-dom";
+import * as clanActions from "../../store/clan";
+import "./DeleteClanForm.css"
 
-function DeleteChallengeForm({ setShowModal, challenge }) {
+function DeleteClanForm({ setShowModal, clan }) {
     const dispatch = useDispatch();
-    const { userId } = useParams();
+    const { clanId } = useParams();
     const currUserId = useSelector(state => state.session.user.id);
     const [success, setSuccess] = useState("");
     const [errors, setErrors] = useState([]);
 
 
     const submitDelete = () => {
+        const history = useHistory();
         setErrors([]);
         const payload = {
-            user_challenge_id: challenge.id,
-            challenge_user_id: userId,
+            user_clan_id: clan.id,
+            clan_user_id: userId,
             curr_user_id: currUserId
         }
-        return dispatch(challengeActions.deleteChallenge(payload))
+        return dispatch(clanActions.deleteClan(payload))
             .then(
                 (response) => {
                     if (response.errors) {
@@ -30,10 +31,9 @@ function DeleteChallengeForm({ setShowModal, challenge }) {
                         setSuccess("Success!");
                         setTimeout(() => {
                             setShowModal(false);
-                            dispatch(challengeActions.deleteOneChallenge(challenge))
+                            dispatch(clanActions.deleteOneClan(clan))
+                            history.push('/clans')
                         }, 1000);
-
-
                         return;
                     }
                 }
@@ -44,26 +44,26 @@ function DeleteChallengeForm({ setShowModal, challenge }) {
         <>
             <div className="header-parent">
                 <div className="left-corner"></div>
-                <div className="header-child"><h2>Delete Challenge?!</h2></div>
+                <div className="header-child"><h2>Delete Clan?!</h2></div>
                 <div className="right-corner"></div>
             </div>
             <div className="content-container">
                 <div className="content">
                     <h2 className="success">{success}</h2>
-                    <h3>Are you sure you want to delete this challenge?</h3>
+                    <h3>Are you sure you want to delete this clan and all of its messages?</h3>
                     This cannot be undone.
                     <ul className="error-list">
                         {errors.map((error, idx) => (
-                            <li key={idx} className="errors">{error}</li>
+                            <p key={idx} className="errors">{error}</p>
                         ))}
                     </ul>
                     <div className="button-div">
-                        <button type="button" onClick={() => submitDelete()} className="">Yes</button>
-                        <button type="button" onClick={() => setShowModal(false)} className="">No</button>
+                        <button type="button" onClick={() => submitDelete()} className="">Yes, nuke it!</button>
+                        <button type="button" onClick={() => setShowModal(false)} className="">Not today</button>
                     </div>
                 </div>
             </div>
         </>)
 }
 
-export default DeleteChallengeForm;
+export default DeleteClanForm;

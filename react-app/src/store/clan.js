@@ -41,7 +41,11 @@ export const loadClans = () => async (dispatch) => {
 }
 
 export const getOneClan = (id) => async (dispatch) => {
-    const response = await fetch(`/api/clans/${id}`)
+    const response = await fetch(`/api/clans/${id}`,
+        {
+            headers: { "Content-Type": "application/json" },
+            method: 'GET'
+        });
     const clan_data = await response.json();
     const clan = {};
     if (response.ok) {
@@ -54,8 +58,9 @@ export const getOneClan = (id) => async (dispatch) => {
             clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
         });
         dispatch(addOneClan(clan));
+        return clan;
     }
-    return clan;
+    return clan_data;
 }
 
 export const editClan = (payload) => async (dispatch) => {
@@ -79,8 +84,9 @@ export const editClan = (payload) => async (dispatch) => {
             clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
         });
         dispatch(addOneClan(clan));
+        return clan;
     }
-    return clan
+    return clan_data;
 }
 
 export const deleteClan = (payload) => async (dispatch) => {

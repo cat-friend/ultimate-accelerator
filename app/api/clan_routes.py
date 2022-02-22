@@ -102,7 +102,6 @@ def one_clan(id):
             clan_members = ClanUsers.query.join(User).filter(ClanUsers.clan_id == id).all()
             description = form.data['description']
             name = form.data['name']
-            print("DESCRIPTION       !!!!", description)
             clan.description = description
             clan.name = name
             db.session.add(clan)

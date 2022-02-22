@@ -6,13 +6,14 @@ import EditClanModal from "../EditClanModal";
 
 function ClanPage() {
     const { clanId } = useParams();
-    const userId = useSelector(state => state.session.user.id);
+    const userId = useSelector((state) => state.session.user.id);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(clanActions.getOneClan(+clanId));
-    }, [dispatch])
-    const clan = useSelector(state => state.clans[+clanId])
-    const members = clan ? Object.values(clan.members) : null;
+        dispatch(clanActions.getOneClan(clanId));
+    }, [dispatch, clanId])
+    const clan = useSelector((state) => state.clans[clanId]);
+    const members = clan ? clan.members : null;
+    const clan_members = members ? Object.values(members) : null;
     return (<>
         <div className="header-parent">
             <div className="left-corner"></div>
@@ -26,7 +27,7 @@ function ClanPage() {
             </div>
             <div className="content">
                 <h3>Members:</h3>
-                {members && members.map((ele, i) => {
+                {clan_members && clan_members.map((ele, i) => {
                     return <div key={i} className={`member-${i % 2}`}>{ele.username}{ele.user_id === clan?.owner_user_id && (<> - Admin</>)}</div>
                 })}
             </div>
