@@ -99,10 +99,8 @@ const SignUpForm = () => {
             required={true}
             className='input'
           ></input>
-          <div>
+          <div className='button-div'>
             <button className='form-button' type='submit'>Sign Up</button>
-          </div>
-          <div>
             <button type='button' onClick={demoLogin}>Demo</button>
           </div>
         </form>

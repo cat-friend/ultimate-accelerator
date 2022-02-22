@@ -12,7 +12,7 @@ const LogoutButton = () => {
     history.push("/")
   };
 
-  return <NavLink onClick={(e) => onLogout(e)} to="#">Logout</NavLink>;
+  return <NavLink onClick={(e) => onLogout(e)} to="#">LOGOUT</NavLink>;
 };
 
 export default LogoutButton;

@@ -35,8 +35,9 @@ a {
 }
 
 a:hover {
-    color: #581c1c;
+    color: white;
     font-size: 1.2rem;
+    text-decoration: underline
 }
 
 a:active {
@@ -159,6 +160,10 @@ input, select {
 }
 input:focus, select:focus   {
     outline: #c23f3f solid 2px;
+}
+
+.input {
+    width: 100%;
 }
 
 .errors {
