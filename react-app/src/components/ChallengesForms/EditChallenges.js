@@ -47,7 +47,7 @@ function EditChallenge({ challengeId }) {
         return <p key={i} className="">{ele}</p>
     })
     }
-        {showSuccess ? "SUCCESS!" :
+        {showSuccess ? "UPDATED!" :
             <form>
                 <select name="status" id="change-status" onChange={
                     (e) => {
