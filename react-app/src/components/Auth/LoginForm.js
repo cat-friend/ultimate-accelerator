@@ -46,7 +46,7 @@ const LoginForm = () => {
       <div className="right-corner-b"></div>
     </div>
     <div className="content-container">
-      <div className='content'>
+      <div className='auth-content'>
         <form onSubmit={onLogin}>
           <div>
             {errors.map((error, ind) => (
@@ -72,10 +72,8 @@ const LoginForm = () => {
               value={password}
               onChange={updatePassword}
             />
-            <div>
+            <div className='button-div'>
               <button type='submit'>Login</button>
-            </div>
-            <div>
               <button type='button' onClick={demoLogin}>Demo</button>
             </div>
           </div>

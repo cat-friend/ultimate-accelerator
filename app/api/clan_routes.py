@@ -97,7 +97,6 @@ def one_clan(id):
             User).filter(ClanUsers.clan_id == id).all()
         return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
     if request.method == 'PUT':
-        print("PUT ROUTE PUT ROUTE")
         form = EditClanForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():

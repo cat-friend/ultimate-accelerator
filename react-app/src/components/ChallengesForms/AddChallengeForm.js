@@ -77,57 +77,78 @@ function AddChallengeForm() {
                     <p key={idx} className="errors">{error}</p>
                 ))}
                 <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        name="user-challenge-input"
-                        id="user-challenge-input"
-                        required
-                        minLength="10"
-                        data-lpignore="true"
-                    />
-                    {modeNames.map((ele, index) => {
-                        return (
-                            <div className="modes" key={`div-${index}`}>
-                                <div className="label-top" key={index}>
-                                    <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
-                                        {ele}
-                                    </label>
-                                </div>
-                                <div className="checkbox-bottom" key={`box-${index}`}>
-                                    <input
-                                        type="checkbox"
-                                        id={`mode-checkbox-${index}`}
-                                        key={`mode-checkbox-${index}`}
-                                        name={ele}
-                                        checked={checked[index]}
-                                        onChange={() => handleCheckboxOnChange(index)}
-                                    />
-                                </div>
-                            </div>
-                        )
-                    })}
-                    <div className="modes">
-                        <div className="label-top">
-                            <label htmlFor="stars">
-                                Stars
-                            </label>
+                    <div className="add-challenge-container">
+                        <div>
+                            <label htmlFor="user_challenge-input">Battlepass Challenge</label>
+                            <input
+                                type="text"
+                                placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                name="user-challenge-input"
+                                id="user-challenge-input"
+                                required
+                                minLength="10"
+                                data-lpignore="true"
+                            />
                         </div>
-                        <input
-                            type="number"
-                            min={1}
-                            max={10}
-                            onChange={(e) => setStars(e.target.value)}
-                            placeholder=""
-                            id="stars"
-                            size="4"
-                            required />
+                        <div className="modes">
+                            {modeNames.map((ele, index) => {
+                                return (
+                                    <div key={index}>
+                                        <div className="label-top" key={index}>
+                                            <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
+                                                {ele}
+                                            </label>
+                                        </div>
+                                        <div className="checkbox-bottom" key={`box-${index}`}>
+                                            <input
+                                                type="checkbox"
+                                                id={`mode-checkbox-${index}`}
+                                                key={`mode-checkbox-${index}`}
+                                                name={ele}
+                                                checked={checked[index]}
+                                                onChange={() => handleCheckboxOnChange(index)}
+                                            />
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <div className="stars">
+                            <div className="label-top">
+                                <label htmlFor="stars">
+                                    Stars
+                                </label>
+                            </div>
+                            <input
+                                type="number"
+                                min={1}
+                                max={10}
+                                onChange={(e) => setStars(e.target.value)}
+                                placeholder="5"
+                                id="stars"
+                                size="4"
+                                required
+                                value={stars} />
+                        </div>
                     </div>
-                    <button
-                        type="submit"
-                        disabled={showSuccess}>{showSuccess ? "Success!" : "SUBMIT"}</button>
+                    <div className="button-div">
+                        <button
+                            type="submit"
+                            disabled={showSuccess}>
+                            {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setInput("");
+                                setChecked(new Array(3).fill(true));
+                                setStars("")
+                            }}>
+                                RESET
+                            </button>
+
+                    </div>
                 </form>
             </div>
         </div>

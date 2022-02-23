@@ -3,28 +3,45 @@ nav {
     background-color: #333;
     height: 5.5rem;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 2fr repeat(5, 1fr);
+    justify-content: space-between;
     padding: 0;
+    gap: 0;
 }
 
-.nav-container {
+/* .nav-container {
     display: flex;
     width: 100%;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0;
-    align-items: center;
+    align-content: center;
 
-    /* align-items: center; */
+    align-items: center;
+} */
+
+.nav-link {
+    transform: skew(-30deg);
+    border-right:#dfd7cc solid 2px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
 }
 
-h1 {
+.nav-link > * {
+transform: skew(30deg);
+}
+
+.nav-link h1 {
+    margin: 0 auto;
     padding: 1rem 0 .5rem 1rem;
     font-weight: normal;
     font-size: 2rem;
     font-family: 'apexregular';
     color: #dfd7cc;
-    align-self: flex-end;
     letter-spacing: .1rem;
 }
 
@@ -49,7 +66,7 @@ nav a {
     font-weight: normal;
     font-size: 1.5rem;
     letter-spacing: .1rem;
-    font-family: 'tekobold';
+    font-family: 'teko';
     color: rgb(214, 214, 214);
 }
 
@@ -61,6 +78,7 @@ nav a:hover {
 
 #icon {
     padding: .5rem;
+    height: 5.5rem;
 }
 
 #logo {
