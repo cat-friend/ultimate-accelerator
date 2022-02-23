@@ -1,5 +1,5 @@
 from flask import Blueprint, session, request
-from app.models import User, db
+from app.models import User, db, ClanUsers
 from app.forms import LoginForm, SignUpForm
 from flask_login import current_user, login_user, logout_user
 
@@ -38,7 +38,7 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
+        user = User.query.filter(User.email == form.data['email']).join(ClanUsers).first()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

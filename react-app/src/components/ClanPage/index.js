@@ -7,7 +7,7 @@ import EditClanModal from "../EditClanModal";
 
 function ClanPage() {
     const { clanId } = useParams();
-    const userId = useSelector((state) => state.session.user.id);
+    const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(clanActions.getOneClan(clanId));
@@ -15,6 +15,8 @@ function ClanPage() {
     const clan = useSelector((state) => state.clans[clanId]);
     const members = clan ? clan.members : null;
     const clan_members = members ? Object.values(members) : null;
+    const isAdmin = clan?.owner_user_id === user;
+    const isMember = clan?.id === user.clan_id;
     return (<>
         <div className="header-parent">
             <div className="left-corner"></div>
@@ -25,8 +27,14 @@ function ClanPage() {
             <div className="content">
                 <h3>Description:  {clan?.description}</h3>
                 <div className="button-div">
-                {clan?.owner_user_id === userId && <EditClanModal clan={clan} />}
-                {clan?.owner_user_id === userId && <DeleteClanModal clan={clan} />}
+                    {isAdmin && (
+                        <>
+                            <EditClanModal clan={clan} />
+                            <DeleteClanModal clan={clan} />
+                        </>
+                    )}
+                    {(isMember && !isAdmin) && ("leave buttons")}
+                    {(!isMember && !isAdmin) && ("join")}
                 </div>
             </div>
             <div className="content">

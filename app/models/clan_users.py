@@ -28,5 +28,4 @@ class ClanUsers(db.Model):
     def to_user(self):
         return {
             'clan_id': self.clan_id,
-            'clan': self.clan.to_user()
         }

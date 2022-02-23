@@ -34,7 +34,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'bio': self.bio,
+            'clan_id': self.clan_users.to_user()
         }
 
     def clan(self):

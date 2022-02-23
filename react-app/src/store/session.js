@@ -24,8 +24,9 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-
-    dispatch(setUser(data));
+    const user = { ...data }
+    user.clan_id = user.clan_id.clan_id;
+    dispatch(setUser(user));
   }
 }
 
@@ -42,7 +43,9 @@ export const login = (email, password) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data))
+    const user = { ...data };
+    user.clan_id = user.clan_id.clan_id;
+    dispatch(setUser(user));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();

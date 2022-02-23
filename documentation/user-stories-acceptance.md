@@ -81,7 +81,7 @@
 
 ### Viewing Challenges
 * As an authenticated user, I can view all of my challenges by clicking a button in the navigation bar.
-* If I want to view specific details about a challenge, I can click on a challenge to be redirected to `/challenges/:challengeId` to see its title, description, challenge composition, and tags.
+* If I want to view specific details about a challenge, I can click on a challenge to be redirected to `/challenges/:challengeId` to see its title, description, challenge composition, and tags. - unneeded
 
 #### Acceptance Criteria
 - [ ] Navigation bar must have a button for viewing all of the authenticated user's challenges (`/users/:userId/challenges`)
@@ -122,8 +122,8 @@
 * When I enter valid data, the clan will be shown in my user profile and I will be redirected to `/clans/:clanId`.
 
 #### Acceptance Criteria
-- [ ] When a logged-in user is viewing a deck that they have created, they can click a `Create a New Clan` button to add a new card to the deck.
-- [ ] The button will show a form for the user to put card information.
+- [ ] When a logged-in user is viewing `/clans`, they can click a `Create a New Clan` button to add a new clan only if they have not created or joined a clan previously.
+- [ ] The button will show a form for the user to put clan information.
 - [ ] When a user enters invalid data, error messages will appear and fields that have been correctly populated will remain the same.
 - [ ] When a user enters valid data, the user will be redirected to `/clans/:clanId`.
 
