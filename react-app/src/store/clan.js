@@ -32,7 +32,7 @@ export const createClan = (payload) => async (dispatch) => {
 }
 
 export const loadClans = () => async (dispatch) => {
-    const response = await fetch(`/api/clans`)
+    const response = await fetch(`/api/clans/`)
     const clans = await response.json();
     if (response.ok) {
         dispatch(loadAllClans(clans));
@@ -41,7 +41,7 @@ export const loadClans = () => async (dispatch) => {
 }
 
 export const getOneClan = (id) => async (dispatch) => {
-    const response = await fetch(`/api/clans/${id}`,
+    const response = await fetch(`/api/clans/${id}/`,
         {
             headers: { "Content-Type": "application/json" },
             method: 'GET'
@@ -65,7 +65,7 @@ export const getOneClan = (id) => async (dispatch) => {
 }
 
 export const editClan = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/clans/${payload.clan_id}`,
+    const response = await fetch(`/api/clans/${payload.clan_id}/`,
         {
             headers: { "Content-Type": "application/json" },
             method: 'PUT',
@@ -91,7 +91,7 @@ export const editClan = (payload) => async (dispatch) => {
 }
 
 export const deleteClan = (payload) => async (dispatch) => {
-    const getCurrClan = await fetch(`/api/clans/${payload.clanId}`, {
+    const getCurrClan = await fetch(`/api/clans/${payload.clanId}/`, {
         headers: {
             "Content-Type": "application/json"
         }
