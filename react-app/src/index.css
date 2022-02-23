@@ -24,8 +24,8 @@ body {
 div.root {
     margin: 3rem auto 2rem auto;
     max-width: 80%;
-    background-color: rgba(255, 255, 255, .5);
     padding: 3rem;
+    height: 100%;
 }
 
 a {
@@ -131,6 +131,17 @@ div.content {
     width: 100%;
 }
 
+div.auth-content {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(360deg, rgba(255, 255, 255, 0.6) 0%, rgba(102, 102, 102, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
+    border-radius: 2px;
+    display: block;
+    margin: 0;
+    padding: 1em;
+    border: 1px solid black;
+    box-shadow: 0 0 .2em #666;
+    width: 100%;
+}
 
 h1, h2, h3 {
     padding: 0;
@@ -162,7 +173,8 @@ input, select {
     border-radius: 2px;
     margin: .5rem auto;
 }
-input:focus, select:focus   {
+
+input:focus, select:focus {
     outline: #c23f3f solid 2px;
 }
 
@@ -171,8 +183,9 @@ input:focus, select:focus   {
 }
 
 .errors {
-    border:rgba(175, 19, 19, 1) 1px solid
+    border: rgba(175, 19, 19, 1) 1px solid
 }
+
 button {
     padding: .5rem;
     border: 1px solid white;

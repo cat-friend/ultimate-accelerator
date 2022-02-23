@@ -46,7 +46,7 @@ const LoginForm = () => {
       <div className="right-corner-b"></div>
     </div>
     <div className="content-container">
-      <div className='content'>
+      <div className='auth-content'>
         <form onSubmit={onLogin}>
           <div>
             {errors.map((error, ind) => (

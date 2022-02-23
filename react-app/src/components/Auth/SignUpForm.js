@@ -59,7 +59,7 @@ const SignUpForm = () => {
       <div className="right-corner"></div>
     </div>
     <div className='content-container'>
-      <div className='content'>
+      <div className='auth-content'>
         <form className='form' onSubmit={onSignUp}>
           <div>
             {errors.map((error, ind) => (

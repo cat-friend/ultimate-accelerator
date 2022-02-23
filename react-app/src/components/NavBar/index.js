@@ -11,13 +11,16 @@ const NavBar = ({ loaded }) => {
 
   return (
     <>
-      {sessionUser &&
+      {sessionUser ?
         (
           <>
             <div className='nav-link'>
             </div>
             <div className="nav-link">
-              <NavLink to={`/users/${sessionUser.id}`}><h1>hi, {sessionUser.username} :)</h1></NavLink>
+              {/* <NavLink to={`/users/${sessionUser.id}`}>
+                <h1>hi, {sessionUser.username} :)</h1>
+                </NavLink> */}
+                <h1>hi, {sessionUser.username} :)</h1>
             </div>
             <div className="nav-link">
               HOW-TO
@@ -32,7 +35,15 @@ const NavBar = ({ loaded }) => {
               <LogoutButton />
             </div>
           </>
-        )
+        ) :
+        (<>
+          <div className="nav-link"></div>
+          <div className="nav-link"></div>
+          <div className="nav-link"></div>
+          <div className="nav-link"></div>
+          <div className="nav-link"></div>
+          <div className="nav-link"></div>
+        </>)
       }
       <div className="icon-container">
         <div id="left-icon">
