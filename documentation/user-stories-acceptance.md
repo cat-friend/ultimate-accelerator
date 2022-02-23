@@ -20,11 +20,10 @@
 - [ ] If the registration information is invalid, the unregistered user is alerted of the errors in their input(s).
 - [ ] If the registration information is valid, a new user is created and the user is logged in.
 - [ ] Once successfully registered and logged in, the user is redirected to a splash page.
-
 ### Log In
 
 * As a registered and unauthorized user, I want to be able to log in to the website via a log-in form.
-  * When I am on the `/` page, I can click a `Log In` button and a modal will appear. The log in modal will contain a form:
+  * When I am on the `/` page, I will see a log in form:
     * I would like to be able to enter my user credentials on a clearly laid out form.
   * When I enter invalid data on the log-in form:
     * I would like the website to inform me of the validations I failed to pass and repopulate the form with my valid entries (except my password).
@@ -63,67 +62,66 @@
 ## Challenges
 
 ### Create Challenges
-* As a logged in user, when I am on the `/challenges` page, I can create challenges to share with other users.
-    * I can see a `Create New Challenge` button when I am on the `/challenges` page.
-* When I click the `Create New Challenge` button, I see a form for creating a new challenge.
-    * I must add at least one card in order to create the challenge.
+* As a logged in user, when I am on the `/users/:userId/challenges` page, I can create challenges to keep track of my battlepass progress.
+    * I can see a `Create New Challenge` form when I am on my `/users/:userId/challenges`` page.
+
 * When I enter invalid data on the `Create New Challenge` form, the page will inform me of the failed validations and repopulate the form with the valid entries
     * so that I can try again without needing to refill every input field.
 * I can see a button to submit the challenge.
 
 #### Acceptance Criteria.
-- [ ] A logged in user who is on the `/challenges` page sees a `Create New Challenge` button.
-- [ ] After clicking the `Create New Challenge` button, a form for creating a challenge is rendered.
+- [ ] A logged in user who is on their `/users/:userId/challenges` page sees a `Create New Challenge` form.
 - [ ] The form has inputs where the user can fill out the label of the challenge.
-- [ ] When user enters invalid data on the `Create New Challenge` form, the page will inform the user of the failed validations and repopulate the form with the valid entries, so that the user can try again without needing to refill every input field.
+- [ ] When a user enters invalid data on the `Create New Challenge` form, the page will inform the user of the failed validations and repopulate the form with the valid entries, so that the user can try again without needing to refill every input field.
 - [ ] A button to submit the challenge is shown.
-- [ ] When a user submits the challenge, the user will be redirected to `/challenges:challengeId`, where it can be viewed by other users.
+- [ ] When a user submits the challenge, the page will re-render and the challenge will be displayed. .
 
 ### Viewing Challenges
 * As an authenticated user, I can view all of my challenges by clicking a button in the navigation bar.
-* If I want to view specific details about a challenge, I can click on a challenge to be redirected to `/challenges/:challengeId` to see its title, description, challenge composition, and tags.
+unneeded - all details displayed on the page.
 
 #### Acceptance Criteria
 - [ ] Navigation bar must have a button for viewing all of the authenticated user's challenges (`/users/:userId/challenges`)
 - [ ] The user can click on a challenge to view its details (title, description, challenge composition (including number of stars)).
-- [ ] Only logged in users can view `/challenges`.
-- [ ] Only logged in users can view `/challenges/:challengeId`.
+
+- [ ] Only logged in users can view `/users/:userId/challenges`.
 
 ### Editing Challenges
-* As a logged-in user visiting `/challenges/:challengeId`, I can edit the challenges that I have created
+* As a logged-in user visiting `/users/:userId/challenges`, I can edit the status of  each challenge that I have created
     * so that I can update the status of the challenge to `in progress` or `completed`.
 * I should not be able to edit any challenges that belong to other users.
 
 #### Acceptance Criteria
-- [ ] When the user is viewing a challenge that they have created, the user can click a button to edit the challenge.
-- [ ] When pressing the button, the user will be taken to a pre-filled form with the challenge’s information. The user can then change any of the sections.
-- [ ] When the user presses the submit button, the challenge will update and the changes will be shown on the website.
+- [ ] When the user is viewing a challenge that they have created, the user can update the completion status of the challenge .
+
+- [ ] When the user selects the new status, the challenge will update upon selection and the changes will be shown on the website.
 - [ ] When viewing a challenge that the user did not create, the user will not be able to edit the challenge.
 
 ### Deleting Challenges
-* As a logged in user visiting `/challenges/:challengeId`, I can delete the challenges that I have created
+* As a logged in user viewing my `/users/:userId/challenges` page, I can delete the challenges that I have created
     * so that when I no longer want to share a challenge with others, I can remove it.
 * I should not be able to delete any challenges that I have not created.
-* When I delete a challenge, I also delete all the cards inside of it.
-* I should be able to make a challenge with the same name as the one that I deleted.
+* When I delete a challenge, I also delete all data associated with it.
+* I should be able to make a challenge with the same label as the one that I deleted.
 
 #### Acceptance Criteria
 - [ ] When the user is viewing a challenge that they have created, the user can click a button to delete their challenge.
-- [ ] When the user clicks the button, the challenge and all cards associated with the challenge will be deleted.
+- [ ] When the user clicks the button, the challenge and all data associated with the challenge will be deleted.
 - [ ] If a user is not authorized to delete a challenge, an error will occur and the user will be alerted that they are not authorized to delete the challenge.
 
 ## Clans
+Clans are groups that users can create, edit, and join.
 
 ### Creating a Clan
 * As a logged in user, I can create a clan, a group for other players to join.
-* When I am viewing `/clans`, if I have not created a clan in the past and want to create a new clan, I can click a button to create a new clan and a `Create a New Clan` form will appear.
+* When I am viewing `/clans`, if I am not currently a member of a clan and want to create a new clan, I can click a button to create a new clan and a `Create a New Clan` form will appear.
 * When I enter invalid data on the `Create a New Clan` form, the page will inform me of the failed validations and repopulate the form with the valid entries
     * so that I can try again without needing to refill every input field.
 * When I enter valid data, the clan will be shown in my user profile and I will be redirected to `/clans/:clanId`.
 
 #### Acceptance Criteria
-- [ ] When a logged-in user is viewing a deck that they have created, they can click a `Create a New Clan` button to add a new card to the deck.
-- [ ] The button will show a form for the user to put card information.
+- [ ] When a logged-in user is viewing `/clans`, they can click a `Create a New Clan` button to add a new clan only if they are not currently in a clanj.
+- [ ] The button will show a form for the user to put clan information.
 - [ ] When a user enters invalid data, error messages will appear and fields that have been correctly populated will remain the same.
 - [ ] When a user enters valid data, the user will be redirected to `/clans/:clanId`.
 
@@ -131,14 +129,15 @@
 * As a logged-in user who is viewing a clan on the `/clans/:clanId` page, I can view the clan name, members, and description. If I am not part of the clan, I cannot view the comments.
 
 #### Acceptance Criteria
-- [ ] When a logged-in user is viewing a card from a deck on the `/clans/:clanId` page, the user can see the details of a clan.
+- [ ] When a logged-in user is viewing a clan the `/clans/:clanId` page, the user can see the details of a clan.
+- [ ] A user who is not a member of the clan is not authorized to see the clan’s messages and should not be able to see them.
 
 ### Updating a Clan
 * As a logged-in user, while viewing a clan that I have created (`/clans/:clanId`), I have the option to edit the clan's name, description, and avatar.
 * When I select the option to edit the clan, a form will appear. Information already present on the clan's page will be autopopulated within the form.
 * When I enter invalid data on the `Edit Clan` form, the page will inform me of the failed validations and repopulate the form with the valid entries
     * so that I can try again without needing to refill every input field.
-* If I have not created the clan, I will not be able to edit any details about t he clan.
+* If I have not created the clan, I will not be able to edit any details about the clan.
 * After I have updated the clan, I can see the changes that I have made.
 
 #### Acceptance Criteria
@@ -164,19 +163,19 @@
 * I can rejoin the clan if I wish.
 
 #### Acceptance Criteria
-- [ ] When users are viewing a clan's page (`/clans/:clanId`), they can leave that clan if and only if they are  currently a member in that clan.
+- [ ] When users are viewing a clan's page (`/clans/:clanId`), they can leave that clan if and only if they are currently a member in that clan.
 - [ ] Once they leave the clan, their username will disappear from the list of members and they will not be able to post messages.
 - [ ] The user can re-join the clan if they wish.
 
 
 ### Deleting a Clan
-* As a logged-in user and viewing a clan that they have created (`/clans/:clanId`), I can delete the clan.
+* As a logged-in user and viewing a clan that Ihave created (`/clans/:clanId`), I can delete the clan.
 * I will only see a `Delete Clan` button if I am the user who created the clan.
-* When I click the `Delete Clan` button, the clan will no longer exist.
+* When I click the `Delete Clan` button, the clan and its associated data will no longer exist.
 * If I try to navigate to the URL of the clan that I have deleted, I will get a `404` error.
 * I will not be able to delete the clans that other users have created.
 * I will be able to create a new clan with the same information as the card that I have deleted.
-* After I have successfully deleted a clan, I will be redirected to `/decks` page will re-render.
+* After I have successfully deleted a clan, I will be redirected to `/clans`.
 
 #### Acceptance Criteria
 - [ ] When a user is viewing a clan that they have created (`/clans/:clanId`), a `Delete Clan` button will be visible.
@@ -186,6 +185,7 @@
 - [ ] A user cannot delete a clan that they have not created.
 - [ ] A user will be able to create a new clan with the same name as the clan that they have deleted.
 - [ ] Upon successful deletion of a clan, they will be redirected to `/clans`.
+
 
 ## Clan Messages
 
