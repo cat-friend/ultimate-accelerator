@@ -27,8 +27,6 @@ def default():
     """
     if request.method == 'GET':
         clans = Clan.query.all()
-        print("clans", clans)
-        print({"clans": clan.to_dict() for clan in clans})
         return {"clans": [clan.to_dict() for clan in clans]}
     if request.method == 'POST':
         form = ClanForm()
@@ -39,8 +37,9 @@ def default():
             description = form.data['description']
             new_clan = Clan(owner_user_id=user_id, name=name,
                             description=description)
-            new_member = ClanUsers(user_id=user_id, clan_id=new_clan.id)
             db.session.add(new_clan)
+            db.session.commit()
+            new_member = ClanUsers(user_id=user_id, clan_id=new_clan.id)
             db.session.add(new_member)
             db.session.commit()
             return new_clan.to_dict()
@@ -64,10 +63,11 @@ def join_leave_clan(id):
             user_id = form.data['user_id']
             clan_id = id
             new_member = ClanUsers(user_id=user_id, clan_id=clan_id)
-            clan_member = ClanUsers.query.join(User).filter(User.id == user_id).first()
+            clan_members = ClanUsers.query.join(
+                User).filter(User.id == user_id).first()
             db.session.add(new_member)
             db.session.commit()
-            return {"clan_members": clan_member.to_dict()}
+            return {"clan_members": [clan_member.to_dict() for clan_member in clan_members]}
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     if request.method == 'DELETE':
@@ -93,21 +93,23 @@ def one_clan(id):
     """
     if request.method == 'GET':
         clan = Clan.query.get(id)
-        clan_members = ClanUsers.query.join(User).filter(ClanUsers.clan_id == id).all()
-        print("HELLLLLLLLLLLLOOOOOOOOOOOOOOOOOOO", clan_members)
+        clan_members = ClanUsers.query.join(
+            User).filter(ClanUsers.clan_id == id).all()
         return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
     if request.method == 'PUT':
         form = EditClanForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             clan = Clan.query.get(id)
+            clan_members = ClanUsers.query.join(
+                User).filter(ClanUsers.clan_id == id).all()
             description = form.data['description']
             name = form.data['name']
             clan.description = description
             clan.name = name
             db.session.add(clan)
             db.session.commit()
-            return clan.to_dict()
+            return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     if request.method == 'DELETE':

@@ -3,12 +3,11 @@ from app.models import db, ClanUsers
 
 # Adds a demo user, you can add other users here if you want
 def seed_clan_users():
-    clans = [1, 2, 3, 1, 2, 3]
-    users = [1, 2, 3, 4, 5, 6]
+    clans = [1, 2, 3, 1, 2, 3, 1, 2, 3, 3]
+    users = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     for i in range(0, len(clans)):
         entry = ClanUsers(clan_id=clans[i], user_id=users[i])
         db.session.add(entry)
-
     db.session.commit()
 
 

@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+import NavBar from './components/NavBar'
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import CSSTester from './components/CSSTester';
+import AddChallengeForm from './components/ChallengesForms/AddChallengeForm';
+import Challenges from './components/Challenges';
+import Auth from './components/Auth';
+import Clans from './components/Clans';
+import ClanPage from './components/ClanPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -25,27 +28,34 @@ function App() {
     return null;
   }
 
-  return (
-    <BrowserRouter>
+  return (<>
+    <nav><NavBar loaded={loaded} /></nav>
+    <div className='root'>
       <Switch>
         <Route path='/' exact={true}>
-          <CSSTester />
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+          <Auth loaded={loaded} />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+        <ProtectedRoute path='/users/:userId/challenges' exact={true} >
+          <Challenges />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+        <ProtectedRoute path='/challenges' exact={true} >
+          <AddChallengeForm />
         </ProtectedRoute>
+        <ProtectedRoute path='/clans' exact={true} >
+          <Clans />
+        </ProtectedRoute>
+        <ProtectedRoute path='/clans/:clanId' exact={true} >
+          <ClanPage />
+        </ProtectedRoute>
+        <Route>
+          oops!
+        </Route>
       </Switch>
-    </BrowserRouter>
+    </div>
+  </>
   );
 }
 

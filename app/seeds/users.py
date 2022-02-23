@@ -5,12 +5,14 @@ from app.models import db, User
 def seed_users():
     demo = User(
         username='Demo', email='demo@aa.io', password='password')
-    yoshi = User(
-        username='Yellow Yoshi', email="yellow@yos.hi", password="charsiubao")
+    dolph = User(
+        username='Dolph Squid', bio="FRIEND OF HUMANITY", email="henry@ron.ron", password="computer")
     gp = User(
         username='Green Pepper', email='green@pep.ski', password="ilovelemon")
     normie = User(
         username='normie', email='normie@aa.io', password='password')
+    yoshi = User(
+        username='Yellow Yoshi', email="yellow@yos.hi", password="charsiubao")
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password')
     trauma = User(
@@ -21,11 +23,10 @@ def seed_users():
         username='umbasa nova', email='rampart@ramp.art', password='sheila4ever')
     dolph = User(
         username='Dolph Squid', bio="FRIEND OF HUMANITY", email="henry@ron.ron", password="computer")
-
     bloobs = User(username="Blueberry Smith",
                   email="blue@ber.ry", password="hellotomywife")
 
-    for datum in [demo, normie, bobbie, trauma, durrneez, umbasa, gp, dolph, yoshi, bloobs]:
+    for datum in [demo, dolph, gp, normie, yoshi, durrneez, trauma, umbasa, bobbie, bloobs]:
         db.session.add(datum)
     db.session.commit()
 

@@ -38,6 +38,7 @@ def all_challenges():
     form = ChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print("FORM DOT DATA ", form.data)
         challenge_label = form.data['challenge_label']
         challenge_type_id = form.data['challenge_type_id']
         user_id = form.data['user_id']
@@ -55,9 +56,16 @@ def all_challenges():
         user_challenge_id = new_challenge.id
         new_dimension_table_entry(
             user_challenge_id, value, weapon_id, mode_id, legend_id)
+        print("NEEEEEEEEEW CHALLENGE", new_challenge.to_dict())
         return new_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@challenge_routes.route('/<int:id>', methods=['GET'])
+def get_challenge(id):
+    user_challenge = UserChallenge.query.get(id)
+    return user_challenge.to_dict()
 
 
 @challenge_routes.route('/<int:id>', methods=['PUT'])
@@ -67,6 +75,7 @@ def edit_challenge(id):
     if form.validate_on_submit():
         user_challenge = UserChallenge.query.get(id)
         user_challenge.status = form.data['status']
+        print("USER CHALLENGE STATUS", user_challenge.status)
         db.session.add(user_challenge)
         db.session.commit()
         return user_challenge.to_dict()

@@ -7,15 +7,13 @@ class ClanUsers(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     clan_id = db.Column(db.Integer, db.ForeignKey("clans.id"), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        "users.id"), nullable=False, unique=True)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
     user = db.relationship("User", back_populates="clan_users")
     clan = db.relationship("Clan", back_populates="members")
-
-
-
 
     def to_dict(self):
         return {
@@ -25,4 +23,10 @@ class ClanUsers(db.Model):
             'member': self.user.clan(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
+        }
+
+    def to_user(self):
+        return {
+            'clan_id': self.clan_id,
+            'clan': self.clan.to_user()
         }
