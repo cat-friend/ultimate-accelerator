@@ -31,12 +31,21 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'bio': self.bio,
-            'clan_id': self.clan_users.to_user()
-        }
+        if self.clan_users:
+            return {
+                'id': self.id,
+                'username': self.username,
+                'bio': self.bio,
+                'clan_id':  self.clan_users.to_user()
+            }
+        else:
+            return {
+                'id': self.id,
+                'username': self.username,
+                'bio': self.bio,
+                'clan_id':  {'clan_id': None}
+            }
+
 
     def clan(self):
         return {
