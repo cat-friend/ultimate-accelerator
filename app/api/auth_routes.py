@@ -50,7 +50,6 @@ def login():
         is_clan_member = clan_member_check(user.id)
         if is_clan_member:
             user = User.query.filter(User.email == form.data['email']).join(ClanUsers).first()
-        print("USERRRRRRRRR", user)
         # Add the user to the session, we are logged in!
         login_user(user)
         return user.to_dict()

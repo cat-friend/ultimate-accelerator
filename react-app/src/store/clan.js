@@ -16,7 +16,7 @@ const loadOneClan = clan => ({
     clan
 })
 
-const loadClanMembers = (clanId, members) => ({
+export const loadClanMembers = (clanId, members) => ({
     type: LOAD_CLAN_MEMBERS,
     clanId,
     members
@@ -141,9 +141,10 @@ export const addClanMember = (payload) => async (dispatch) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
     });
-    const data = response.json()
+    const data = await response.json()
     const members = {};
     if (response.ok) {
+        console.log("data", data)
         data.clan_members.forEach((ele) => {
             members[ele.user_id] = { user_id: ele.user_id, username: ele.member.username }
         });
@@ -185,7 +186,7 @@ const clanReducer = (state = {}, action) => {
         }
         case LOAD_CLAN_MEMBERS: {
             const newState = { ...state };
-            newState[action.clanId].members = action.members;
+            newState.members = action.members;
             return newState;
         }
         case DELETE_CLAN_MEMBER: {

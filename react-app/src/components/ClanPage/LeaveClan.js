@@ -2,14 +2,13 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as clanActions from "../../store/clan"
+import * as sessionActions from "../../store/session"
 
 function LeaveClan() {
-    // get clan Id, user Id
     const dispatch = useDispatch();
     const { clanId } = useParams();
     const userId = useSelector(state => state.session.user.id);
     const [errors, setErrors] = useState([]);
-    const [showSuccess, setShowSuccess] = useState(false);
 
     const handleSubmit = () => {
         setErrors([]);
@@ -23,7 +22,8 @@ function LeaveClan() {
                     setErrors(response.errors);
                     return
                 }
-                setShowSuccess(true);
+                dispatch(clanActions.getOneClan(clanId));
+                dispatch(sessionActions.authenticate());
             }
         );
     }
@@ -33,7 +33,6 @@ function LeaveClan() {
             {errors && errors.map((error, idx) => (
                 <p key={idx} className="errors">{error}</p>
             ))}
-            {showSuccess && (<h2>Success!</h2>)}
         </div>
         <button
             type="button"
@@ -41,10 +40,6 @@ function LeaveClan() {
             LEAVE
         </button>
     </>)
-    // send payload that has that
-    // in backend, check if user has joined a clan previously, if so --> send error -- DONE
-    // dispatch joinClan or add member or something
-    // return errors
 }
 
 export default LeaveClan;

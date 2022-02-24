@@ -26,6 +26,7 @@ class ClanUsers(db.Model):
         }
 
     def to_user(self):
-        return {
-            'clan_id': self.clan_id,
-        }
+        if self.clan_id:
+            return {'clan_id': self.clan_id}
+        else:
+            return {'clan_id': None}

@@ -7,13 +7,14 @@ import CreateClan from "../ClanForms/CreateClan";
 function Clans() {
     const dispatch = useDispatch();
     const clans = useSelector(state => { return Object.values(state.clans) });
-    console.log("clans", clans)
+    const user = useSelector(state => state.session.user)
+    const hasClan = user.clan_id;
     useEffect(() => {
         dispatch(clanActions.loadClans());
     }, [dispatch])
     return (
         <>
-            <CreateClan />
+            {!hasClan && <CreateClan />}
             <div className="header-parent">
                 <div className="left-corner"></div>
                 <div className="header-child"><h2>Clans</h2></div>

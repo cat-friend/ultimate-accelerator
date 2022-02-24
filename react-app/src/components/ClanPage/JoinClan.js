@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as clanActions from "../../store/clan"
+import * as sessionActions from "../../store/session"
 
 function JoinClan() {
     // get clan Id, user Id
@@ -9,7 +10,6 @@ function JoinClan() {
     const { clanId } = useParams();
     const userId = useSelector(state => state.session.user.id);
     const [errors, setErrors] = useState([]);
-    const [showSuccess, setShowSuccess] = useState(false);
 
     const handleSubmit = () => {
         setErrors([]);
@@ -23,7 +23,8 @@ function JoinClan() {
                     setErrors(response.errors);
                     return
                 }
-                setShowSuccess(true);
+                dispatch(clanActions.getOneClan(clanId));
+                dispatch(sessionActions.authenticate());
             }
         );
     }
@@ -33,7 +34,6 @@ function JoinClan() {
             {errors && errors.map((error, idx) => (
                 <p key={idx} className="errors">{error}</p>
             ))}
-            {showSuccess && (<h2>Success!</h2>)}
         </div>
         <button
             type="button"
