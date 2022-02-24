@@ -1,0 +1,11 @@
+.content > p {
+    margin: 1rem auto;
+    width: fit-content;
+}
+#title {
+    margin-bottom: 2rem;
+}
+
+p > i {
+    color: #ff5252;
+}

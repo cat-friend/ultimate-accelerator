@@ -13,6 +13,7 @@ import Auth from './components/Auth';
 import Clans from './components/Clans';
 import ClanPage from './components/ClanPage';
 import Footer from './components/Footer';
+import About from './components/About';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,6 +36,7 @@ function App() {
       <Switch>
         <Route path='/' exact={true}>
           <Auth loaded={loaded} />
+          <About loaded={loaded}/>
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
