@@ -1,14 +1,21 @@
-footer {
+#footer {
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
-    padding: 1rem;
 }
 
 #bio-links {
-    margin: 0 auto;
+    margin: .5rem auto;
+    width: fit-content;
     display: grid;
     grid-template-columns: repeat(3, auto);
+    white-space: nowrap;
     column-gap: 10%;
+}
+
+#tech {
+    margin: .5rem auto;
+    display: flex;
+    justify-content: space-around;
 }

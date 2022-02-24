@@ -2,7 +2,7 @@ import "./Footer.css";
 
 function Footer() {
     return (
-        <>
+        <div id="footer">
             <div id="bio-links">
                 <div>Denise Li</div>
                 <div>GitHub</div>
@@ -27,7 +27,7 @@ function Footer() {
                 <div>|</div>
                 <div>Deployed with Docker</div>
             </div>
-        </>
+        </div>
     )
 }
 export default Footer;

@@ -12,6 +12,7 @@ import Challenges from './components/Challenges';
 import Auth from './components/Auth';
 import Clans from './components/Clans';
 import ClanPage from './components/ClanPage';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,10 +52,10 @@ function App() {
           <ClanPage />
         </ProtectedRoute>
         <Route>
-          oops!
         </Route>
       </Switch>
     </div>
+    <Footer/>
   </>
   );
 }
