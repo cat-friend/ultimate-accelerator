@@ -21,11 +21,11 @@ function Clans() {
             </div>
             <div className="content-container">
                 <div className="content">
-                    {clans.map((clan, index) => {
+                    {clans && clans.map((clan, index) => {
                         return (
                             <div className={`clan-${index % 2}`} key={index}>
-                                <NavLink className="" to={`/clans/${clan.id}`}>
-                                    {clan.name}
+                                <NavLink className="" to={`/clans/${clan?.id}`}>
+                                    {clan?.name}
                                 </NavLink>
                             </div>
                         )

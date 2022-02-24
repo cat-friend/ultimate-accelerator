@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import * as clanActions from "../../store/clan"
 import DeleteClanModal from "../DeleteClanModal";
 import EditClanModal from "../EditClanModal";
+import JoinClan from "./JoinClan";
+import LeaveClan from "./LeaveClan";
 
 function ClanPage() {
     const { clanId } = useParams();
@@ -12,10 +14,10 @@ function ClanPage() {
     useEffect(() => {
         dispatch(clanActions.getOneClan(clanId));
     }, [dispatch, clanId])
-    const clan = useSelector((state) => state.clans[clanId]);
+    const clan = useSelector((state) => state.clans);
     const members = clan ? clan.members : null;
     const clan_members = members ? Object.values(members) : null;
-    const isAdmin = clan?.owner_user_id === user;
+    const isAdmin = clan?.owner_user_id === user.id;
     const isMember = clan?.id === user.clan_id;
     return (<>
         <div className="header-parent">
@@ -33,8 +35,8 @@ function ClanPage() {
                             <DeleteClanModal clan={clan} />
                         </>
                     )}
-                    {(isMember && !isAdmin) && ("leave buttons")}
-                    {(!isMember && !isAdmin) && ("join")}
+                    {(isMember && !isAdmin) && <LeaveClan />}
+                    {(!isMember && !isAdmin) && <JoinClan />}
                 </div>
             </div>
             <div className="content">

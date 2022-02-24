@@ -10,7 +10,7 @@ def check_membership(form, field):
     user_check = ClanUsers.query.filter_by(user_id=user_id).first()
     if user_check:
         raise ValidationError(
-            "Oops! You've already joined a clan! You can only join one clan.")
+            "Oops! You've already joined a clan! You can only be a member of one clan. If you'd like to join this clan, leave your current clan by heading to its page.")
 
 
 def check_unique_owner(form, field):
@@ -57,6 +57,6 @@ class JoinClan(FlaskForm):
 
 class LeaveClan(FlaskForm):
     user_id = IntegerField("", validators=[DataRequired(
-        message="Oops! No user id detected!")])
+        message="Oops! No user id detected! Are you authorized to perform this action?!")])
     clan_id = IntegerField("", validators=[DataRequired(
-        message="Oops! No user id detected!")])
+        message="Oops! No clan id detected!")])

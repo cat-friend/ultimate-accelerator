@@ -1,16 +1,37 @@
 const LOAD_CLANS = "ultimate-accelerator/clans/LOAD_CLANS";
 const ADD_CLAN = "ultimate-accelerator/clans/ADD_CLAN"
+const LOAD_CLAN_MEMBERS = "ultimate-accelerator/clans/LOAD_CLAN_MEMBERS";
 const DELETE_CLAN = "ultimate-accelerator/clans/DEL_CLAN"
+const DELETE_CLAN_MEMBER = "ultimate-accelerator/clans/DEL_CLAN_MEMBER"
+const LOAD_ONE_CLAN = "ultimate-accelerator/clans/LOAD_ONE_CLAN"
 
 const loadAllClans = clans => ({
     type: LOAD_CLANS,
     clans: clans.clans
 });
 
+
+const loadOneClan = clan => ({
+    type: LOAD_ONE_CLAN,
+    clan
+})
+
+const loadClanMembers = (clanId, members) => ({
+    type: LOAD_CLAN_MEMBERS,
+    clanId,
+    members
+})
+
+const delClanMember = payload => ({
+    type: DELETE_CLAN_MEMBER,
+    payload
+})
+
 const addOneClan = clan => ({
     type: ADD_CLAN,
     clan
 });
+
 
 export const deleteOneClan = clan => ({
     type: DELETE_CLAN,
@@ -56,10 +77,9 @@ export const getOneClan = (id) => async (dispatch) => {
         clan.description = clan_data.clan.description;
         clan.created_at = clan_data.clan.created_at;
         clan_data.clan_members.forEach((ele) => {
-            clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
+            clan.members[ele.user_id] = { user_id: ele.user_id, username: ele.member.username }
         });
-        console.log("getOneClan", clan)
-        dispatch(addOneClan(clan));
+        dispatch(loadOneClan(clan));
         return clan;
     }
     return clan_data;
@@ -83,7 +103,7 @@ export const editClan = (payload) => async (dispatch) => {
         clan.members = {};
         clan.created_at = clan_data.clan.created_at;
         clan_data.clan_members.forEach((ele) => {
-            clan.members[ele.id] = { user_id: ele.user_id, username: ele.member.username }
+            clan.members[ele.user_id] = { user_id: ele.user_id, username: ele.member.username }
         });
         dispatch(addOneClan(clan));
         return clan;
@@ -115,6 +135,36 @@ export const deleteClan = (payload) => async (dispatch) => {
     return getCurrClan.json()
 }
 
+export const addClanMember = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/clans/${payload.clan_id}/join`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+    const data = response.json()
+    const members = {};
+    if (response.ok) {
+        data.clan_members.forEach((ele) => {
+            members[ele.user_id] = { user_id: ele.user_id, username: ele.member.username }
+        });
+        dispatch(loadClanMembers(payload.clan_id, members));
+    }
+    return data;
+}
+
+export const removeClanMember = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/clans/${payload.clan_id}/join`, {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+    const data = response.json();
+    if (response.ok) {
+        dispatch(delClanMember(payload));
+    }
+    return data;
+
+}
 const clanReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_CLANS: {
@@ -127,6 +177,20 @@ const clanReducer = (state = {}, action) => {
         case ADD_CLAN: {
             const newState = { ...state };
             newState[action.clan.id] = action.clan;
+            return newState;
+        }
+        case LOAD_ONE_CLAN: {
+            const newState = action.clan;
+            return newState;
+        }
+        case LOAD_CLAN_MEMBERS: {
+            const newState = { ...state };
+            newState[action.clanId].members = action.members;
+            return newState;
+        }
+        case DELETE_CLAN_MEMBER: {
+            const newState = { ...state };
+            delete newState.members[action.payload.user_id];
             return newState;
         }
         default: return state;
