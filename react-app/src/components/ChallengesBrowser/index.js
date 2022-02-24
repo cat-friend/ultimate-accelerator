@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
-import * as challengeActions from "../../store/challenge"
+import { useParams } from "react-router-dom";
+import * as challengeActions from "../../store/challenge";
+import * as userActions from "../../store/user";
 import EditChallenge from "../ChallengesForms/EditChallenges";
-import DeleteChallengeModal from "../DeleteChallengeModal"
-import OneChallenge from "../OneChallenge";
-import './ChallengesBrowser.css'
+import DeleteChallengeModal from "../DeleteChallengeModal";
+import './ChallengesBrowser.css';
 
 function ChallengesBrowser() {
     const { userId } = useParams();
     const dispatch = useDispatch();
+    const thisUser = useSelector(state => state?.user)
     const currUser = useSelector(state => state?.session?.user)
     useEffect(() => {
-        dispatch(challengeActions.loadChallenges(userId))
+        dispatch(challengeActions.loadChallenges(userId));
+        dispatch(userActions.getOneUser(userId));
     }, [dispatch, userId])
     const challenges = useSelector(state => {
         return Object.values(state.challenges)
@@ -20,7 +22,7 @@ function ChallengesBrowser() {
     return (<>
         <div className="header-parent">
             <div className="left-corner-b"></div>
-            <div className="header-child-b"><h2>{+userId === currUser.id ? "Your Battlepass Challenges" : `not ${currUser.username}'s challenges`}</h2></div>
+            <div className="header-child-b"><h2>{+userId === currUser.id ? "Your Battlepass Challenges" : `${thisUser?.username}'s challenges`}</h2></div>
             <div className="right-corner-b"></div>
         </div>
         <div className="content-container">

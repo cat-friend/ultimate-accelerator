@@ -3,9 +3,11 @@ import thunk from 'redux-thunk';
 import session from './session'
 import challengeReducer from './challenge';
 import clanReducer from './clan';
+import userReducer from './user';
 
 const rootReducer = combineReducers({
   session,
+  user: userReducer,
   challenges: challengeReducer,
   clans: clanReducer
 });

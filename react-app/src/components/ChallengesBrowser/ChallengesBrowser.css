@@ -1,7 +1,7 @@
 .challenges {
     display: grid;
     grid-template-columns: repeat(4, auto);
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     gap: 1px;
     min-width: 100%;
@@ -12,27 +12,36 @@
     min-width: 100%;
     display: flex;
     align-items: center;
-    margin: 0 .5rem;
+    margin: 0;
 }
 
 .challenges-header {
     grid-row: 1/2;
 }
-div[class*="label-1"] {
-    color: rgb(207, 188, 188);
-    padding: auto 0;
-}
 
-div[class*="label-0"] button {
+div[class~="label-0"] > button {
     color: white;
-    background-color: #333;
+    /* background-color: #333; */
     box-shadow: inset 0 0 .2em #fff;
-    padding: auto 0;
 }
 
-div[class*="label-1"] button {
+div[class$="label-1"] {
     color: #333;
-    background-color:#cfbcbc;
+    background-color:rgb(207, 188, 188);
     box-shadow: inset 0 0 .2em #fff;
-    padding: auto 0;
 }
+
+div[class$="label-1"] > button {
+    margin: 0 auto;
+    color: #333;
+    background-color:rgb(207, 188, 188);
+    box-shadow: inset 0 0 .2em #fff;
+}
+
+div[class^="trash"] {
+    width: fit-content;
+}
+/*
+div[class^="trash"] > a{
+    color:
+} */

@@ -10,8 +10,9 @@
     width: 100%;
     display: grid;
     grid-template:
-        "a b b b c" auto 1fr 1fr 1fr auto
-        "d e e e f" auto 1fr 1fr 1fr auto
+        "a b b b c" auto
+        "d e e e f" auto / auto 1fr 1fr 1fr auto;
+    justify-content: space-between
 }
 
 .modes {

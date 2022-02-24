@@ -9,7 +9,7 @@ function Challenges() {
 
     return (
         <>
-            <AddChallengeForm />
+            {currUser.id === +userId && <AddChallengeForm />}
             <ChallengesBrowser />
         </>)
 }
