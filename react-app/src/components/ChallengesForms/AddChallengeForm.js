@@ -34,7 +34,6 @@ function AddChallengeForm() {
             mode_id: checkedModes,
             legend_id: []
         }
-        console.log("payload", payload)
         setErrors([]);
         const challengeArray = input.toLowerCase().match(challengeTypeRegex)
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
