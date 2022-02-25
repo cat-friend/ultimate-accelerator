@@ -19,16 +19,22 @@ function AddChallengeForm() {
     let checkedModes
     const handleCheckboxOnChange = (index) => {
         const updatedCheckedState = checked.map((ele, i) => index === i ? !ele : ele)
-        console.log("updatedCheckedState", updatedCheckedState)
         setChecked(updatedCheckedState)
         checkedModes = modes.filter((ele, i) => {
-            if (updatedCheckedState[i]) return true;
+            if (updatedCheckedState[i]) {
+                console.log(updatedCheckedState[i]);
+                return true};
             return false;
         })
-        console.log("checkedModes", checkedModes);
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        checkedModes = modes.filter((ele, i) => {
+            if (checked[i]) {
+                return true;
+            }
+            return false;
+        })
         const payload = {
             challenge_label: input,
             user_id: 1,
@@ -36,7 +42,6 @@ function AddChallengeForm() {
             mode_id: checkedModes,
             legend_id: []
         }
-        console.log("payload", payload)
         setErrors([]);
         const challengeArray = input.toLowerCase().match(challengeTypeRegex)
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
@@ -50,22 +55,24 @@ function AddChallengeForm() {
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
-        return dispatch(challengeActions.createChallenge(payload))
-            .then(
-                (response) => {
-                    if (response.errors) {
-                        setErrors(response.errors)
-                        setInput("");
-                        return
-                    }
-                    setShowSuccess(true);
-                    setInput("");
-                    setStars("");
-                    setTimeout(() => {
-                        setShowSuccess(false);
-                    }, 1000);
-                }
-            );
+
+        console.log("payload", payload)
+        // return dispatch(challengeActions.createChallenge(payload))
+        //     .then(
+        //         (response) => {
+        //             if (response.errors) {
+        //                 setErrors(response.errors)
+        //                 return
+        //             }
+        //             setShowSuccess(true);
+        //             setInput("")
+        //             setStars("")
+        //             setChecked(new Array(3).fill(false))
+        //             setTimeout(() => {
+        //                 setShowSuccess(false);
+        //             }, 1000);
+        //         }
+        //     );
     };
 
     return (<>
