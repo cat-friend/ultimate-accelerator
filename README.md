@@ -13,7 +13,6 @@ Ultimate Accelerator is a website where users can create, study, and share decks
  - [Node.js 16.13.1](https://nodejs.org/en/)
 
 ### Getting Started
-# CHANGE THIS
 
 1. Clone the project repository
 ```
@@ -31,7 +30,7 @@ Ultimate Accelerator is a website where users can create, study, and share decks
    SECRET_KEY=<<YOUR-SECRET_KEY>>
    DATABASE_URL=postgresql://ultimate_accel_dev:<<PASSWORD>>@localhost/ultimate_accel_db
 ```
-4. Set up your PostgreSQL user, password, and database. Make sure that it matches your .env file!
+4. Set up your PostgreSQL user (`ultimate_accel_dev`), password, and database (`ultimate_accel_db`). Make sure that it matches your .env file!
 
 5. Access your `pipenv shell`, migrate your database, seed your database, and run your flask app with the following commands:
 ```
@@ -46,6 +45,12 @@ flask seed all
 ```
 flask run
 ```
+
+   In the future, if you'd like to unseed and reseed the database, you can run
+   ```
+   flask seed reset
+   ```
+   Caution! This will delete _all_ data in your database.
 
 5. To run the React App, `cd` into the `react-app` directory, install `react-app`, and then start React:
  ```
@@ -62,27 +67,19 @@ flask run
 Full user stories for the initial development phase are available on the [User Stories](https://github.com/cat-friend/ultimate-accelerator/wiki/User-Stories-&-Acceptance-Criteria) section of the project wiki. A feature list for the initial development phase is available on the [Feature List](https://github.com/cat-friend/ultimate-accelerator/wiki/Feature-List) section of the project [wiki](https://github.com/cat-friend/ultimate-accelerator/wiki).
 
 ### User Registration and Authentication
-New users can register for an account by entering a unique username, email address, and password.
+New users can register for an account by entering a unique username, email address, and password. If the username is already taken, the email address provided is invalid or already in use, and/or the password is invalid, the user will be notified of the specific errors.
 
 ## < Add images >
 
 
-Existing users can log in to their account by submitting their credentials via the login form.
+Existing users can log in to their account by submitting their credentials via the login form. If there are any issues with their provided credentials, the user will be notified of the errors. Users may log out of their account by clicking the **LOGOUT** button on the site-wide navigation bar.
 
 ## < Add images >
 
-
-Authenticated users can edit their profile biography
-
-## < Add images >
-
-Users may log out of their account by clicking the **LOGOUT** button on the site-wide navigation bar.
-
-## < Add images >
 
 ### Creating and Modifying A Battlepass Challenge
 
-Authenticated users can create a battlepass challenge with a title, mode type, and value (stars).
+Authenticated users can create a battlepass challenge with a title, mode type, and value (stars). If there are any issues with their provided data, the user will be notified of the errors.
 
 ## < Add images >
 
