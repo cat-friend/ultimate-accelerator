@@ -24,8 +24,8 @@ function Tutorial() {
                 <div className="content">
                     <h3>Battle Pass Challenges Overview</h3>
                     <p>Battle Pass Challenges can be found on the top right of the lobby screen in <i>Apex Legends</i>:</p>
-                    <img alt="example of battle pass challenges displayed on the lobby screen" src={example} />
-                    <h3>Examples of Battle Pass Challenges</h3>
+                    <img alt="example of battle pass challenges displayed on the lobby screen" src={example} id="bp-img"/>
+                    <h3>Examples of Battle Pass Challenges</h3><br/>
                     <ul>
                         {tutorialInfo.challengeExamplesArray.map((ele, index) => {
                             return <li key={index}>{ele}</li>

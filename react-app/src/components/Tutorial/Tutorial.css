@@ -8,3 +8,8 @@
     margin-bottom: 2rem;
     width: 100%;
 }
+
+#bp-img {
+    display: block;
+    margin: 0 auto 1rem auto;
+}
