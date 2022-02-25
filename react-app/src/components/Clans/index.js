@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as clanActions from "../../store/clan";
+import * as sessionActions from "../../store/session"
 import { NavLink } from 'react-router-dom';
 import CreateClan from "../ClanForms/CreateClan";
 
@@ -11,6 +12,7 @@ function Clans() {
     const hasClan = user.clan_id;
     useEffect(() => {
         dispatch(clanActions.loadClans());
+        dispatch(sessionActions.authenticate());
     }, [dispatch])
     return (
         <>

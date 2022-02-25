@@ -28,6 +28,7 @@ function EditClanForm({ setShowModal, clan }) {
                     return
                 }
                 setShowSuccess(true);
+                dispatch(clanActions.getOneClan(clan.id));
                 setTimeout(() => {
                     setShowModal(false);
                 }, 750);

@@ -17,12 +17,25 @@ const LoginForm = () => {
     return dispatch(login(email, password));
   }
 
+  // const onLogin = async (e) => {
+  //   e.preventDefault();
+  //   const data = await dispatch(login(email, password));
+  //   if (data) {
+  //     setErrors(data);
+  //   }
+  // };
+
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
+    setErrors([]);
+    return dispatch(login(email, password)).then((response) => {
+      if (response?.errors) {
+        setErrors(response.errors);
+        setEmail("");
+        setPassword("");
+        return;
+      }
+    });
   };
 
   const updateEmail = (e) => {

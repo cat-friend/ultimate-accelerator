@@ -32,17 +32,17 @@ function AddChallengeForm() {
             user_id: 1,
             value: +stars,
             mode_id: checkedModes,
-            legend_id: [],
-            challenge_type_id: [null]
+            legend_id: []
         }
+        console.log("payload", payload)
         setErrors([]);
         const challengeArray = input.toLowerCase().match(challengeTypeRegex)
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
         const legendsArray = input.toLowerCase().match(legendsRegex)
         const weaponsArray = input.toLowerCase().match(weaponsRegex)
 
-        payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : abilitiesArray ? [1] :
-            null
+        payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : abilitiesArray ? 1 :
+            0
         );
         payload.weapon_id = weaponsArray ? weaponsDict[weaponsArray[0]] : [null];
         legendsArray ? legendsArray.forEach((ele) => {
@@ -53,11 +53,12 @@ function AddChallengeForm() {
                 (response) => {
                     if (response.errors) {
                         setErrors(response.errors)
+                        setInput("");
                         return
                     }
                     setShowSuccess(true);
-                    setInput("")
-                    setStars("")
+                    setInput("");
+                    setStars("");
                     setTimeout(() => {
                         setShowSuccess(false);
                     }, 1000);
