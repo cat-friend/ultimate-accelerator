@@ -3,6 +3,9 @@
     position: fixed;
     bottom: 0;
     left: 0;
+    font-size: 1.1rem;
+    background-color: white;
+    color: black;
 }
 
 #bio-links {
@@ -12,6 +15,10 @@
     grid-template-columns: repeat(3, auto);
     white-space: nowrap;
     column-gap: 10%;
+}
+
+#bio-links a:hover {
+    color: #993333;
 }
 
 #tech {
