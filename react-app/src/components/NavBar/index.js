@@ -23,10 +23,10 @@ const NavBar = ({ loaded }) => {
                 <h1>hi, {sessionUser.username} :)</h1>
             </div>
             <div className="nav-link">
-              HOW-TO
+              <NavLink to={"/tutorial"}>TUTORIAL</NavLink>
             </div>
             <div className="nav-link">
-              <NavLink to={`/users/${sessionUser.id}/challenges`}>BATTLEPASS CHALLENGES</NavLink>
+              <NavLink to={`/users/${sessionUser.id}/challenges`}>BATTLE PASS CHALLENGES</NavLink>
             </div>
             <div className="nav-link">
               <NavLink to="/clans">CLANS</NavLink>

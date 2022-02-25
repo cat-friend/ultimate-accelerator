@@ -144,12 +144,7 @@ Clans are groups that users can create, edit, and join.
 
 
 #### Acceptance Criteria
-<<<<<<< HEAD
 - [ ] When a logged-in user is viewing `/clans`, they can click a `Create a New Clan` button to add a new clan only if they have not created or joined a clan previously.
-=======
-
-- [ ] When a logged-in user is viewing `/clans`, they can click a `Create a New Clan` button to add a new clan only if they are not currently in a clanj.
->>>>>>> main
 - [ ] The button will show a form for the user to put clan information.
 - [ ] When a user enters invalid data, error messages will appear and fields that have been correctly populated will remain the same.
 - [ ] When a user enters valid data, the user will be redirected to `/clans/:clanId`.

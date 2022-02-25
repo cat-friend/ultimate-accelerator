@@ -14,6 +14,7 @@ import Clans from './components/Clans';
 import ClanPage from './components/ClanPage';
 import Footer from './components/Footer';
 import About from './components/About';
+import Tutorial from "./components/Tutorial"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,7 +37,7 @@ function App() {
       <Switch>
         <Route path='/' exact={true}>
           <Auth loaded={loaded} />
-          <About loaded={loaded}/>
+          <About loaded={loaded} />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
@@ -53,11 +54,14 @@ function App() {
         <ProtectedRoute path='/clans/:clanId' exact={true} >
           <ClanPage />
         </ProtectedRoute>
+        <ProtectedRoute path='/tutorial' exact={true} >
+          <Tutorial />
+        </ProtectedRoute>
         <Route>
         </Route>
       </Switch>
     </div>
-    <Footer/>
+    <Footer />
   </>
   );
 }
