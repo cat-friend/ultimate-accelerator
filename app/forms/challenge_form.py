@@ -17,7 +17,7 @@ class ChallengeForm(FlaskForm):
         message="Please enter a value for this challenge."),
         NumberRange(min=1, max=10, message="Please enter a value for this challenge between 1 and 10")])
     weapon_id = ListField(validators=[])
-    mode_id = ListField(validators=[])
+    mode_id = ListField(validators=[DataRequired(message="Error! No modes provided. Please provide the mode that this Battle Pass can be completed in.")])
     legend_id = ListField(validators=[])
     submit = SubmitField("Submit")
 

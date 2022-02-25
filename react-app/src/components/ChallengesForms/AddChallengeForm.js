@@ -10,20 +10,22 @@ function AddChallengeForm() {
     const [input, setInput] = useState("")
     const [errors, setErrors] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [checked, setChecked] = useState(new Array(3).fill(true))
+    const [checked, setChecked] = useState(new Array(3).fill(false))
     const [stars, setStars] = useState("")
 
 
     const modeNames = ["Battle Royale", "Arena", "LTM"]
     const modes = [1, 2, 3]
-    let checkedModes = [1, 2, 3]
+    let checkedModes
     const handleCheckboxOnChange = (index) => {
         const updatedCheckedState = checked.map((ele, i) => index === i ? !ele : ele)
+        console.log("updatedCheckedState", updatedCheckedState)
         setChecked(updatedCheckedState)
         checkedModes = modes.filter((ele, i) => {
             if (updatedCheckedState[i]) return true;
             return false;
         })
+        console.log("checkedModes", checkedModes);
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,6 +37,7 @@ function AddChallengeForm() {
             legend_id: [],
             challenge_type_id: [null]
         }
+        console.log("payload", payload)
         setErrors([]);
         const challengeArray = input.toLowerCase().match(challengeTypeRegex)
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
