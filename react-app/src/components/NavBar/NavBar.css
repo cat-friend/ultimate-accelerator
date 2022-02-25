@@ -1,9 +1,9 @@
 nav {
     width: 100%;
-    background-color: #333;
-    height: 5.5rem;
+    max-height: 5.5rem;
     display: grid;
-    grid-template-columns: auto 2fr repeat(5, 1fr);
+    grid-template-columns: 2fr repeat(5, 1fr);
+    grid-template-rows: 5.5rem;
     justify-content: space-between;
     padding: 0;
     gap: 0;
@@ -21,8 +21,10 @@ nav {
 } */
 
 .nav-link {
+    background-color: #333;
     transform: skew(-30deg);
-    border-right:#dfd7cc solid 2px;
+    border-right: #dfd7cc solid 2px;
+    border-bottom: 1rem solid white;
     height: 100%;
     display: flex;
     align-items: center;
@@ -31,8 +33,8 @@ nav {
     width: 100%;
 }
 
-.nav-link > * {
-transform: skew(30deg);
+.nav-link>* {
+    transform: skew(30deg);
 }
 
 .nav-link h1 {
@@ -46,6 +48,7 @@ transform: skew(30deg);
 }
 
 .icon-container {
+    transform: skew(-30deg);
     background-color: #dfd7cc;
     display: flex;
     flex-direction: row;
@@ -53,14 +56,14 @@ transform: skew(30deg);
     padding-right: 1rem;
 }
 
-#left-icon {
+/* #left-icon {
     width: 0;
     border-bottom: 5.5rem solid transparent;
     border-left: 2.75rem solid #333;
     margin: 0;
     height: 0;
     padding: 0;
-}
+} */
 
 nav a {
     font-weight: normal;
@@ -77,11 +80,13 @@ nav a:hover {
 }
 
 #icon {
-    padding: .5rem;
-    height: 5.5rem;
+    transform: skew(30deg);
+
+
 }
 
 #logo {
-    height: 4.5rem;
-    width: 4.5rem;
+    display: block;
+    margin: 0 auto;
+    max-height: 5.5rem;
 }

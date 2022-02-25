@@ -14,13 +14,13 @@ const NavBar = ({ loaded }) => {
       {sessionUser ?
         (
           <>
-            <div className='nav-link'>
-            </div>
+            {/* <div className='nav-link'>&nbsp;&nbsp;&nbsp;&nbsp;
+            </div> */}
             <div className="nav-link">
               {/* <NavLink to={`/users/${sessionUser.id}`}>
                 <h1>hi, {sessionUser.username} :)</h1>
                 </NavLink> */}
-                <h1>hi, {sessionUser.username} :)</h1>
+              <h1>hi, {sessionUser.username} :)</h1>
             </div>
             <div className="nav-link">
               <NavLink to={"/tutorial"}>TUTORIAL</NavLink>
@@ -45,13 +45,12 @@ const NavBar = ({ loaded }) => {
           <div className="nav-link"></div>
         </>)
       }
-      <div className="icon-container">
-        <div id="left-icon">
-        </div>
-        <div id="icon">
+        {/* <div id="left-icon">
+        </div> */}
+        {/* <div id="icon">
           <img src={logo} id="logo" />
-        </div>
-      </div>
+        </div> */}
+        <NavLink to="/"><img src={logo} id="logo" /></NavLink>
     </>)
 }
 export default NavBar;

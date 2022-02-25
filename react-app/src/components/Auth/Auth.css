@@ -1,23 +1,26 @@
 #auth {
-    max-width: 60%;
-    min-width: 50%;
+    max-height: 75vh;
     display: grid;
-    grid-template-rows: 1rem 2fr 1rem;
+    grid-template-rows: 1fr 1.5fr;
     grid-template-columns: 1fr 2px 1fr;
     grid-template-areas:
     "a a a"
-    "b c d"
-    "e e e";
-    grid-gap: 2rem;
+    "b c d";
+    gap: 0;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    align-items: flex-start;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .auth-forms {
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 1rem;
+}
+
+#a {
+    grid-area: a;
 }
 
 #b {
