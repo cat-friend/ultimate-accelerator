@@ -1,6 +1,7 @@
 const challengeTypeDict = {
     ability: 1,
     collect: 2,
+    craft: 2,
     damage: 3,
     finish: 4,
     win: 4,
@@ -15,6 +16,7 @@ const challengeTypeDict = {
     loot: 7,
     open: 7,
     play: 8,
+    capture: 8,
     purchase: 9,
     upgrade: 9,
     'survey beacons': 10,
@@ -51,6 +53,7 @@ const weaponsDict = {
     bocek: [3],
     car: [4],
     'charge rifle': [7],
+    craftable: [11, 19],
     devotion: [8],
     'eva-8': [9],
     flatline: [10, 11],
@@ -85,8 +88,7 @@ const weaponsDict = {
     lmg: [8, 18, 28, 31, 32],
     shotgun: [9, 21, 22, 24],
     marksman: [1, 3, 12, 13, 33],
-    sniper: [7, 16, 17, 19, 20, 30],
-
+    sniper: [7, 16, 17, 19, 20, 30]
 }
 
 export {challengeTypeDict, legendsDict, weaponsDict}
