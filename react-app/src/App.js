@@ -32,7 +32,7 @@ function App() {
   }
 
   return (<>
-    <nav><NavBar loaded={loaded} /></nav>
+    <nav><NavBar /></nav>
     <div className='root'>
       <Switch>
         <Route path='/' exact={true}>

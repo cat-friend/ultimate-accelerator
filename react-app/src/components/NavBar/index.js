@@ -5,9 +5,9 @@ import logo from './logo.svg'
 import "./NavBar.css"
 import LogoutButton from '../Auth/LogoutButton';
 
-const NavBar = ({ loaded }) => {
-  const dispatch = useDispatch();
+const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
+  const isQT = sessionUser?.id === 5;
 
   return (
     <>
@@ -15,8 +15,8 @@ const NavBar = ({ loaded }) => {
         (
           <>
             <div className="nav-link">
-
               <h1>hi, {sessionUser.username} :)</h1>
+              {isQT && <p>sup qt 3.14</p>}
             </div>
             <div className="nav-link">
               <NavLink to={"/tutorial"}>TUTORIAL</NavLink>
