@@ -85,7 +85,17 @@ function AddChallengeForm() {
             <div className="header-child"><h2>Add a Challenge</h2></div>
             <div className="right-corner"></div>
         </div>
-        <div className="content-container">
+        <div className="bp-container">
+            <div className="content">
+                <h3>How to Enter Battle Pass Data</h3>
+                <p>For an entry to be considered valid, the Battle Pass challenges that the user inputs must follow the structure of the example Battle Pass challenges: </p>
+                <ul>
+                    <li>The challenge must have some diction that indicate the challenge type. For example, "deal <i>damage</i>," "<i>play</i> as Gibletta";</li>
+                    <li>Weapons or weapon classes and legend(s) are OPTIONAL but, in order to register correctly must exist in <i>Apex Legends</i></li>
+                    <li>Play mode (Battle Royale, Arena, or LTM) must be indicated;</li>
+                    <li>Value, or number of stars that the challenge is worth, must also be indicated.</li>
+                </ul>
+            </div>
             <div className="content">
                 {errors.map((error, idx) => (
                     <p key={idx} className="errors">{error}</p>
