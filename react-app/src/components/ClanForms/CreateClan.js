@@ -36,9 +36,9 @@ function CreateClan() {
 
     return (<>
         <div className="header-parent">
-            <div className="left-corner"></div>
-            <div className="header-child"><h2>Create a Clan</h2></div>
-            <div className="right-corner"></div>
+            <div className="left-corner-b"></div>
+            <div className="header-child-b"><h2>Create a Clan</h2></div>
+            <div className="right-corner-b"></div>
         </div>
         <div className="content-container">
             <div className="content">
