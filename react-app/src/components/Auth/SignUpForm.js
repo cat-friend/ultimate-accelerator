@@ -97,7 +97,7 @@ const SignUpForm = () => {
           </input>
           <div className='button-div'>
             <button className='form-button' type='submit'>Sign Up</button>
-            <button type='button' onClick={() => demoLogin}>Demo</button>
+            <button type='button' onClick={() => demoLogin()}>Demo</button>
           </div>
         </form>
       </div>

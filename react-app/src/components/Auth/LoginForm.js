@@ -73,7 +73,7 @@ const LoginForm = () => {
               type='text'
               placeholder='Email'
               value={email}
-              onChange={updateEmail}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -83,11 +83,11 @@ const LoginForm = () => {
               type='password'
               placeholder='Password'
               value={password}
-              onChange={updatePassword}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className='button-div'>
               <button type='submit'>Login</button>
-              <button type='button' onClick={demoLogin}>Demo</button>
+              <button type='button' onClick={() => demoLogin()}>Demo</button>
             </div>
           </div>
         </form>
