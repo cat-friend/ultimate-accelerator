@@ -201,7 +201,7 @@ button {
 }
 
 .button-div {
-    width: 50%;
+    width: 100%;
     margin: 1rem auto 0rem auto;
     display: flex;
     justify-content: space-around;
