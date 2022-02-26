@@ -12,7 +12,16 @@ function Tutorial() {
             </div>
             <div className="bp-container">
                 <div className="content">
-                    <h3>How to Enter Battle Pass Data</h3>
+                    <h3>Types of Challenges</h3>
+                    <p><i>Apex Legends</i> Battle Pass Challenges have 12 basic types:</p>
+                    <ul>
+                        {tutorialInfo.challegeTypes.map((ele, index) => {
+                            return <li key={index}>{ele}</li>
+                        })}
+                    </ul>
+                </div>
+                <div className="content">
+                    <h3>How to Enter Battle Pass Challenges Data</h3>
                     <p>For an entry to be considered valid, the Battle Pass challenges that the user inputs must follow the structure of the example Battle Pass challenges: </p>
                     <ul>
                         <li>The challenge must have some diction that indicate the challenge type. For example, "deal <i>damage</i>," "<i>play</i> as Gibletta";</li>
@@ -22,21 +31,14 @@ function Tutorial() {
                     </ul>
                 </div>
                 <div className="content">
-                    <h3>Battle Pass Challenges Overview</h3>
+                    <h3>Battle Pass Challenges In Game</h3>
                     <p>Battle Pass Challenges can be found on the top right of the lobby screen in <i>Apex Legends</i>:</p>
-                    <img alt="example of battle pass challenges displayed on the lobby screen" src={example} id="bp-img"/>
-                    <h3>Examples of Battle Pass Challenges</h3><br/>
-                    <ul>
-                        {tutorialInfo.challengeExamplesArray.map((ele, index) => {
-                            return <li key={index}>{ele}</li>
-                        })}
-                    </ul>
+                    <img alt="example of battle pass challenges displayed on the lobby screen" src={example} id="bp-img" />
                 </div>
                 <div className="content">
-                    <h3>Types of Challenges</h3>
-                    <p><i>Apex Legends</i> Battle Pass Challenges have 12 basic types:</p>
+                <h3>Examples of Battle Pass Challenges</h3><br />
                     <ul>
-                        {tutorialInfo.challegeTypes.map((ele, index) => {
+                        {tutorialInfo.challengeExamplesArray.map((ele, index) => {
                             return <li key={index}>{ele}</li>
                         })}
                     </ul>
