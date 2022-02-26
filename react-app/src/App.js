@@ -15,6 +15,7 @@ import ClanPage from './components/ClanPage';
 import Footer from './components/Footer';
 import About from './components/About';
 import Tutorial from "./components/Tutorial"
+import UltimateAccelerator from './components/UltimateAccelerator';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/tutorial' exact={true} >
           <Tutorial />
+        </ProtectedRoute>
+        <ProtectedRoute path='/accelerate/:userId' exact={true} >
+          <UltimateAccelerator />
         </ProtectedRoute>
         <Route>
         </Route>

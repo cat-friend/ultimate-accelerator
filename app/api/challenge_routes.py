@@ -100,6 +100,7 @@ def delete_challenge(id):
 
 @challenge_routes.route('/accelerate/<int:id>', methods=['GET'])
 def calc_max(id):
+    print("IN ROUTE IN ROUTE IOAJTOSIDJG;ISKDJGKLS")
     modes = [1, 2, 3]
     result = {}
     for mode in modes:
