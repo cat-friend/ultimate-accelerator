@@ -27,7 +27,6 @@ def user_challenges(id):
     GET request retrieves all challenges for the user.
     """
     user_challenges = UserChallenge.query.filter(UserChallenge.user_id==id).all()
-    print("USER C HALLENGEKLSKLF", user_challenges)
     return {"challenges": [user_challenge.to_dict() for user_challenge in user_challenges]}
 
 @user_routes.route('/<int:id>', methods=['GET', 'PUT'])

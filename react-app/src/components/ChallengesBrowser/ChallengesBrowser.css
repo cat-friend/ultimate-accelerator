@@ -8,7 +8,6 @@
 }
 
 .challenges div {
-    min-height: 44px;
     min-width: 100%;
     display: flex;
     align-items: center;
@@ -17,31 +16,24 @@
 
 .challenges-header {
     grid-row: 1/2;
+    /* color:rgb(255, 237, 132); */
+    text-decoration: underline;
 }
 
-div[class~="label-0"] > button {
-    color: white;
-    /* background-color: #333; */
-    box-shadow: inset 0 0 .2em #fff;
+div[class$="label-0"] {
+    color: rgb(247, 177, 177);
 }
 
 div[class$="label-1"] {
-    color: #333;
-    background-color:rgb(207, 188, 188);
-    box-shadow: inset 0 0 .2em #fff;
+    /* color: rgb(255, 198, 243); */
+    /* background-color: #333; */
+    /* box-shadow: inset 0 0 .2em #fff; */
 }
 
-div[class$="label-1"] > button {
-    margin: 0 auto;
-    color: #333;
-    background-color:rgb(207, 188, 188);
-    box-shadow: inset 0 0 .2em #fff;
+.trash-label-0 > a {
+    color: rgb(247, 177, 177);
 }
 
-div[class^="trash"] {
-    width: fit-content;
+.trash-label-1 > a {
+    color: white;
 }
-/*
-div[class^="trash"] > a{
-    color:
-} */

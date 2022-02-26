@@ -7,11 +7,15 @@ function DeleteChallengeModal({ challenge }) {
     const [showModal, setShowModal] = useState(false);
     return (
         <>
-
-                <button type="button" id="trash" onClick={() => setShowModal(true)}><i className="fa-solid fa-ban"></i></button>
+            <NavLink to="#" onClick={(e) => {
+                e.preventDefault();
+                setShowModal(true); }}>
+                <i className="fa-solid fa-ban">
+                </i>
+            </NavLink>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <DeleteChallengeForm setShowModal={setShowModal} challenge={challenge}/>
+                    <DeleteChallengeForm setShowModal={setShowModal} challenge={challenge} />
                 </Modal>
             )}
         </>

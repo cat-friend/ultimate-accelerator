@@ -53,7 +53,6 @@ def seed_user_challenge():
                 status=status[i], value=value[i])
             db.session.add(entry)
             db.session.commit()
-            print("ENTRY", entry.id)
             for weapon in weapons[i]:
                 for mode in modes[i]:
                     for legend in legends[i]:

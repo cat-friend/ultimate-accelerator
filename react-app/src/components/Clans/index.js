@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as clanActions from "../../store/clan";
 import * as sessionActions from "../../store/session"
 import { NavLink } from 'react-router-dom';
-import CreateClan from "../ClanForms/CreateClan";
+import CreateClan from "../CreateClan";
+import "./Clans.css"
 
 function Clans() {
     const dispatch = useDispatch();
@@ -17,6 +18,20 @@ function Clans() {
     return (
         <>
             {!hasClan && <CreateClan />}
+            {hasClan && (
+                <>
+                    <div className="header-parent">
+                        <div className="left-corner-b"></div>
+                        <div className="header-child-b"><h2>Create a Clan</h2></div>
+                        <div className="right-corner-b"></div>
+                    </div>
+                    <div className="content-container">
+                        <div className="content">
+                            Looks like you're currently a member of a clan. Unfortunately, you can't create a clan while you're currently a member of one.
+                        </div>
+                    </div>
+                </>
+            )}
             <div className="header-parent">
                 <div className="left-corner"></div>
                 <div className="header-child"><h2>Clans</h2></div>

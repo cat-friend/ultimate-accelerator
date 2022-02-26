@@ -1,0 +1,13 @@
+.clan-0 > a {
+    transition: all .5s ease-in;
+    text-decoration: none;
+    color: rgb(255, 237, 132);
+    font-size: 1.1rem;
+}
+
+.clan-1 > a {
+    transition: all .5s ease-in;
+    text-decoration: none;
+    color: #dfd7cc;
+    font-size: 1.1rem;
+}

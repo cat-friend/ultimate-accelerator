@@ -19,7 +19,7 @@ const challengeTypeDict = {
     capture: 8,
     purchase: 9,
     upgrade: 9,
-    'survey beacons': 10,
+    beacons: 10,
     outlive: 11,
     survive: 11
 }
@@ -43,8 +43,9 @@ const legendsDict = {
     valkyrie: [17],
     seer: [18],
     ash: [19],
-    'mad maggie': [20],
-    recon: [1, 4, 11, 17, 18]
+    maggie: [20],
+    recon: [1, 4, 11, 17, 18],
+    beacons: [1, 4, 11, 17, 18]
 }
 
 const weaponsDict = {

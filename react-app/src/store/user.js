@@ -15,7 +15,6 @@ export const getOneUser = (id) => async (dispatch) => {
     if (response.ok) {
         const user = await response.json();
         user.clan_id = user.clan_id.clan_id;
-        console.log("user", user)
         dispatch(loadOneUser(user));
         return user;
     }
@@ -31,7 +30,7 @@ export const getOneUser = (id) => async (dispatch) => {
 export default function userReducer(state = {}, action) {
     switch (action.type) {
         case LOAD_USER:
-            return { ... action.user }
+            return { ...action.user }
         default:
             return state;
     }

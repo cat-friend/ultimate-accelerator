@@ -1,42 +1,50 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { weaponsDict, legendsDict, challengeTypeDict } from "./dictionaries"
 import { challengeTypeRegex, abilitiesRegex, legendsRegex, weaponsRegex } from "./regexes"
 import "./ChallengesForms.css"
 import * as challengeActions from "../../store/challenge"
+import { useHistory } from "react-router-dom";
 
 function AddChallengeForm() {
     const dispatch = useDispatch();
     const [input, setInput] = useState("")
     const [errors, setErrors] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [checked, setChecked] = useState(new Array(3).fill(false))
-    const [stars, setStars] = useState("")
+    const [checked, setChecked] = useState(new Array(3).fill(false));
+    const [stars, setStars] = useState("");
+    const user = useSelector(state => state.session.user);
+    const history = useHistory();
 
 
-    const modeNames = ["Battle Royale", "Arena", "LTM"]
+    const modeNames = ["Battle\n Royale", "Arena", "LTM"]
     const modes = [1, 2, 3]
     let checkedModes
     const handleCheckboxOnChange = (index) => {
         const updatedCheckedState = checked.map((ele, i) => index === i ? !ele : ele)
-        console.log("updatedCheckedState", updatedCheckedState)
         setChecked(updatedCheckedState)
         checkedModes = modes.filter((ele, i) => {
-            if (updatedCheckedState[i]) return true;
+            if (updatedCheckedState[i]) {
+                return true
+            };
             return false;
         })
-        console.log("checkedModes", checkedModes);
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        checkedModes = modes.filter((ele, i) => {
+            if (checked[i]) {
+                return true;
+            }
+            return false;
+        })
         const payload = {
             challenge_label: input,
-            user_id: 1,
+            user_id: user.id,
             value: +stars,
             mode_id: checkedModes,
             legend_id: []
         }
-        console.log("payload", payload)
         setErrors([]);
         const challengeArray = input.toLowerCase().match(challengeTypeRegex)
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
@@ -50,17 +58,18 @@ function AddChallengeForm() {
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
+        
         return dispatch(challengeActions.createChallenge(payload))
             .then(
                 (response) => {
                     if (response.errors) {
                         setErrors(response.errors)
-                        setInput("");
                         return
                     }
                     setShowSuccess(true);
-                    setInput("");
-                    setStars("");
+                    setInput("")
+                    setStars("")
+                    setChecked(new Array(3).fill(false))
                     setTimeout(() => {
                         setShowSuccess(false);
                     }, 1000);
@@ -74,7 +83,17 @@ function AddChallengeForm() {
             <div className="header-child"><h2>Add a Challenge</h2></div>
             <div className="right-corner"></div>
         </div>
-        <div className="content-container">
+        <div className="bp-container">
+            <div className="content">
+                <h3>How to Enter Battle Pass Data</h3>
+                <p>For an entry to be considered valid, the Battle Pass challenges that the user inputs must follow the structure of the example Battle Pass challenges: </p>
+                <ul>
+                    <li>The challenge must have some diction that indicate the challenge type. For example, "deal <i>damage</i>," "<i>play</i> as Gibletta";</li>
+                    <li>Weapons or weapon classes and legend(s) are OPTIONAL but, in order to register correctly must exist in <i>Apex Legends</i></li>
+                    <li>Play mode (Battle Royale, Arena, or LTM) must be indicated;</li>
+                    <li>Value, or number of stars that the challenge is worth, must also be indicated.</li>
+                </ul>
+            </div>
             <div className="content">
                 {errors.map((error, idx) => (
                     <p key={idx} className="errors">{error}</p>
@@ -138,6 +157,12 @@ function AddChallengeForm() {
                     </div>
                     <div className="button-div">
                         <button
+                            type="button"
+                            onClick={() => {
+                                history.push("/tutorial")
+                            }}
+                        >TUTORIAL</button>
+                        <button
                             type="submit"
                             disabled={showSuccess}>
                             {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
@@ -148,8 +173,8 @@ function AddChallengeForm() {
                                 setChecked(new Array(3).fill(true));
                                 setStars("")
                             }}>
-                                RESET
-                            </button>
+                            RESET
+                        </button>
 
                     </div>
                 </form>

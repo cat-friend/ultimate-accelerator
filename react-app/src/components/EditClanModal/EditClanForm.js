@@ -55,19 +55,25 @@ function EditClanForm({ setShowModal, clan }) {
                         ))}
                     </ul>
                     <form onSubmit={(e) => handleSubmit(e)}>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                            placeholder="Super cool clan name"
-                        />
-                        <textarea
-                            data-lpignore="true"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            required
-                            placeholder="Please describe how cool and good your clan full of aim gods is." />
+                        <div>
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                                placeholder="Super cool clan name"
+                                className="input"
+                            />
+                        </div>
+                        <div>
+                            <textarea
+                                data-lpignore="true"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                required
+                                placeholder="Please describe how cool and good your clan full of aim gods is."
+                                className="input" />
+                        </div>
                         <div className="button-div">
                             <button
                                 type="submit"

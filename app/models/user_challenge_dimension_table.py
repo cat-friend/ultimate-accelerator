@@ -27,5 +27,4 @@ class UserChallengeDimensionTable(db.Model):
             'legend_id': self.legend_id,
             'value': self.value,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
         }
