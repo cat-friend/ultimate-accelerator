@@ -14,12 +14,8 @@ const NavBar = ({ loaded }) => {
       {sessionUser ?
         (
           <>
-            {/* <div className='nav-link'>&nbsp;&nbsp;&nbsp;&nbsp;
-            </div> */}
             <div className="nav-link">
-              {/* <NavLink to={`/users/${sessionUser.id}`}>
-                <h1>hi, {sessionUser.username} :)</h1>
-                </NavLink> */}
+
               <h1>hi, {sessionUser.username} :)</h1>
             </div>
             <div className="nav-link">
@@ -37,7 +33,6 @@ const NavBar = ({ loaded }) => {
           </>
         ) :
         (<>
-          <div className="nav-link"></div>
           <div className="nav-link"></div>
           <div className="nav-link"></div>
           <div className="nav-link"></div>
