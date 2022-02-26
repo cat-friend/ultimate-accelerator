@@ -25,7 +25,6 @@ function AddChallengeForm() {
         setChecked(updatedCheckedState)
         checkedModes = modes.filter((ele, i) => {
             if (updatedCheckedState[i]) {
-                console.log(updatedCheckedState[i]);
                 return true
             };
             return false;
@@ -59,8 +58,7 @@ function AddChallengeForm() {
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
-
-        console.log("payload", payload)
+        
         return dispatch(challengeActions.createChallenge(payload))
             .then(
                 (response) => {

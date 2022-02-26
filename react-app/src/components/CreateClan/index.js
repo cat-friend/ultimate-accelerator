@@ -26,7 +26,6 @@ function CreateClan() {
                     return
                 }
                 setShowSuccess(true);
-                console.log(response);
                 setTimeout(() => {
                     setShowSuccess(false);
                     history.push(`/clans/${response.id}`)

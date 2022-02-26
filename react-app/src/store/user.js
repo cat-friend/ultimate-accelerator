@@ -15,7 +15,6 @@ export const getOneUser = (id) => async (dispatch) => {
     if (response.ok) {
         const user = await response.json();
         user.clan_id = user.clan_id.clan_id;
-        console.log("user", user)
         dispatch(loadOneUser(user));
         return user;
     }

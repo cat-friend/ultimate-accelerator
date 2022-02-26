@@ -27,14 +27,12 @@ const SignUpForm = () => {
         if (response?.errors) {
           setErrors(response.errors);
           response.errors.forEach((ele) => {
-            console.log("ele", ele);
             if (ele.includes("Username")) setUsername("");
             if (ele.includes("address")) setEmail("");
           });
           setPassword("");
           setRepeatPassword("");
           errors.forEach((ele) => {
-            console.log("ele", ele);
             if (ele.includes("Username")) setUsername("");
             if (ele.includes("address")) setEmail("");
           });
