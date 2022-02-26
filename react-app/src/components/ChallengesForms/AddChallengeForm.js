@@ -4,6 +4,7 @@ import { weaponsDict, legendsDict, challengeTypeDict } from "./dictionaries"
 import { challengeTypeRegex, abilitiesRegex, legendsRegex, weaponsRegex } from "./regexes"
 import "./ChallengesForms.css"
 import * as challengeActions from "../../store/challenge"
+import { useHistory } from "react-router-dom";
 
 function AddChallengeForm() {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ function AddChallengeForm() {
     const [showSuccess, setShowSuccess] = useState(false);
     const [checked, setChecked] = useState(new Array(3).fill(false))
     const [stars, setStars] = useState("")
+    const history = useHistory();
 
 
     const modeNames = ["Battle Royale", "Arena", "LTM"]
@@ -23,7 +25,8 @@ function AddChallengeForm() {
         checkedModes = modes.filter((ele, i) => {
             if (updatedCheckedState[i]) {
                 console.log(updatedCheckedState[i]);
-                return true};
+                return true
+            };
             return false;
         })
     }
@@ -145,6 +148,12 @@ function AddChallengeForm() {
                     </div>
                     <div className="button-div">
                         <button
+                            type="button"
+                            onClick={() => {
+                                history.push("/tutorial")
+                            }}
+                        >TUTORIAL</button>
+                        <button
                             type="submit"
                             disabled={showSuccess}>
                             {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
@@ -155,8 +164,8 @@ function AddChallengeForm() {
                                 setChecked(new Array(3).fill(true));
                                 setStars("")
                             }}>
-                                RESET
-                            </button>
+                            RESET
+                        </button>
 
                     </div>
                 </form>
