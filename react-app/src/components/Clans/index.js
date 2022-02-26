@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as clanActions from "../../store/clan";
 import * as sessionActions from "../../store/session"
 import { NavLink } from 'react-router-dom';
-import CreateClan from "../ClanForms/CreateClan";
+import CreateClan from "../CreateClan";
 import "./Clans.css"
 
 function Clans() {

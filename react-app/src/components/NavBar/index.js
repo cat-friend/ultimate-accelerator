@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from './logo.svg'
 import "./NavBar.css"
@@ -45,7 +45,7 @@ const NavBar = () => {
         {/* <div id="icon">
           <img src={logo} id="logo" />
         </div> */}
-        <NavLink to="/"><img src={logo} id="logo" /></NavLink>
+        <NavLink to="/"><img src={logo} id="logo" alt="Ultimate Accelerator logo that, when clicked, redirects user to the splash page"/></NavLink>
     </>)
 }
 export default NavBar;

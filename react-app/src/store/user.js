@@ -31,7 +31,7 @@ export const getOneUser = (id) => async (dispatch) => {
 export default function userReducer(state = {}, action) {
     switch (action.type) {
         case LOAD_USER:
-            return { ... action.user }
+            return { ...action.user }
         default:
             return state;
     }

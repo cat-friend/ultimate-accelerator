@@ -7,13 +7,13 @@ function Footer() {
                 <div id="bio-links">
                     <div><a href="mailto:denisepli@gmail.com">Denise Li</a></div>
                     <div><a href="mailto:denisepli@gmail.com">Email</a></div>
-                    <div><a href="https://github.com/cat-friend/ultimate-accelerator" target="_blank">GitHub</a></div>
-                    <div><a href="https://www.linkedin.com/in/denise-li-45350320/" target="_blank" id="end">LinkedIn</a></div>
+                    <div><a href="https://github.com/cat-friend/ultimate-accelerator" target="_blank" rel="noreferrer">GitHub</a></div>
+                    <div><a href="https://www.linkedin.com/in/denise-li-45350320/" target="_blank" id="end" rel="noreferrer">LinkedIn</a></div>
                 </div>
             </div>
             <div
-             id="tech">
-                 <div>Tech stack:</div>
+                id="tech">
+                <div>Tech stack:</div>
                 <div>Python</div>
                 <div>JavaScript</div>
                 <div>ReactJS</div>
