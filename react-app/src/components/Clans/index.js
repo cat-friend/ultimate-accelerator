@@ -4,6 +4,7 @@ import * as clanActions from "../../store/clan";
 import * as sessionActions from "../../store/session"
 import { NavLink } from 'react-router-dom';
 import CreateClan from "../ClanForms/CreateClan";
+import "./Clans.css"
 
 function Clans() {
     const dispatch = useDispatch();
