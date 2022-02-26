@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { weaponsDict, legendsDict, challengeTypeDict } from "./dictionaries"
 import { challengeTypeRegex, abilitiesRegex, legendsRegex, weaponsRegex } from "./regexes"
 import "./ChallengesForms.css"
@@ -11,8 +11,9 @@ function AddChallengeForm() {
     const [input, setInput] = useState("")
     const [errors, setErrors] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [checked, setChecked] = useState(new Array(3).fill(false))
-    const [stars, setStars] = useState("")
+    const [checked, setChecked] = useState(new Array(3).fill(false));
+    const [stars, setStars] = useState("");
+    const user = useSelector(state => state.session.user);
     const history = useHistory();
 
 
@@ -40,7 +41,7 @@ function AddChallengeForm() {
         })
         const payload = {
             challenge_label: input,
-            user_id: 1,
+            user_id: user.id,
             value: +stars,
             mode_id: checkedModes,
             legend_id: []

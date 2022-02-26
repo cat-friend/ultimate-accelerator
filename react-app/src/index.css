@@ -15,7 +15,6 @@ body {
     font-family: 'Franklin Gothic Medium', Helvetica, sans-serif;
     font-size: 1rem;
     color: white;
-    padding-bottom: 4rem;
     overflow-x: hidden;
 }
 
@@ -24,9 +23,11 @@ body {
 }
 
 div.root {
-    margin: 2rem auto 4rem auto;
+    margin: 2rem auto 20rem auto;
     width: fit-content;
+    min-width: 40%;
     padding: 3rem;
+    padding-bottom: 5rem;
     min-height: 100%;
 }
 
@@ -205,6 +206,9 @@ button {
     margin: 1rem auto 0rem auto;
     display: flex;
     justify-content: space-around;
+}
+.button-div > div {
+    display: block;
 }
 
 

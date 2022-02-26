@@ -36,6 +36,7 @@ def all_challenges():
     route returns JSON data needed for the front end. Else, the route
     returns error messages.
     """
+    print("INSIDE THE CHALLENGE ROUTE INSIDE THE POST ROUTE")
     form = ChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

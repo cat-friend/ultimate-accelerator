@@ -1,0 +1,8 @@
+div.clans {
+    display: block;
+}
+
+.clan-input {
+    display: block;
+    min-width: 100%;
+}
