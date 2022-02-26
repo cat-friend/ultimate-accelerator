@@ -30,22 +30,15 @@ div.root {
     min-height: 100%;
 }
 
-.clan-0 > a {
+a {
     transition: all .5s ease-in;
     text-decoration: none;
-    color: rgb(255, 237, 132);
-    font-size: 1.1rem;
-}
-
-.clan-1 > a {
-    transition: all .5s ease-in;
-    text-decoration: none;
-    color: #dfd7cc;
+    color: red;
     font-size: 1.1rem;
 }
 
 a:hover {
-    color: white;
+    color: black;
     font-size: 1.2rem;
     text-decoration: underline
 }
