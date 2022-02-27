@@ -69,44 +69,63 @@ Full user stories for the initial development phase are available on the [User S
 ### User Registration and Authentication
 New users can register for an account by entering a unique username, email address, and password. If the username is already taken, the email address provided is invalid or already in use, and/or the password is invalid, the user will be notified of the specific errors.
 
-## < Add images >
+<p align='center'>
+<img src='https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/sign_up.jpg' alt='sign up form'>
+</p>
 
 
 Existing users can log in to their account by submitting their credentials via the login form. If there are any issues with their provided credentials, the user will be notified of the errors. Users may log out of their account by clicking the **LOGOUT** button on the site-wide navigation bar.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/log_in.jpg" alt='log in form'>
+</p>
+
 
 
 ### Creating and Modifying A Battlepass Challenge
 
 Authenticated users can create a battlepass challenge with a title, mode type, and value (stars). If there are any issues with their provided data, the user will be notified of the errors.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/add_challenge.jpg" alt='add challenge form'>
+</p>
 
 All authenticated users can view the other user's Battle Pass Challenge information.
 
-## < Add images >
+<p align='center'>
+<img src= alt='sign up form'>
+</p>
 
 When viewing their own Battle Pass Challenges, they may add, edit, or delete challenges. Users can edit the status of their Battle Pass Challenge to a status of `open`, `in progress`, or `completed`.
 
-## < Add images >
+<p align='center'>
+<img src= alt='sign up form'>
+</p>
 
 
 ### Creating and Modifying A Clan
 
 If a user is not currently a member of a clan, they may create one (1) clan.
 
-## < Add images >
+<p align='center'>
+<img src= alt='sign up form'>
+</p>
 
 If a user does not wish to create their own clan, they can join a clan by navigating to that clan's page. Their name will immediately appear in the clan members list.
 
-## < Add images >
+<p align='center'>
+<img src= alt='sign up form'>
+</p>
 
 If a user would like to leave their clan, they can do so by navigating to their clan's page and clicking the `Leave` button. Their name will immediately disappear from the clan members list.
 
-## < Add images >
+<p align='center'>
+<img src= alt='sign up form'>
+</p>
 
-## < Add images >
+<p align='center'>
+<img src= alt='sign up form'>
+</p>
 
 
 ### Frontend Routes
