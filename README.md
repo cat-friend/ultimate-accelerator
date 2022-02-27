@@ -64,7 +64,7 @@ flask run
  ```
 
 ## Ultimate Accelerator In Action
-Full user stories for the initial development phase are available on the [User Stories](https://github.com/cat-friend/ultimate-accelerator/wiki/User-Stories-&-Acceptance-Criteria) section of the project wiki. A feature list for the initial development phase is available on the [Feature List](https://github.com/cat-friend/ultimate-accelerator/wiki/Feature-List) section of the project [wiki](https://github.com/cat-friend/ultimate-accelerator/wiki).
+Full user stories for the initial development phase are available on the [User Stories](https://github.com/cat-friend/ultimate-accelerator/wiki/2.-User-Stories-&-Features-Acceptance-Criteria) section of the project wiki. A feature list for the initial development phase is available on the [Feature List](https://github.com/cat-friend/ultimate-accelerator/wiki/1.-MVP-Features-List) section of the project [wiki](https://github.com/cat-friend/ultimate-accelerator/wiki).
 
 ### User Registration and Authentication
 New users can register for an account by entering a unique username, email address, and password. If the username is already taken, the email address provided is invalid or already in use, and/or the password is invalid, the user will be notified of the specific errors.
@@ -111,7 +111,7 @@ If a user would like to leave their clan, they can do so by navigating to their 
 
 ### Frontend Routes
 # COME BACK AND FIX LINKS
-All frontend routes are covered in detail on the [Fronted Routes section of our project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/Frontend-Routes). Frontend routes were designed to enable users access to basic functionality such as:
+All frontend routes are covered in detail on the [Fronted Routes section of the project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/3.-Frontend-Routes). Frontend routes were designed to enable users access to basic functionality such as:
    * registration;
    * authentication;
    * viewing, creating, updating and deleting challenges;
@@ -119,7 +119,7 @@ All frontend routes are covered in detail on the [Fronted Routes section of our 
 
 ### API Routes
 # COME BACK AND FIX LINKS
-All frontend routes are covered in detail on the [API Routes section of our project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/API-Documentation). API routes were designed for users to interact with a page without being redirected.
+All frontend routes are covered in detail on the [API Routes section of the project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/4.-API-Documentation). API routes were designed for users to interact with a page without being redirected.
 
 
 ## Feature Highlights
@@ -144,6 +144,6 @@ Big thank you to everyone who's been with me along the way. Specifically:
 * Dolph Squid for the inspiration and for being a great frond, good job I love you!;
 * Green Pepper for dependable moral support;
 * Yellow Yoshi for our late night talks and Shrek gifs;
-* Austin McDonald for giving me the courage to _finally_ pivot out of science after two (2) years of indecision;
+* Austin M. for giving me the courage to _finally_ pivot out of science after two (2) years of indecision;
 * Barry Mattern for being the best cohort lead that anyone in the history of bootcamps anywhere could ever ask for. Thank you for your compassion and understanding. October 2022 cohort they will soon know how lucky they are to have you as their cohort leader;
 * Suhayl & Co for everything--this bootcamp has been one of the most enjoyable experiences of my life and you played a huge role in that. I wake up every morning and open palm slam a giant smile on my face because I am blessed with the opportunity to learn and develop alongside very compassionate, talented, and intelligent people and to make you laugh so hard via Discord that you have to shut your camera off in Zoom.
