@@ -143,7 +143,7 @@ Big thank you to everyone who's been with me along the way. Specifically:
 * Blueberry Smith for helping me simplify my database schema and raw SQL queries _after_ I've struggled with it. Giving me room to grow is the best gift;
 * Dolph Squid for the inspiration and for being a great frond, good job I love you!;
 * Green Pepper for dependable moral support;
-* Yellow Yoshi for our late night talks;
+* Yellow Yoshi for our late night talks and Shrek gifs;
 * Austin McDonald for giving me the courage to _finally_ pivot out of science after two (2) years of indecision;
-* Barry Mattern for being the best cohort lead that anyone in the history of bootcamps anywhere could ever ask for. Thank you for your compassion and understanding. October 2022 cohort doesn't know it yet but they will soon know how lucky they are;
-* Suhayl & Co for everything--this bootcamp has been one of the most enjoyable experiences of my life and you and Barry Mattern played a huge role in that. I wake up every morning and open palm slam a giant smile on my face because I am blessed with the opportunity to make you laugh so hard in Discord that you have to shut your camera off in Zoom and to learn and develop alongside very compassionate, talented, and intelligent people.
+* Barry Mattern for being the best cohort lead that anyone in the history of bootcamps anywhere could ever ask for. Thank you for your compassion and understanding. October 2022 cohort they will soon know how lucky they are to have you as their cohort leader;
+* Suhayl & Co for everything--this bootcamp has been one of the most enjoyable experiences of my life and you played a huge role in that. I wake up every morning and open palm slam a giant smile on my face because I am blessed with the opportunity to learn and develop alongside very compassionate, talented, and intelligent people and to make you laugh so hard via Discord that you have to shut your camera off in Zoom.
