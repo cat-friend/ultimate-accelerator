@@ -87,19 +87,19 @@ Existing users can log in to their account by submitting their credentials via t
 Authenticated users can create a battlepass challenge with a title, mode type, and value (stars). If there are any issues with their provided data, the user will be notified of the errors.
 
 <p align='center'>
-<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/add_challenge.jpg" alt='add challenge form'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/challenge_add.jpg" alt='add challenge form'>
 </p>
 
 All authenticated users can view the other user's Battle Pass Challenge information.
 
 <p align='center'>
-<img src= alt='sign up form'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/challenge_other_user.jpg" alt='sign up form'>
 </p>
 
 When viewing their own Battle Pass Challenges, they may add, edit, or delete challenges. Users can edit the status of their Battle Pass Challenge to a status of `open`, `in progress`, or `completed`.
 
 <p align='center'>
-<img src= alt='sign up form'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/challenge_edit.jpg" alt='how editing a battle pass challenge looks to a user'>
 </p>
 
 
@@ -108,28 +108,36 @@ When viewing their own Battle Pass Challenges, they may add, edit, or delete cha
 If a user is not currently a member of a clan, they may create one (1) clan.
 
 <p align='center'>
-<img src= alt='sign up form'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_create.jpg" alt='clan creation form'>
 </p>
+
+If a user is an administrator of a clan, `EDIT` and `DELETE` buttons will appear when they navigate to their clan's page.
+
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_admin.jpg" alt='edit and delete buttons appear for clan administrators'>
+</p>
+
+If a user is currently a member of a clan, they will be notified that they are unable to create a clan.
+
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_no_create.jpg" alt='message that informs user why they are unable to create a clan'>
+</p>
+
 
 If a user does not wish to create their own clan, they can join a clan by navigating to that clan's page. Their name will immediately appear in the clan members list.
 
 <p align='center'>
-<img src= alt='sign up form'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_join.jpg" alt='joining a clan'>
 </p>
 
 If a user would like to leave their clan, they can do so by navigating to their clan's page and clicking the `Leave` button. Their name will immediately disappear from the clan members list.
 
 <p align='center'>
-<img src= alt='sign up form'>
-</p>
-
-<p align='center'>
-<img src= alt='sign up form'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_leave.jpg" alt='leave button'>
 </p>
 
 
 ### Frontend Routes
-# COME BACK AND FIX LINKS
 All frontend routes are covered in detail on the [Fronted Routes section of the project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/3.-Frontend-Routes). Frontend routes were designed to enable users access to basic functionality such as:
    * registration;
    * authentication;
@@ -137,7 +145,6 @@ All frontend routes are covered in detail on the [Fronted Routes section of the 
    * viewing, creating, updating, deleting, joining, and leaving clans (groups).
 
 ### API Routes
-# COME BACK AND FIX LINKS
 All frontend routes are covered in detail on the [API Routes section of the project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/4.-API-Documentation). API routes were designed for users to interact with a page without being redirected.
 
 
