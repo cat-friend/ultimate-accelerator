@@ -151,7 +151,7 @@ All frontend routes are covered in detail on the [API Routes section of the proj
 ## Feature Highlights
 
 ### Data analysis
-Battle Pass Challenges are based on play modes, playable characters (legends), or weapons and challenge types. I analyzed relevant raw data from _Apex Legends_ in order to programmatically identify, categorize, and create new database entries based on user input challenge data. For a full write up, see [Data Analysis](https://github.com/cat-friend/ultimate-accelerator/wiki/Battle-Pass-Challenges-Data-Analysis).
+Battle Pass Challenges are based on play modes, playable characters (legends), or weapons and challenge types. I analyzed relevant raw data from _Apex Legends_ in order to programmatically identify, categorize, and create new database entries based on user input challenge data. For a full write up, see [Data Analysis](https://github.com/cat-friend/ultimate-accelerator/wiki/7.-Battle-Pass-Challenges-Data-Analysis).
 
 
 ### Accessibility
