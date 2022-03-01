@@ -20,14 +20,14 @@ body {
 
 #body {
     width: 100%;
+    padding-bottom: 5rem;
 }
 
 div.root {
-    margin: 2rem auto 20rem auto;
+    margin: 2rem auto 2rem auto;
     width: fit-content;
     min-width: 40%;
-    padding: 3rem;
-    padding-bottom: 5rem;
+    padding: 3rem 3rem 0 3rem;
     min-height: 100%;
 }
 
