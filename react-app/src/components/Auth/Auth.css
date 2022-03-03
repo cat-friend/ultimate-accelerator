@@ -1,16 +1,12 @@
 #auth {
-    max-height: 75vh;
+    max-height: 60%;
     display: grid;
-    grid-template-rows: 1fr 1.5fr;
+    grid-template-rows: 1fr auto;
     grid-template-columns: 1fr 2px 1fr;
     grid-template-areas:
     "a a a"
     "b c d";
     gap: 0;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     align-items: center;
     margin: 0 auto;
 }

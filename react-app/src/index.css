@@ -15,18 +15,19 @@ body {
     font-family: 'Franklin Gothic Medium', Helvetica, sans-serif;
     font-size: 1rem;
     color: white;
-    padding-bottom: 4rem;
     overflow-x: hidden;
 }
 
 #body {
     width: 100%;
+    padding-bottom: 5rem;
 }
 
 div.root {
-    margin: 2rem auto 4rem auto;
-    max-width: 80%;
-    padding: 3rem;
+    margin: 2rem auto 2rem auto;
+    width: fit-content;
+    min-width: 40%;
+    padding: 3rem 3rem 0 3rem;
     min-height: 100%;
 }
 
@@ -35,11 +36,10 @@ a {
     text-decoration: none;
     color: red;
     font-size: 1.1rem;
-
 }
 
 a:hover {
-    color: white;
+    color: black;
     font-size: 1.2rem;
     text-decoration: underline
 }
@@ -113,17 +113,18 @@ div.right-corner-b {
 .content-container {
     border: 1px #999 solid;
     border-radius: 2px;
-    box-shadow: inset 0 0 .2em #666;
+    box-shadow: inset 0 0 .2rem #999;
     display: flex;
     justify-content: center;
     padding: .25em;
-    background-color: rgba(255, 255, 255, .85);
+    background-color: white;
     margin-bottom: 2rem;
     width: 100%;
 }
 
 div.content {
-    background-color: rgba(0, 0, 0, .75);
+    /* background-color: rgba(0, 0, 0, .75); */
+    background-color: #333;
     border-radius: 2px;
     display: block;
     margin: 0;
@@ -148,7 +149,7 @@ div.auth-content {
 h1, h2, h3 {
     padding: 0;
     margin: 0;
-    font-family: 'tekosemibold';
+    font-family: 'teko';
     color: white;
 }
 
@@ -159,7 +160,7 @@ h2 {
 }
 
 h2.success {
-    color: red;
+    color: rgb(255, 198, 243);
 }
 
 h3 {
@@ -201,10 +202,13 @@ button {
 }
 
 .button-div {
-    width: 50%;
+    width: 100%;
     margin: 1rem auto 0rem auto;
     display: flex;
     justify-content: space-around;
+}
+.button-div > div {
+    display: block;
 }
 
 

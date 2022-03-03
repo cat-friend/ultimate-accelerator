@@ -3,7 +3,7 @@ from app.models import db, ChallengeType
 
 # Adds a demo user, you can add other users here if you want
 def seed_challenge_types():
-    types = ["Ability", "Collect", "DMG", "Finish", "Health", "KKDA", "Loot", "Play", "Purchase", "Scan", "Survive", "Win"]
+    types = ["Ability", "Collect", "DMG", "Finish", "Health", "KKDA", "Loot", "Play", "Purchase", "Scan", "Survive"]
 
     for type in types:
         entry = ChallengeType(type=type)

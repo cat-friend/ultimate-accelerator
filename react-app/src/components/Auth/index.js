@@ -1,18 +1,16 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import './Auth.css'
-import { NavLink } from 'react-router-dom';
 import title from "./title.svg"
 
 function Auth() {
     const user = useSelector(state => state.session.user);
-    const notUser = !user;
 
     return (<>
         {!user && (< div id="auth" >
-            <img src={title} id="a" />
+            <img src={title} id="a" alt="Ultimate Accelerator title"/>
             <div className="auth-forms" id='b'>
                 <SignUpForm />
             </div>

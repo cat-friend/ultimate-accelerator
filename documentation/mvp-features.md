@@ -1,5 +1,3 @@
-# MVP Features List
-
 ## 1. New account creation, log in, log out, and demo login
 * Users can sign up, log in, and log out.
 * Users can use a demo log in to try the site.

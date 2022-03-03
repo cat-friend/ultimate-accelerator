@@ -2,10 +2,10 @@
 
 <a href="https://ultimate-accelerator.herokuapp.com">Live Site</a>  |  <a href="https://github.com/cat-friend/ultimate-accelerator/wiki"> Project Wiki</a> | <a href="https://github.com/cat-friend/ultimate-accelerator/issue">Report Bug</a>
 
-Ultimate Accelerator is a website where users can create, study, and share decks of cards for studying computer science topics. This website was designed as a Week 20 project as part of App Academy's 24-week Full Stack Software Engineering Bootcamp.
+**Ultimate Accelerator** is a companion application for Respawn Entertainment's video game [_Apex Legends_](https://www.respawn.com/games/apex-legends). In _Apex Legends_, the Battle Pass is a system that rewards players for accruing stars and "leveling up" their Battle Pass. Players can unlock character cosmetics and in-game currency by advancing their Battle Pass levels. Battle Pass levels increase when the player has accrued enough stars to "level up." Players earn stars by completing daily, weekly, and/or event challenges. This full stack application was designed as my capstone project for App Academy's 24-week Full Stack Software Engineering Bootcamp. It is my best work to date and the, ahem, _apex_ of my abilities.
 
 ## Technologies Used
-[Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | [Node.js](https://nodejs.org/en/) | [Flask](https://flask.palletsprojects.com/en/2.0.x/) | [React](https://reactjs.org/) | [Redux](https://redux.js.org/) | [SQLAlchemy](https://www.sqlalchemy.org/) | [PostgreSQL](https://www.postgresql.org/)
+[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | [Node.js](https://nodejs.org/en/) | [Flask](https://flask.palletsprojects.com/en/2.0.x/) | [React](https://reactjs.org/) | [Redux](https://redux.js.org/) | [SQLAlchemy](https://www.sqlalchemy.org/) | [PostgreSQL](https://www.postgresql.org/) | [Docker](https://www.docker.com/)
 
 ## Launching Locally
 
@@ -13,7 +13,6 @@ Ultimate Accelerator is a website where users can create, study, and share decks
  - [Node.js 16.13.1](https://nodejs.org/en/)
 
 ### Getting Started
-# CHANGE THIS
 
 1. Clone the project repository
 ```
@@ -31,7 +30,7 @@ Ultimate Accelerator is a website where users can create, study, and share decks
    SECRET_KEY=<<YOUR-SECRET_KEY>>
    DATABASE_URL=postgresql://ultimate_accel_dev:<<PASSWORD>>@localhost/ultimate_accel_db
 ```
-4. Set up your PostgreSQL user, password, and database. Make sure that it matches your .env file!
+4. Set up your PostgreSQL user (`ultimate_accel_dev`), password, and database (`ultimate_accel_db`). Make sure that these values match your .env file!
 
 5. Access your `pipenv shell`, migrate your database, seed your database, and run your flask app with the following commands:
 ```
@@ -47,6 +46,12 @@ flask seed all
 flask run
 ```
 
+   In the future, if you'd like to unseed and reseed the database, you can run
+   ```
+   flask seed reset
+   ```
+   Caution! This will delete _all_ data in your database.
+
 5. To run the React App, `cd` into the `react-app` directory, install `react-app`, and then start React:
  ```
     cd react-app
@@ -59,109 +64,112 @@ flask run
  ```
 
 ## Ultimate Accelerator In Action
-Full user stories for the initial development phase are available on the [User Stories](https://github.com/cat-friend/ultimate-accelerator/wiki/User-Stories-&-Acceptance-Criteria) section of the project wiki. A feature list for the initial development phase is available on the [Feature List](https://github.com/cat-friend/ultimate-accelerator/wiki/Feature-List) section of the project [wiki](https://github.com/cat-friend/ultimate-accelerator/wiki).
+Full user stories for the initial development phase are available on the [User Stories](https://github.com/cat-friend/ultimate-accelerator/wiki/2.-User-Stories-&-Features-Acceptance-Criteria) section of the project wiki. A feature list for the initial development phase is available on the [Feature List](https://github.com/cat-friend/ultimate-accelerator/wiki/1.-MVP-Features-List) section of the project [wiki](https://github.com/cat-friend/ultimate-accelerator/wiki).
 
 ### User Registration and Authentication
-New users can register for an account by entering a unique username, email address, and password.
+New users can register for an account by entering a unique username, email address, and password. If the username is already taken, the email address provided is invalid or already in use, and/or the password is invalid, the user will be notified of the specific errors.
 
-## < Add images >
-
-
-Existing users can log in to their account by submitting their credentials via the login form.
-
-## < Add images >
+<p align='center'>
+<img src='https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/sign_up.jpg' alt='sign up form'>
+</p>
 
 
-Authenticated users can edit their profile biography
+Existing users can log in to their account by submitting their credentials via the login form. If there are any issues with their provided credentials, the user will be notified of the errors. Users may log out of their account by clicking the **LOGOUT** button on the site-wide navigation bar.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/log_in.jpg" alt='log in form'>
+</p>
 
-Users may log out of their account by clicking the **LOGOUT** button on the site-wide navigation bar.
 
-## < Add images >
 
 ### Creating and Modifying A Battlepass Challenge
 
-Authenticated users can create a battlepass challenge with a title, mode type, and value (stars).
+Authenticated users can create a battlepass challenge with a title, mode type, and value (stars). If there are any issues with their provided data, the user will be notified of the errors.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/challenge_add.jpg" alt='add challenge form'>
+</p>
 
-All users can view the deck information. Authenticated users can view the deck or add the deck to their study list. Deck owners can only edit or delete their own decks.
+All authenticated users can view the other user's Battle Pass Challenge information.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/challenge_other_user.jpg" alt='sign up form'>
+</p>
 
-When modifying a deck, an Edit form will populate with the deck's current information. A user may add, edit, or delete cards, and can edit the deck title and description. If a user would like to delete the card, or discard their changes, they may do so from the edit form.
+When viewing their own Battle Pass Challenges, they may add, edit, or delete challenges. Users can edit the status of their Battle Pass Challenge to a status of `open`, `in progress`, or `completed`.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/challenge_edit.jpg" alt='how editing a battle pass challenge looks to a user'>
+</p>
 
 
 ### Creating and Modifying A Clan
 
-Users can create one (1) clan in a.
+If a user is not currently a member of a clan, they may create one (1) clan.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_create.jpg" alt='clan creation form'>
+</p>
 
-Users can add and remove clan from their.
+If a user is an administrator of a clan, `EDIT` and `DELETE` buttons will appear when they navigate to their clan's page.
 
-## < Add images >
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_admin.jpg" alt='edit and delete buttons appear for clan administrators'>
+</p>
 
-Users can edit and delete their clan.
+If a user is currently a member of a clan, they will be notified that they are unable to create a clan.
 
-## < Add images >
-
-## < Add images >
-
-
-<!-- ### Adding and Removing Decks From Their `Study List` Collection
-
-Users can mark any as to-be-studied and it will be added to their to-study collection.
-
-Users can remove any from their to-study collection.
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_no_create.jpg" alt='message that informs user why they are unable to create a clan'>
+</p>
 
 
+If a user does not wish to create their own clan, they can join a clan by navigating to that clan's page. Their name will immediately appear in the clan members list.
 
-### Search By Tags
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_join.jpg" alt='joining a clan'>
+</p>
 
-Each deck will have its tags visible. Users can click on the tags to do a search of all decks with that tag.
+If a user would like to leave their clan, they can do so by navigating to their clan's page and clicking the `Leave` button. Their name will immediately disappear from the clan members list.
 
-## < Add images >
-
-
-## Technical Implementation
-### Database Design
-The full database schema is available to view [on dbdiagram.io](https://dbdiagram.io/d/61f9be7485022f4ee524eb6f), or as a [list of tables on the Database Schema page](https://github.com/cat-friend/ultimate-accelerator/wiki/Database-Schema) of the wiki. -->
-
+<p align='center'>
+<img src="https://raw.githubusercontent.com/cat-friend/ultimate-accelerator/main/documentation/README-images/clan_leave.jpg" alt='leave button'>
+</p>
 
 
 ### Frontend Routes
-# COME BACK AND FIX LINKS
-All frontend routes are covered in detail on the [Fronted Routes section of our project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/Frontend-Routes). Frontend routes were designed to enable users access to basic functionality such as registration, authentication, viewing decks, accessing cards, searching by tags, and viewing their profile page where users can manage their decks.
+All frontend routes are covered in detail on the [Fronted Routes section of the project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/3.-Frontend-Routes). Frontend routes were designed to enable users access to basic functionality such as:
+   * registration;
+   * authentication;
+   * viewing, creating, updating and deleting challenges;
+   * viewing, creating, updating, deleting, joining, and leaving clans (groups).
 
 ### API Routes
-# COME BACK AND FIX LINKS
-All frontend routes are covered in detail on the [API Routes section of our project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/API-Documentation). API routes were designed for users to interact with a page without being redirected.
-   </br>
+All frontend routes are covered in detail on the [API Routes section of the project wiki](https://github.com/cat-friend/ultimate-accelerator/wiki/4.-API-Documentation). API routes were designed for users to interact with a page without being redirected.
 
-## Developmental Challenges
+
+## Feature Highlights
 
 ### Data analysis
-
-### Optimization calculator
-
+Battle Pass Challenges are based on play modes, playable characters (legends), or weapons and challenge types. I analyzed relevant raw data from _Apex Legends_ in order to programmatically identify, categorize, and create new database entries based on user input challenge data. For a full write up, see [Data Analysis](https://github.com/cat-friend/ultimate-accelerator/wiki/7.-Battle-Pass-Challenges-Data-Analysis).
 
 
-### Future Improvements
+### Accessibility
+Almost all text on website has a contrast ratio of at least 7.00 and is sized in `rem` units.
 
-#### **Site-wide Responsiveness**
 
-The website is currently functional on all screen sizes, but is styled for screens greater than 900 px in width. New smaller-scale layouts will be implemented so that the user experience on mobile or tablet devices is comparable to the desktop user experience.
+## Future Improvements
 
-### Improved Maintainability
-
-#### **Normalization of Tag Names**
-
-Currently, all tags are stored as rows on a database. If a user types in a new tag for a deck that is not already in the database, a new tag is created. However, the addition of new tags does not currently account for spelling or capitalization variations. For example, JavaScript, Javascript, and JS would all be stored in the database as separate tags. In order to support future functionality, tag names may undergo a pattern-matching normalization process or third-party name API validation to prevent duplicate entries within our database.
+### Automatic Battle Pass Challenge Data Archival
+Battle Passes are season-specific. A season in _Apex Legends_ usually lasts about 11 weeks. Prior to the launch of a new season, Respawn announces when the next season will launch and end. A future feature will be database archival of season data, creation of a new season's challenges database, and updating user statistics.
 
 ## Acknowledgements
 
-Big thank you to everyone who's been with me along the way. Specifically, Blueberry Smith for helping me simplify my database schema, Dolph Squid for the inspiration, Green Pepper for dependable moral support, Suhayl & Co for everything.
+Big thank you to everyone who's been with me along the way. Specifically:
+* Blueberry Smith for helping me simplify my database schema and raw SQL queries _after_ I've struggled with it. Giving me room to grow is the best gift;
+* Dolph Squid for the inspiration and for being a great frond, good job I love you!;
+* Green Pepper for dependable moral support;
+* Yellow Yoshi for our late night talks and the Shrek gifs;
+* Austin M. for giving me the courage to _finally_ pivot out of science after two (2) years of indecision;
+* Barry Mattern for being the best cohort lead that anyone in the history of bootcamps anywhere could ever ask for. Thank you for your compassion and understanding. October 2022 cohort they will soon know how lucky they are to have you as their cohort leader;
+* Suhayl & Co for everything--this bootcamp has been one of the most enjoyable experiences of my life and you played a huge role in that. I wake up every morning and open palm slam a giant smile on my face because I am blessed with the opportunity to learn and develop alongside very compassionate, talented, and intelligent people and to make you laugh so hard via Discord that you have to shut your camera off in Zoom.

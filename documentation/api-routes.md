@@ -1,10 +1,6 @@
-# API Documentation
-
-## API-Routes
-
 This web app uses the following API routes to dynamically update the page.
 
-### Challenges
+## Challenges
 * An authenticated user may create a new challenge and view all challenges that they have created without causing a refresh/redirect.
     * `GET /api/challenges`
     * `POST /api/challenges`
@@ -14,7 +10,7 @@ This web app uses the following API routes to dynamically update the page.
     * `PUT /api/challenges/:challengeId`
     * `DELETE /api/challenges/:challengeId`
 
-### Clans
+## Clans
 * Users can view all clans. They can also create at most one (1) new clan.
     * `GET /api/clans`
     * `POST /api/clans`
@@ -24,7 +20,7 @@ This web app uses the following API routes to dynamically update the page.
     * `PUT /api/clans/:clanId`
     * `DELETE /api/clans/:clanId`
 
-### Comments
+## Comments
 * An authenticated user can view all messages on a clan's page.
     * `GET /api/clans/:clanId/comments`
 
@@ -33,7 +29,7 @@ This web app uses the following API routes to dynamically update the page.
     * `PUT /api/comments/:commentId`
     * `DELETE /api/commments/:commentId`
 
-### User Profile Page
+## User Profile Page
 * An authenticated user may view and edit their  profile page without causing a refresh/redirect.
     * `GET /api/:userId`
     * `PUT /api/:userId`

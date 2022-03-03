@@ -27,14 +27,12 @@ const SignUpForm = () => {
         if (response?.errors) {
           setErrors(response.errors);
           response.errors.forEach((ele) => {
-            console.log("ele", ele);
             if (ele.includes("Username")) setUsername("");
             if (ele.includes("address")) setEmail("");
           });
           setPassword("");
           setRepeatPassword("");
           errors.forEach((ele) => {
-            console.log("ele", ele);
             if (ele.includes("Username")) setUsername("");
             if (ele.includes("address")) setEmail("");
           });
@@ -42,22 +40,6 @@ const SignUpForm = () => {
         }
         else if (!response?.errors) return;
       })
-  };
-
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
   };
 
   if (user) {
@@ -72,7 +54,7 @@ const SignUpForm = () => {
     </div>
     <div className='content-container'>
       <div className='auth-content'>
-        <form className='form' onSubmit={onSignUp}>
+        <form className='form' onSubmit={(e) => onSignUp(e)}>
           <div>
             {errors.map((error, ind) => (
               <div key={ind} className="errors">{error}</div>
@@ -82,38 +64,38 @@ const SignUpForm = () => {
             placeholder='Username'
             type='text'
             name='username'
-            onChange={updateUsername}
+            onChange={(e) => setUsername(e.target.value)}
             value={username}
-            className='input'
-          ></input>
+            className='input'>
+          </input>
           <input
             placeholder='Email'
             type='text'
             name='email'
-            onChange={updateEmail}
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
-            className='input'
-          ></input>
+            className='input'>
+          </input>
           <input
             placeholder='Password'
             type='password'
             name='password'
-            onChange={updatePassword}
+            onChange={(e) => setPassword(e.target.value)}
             value={password}
-            className='input'
-          ></input>
+            className='input'>
+          </input>
           <input
             placeholder='Verify Password'
             type='password'
             name='repeat_password'
-            onChange={updateRepeatPassword}
+            onChange={(e) => setRepeatPassword(e.target.value)}
             value={repeatPassword}
             required={true}
-            className='input'
-          ></input>
+            className='input'>
+          </input>
           <div className='button-div'>
             <button className='form-button' type='submit'>Sign Up</button>
-            <button type='button' onClick={demoLogin}>Demo</button>
+            <button type='button' onClick={() => demoLogin()}>Demo</button>
           </div>
         </form>
       </div>

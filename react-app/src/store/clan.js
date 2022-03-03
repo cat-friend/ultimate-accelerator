@@ -144,7 +144,6 @@ export const addClanMember = (payload) => async (dispatch) => {
     const data = await response.json()
     const members = {};
     if (response.ok) {
-        console.log("data", data)
         data.clan_members.forEach((ele) => {
             members[ele.user_id] = { user_id: ele.user_id, username: ele.member.username }
         });

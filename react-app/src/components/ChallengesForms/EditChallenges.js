@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Modal } from '../../context/Modal';
-import ErrorBody from "./ErrorBody";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./ChallengesForms.css"
 import * as challengeActions from "../../store/challenge"
 
 
 function EditChallenge({ challengeId }) {
-    const [showModal, setShowModal] = useState(true)
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch();
     const status = useSelector(state => state.challenges[challengeId].status)
