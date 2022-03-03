@@ -1,8 +1,7 @@
-from flask import Blueprint, session, request, make_response
-from app.models import UserChallenge, User, db, UserChallengeDimensionTable
+from flask import Blueprint, request
+from app.models import UserChallenge, db, UserChallengeDimensionTable
 from app.forms import ChallengeForm, EditChallengeForm, DeleteChallengeForm
-from sqlalchemy.sql import func
-from flask.json import jsonify
+
 challenge_routes = Blueprint('challenges', __name__)
 
 
@@ -36,7 +35,6 @@ def all_challenges():
     route returns JSON data needed for the front end. Else, the route
     returns error messages.
     """
-    print("INSIDE THE CHALLENGE ROUTE INSIDE THE POST ROUTE")
     form = ChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -64,12 +62,20 @@ def all_challenges():
 
 @challenge_routes.route('/<int:id>', methods=['GET'])
 def get_challenge(id):
+    """
+    Responds to GET requests with a specific user's UserChallenge.
+    """
     user_challenge = UserChallenge.query.get(id)
     return user_challenge.to_dict()
 
 
 @challenge_routes.route('/<int:id>', methods=['PUT'])
 def edit_challenge(id):
+    """
+    PUT requests send in a new status for the UserChallenge.
+    Function updates the entry in the database and returns
+    the entry with the new status.
+    """
     form = EditChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
