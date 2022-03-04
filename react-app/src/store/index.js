@@ -5,12 +5,16 @@ import challengeReducer from './challenge';
 import clanReducer from './clan';
 import userReducer from './user';
 import accelerateReducer from './accelerate';
+import legendReducer from './legend';
+import weaponReducer from './weapon';
 
 const rootReducer = combineReducers({
   session,
   user: userReducer,
   challenges: challengeReducer,
   clans: clanReducer,
+  legends: legendReducer,
+  weapons: weaponReducer,
   accelerate: accelerateReducer
 });
 

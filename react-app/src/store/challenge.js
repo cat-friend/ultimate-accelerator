@@ -1,6 +1,6 @@
 const LOAD_CHALLENGES = "ultimate-accelerator/challenges/LOAD_CHALLENGES";
-const ADD_CHALLENGE = "ultimate-accelerator/challenges/ADD_CHALLENGE"
-const DELETE_CHALLENGE = "ultimate-accelerator/challenges/DEL_CHALLENGE"
+const ADD_CHALLENGE = "ultimate-accelerator/challenges/ADD_CHALLENGE";
+const DELETE_CHALLENGE = "ultimate-accelerator/challenges/DEL_CHALLENGE";
 
 
 const loadAllChallenges = challenges => ({
