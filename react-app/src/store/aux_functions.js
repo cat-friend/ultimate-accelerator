@@ -7,11 +7,12 @@ function accelArray(payload) {
         weaponMode2Max: [],
         weaponMode3Max: [],
     }
-    console.log("payload", payload)
+    const outbound_payload = [];
     if (payload.legend_mode_1.length) {
         let i = 0;
         do {
             result.legendMode1Max.push(payload.legend_mode_1[i])
+            // outbound_payload.push({mode_id: 1, type: legend_id, type_id: payload.legend_mode_1[i].legend_id})
             i++;
         }
         while (i < payload.legend_mode_1.length && payload.legend_mode_1[i - 1].sum === payload.legend_mode_1[i].sum);
@@ -64,3 +65,7 @@ function accelArray(payload) {
 }
 
 export default accelArray;
+
+export const matchingUserChallenges = () => {
+
+}

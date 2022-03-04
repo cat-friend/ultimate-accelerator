@@ -58,7 +58,7 @@ function AddChallengeForm() {
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
-        
+
         return dispatch(challengeActions.createChallenge(payload))
             .then(
                 (response) => {
@@ -77,110 +77,112 @@ function AddChallengeForm() {
             );
     };
 
-    return (<>
-        <div className="header-parent">
-            <div className="left-corner"></div>
-            <div className="header-child"><h2>Add a Challenge</h2></div>
-            <div className="right-corner"></div>
-        </div>
-        <div className="bp-container">
-            <div className="content">
-                <h3>How to Enter Battle Pass Data</h3>
-                <p>For an entry to be considered valid, the Battle Pass challenges that the user inputs must follow the structure of the example Battle Pass challenges: </p>
-                <ul>
-                    <li>The challenge must have some diction that indicate the challenge type. For example, "deal <i>damage</i>," "<i>play</i> as Gibletta";</li>
-                    <li>Weapons or weapon classes and legend(s) are OPTIONAL but, in order to register correctly must exist in <i>Apex Legends</i></li>
-                    <li>Play mode (Battle Royale, Arena, or LTM) must be indicated;</li>
-                    <li>Value, or number of stars that the challenge is worth, must also be indicated.</li>
-                </ul>
+    return (
+        <>
+            <div className="header-parent">
+                <div className="left-corner"></div>
+                <div className="header-child"><h2>Add a Challenge</h2></div>
+                <div className="right-corner"></div>
             </div>
-            <div className="content">
-                {errors.map((error, idx) => (
-                    <p key={idx} className="errors">{error}</p>
-                ))}
-                <form onSubmit={handleSubmit}>
-                    <div className="add-challenge-container">
-                        <div>
-                            <label htmlFor="user_challenge-input">Battlepass Challenge</label>
-                            <input
-                                type="text"
-                                placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                name="user-challenge-input"
-                                id="user-challenge-input"
-                                required
-                                minLength="10"
-                                data-lpignore="true"
-                            />
-                        </div>
-                        <div className="modes">
-                            {modeNames.map((ele, index) => {
-                                return (
-                                    <div key={index}>
-                                        <div className="label-top" key={index}>
-                                            <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
-                                                {ele}
-                                            </label>
-                                        </div>
-                                        <div className="checkbox-bottom" key={`box-${index}`}>
-                                            <input
-                                                type="checkbox"
-                                                id={`mode-checkbox-${index}`}
-                                                key={`mode-checkbox-${index}`}
-                                                name={ele}
-                                                checked={checked[index]}
-                                                onChange={() => handleCheckboxOnChange(index)}
-                                            />
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                        <div className="stars">
-                            <div className="label-top">
-                                <label htmlFor="stars">
-                                    Stars
-                                </label>
+            <div className="bp-container">
+                <div className="content">
+                    <h3>How to Enter Battle Pass Data</h3>
+                    <p>For an entry to be considered valid, the Battle Pass challenges that the user inputs must follow the structure of the example Battle Pass challenges: </p>
+                    <ul>
+                        <li>The challenge must have some diction that indicate the challenge type. For example, "deal <i>damage</i>," "<i>play</i> as Gibletta";</li>
+                        <li>Weapons or weapon classes and legend(s) are OPTIONAL but, in order to register correctly must exist in <i>Apex Legends</i></li>
+                        <li>Play mode (Battle Royale, Arena, or LTM) must be indicated;</li>
+                        <li>Value, or number of stars that the challenge is worth, must also be indicated.</li>
+                    </ul>
+                </div>
+                <div className="content">
+                    {errors.map((error, idx) => (
+                        <p key={idx} className="errors">{error}</p>
+                    ))}
+                    <form onSubmit={handleSubmit}>
+                        <div className="add-challenge-container">
+                            <div>
+                                <label htmlFor="user_challenge-input">Battlepass Challenge</label>
+                                <input
+                                    type="text"
+                                    placeholder="Ex: Deal 5000 damage as Bangalore, Seer, or Rampart"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    name="user-challenge-input"
+                                    id="user-challenge-input"
+                                    required
+                                    minLength="10"
+                                    data-lpignore="true"
+                                />
                             </div>
-                            <input
-                                type="number"
-                                min={1}
-                                max={10}
-                                onChange={(e) => setStars(e.target.value)}
-                                placeholder="5"
-                                id="stars"
-                                size="4"
-                                required
-                                value={stars} />
+                            <div className="modes">
+                                {modeNames.map((ele, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <div className="label-top" key={index}>
+                                                <label htmlFor={`mode-checkbox-${index}`} key={`label-${index}`}>
+                                                    {ele}
+                                                </label>
+                                            </div>
+                                            <div className="checkbox-bottom" key={`box-${index}`}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={`mode-checkbox-${index}`}
+                                                    key={`mode-checkbox-${index}`}
+                                                    name={ele}
+                                                    checked={checked[index]}
+                                                    onChange={() => handleCheckboxOnChange(index)}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            <div className="stars">
+                                <div className="label-top">
+                                    <label htmlFor="stars">
+                                        Stars
+                                    </label>
+                                </div>
+                                <input
+                                    type="number"
+                                    min={1}
+                                    max={10}
+                                    onChange={(e) => setStars(e.target.value)}
+                                    placeholder="5"
+                                    id="stars"
+                                    size="4"
+                                    required
+                                    value={stars} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="button-div">
-                        <button
-                            type="button"
-                            onClick={() => {
-                                history.push("/tutorial")
-                            }}
-                        >TUTORIAL</button>
-                        <button
-                            type="submit"
-                            disabled={showSuccess}>
-                            {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setInput("");
-                                setChecked(new Array(3).fill(true));
-                                setStars("")
-                            }}>
-                            RESET
-                        </button>
+                        <div className="button-div">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    history.push("/tutorial")
+                                }}
+                            >TUTORIAL</button>
+                            <button
+                                type="submit"
+                                disabled={showSuccess}>
+                                {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setInput("");
+                                    setChecked(new Array(3).fill(true));
+                                    setStars("")
+                                }}>
+                                RESET
+                            </button>
 
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </>);
+        </>
+    );
 }
 
 export default AddChallengeForm;
