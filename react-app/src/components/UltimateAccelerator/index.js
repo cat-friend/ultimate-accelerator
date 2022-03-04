@@ -86,7 +86,7 @@ function UltimateAccelerator() {
     if (accelData.weaponMode1Max?.length) {
         let flavorText;
         const stringArray = weaponsString(accelData.weaponMode1Max, weaponsDict)
-        if (stringArray[0] > 1) flavorText = "Play as any of these characters: " + stringArray[1];
+        if (stringArray[0] > 1) flavorText = "Use any of these weapons: " + stringArray[1];
         else flavorText = "Play as " + stringArray[1];
         battleRoyale.push(
             <div className="bp-container">
@@ -106,7 +106,7 @@ function UltimateAccelerator() {
     if (accelData.weaponMode2Max?.length) {
         let flavorText;
         const stringArray = weaponsString(accelData.weaponMode2Max, weaponsDict)
-        if (stringArray[0] > 1) flavorText = "Play as any of these characters: " + stringArray[1];
+        if (stringArray[0] > 1) flavorText = "Use any of these weapons: " + stringArray[1];
         else flavorText = "Play as " + stringArray[1];
         arena.push(
             <div className="bp-container">
@@ -126,7 +126,7 @@ function UltimateAccelerator() {
     if (accelData.weaponMode3Max?.length) {
         let flavorText;
         const stringArray = legendsString(accelData.legendMode3Max, legendsDict)
-        if (stringArray[0] > 1) flavorText = "Play as any of these characters: " + stringArray[1];
+        if (stringArray[0] > 1) flavorText = "Use any of these weapons: " + stringArray[1];
         else flavorText = "Play as " + stringArray[1];
         LTM.push(
             <div className="bp-container">
