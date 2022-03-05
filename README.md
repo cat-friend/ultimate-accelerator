@@ -166,7 +166,7 @@ Battle Passes are season-specific. A season in _Apex Legends_ usually lasts abou
 ## Acknowledgements
 
 Big thank you to everyone who's been with me along the way. Specifically:
-* Blueberry Smith for helping me simplify my database schema and raw SQL queries _after_ I've struggled with it. Giving me room to grow (and carrying me to plat) is the best gift;
+* Blueberry Smith for helping me _after_ I've struggled. Giving me room to grow (and carrying me to plat) is the best gift;
 * Dolph Squid for the inspiration and for being a great frond, good job I love you!;
 * Green Pepper for dependable moral support;
 * Yellow Yoshi for our late night talks and the Shrek gifs;
