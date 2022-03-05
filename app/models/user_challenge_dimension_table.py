@@ -28,3 +28,8 @@ class UserChallengeDimensionTable(db.Model):
             'value': self.value,
             'created_at': self.created_at,
         }
+
+    def to_accel(self):
+        return {
+            'challenge': self.user_challenges.to_dict()
+        }

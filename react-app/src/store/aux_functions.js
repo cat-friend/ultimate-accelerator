@@ -1,4 +1,5 @@
 function accelArray(payload) {
+    console.log("backend payload", payload)
     const result = {
         legendMode1Max: [],
         legendMode2Max: [],
@@ -65,7 +66,3 @@ function accelArray(payload) {
 }
 
 export default accelArray;
-
-export const matchingUserChallenges = () => {
-
-}

@@ -86,8 +86,8 @@ function UltimateAccelerator() {
     if (accelData.weaponMode1Max?.length) {
         let flavorText;
         const stringArray = weaponsString(accelData.weaponMode1Max, weaponsDict)
-        if (stringArray[0] > 1) flavorText = "Use any of these weapons: " + stringArray[1];
-        else flavorText = "Play as " + stringArray[1];
+        if (stringArray[0] > 1) flavorText = "...and use any of these weapons: " + stringArray[1];
+        else flavorText = "...and use this weapon " + stringArray[1];
         battleRoyale.push(
             <div className="bp-container">
                 <div className="content">
@@ -106,8 +106,8 @@ function UltimateAccelerator() {
     if (accelData.weaponMode2Max?.length) {
         let flavorText;
         const stringArray = weaponsString(accelData.weaponMode2Max, weaponsDict)
-        if (stringArray[0] > 1) flavorText = "Use any of these weapons: " + stringArray[1];
-        else flavorText = "Play as " + stringArray[1];
+        if (stringArray[0] > 1) flavorText = "...and use any of these weapons: " + stringArray[1];
+        else flavorText = "...and use this weapon " + stringArray[1];
         arena.push(
             <div className="bp-container">
                 <div className="content">
@@ -125,16 +125,16 @@ function UltimateAccelerator() {
     }
     if (accelData.weaponMode3Max?.length) {
         let flavorText;
-        const stringArray = legendsString(accelData.legendMode3Max, legendsDict)
-        if (stringArray[0] > 1) flavorText = "Use any of these weapons: " + stringArray[1];
-        else flavorText = "Play as " + stringArray[1];
+        const stringArray = weaponsString(accelData.weaponMode3Max, weaponsDict)
+        if (stringArray[0] > 1) flavorText = "...and use any of these weapons: " + stringArray[1];
+        else flavorText = "...and use this weapon " + stringArray[1];
         LTM.push(
             <div className="bp-container">
                 <div className="content">
-                    {accelData && accelData.legendMode3Max?.length && (
+                    {accelData && accelData.weaponMode3Max?.length && (
                         <>
                             <h3>
-                                <p>{flavorText}</p> to earn {accelData?.legendMode3Max[0].sum} max possible stars.
+                                <p>{flavorText}</p> to earn {accelData?.weaponMode3Max[0].sum} max possible stars.
                             </h3>
 
                         </>

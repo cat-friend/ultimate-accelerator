@@ -1,4 +1,6 @@
 from flask import Blueprint, request
+from jinja2 import Undefined
+from sqlalchemy import null
 from app.models import UserChallenge, db, UserChallengeDimensionTable
 from app.forms import ChallengeForm, EditChallengeForm, DeleteChallengeForm
 
@@ -105,26 +107,12 @@ def delete_challenge(id):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+
 @challenge_routes.route('/accelerate/<int:id>', methods=['GET'])
 def calc_max(id):
-    print("IN ROUTE IN ROUTE IOAJTOSIDJG;ISKDJGKLS")
     modes = [1, 2, 3]
     result = {}
     for mode in modes:
-        query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as results, \
-                             userchallengesdimensiontable.weapon_id, \
-                             userchallengesdimensiontable.mode_id\
-                             FROM userchallenges\
-                             JOIN userchallengesdimensiontable\
-                             ON userchallenges.id=userchallengesdimensiontable.user_challenge_id\
-                             WHERE userchallenges.user_id=:user_id AND\
-                             NOT userchallenges.status=\'completed\'\
-                             AND weapon_id > 0\
-                             AND mode_id=:mode_id\
-                             GROUP BY userchallengesdimensiontable.weapon_id,\
-                             userchallengesdimensiontable.mode_id\
-                             ORDER BY results desc;', {'user_id': id, 'mode_id': mode}).fetchall()
-        result[f"weapon_mode_{mode}"] = [{"sum": row.results, "weapon_id": row.weapon_id, "mode_id": row.mode_id} for row in query_result]
         query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as results, \
                              userchallengesdimensiontable.legend_id, \
                              userchallengesdimensiontable.mode_id\
@@ -138,5 +126,88 @@ def calc_max(id):
                              GROUP BY userchallengesdimensiontable.legend_id,\
                              userchallengesdimensiontable.mode_id\
                              ORDER BY results desc;', {'user_id': id, 'mode_id': mode}).fetchall()
-        result[f"legend_mode_{mode}"] = [{"sum": row.results, "legend_id": row.legend_id, "mode_id": row.mode_id} for row in query_result]
+        result[f"legend_mode_{mode}"] = [
+            {"sum": row.results, "legend_id": row.legend_id, "mode_id": row.mode_id} for row in query_result]
+        lookup_list = []
+        result[f"legend_mode_{mode}_challenges"] = []
+        for row in query_result:
+            lookup_list.append(row.legend_id)
+        for legend_id in lookup_list:
+            query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
+                userchallenges.id, \
+                userchallengesdimensiontable.mode_id, \
+                userchallenges.challenge_label, \
+                userchallenges.status \
+                FROM userchallenges \
+                JOIN userchallengesdimensiontable \
+	            ON userchallenges.id=userchallengesdimensiontable.user_challenge_id \
+                WHERE userchallenges.user_id=:user_id AND \
+                NOT userchallenges.status=\'completed\' \
+                AND legend_id=:legend_id \
+                AND mode_id=:mode_id \
+                GROUP BY userchallenges.id, \
+                userchallengesdimensiontable.mode_id \
+                ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'legend_id': legend_id}).fetchall()
+            result[f"legend_mode_{mode}_challenges"].append(
+            {legend_id: [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
+                         for row in query_result]})
+
+
+        query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as results, \
+                             userchallengesdimensiontable.weapon_id, \
+                             userchallengesdimensiontable.mode_id\
+                             FROM userchallenges\
+                             JOIN userchallengesdimensiontable\
+                             ON userchallenges.id=userchallengesdimensiontable.user_challenge_id\
+                             WHERE userchallenges.user_id=:user_id AND\
+                             NOT userchallenges.status=\'completed\'\
+                             AND weapon_id > 0\
+                             AND mode_id=:mode_id\
+                             GROUP BY userchallengesdimensiontable.weapon_id,\
+                             userchallengesdimensiontable.mode_id\
+                             ORDER BY results desc;', {'user_id': id, 'mode_id': mode}).fetchall()
+        result[f"weapon_mode_{mode}"] = [
+            {"sum": row.results, "weapon_id": row.weapon_id, "mode_id": row.mode_id} for row in query_result]
+        lookup_list = []
+        result[f"weapon_mode_{mode}_challenges"] = []
+        for row in query_result:
+            lookup_list.append(row.weapon_id)
+        for weapon_id in lookup_list:
+            query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
+                userchallenges.id, \
+                userchallengesdimensiontable.mode_id, \
+                userchallenges.challenge_label, \
+                userchallenges.status \
+                FROM userchallenges \
+                JOIN userchallengesdimensiontable \
+	            ON userchallenges.id=userchallengesdimensiontable.user_challenge_id \
+                WHERE userchallenges.user_id=:user_id AND \
+                NOT userchallenges.status=\'completed\' \
+                AND weapon_id=:weapon_id \
+                AND mode_id=:mode_id \
+                GROUP BY userchallenges.id, \
+                userchallengesdimensiontable.mode_id \
+                ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'weapon_id': weapon_id}).fetchall()
+            result[f"weapon_mode_{mode}_challenges"].append(
+            {weapon_id: [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
+                         for row in query_result]})
+
+        query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
+                        userchallenges.id, \
+                        userchallengesdimensiontable.mode_id, \
+                        userchallenges.challenge_label, \
+                        userchallenges.status \
+                    FROM userchallenges \
+                    JOIN userchallengesdimensiontable \
+	                    ON userchallenges.id=userchallengesdimensiontable.user_challenge_id \
+	                    WHERE userchallenges.user_id=:user_id AND \
+	                    NOT userchallenges.status=\'completed\' \
+	                    AND weapon_id IS NULL \
+                        AND legend_id IS NULL \
+                        AND mode_id=:mode_id \
+	                    GROUP BY userchallenges.id, \
+                        userchallengesdimensiontable.mode_id \
+                        ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode}).fetchall()
+        result[f"misc_mode_{mode}_challenges"] = [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
+                                                  for row in query_result]
     return result
