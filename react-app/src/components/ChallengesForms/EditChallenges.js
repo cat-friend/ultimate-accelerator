@@ -7,11 +7,11 @@ import * as challengeActions from "../../store/challenge"
 function EditChallenge({ challengeId }) {
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch();
-    const status = useSelector(state => state.challenges[challengeId].status)
+    const status = useSelector(state => state.challenges[challengeId]?.status)
     const [newStatus, setNewStatus] = useState(status);
     const [showSuccess, setShowSuccess] = useState(false);
     const curr_user_id = useSelector(state => state.session.user.id)
-    const challenge_user_id = useSelector(state => state.challenges[challengeId].user_id)
+    const challenge_user_id = useSelector(state => state.challenges[challengeId]?.user_id)
     const handleUpdate = (e) => {
         setErrors([]);
         const payload = {

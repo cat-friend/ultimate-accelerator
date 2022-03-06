@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getAllLegends } from "../../store/legend";
 import { getAllWeapons } from "../../store/weapon";
 import { legendsString, weaponsString } from "./aux_functions"
+import AccelChallengesBrowser from "./AccelChallengesBrowser";
 
 function UltimateAccelerator() {
     const { userId } = useParams();
@@ -22,137 +23,292 @@ function UltimateAccelerator() {
     const battleRoyale = [];
     const arena = [];
     const LTM = [];
-    if (accelData.legendMode1Max?.length && legendsDict && weaponsDict) {
-        let flavorText;
-        const stringArray = legendsString(accelData.legendMode1Max, legendsDict)
-        if (stringArray[0] > 1) flavorText = "Play as any of these characters: " + stringArray[1];
-        else flavorText = "Play as " + stringArray[1];
+    if (!isUser) return (
+        <div className="bp-container">
+            <div className="content">
+                <h1>HEY, you're not allowed here!</h1>
+            </div>
+        </div>
+    )
+    let mode1Sum = 0;
+    let mode2Sum = 0;
+    let mode3Sum = 0;
+    if (accelData.mode_1?.legends?.max?.length && legendsDict && weaponsDict) {
+        let maxCalcText
+        const stringArray = legendsString(accelData.mode_1.legends.max, legendsDict)
+        if (stringArray[0] > 1) maxCalcText = `Play as any of these characters to earn ${accelData.mode_1.legends.max[0].sum} stars: ` + stringArray[1];
+        else maxCalcText = `Play as any of this character to earn ${accelData.mode_1.legends.max[0].sum} stars: ` + stringArray[1];
         battleRoyale.push(
-            <div className="bp-container">
-                <div className="content">
-                    {accelData && accelData.legendMode1Max?.length && (
-                        <>
-                            <h3>
-                                <p>{flavorText}</p> to earn {accelData?.legendMode1Max[0].sum} max possible stars.
-                            </h3>
-
-                        </>
-                    )}
-                </div>
+            <div className="content" key="mode1leg">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText}
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_1?.legends?.challenges} />
+                    </>
+                )}
             </div>
         )
-    }
-    if (accelData.legendMode2Max?.length) {
-        let flavorText;
-        const stringArray = legendsString(accelData.legendMode2Max, legendsDict)
-        if (stringArray[0] > 1) flavorText = "Play as any of these characters: " + stringArray[1];
-        else flavorText = "Play as " + stringArray[1];
-        arena.push(
-            <div className="bp-container">
-                <div className="content">
-                    {accelData && accelData.legendMode2Max?.length && (
-                        <>
-                            <h3>
-                                <p>{flavorText}</p> to earn {accelData?.legendMode2Max[0].sum} max possible stars.
-                            </h3>
-
-                        </>
-                    )}
-                </div>
-            </div>
-        )
+        mode1Sum += accelData.mode_1.legends.max[0].sum;
     }
 
-    if (accelData.legendMode3Max?.length) {
-        let flavorText;
-        const stringArray = legendsString(accelData.legendMode3Max, legendsDict)
-        if (stringArray[0] > 1) flavorText = "Play as any of these characters: " + stringArray[1];
-        else flavorText = "Play as " + stringArray[1];
-        LTM.push(
-            <div className="bp-container">
-                <div className="content">
-                    {accelData && accelData.legendMode3Max?.length && (
-                        <>
-                            <h3>
-                                <p>{flavorText}</p> to earn {accelData?.legendMode3Max[0].sum} max possible stars.
-                            </h3>
+    if (accelData.mode_1?.weapons?.max?.length && legendsDict && weaponsDict) {
+        let maxCalcText;
+        const stringArray = weaponsString(accelData.mode_1.weapons.max, weaponsDict)
 
-                        </>
-                    )}
-                </div>
-            </div>
-        )
-    }
-    if (accelData.weaponMode1Max?.length) {
-        let flavorText;
-        const stringArray = weaponsString(accelData.weaponMode1Max, weaponsDict)
-        if (stringArray[0] > 1) flavorText = "...and use any of these weapons: " + stringArray[1];
-        else flavorText = "...and use this weapon " + stringArray[1];
+        if (accelData.mode_1.legends.max.length)
+            if (accelData.mode_1.misc.challenges.length > 1) {
+                maxCalcText = `... and use any of these weapons to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+            else {
+                maxCalcText = `... and use this weapon to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+        else {
+            if (accelData.mode_1.misc.challenge.length > 1) {
+                maxCalcText = `Use any of these weapons to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+            else maxCalcText = `Use this weapon to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
+        }
         battleRoyale.push(
-            <div className="bp-container">
-                <div className="content">
-                    {accelData && accelData.weaponMode1Max?.length && (
-                        <>
-                            <h3>
-                                <p>{flavorText}</p> to earn {accelData?.weaponMode1Max[0].sum} max possible stars.
-                            </h3>
-
-                        </>
-                    )}
-                </div>
+            <div className="content" key="mode1weap">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {accelData?.mode_1.weapons.max[0].sum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_1.weapons.challenges} />
+                    </>
+                )}
             </div>
         )
+        mode1Sum += accelData.mode_1.weapons.max[0].sum;
     }
-    if (accelData.weaponMode2Max?.length) {
-        let flavorText;
-        const stringArray = weaponsString(accelData.weaponMode2Max, weaponsDict)
-        if (stringArray[0] > 1) flavorText = "...and use any of these weapons: " + stringArray[1];
-        else flavorText = "...and use this weapon " + stringArray[1];
+
+    if (accelData.mode_1?.misc?.challenges?.length) {
+        let miscSum = 0;
+        let maxCalcText;
+        if (accelData.mode_1.weapons.max.length || accelData.mode_1.legends.max.length)
+            if (accelData.mode_1.misc.challenges.length > 1) {
+                maxCalcText = "... and complete these"
+            }
+            else {
+                maxCalcText = "... and complete this"
+            }
+        else {
+            if (accelData.mode_1.misc.challenge.length > 1) {
+                maxCalcText = "Complete these"
+            }
+            else maxCalcText = "Complete this"
+        }
+        accelData.mode_1.misc.challenges.forEach((ele) => miscSum += ele.sum);
+        battleRoyale.push(
+            <div className="content" key="mode1misc">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {miscSum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_1.misc.challenges} />
+                    </>
+                )}
+            </div>
+        )
+        mode1Sum += miscSum
+    }
+    if (accelData.mode_2?.legends?.max?.length && legendsDict && weaponsDict) {
+        let maxCalcText
+        const stringArray = legendsString(accelData.mode_2.legends.max, legendsDict)
+        if (stringArray[0] > 1) maxCalcText = "Play as any of these characters: " + stringArray[1];
+        else maxCalcText = "Play as " + stringArray[1];
         arena.push(
-            <div className="bp-container">
-                <div className="content">
-                    {accelData && accelData.weaponMode2Max?.length && (
-                        <>
-                            <h3>
-                                <p>{flavorText}</p> to earn {accelData?.weaponMode2Max[0].sum} max possible stars.
-                            </h3>
-
-                        </>
-                    )}
-                </div>
+            <div className="content" key="mode2leg">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {accelData?.mode_2.legends.max[0].sum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_2?.legends?.challenges} />
+                    </>
+                )}
             </div>
         )
+        mode2Sum += accelData.mode_2.legends.max[0].sum;
     }
-    if (accelData.weaponMode3Max?.length) {
-        let flavorText;
-        const stringArray = weaponsString(accelData.weaponMode3Max, weaponsDict)
-        if (stringArray[0] > 1) flavorText = "...and use any of these weapons: " + stringArray[1];
-        else flavorText = "...and use this weapon " + stringArray[1];
+
+    if (accelData.mode_2?.weapons?.max?.length && legendsDict && weaponsDict) {
+        let maxCalcText;
+        const stringArray = weaponsString(accelData.mode_2.weapons.max, weaponsDict)
+        if (accelData.mode_2.legends.max.length)
+            if (accelData.mode_2.misc.challenges.length > 1) {
+                maxCalcText = `... and use any of these weapons to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+            else {
+                maxCalcText = `... and use this weapon to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+        else {
+            if (accelData.mode_2.misc.challenge.length > 1) {
+                maxCalcText = `Use any of these weapons to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+            else maxCalcText = `Use this weapon to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
+        }
+        arena.push(
+            <div className="content" key="mode2weap">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {accelData?.mode_2.weapons.max[0].sum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_2?.weapons?.challenges} />
+                    </>
+                )}
+            </div>
+        )
+        mode2Sum += accelData.mode_2.weapons.max[0].sum;
+    }
+
+    if (accelData.mode_2?.misc?.challenges?.length) {
+        let miscSum = 0;
+        let maxCalcText;
+        if (accelData.mode_2.weapons.max.length || accelData.mode_2.legends.max.length)
+            if (accelData.mode_2.misc.challenges.length > 1) {
+                maxCalcText = "... and complete these"
+            }
+            else {
+                maxCalcText = "... and complete this"
+            }
+        else {
+            if (accelData.mode_2.misc.challenge.length > 1) {
+                maxCalcText = "Complete these"
+            }
+            else maxCalcText = "Complete this"
+        }
+        accelData.mode_2.misc.challenges.forEach((ele) => miscSum += ele.sum);
+        arena.push(
+            <div className="content" key="mode1misc">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {miscSum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_2.misc.challenges} />
+                    </>
+                )}
+            </div>
+        )
+        mode2Sum += miscSum
+    }
+
+    if (accelData.mode_3?.legends?.max?.length && legendsDict && weaponsDict) {
+        let maxCalcText
+        const stringArray = legendsString(accelData.mode_3.legends.max, legendsDict)
+        if (stringArray[0] > 1) maxCalcText = "Play as any of these characters: " + stringArray[1];
+        else maxCalcText = "Play as " + stringArray[1];
         LTM.push(
-            <div className="bp-container">
-                <div className="content">
-                    {accelData && accelData.weaponMode3Max?.length && (
-                        <>
-                            <h3>
-                                <p>{flavorText}</p> to earn {accelData?.weaponMode3Max[0].sum} max possible stars.
-                            </h3>
-
-                        </>
-                    )}
-                </div>
+            <div className="content" key="mode3leg">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {accelData?.mode_3.legends.max[0].sum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_3?.legends?.challenges} />
+                    </>
+                )}
             </div>
         )
+        mode3Sum += accelData.mode_3.legends.max[0].sum;
     }
+
+    if (accelData.mode_3?.weapons?.max?.length && legendsDict && weaponsDict) {
+        let maxCalcText;
+        const stringArray = weaponsString(accelData.mode_3.weapons.max, weaponsDict)
+        if (accelData.mode_3.legends.max.length)
+            if (accelData.mode_3.misc.challenges.length > 1) {
+                maxCalcText = `... and use any of these weapons to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+            else {
+                maxCalcText = `... and use this weapon to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+        else {
+            if (accelData.mode_3.misc.challenge.length > 1) {
+                maxCalcText = `Use any of these weapons to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
+            }
+            else maxCalcText = `Use this weapon to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
+        }
+        LTM.push(
+            <div className="content" key="mode3weap">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {accelData?.mode_3.weapons.max[0].sum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_3?.weapons?.challenges} />
+                    </>
+                )}
+            </div>
+        )
+        mode3Sum += accelData.mode_3.weapons.max[0].sum;
+    }
+
+    if (accelData.mode_3?.misc?.challenges?.length) {
+        let miscSum = 0;
+        let maxCalcText;
+        if (accelData.mode_3.weapons.max.length || accelData.mode_3.legends.max.length)
+            if (accelData.mode_3.misc.challenges.length > 1) {
+                maxCalcText = "... and complete these"
+            }
+            else {
+                maxCalcText = "... and complete this"
+            }
+        else {
+            if (accelData.mode_3.misc.challenges.length > 1) {
+                maxCalcText = "Complete these"
+            }
+            else maxCalcText = "Complete this"
+        }
+        accelData.mode_3.misc.challenges.forEach((ele) => miscSum += ele.sum);
+        LTM.push(
+            <div className="content" key="mode3misc">
+                {accelData && (
+                    <>
+                        <h3>
+                            {maxCalcText} to earn {miscSum} stars.
+                        </h3>
+                        <AccelChallengesBrowser challenges={accelData.mode_3.misc.challenges} />
+                    </>
+                )}
+            </div>
+        )
+        mode3Sum += miscSum
+    }
+
     return (
-        <>
+        <>{mode1Sum && (<>
             <div className="header-parent">
                 <div className="left-corner"></div>
-                <div className="header-child"><h2>Battle Royale</h2></div>
+                <div className="header-child"><h2>Battle Royale: {mode1Sum} possible stars</h2></div>
                 <div className="right-corner"></div>
             </div>
-            <div>BR: {battleRoyale}</div>
-            <div>Arenas: {arena}</div>
-            <div>LTM: {LTM}</div>
+            <div className="bp-container">{battleRoyale}</div></>)}
+            {mode2Sum && (
+                <>
+                    <div className="header-parent">
+                        <div className="left-corner-b"></div>
+                        <div className="header-child-b"><h2>Arena: {mode2Sum} possible stars</h2></div>
+                        <div className="right-corner-b"></div>
+                    </div>
+                    <div className="bp-container">{arena}</div></>
+            )}
+            {mode3Sum && (
+                <>
+                    <div className="header-parent">
+                        <div className="left-corner"></div>
+                        <div className="header-child"><h2>LTM: {mode3Sum} possible stars</h2></div>
+                        <div className="right-corner"></div>
+                    </div>
+                    <div className="bp-container">{LTM}</div></>
+            )}
+
 
         </>
     )

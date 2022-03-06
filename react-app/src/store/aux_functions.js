@@ -1,5 +1,5 @@
-function accelArray(payload) {
-    console.log("backend payload", payload)
+ function accelArray(payload) {
+     console.log("payload", payload )
     const result = {
         mode_1: {
             legends: {
@@ -43,7 +43,7 @@ function accelArray(payload) {
     }
     if (payload.legend_mode_1.length) {
         const sum = payload.legend_mode_1[0].sum
-        result.mode_2.legends.max = payload.legend_mode_2.filter((ele) => {
+        result.mode_1.legends.max = payload.legend_mode_1.filter((ele) => {
             return ele.sum === sum;
         })
         payload.legend_mode_1_challenges = Object.values(payload.legend_mode_1_challenges);
@@ -127,11 +127,3 @@ function accelArray(payload) {
 }
 
 export default accelArray;
-
-function challengesSet(payload) {
-    const set = new Set(payload);
-    const setVals = set.values();
-    const outbound = [];
-    for (const val of setVals) outbound.push(val);
-    return outbound;
-}
