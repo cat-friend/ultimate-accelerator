@@ -52,9 +52,9 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText}
                         </h3>
-                        <ul>
+                        <ul className="accelInfo">
                             {stringArray.map((ele, i) => (
-                                <li key={`${i}`}>
+                                <li className="accelInfo" key={`${i}`}>
                                     {ele}
                                 </li>))}
                         </ul>
@@ -90,9 +90,9 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText}
                         </h3>
-                        <ul>
+                        <ul className="accelInfo">
                             {stringArray.map((ele, i) => (
-                                <li key={`${i}`}>
+                                <li className="accelInfo" key={`${i}`}>
                                     {ele}
                                 </li>))}
                         </ul>
@@ -152,9 +152,9 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText}
                         </h3>
-                        <ul>
+                        <ul className="accelInfo">
                             {stringArray.map((ele, i) => (
-                                <li key={`${i}`}>
+                                <li className="accelInfo" key={`${i}`}>
                                     {ele}
                                 </li>))}
                         </ul>
@@ -189,9 +189,9 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText}
                         </h3>
-                        <ul>
+                        <ul className="accelInfo">
                             {stringArray.map((ele, i) => (
-                                <li key={`${i}`}>
+                                <li className="accelInfo" key={`${i}`}>
                                     {ele}
                                 </li>))}
                         </ul>
@@ -249,9 +249,9 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText}
                         </h3>
-                        <ul>
+                        <ul className="accelInfo">
                             {stringArray.map((ele, i) => (
-                                <li key={`${i}`}>
+                                <li className="accelInfo" key={`${i}`}>
                                     {ele}
                                 </li>))}
                         </ul>
@@ -286,9 +286,9 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText}
                         </h3>
-                        <ul>
+                        <ul className="accelInfo">
                             {stringArray.map((ele, i) => (
-                                <li key={`${i}`}>
+                                <li className="accelInfo" key={`${i}`}>
                                     {ele}
                                 </li>))}
                         </ul>

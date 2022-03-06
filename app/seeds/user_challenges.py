@@ -3,38 +3,38 @@ from app.models import db, UserChallenge, UserChallengeDimensionTable
 
 def seed_user_challenge():
     labels = [
-        "Deal 1000 damage with pistols - 10 - 2",
-        "Play 12 matches as Bangalore, Mad Maggie, or Wattson - 10 - 123",
-        "Deal 5000 damage as Pathfinder, Horizon, or Revenant - 10 - 1",
-        "Get 40 knockdowns with sub machine guns - 10 - 2",
-        "Get 20 kills as Wraith, Fuse, or Mirage - 5 - 2",
-        "Survive 30 ring closings - 5 - 123",
-        "Finish in the top-3 1 time getting at least 3 kills, knockdowns or assists - 5 - 1",
-        "Neurolink: Scan 10 enemies as Crypto - 2 - 123",
-        "Deal 10000 damage with assault rifles - 10 - 2",
-        "Play 12 matches as Gibraltar, Octane, or Loba - 10 - 123",
-        "Deal 5000 damage as Pathfinder, Mad Maggie, or Mirage - 10 - 1",
-        "Get 30 knockdowns with sub machine guns - 10 - 1",
-        "Win 3 matches as Bangalore, Ash, or Caustic - 5 - 2",
-        "Deal 500 melee damage - 5 - 123",
-        "Get 50 kills or assists 5 - 1",
-        "Play 10 matches - 2 - 123",
-        "Deal 3500 damage with shotguns - 10 - 2",
-        "Play 12 matches as Bangalore, Octane, or Mirage - 10 - 123",
-        "Deal 5000 damage as Wraith, Wattson, or Fuse 10 - 1",
-        "Get 25 knockdowns with sniper rifles - 10 - 1",
-        "Get 20 kills as Lifeline, Mad Maggie or Caustic - 5 - 2",
-        "Finish in the top-3 1 time getting at least 3 kills, knockdowns, or assists 5- 1",
-        "Deal 5000 damage 5 - 1",
-        "Loot 50 epic items - 2 - 1",
-        "Deal 3500 damage with marksman weapons - 10 - 1",
-        "Play 12 matches as Bloodhound, Fuse, or Caustic 10 - 123",
-        "Deal 5000 damage as Gibraltar, Valkyrie, or Crypto - 10 -1 ",
-        "Get 40 knockdowns with sub machine guns 10 2",
-        "Get 15 kills as Wraith, Rampart or Wattson 5 1",
-        "Get 5 Battle Royale Top 10 finishes or Arenas wins 5 12",
-        "Win 1 match getting at least five kills, knockdowns, or assists 5 2",
-        "Deal 1000 damage before the end of the first shrink 2 1"
+        "Deal 1000 damage with pistols",
+        "Play 12 matches as Bangalore, Mad Maggie, or Wattson",
+        "Deal 5000 damage as Pathfinder, Horizon, or Revenant",
+        "Get 40 knockdowns with sub machine guns",
+        "Get 20 kills as Wraith, Fuse, or Mirage",
+        "Survive 30 ring closings",
+        "Finish in the top-3 1 time getting at least 3 kills, knockdowns or assists",
+        "Neurolink: Scan 10 enemies as Crypto",
+        "Deal 10000 damage with assault rifles",
+        "Play 12 matches as Gibraltar, Octane, or Loba",
+        "Deal 5000 damage as Pathfinder, Mad Maggie, or Mirage",
+        "Get 30 knockdowns with sub machine guns",
+        "Win 3 matches as Bangalore, Ash, or Caustic",
+        "Deal 500 melee damage",
+        "Get 50 kills or assists",
+        "Play 10 matches",
+        "Deal 3500 damage with shotguns",
+        "Play 12 matches as Bangalore, Octane, or Mirage",
+        "Deal 5000 damage as Wraith, Wattson, or Fuse",
+        "Get 25 knockdowns with sniper rifles",
+        "Get 20 kills as Lifeline, Mad Maggie or Caustic",
+        "Finish in the top-3 1 time getting at least 3 kills, knockdowns, or assists",
+        "Deal 5000 damage",
+        "Loot 50 epic items",
+        "Deal 3500 damage with marksman weapons",
+        "Play 12 matches as Bloodhound, Fuse, or Caustic",
+        "Deal 5000 damage as Gibraltar, Valkyrie, or Crypto",
+        "Get 40 knockdowns with sub machine guns",
+        "Get 15 kills as Wraith, Rampart or Wattson",
+        "Get 5 Battle Royale Top 10 finishes or Arenas wins",
+        "Win 1 match getting at least five kills, knockdowns, or assists",
+        "Deal 1000 damage before the end of the first shrink"
     ]
     value = [
         10,
@@ -104,9 +104,8 @@ def seed_user_challenge():
         4,
         3
     ]
-    user_ids = [1]
-        # user_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-        #         11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+    user_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+                16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
     weapons = [
         [23, 29, 36],
         [None],
@@ -220,30 +219,14 @@ def seed_user_challenge():
             db.session.add(entry)
             db.session.commit()
             for weapon in weapons[i]:
-                for mode in modes[i]:
-                    for legend in legends[i]:
+                for legend in legends[i]:
+                    for mode in modes[i]:
                         dim_table_entry = UserChallengeDimensionTable(
                             user_challenge_id=entry.id, weapon_id=weapon, mode_id=mode,
                             legend_id=legend, value=value[i]
                         )
                         db.session.add(dim_table_entry)
                         db.session.commit()
-
-    # for user_id in user_ids:
-    #     for i in range(0, len(labels)):
-    #         entry = UserChallenge(
-    #             user_id=user_id, challenge_label=labels[i], challenge_type_id=challenge_types[i],
-    #             status="open", value=value[i])
-    #         db.session.add(entry)
-    #         db.session.commit()
-    #         for weapon in weapons[i]:
-    #             for legend in legends[i]:
-    #                 dim_table_entry = UserChallengeDimensionTable(
-    #                     user_challenge_id=entry.id, weapon_id=weapon, mode_id=1,
-    #                     legend_id=legend, value=value[i]
-    #                 )
-    #                 db.session.add(dim_table_entry)
-    #                 db.session.commit()
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY

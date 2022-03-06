@@ -38,7 +38,7 @@ div[class$="label-1"] {
     color: white;
 }
 
-ul {
+ul.accelInfo {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -46,7 +46,7 @@ ul {
     margin-bottom: 1rem;
 }
 
-li {
+li.accelInfo {
     list-style: none;
     font-size: 1.2rem;
     margin: .5rem;
