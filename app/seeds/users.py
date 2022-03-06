@@ -6,23 +6,23 @@ def seed_users():
     demo = User(
         username='Demo', email='demo@aa.io', password='password')
     dolph = User(
-        username='Dolph Squid', bio="FRIEND OF HUMANITY", email="henry@ron.ron", password="computer")
+        username='Dolph Squid', bio="FRIEND OF HUMANITY", email="henry@ron.ron", password="password")
     gp = User(
-        username='Green Pepper', email='green@pep.ski', password="ilovelemon")
+        username='Green Pepper', email='green@pep.ski', password="password")
     normie = User(
         username='normie', email='normie@aa.io', password='password')
     yoshi = User(
-        username='Yellow Yoshi', email="yellow@yos.hi", password="charsiubao")
+        username='Yellow Yoshi', email="yellow@yos.hi", password="password")
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password')
     trauma = User(
-        username='trauma', email='aimgod@cs.go', password='pewpewpew')
+        username='trauma', email='aimgod@cs.go', password='password')
     durrneez = User(
-        username='costco $1.50 hot dog', bio="(WITH REFILL)", email='hotdog@hot.dog', password='dollarfiddy')
+        username='costco $1.50 hot dog', bio="(WITH REFILL)", email='hotdog@hot.dog', password='password')
     umbasa = User(
-        username='umbasa nova', email='rampart@ramp.art', password='sheila4ever')
+        username='umbasa nova', email='rampart@ramp.art', password='password')
     bloobs = User(username="Blueberry Smith",
-                  email="blue@ber.ry", password="hellotomywife")
+                  email="blue@ber.ry", password="password")
     caustic1 = User(username="gaspapi01",
                     email="gaspapi01@gas.gas", password="password")
     caustic2 = User(username="gaspapi02",
@@ -51,32 +51,32 @@ def seed_users():
                 email="gibraltar3@email.ema", password="password")
     gib4 = User(username="Majordome-o",
                 email="gibraltar4@email.ema", password="password")
-    gib5 = User(username="gibby like gif",
+    gib5 = User(username="gibby like giffy with b's",
                 email="gibraltar5@email.ema", password="password")
     a1 = User(username="CAMEROFF",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="Su-halo",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="Yu Ra",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="FionahhHH",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="DANIEL",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="Petur",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="chrithy",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="jennJENN",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="gibby like gif",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="gibby like gif",
-              email="user1@cat.cat", password="password")
-    a1 = User(username="gibby like gif",
-              email="user1@cat.cat", password="password")
+              email="cameroff@cat.cat", password="password")
+    a2 = User(username="Su-halo",
+              email="suhalo@cat.cat", password="password")
+    a3 = User(username="Yu Ra",
+              email="yura@cat.cat", password="password")
+    a4 = User(username="FionahhHH",
+              email="fiona@cat.cat", password="password")
+    a5 = User(username="DANIEL",
+              email="daniel@cat.cat", password="password")
+    a6 = User(username="Petur",
+              email="peter@cat.cat", password="password")
+    a7 = User(username="chrithy",
+              email="christy@cat.cat", password="password")
+    a8 = User(username="jennJENN",
+              email="jenn@cat.cat", password="password")
+    a9 = User(username="derniz",
+              email="derniz@cat.cat", password="password")
+    a10 = User(username="brybry",
+              email="brybry@cat.cat", password="password")
+    a11 = User(username="JUSTAWN",
+              email="jsweeney@cat.cat", password="password")
 
-    for datum in [demo, dolph, gp, normie, yoshi, durrneez, trauma, umbasa, bobbie, bloobs, caustic1, caustic2, caustic3, caustic4, caustic5, loba1, loba2, loba3, loba4, loba5, gib1, gib2, gib3, gib4, gib5]:
+    for datum in [demo, dolph, gp, normie, yoshi, durrneez, trauma, umbasa, bobbie, bloobs, caustic1, caustic2, caustic3, caustic4, caustic5, loba1, loba2, loba3, loba4, loba5, gib1, gib2, gib3, gib4, gib5, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11]:
         db.session.add(datum)
     db.session.commit()
 
