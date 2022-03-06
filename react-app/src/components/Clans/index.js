@@ -27,6 +27,7 @@ function Clans() {
                     </div>
                     <div className="content-container">
                         <div className="content">
+                            Clans are the same thing as groups, just with a name that resonates better with gamers. In your clan, you can post messages to your buddies, frenemies, that-person-whom-you-tolerate-but-only-when-nobody-else-is-on-to-play-with-and-even-then-just-barely and favorite people to play Apex with--because we're pretending that Discord doesn't exist.<br/><br/>
                             Looks like you're currently a member of a clan. Unfortunately, you can't create a clan while you're currently a member of one.
                         </div>
                     </div>

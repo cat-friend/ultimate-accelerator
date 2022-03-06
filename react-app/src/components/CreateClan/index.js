@@ -42,6 +42,7 @@ function CreateClan() {
         </div>
         <div className="content-container">
             <div className="content clans">
+            Clans are the same thing as groups, just with a name that resonates better with gamers. In your clan, you can post messages to your buddies, frenemies, that-person-whom-you-tolerate-but-only-when-nobody-else-is-on-to-play-with-and-even-then-just-barely and favorite people to play Apex with--because we're pretending that Discord doesn't exist.<br/><br/>
                 {errors.map((error, idx) => (
                     <p key={idx} className="errors">{error}</p>
                 ))}
