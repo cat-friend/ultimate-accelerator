@@ -58,7 +58,7 @@ function UltimateAccelerator() {
                                     {ele}
                                 </li>))}
                         </ul>
-                        <AccelChallengesBrowser challenges={accelData.mode_1?.legends?.challenges} />
+                        <AccelChallengesBrowser challenges={Object.values(accelData.mode_1.legends.challenges)} />
                     </>
                 )}
             </div>
@@ -96,7 +96,7 @@ function UltimateAccelerator() {
                                     {ele}
                                 </li>))}
                         </ul>
-                        <AccelChallengesBrowser challenges={accelData.mode_1.weapons.challenges} />
+                        <AccelChallengesBrowser challenges={Object.values(accelData.mode_1.weapons.challenges)} />
                     </>
                 )
                 }
@@ -158,7 +158,7 @@ function UltimateAccelerator() {
                                     {ele}
                                 </li>))}
                         </ul>
-                        <AccelChallengesBrowser challenges={accelData.mode_2?.legends?.challenges} />
+                        <AccelChallengesBrowser challenges={Object.values(accelData.mode_2?.legends?.challenges)} />
                     </>
                 )}
             </div>
@@ -195,7 +195,7 @@ function UltimateAccelerator() {
                                     {ele}
                                 </li>))}
                         </ul>
-                        <AccelChallengesBrowser challenges={accelData.mode_2?.weapons?.challenges} />
+                        <AccelChallengesBrowser challenges={Object.values(accelData.mode_2?.weapons?.challenges)} />
                     </>
                 )}
             </div>
@@ -255,7 +255,7 @@ function UltimateAccelerator() {
                                     {ele}
                                 </li>))}
                         </ul>
-                        <AccelChallengesBrowser challenges={accelData.mode_3?.legends?.challenges} />
+                        <AccelChallengesBrowser challenges={Object.values(accelData.mode_3?.legends?.challenges)} />
                     </>
                 )}
             </div>
@@ -292,7 +292,7 @@ function UltimateAccelerator() {
                                     {ele}
                                 </li>))}
                         </ul>
-                        <AccelChallengesBrowser challenges={accelData.mode_3?.weapons?.challenges} />
+                        <AccelChallengesBrowser challenges={Object.values(accelData.mode_3?.weapons?.challenges)} />
                     </>
                 )}
             </div>
