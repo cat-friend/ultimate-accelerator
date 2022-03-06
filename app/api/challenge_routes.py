@@ -129,7 +129,7 @@ def calc_max(id):
         result[f"legend_mode_{mode}"] = [
             {"sum": row.results, "legend_id": row.legend_id, "mode_id": row.mode_id} for row in query_result]
         lookup_list = []
-        result[f"legend_mode_{mode}_challenges"] = []
+        result[f"legend_mode_{mode}_challenges"] = {}
         for row in query_result:
             lookup_list.append(row.legend_id)
         for legend_id in lookup_list:
@@ -148,10 +148,9 @@ def calc_max(id):
                 GROUP BY userchallenges.id, \
                 userchallengesdimensiontable.mode_id \
                 ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'legend_id': legend_id}).fetchall()
-            result[f"legend_mode_{mode}_challenges"].append(
-            {legend_id: [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
-                         for row in query_result]})
-
+            for row in query_result:
+                result[f"legend_mode_{mode}_challenges"][row.id] = {"sum": row.sum, "id": row.id,
+                                                                    "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
 
         query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as results, \
                              userchallengesdimensiontable.weapon_id, \
@@ -169,7 +168,7 @@ def calc_max(id):
         result[f"weapon_mode_{mode}"] = [
             {"sum": row.results, "weapon_id": row.weapon_id, "mode_id": row.mode_id} for row in query_result]
         lookup_list = []
-        result[f"weapon_mode_{mode}_challenges"] = []
+        result[f"weapon_mode_{mode}_challenges"] = {}
         for row in query_result:
             lookup_list.append(row.weapon_id)
         for weapon_id in lookup_list:
@@ -188,9 +187,9 @@ def calc_max(id):
                 GROUP BY userchallenges.id, \
                 userchallengesdimensiontable.mode_id \
                 ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'weapon_id': weapon_id}).fetchall()
-            result[f"weapon_mode_{mode}_challenges"].append(
-            {weapon_id: [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
-                         for row in query_result]})
+            for row in query_result:
+                result[f"weapon_mode_{mode}_challenges"][row.id] = {"sum": row.sum, "id": row.id,
+                                                                    "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
 
         query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
                         userchallenges.id, \
@@ -209,5 +208,5 @@ def calc_max(id):
                         userchallengesdimensiontable.mode_id \
                         ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode}).fetchall()
         result[f"misc_mode_{mode}_challenges"] = [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
-                                                  for row in query_result]
+                                                  ]
     return result
