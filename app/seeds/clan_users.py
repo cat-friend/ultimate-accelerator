@@ -13,6 +13,7 @@ def seed_clan_users():
     for i in range(0, len(clans)):
         for user in user_lists[i]:
             entry = ClanUsers(clan_id=clans[i], user_id=user)
+            db.session.add(entry)
     db.session.commit()
 
 
