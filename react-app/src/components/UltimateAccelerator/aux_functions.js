@@ -4,6 +4,7 @@ export const legendsString = (maxData, legendsDict) => {
     const payload = [];
     const legendsSetValues = legendsSet.values();
     for (const legend of legendsSetValues) payload.push(legend);
+    payload.sort();
     return payload;
 }
 
@@ -14,5 +15,6 @@ export const weaponsString = (maxData, weaponsDict) => {
     const payload = [];
     const weaponsSetValues = weaponsSet.values();
     for (const weapon of weaponsSetValues) payload.push(weapon);
+    payload.sort();
     return payload;
 }
