@@ -133,7 +133,7 @@ def calc_max(id):
             max = result[f"legend_mode_{mode}"][0]["sum"]
             result[f"legend_mode_{mode}"] = list(filter(lambda ele: ele["sum"] == max, result[f"legend_mode_{mode}"]))
             lookup_list = []
-            result[f"legend_mode_{mode}_challenges"] = []
+            result[f"legend_mode_{mode}_challenges"] = {}
             for row in result[f"legend_mode_{mode}"]:
                 lookup_list.append(row["legend_id"])
             for legend_id in lookup_list:
@@ -153,11 +153,11 @@ def calc_max(id):
                     userchallengesdimensiontable.mode_id \
                     ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'legend_id': legend_id}).fetchall()
                 for row in query_result:
-                    result[f"legend_mode_{mode}_challenges"].append({"sum": row.sum, "id": row.id,
-                                                                        "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status})
+                    result[f"legend_mode_{mode}_challenges"][row.id] = {"sum": row.sum, "id": row.id,
+                                                                        "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
         except:
             result[f"legend_mode_{mode}"] = []
-            result[f"legend_mode_{mode}_challenges"] = []
+            result[f"legend_mode_{mode}_challenges"] = {}
 
         query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as results, \
                              userchallengesdimensiontable.weapon_id, \
@@ -178,7 +178,7 @@ def calc_max(id):
             max = result[f"weapon_mode_{mode}"][0]["sum"]
             result[f"weapon_mode_{mode}"] = list(filter(lambda ele: ele["sum"] == max, result[f"weapon_mode_{mode}"]))
             lookup_list = []
-            result[f"weapon_mode_{mode}_challenges"] = []
+            result[f"weapon_mode_{mode}_challenges"] = {}
             for row in result[f"weapon_mode_{mode}"]:
                 lookup_list.append(row["weapon_id"])
             for weapon_id in lookup_list:
@@ -198,12 +198,12 @@ def calc_max(id):
                     userchallengesdimensiontable.mode_id \
                     ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'weapon_id': weapon_id}).fetchall()
                 for row in query_result:
-                    result[f"weapon_mode_{mode}_challenges"].append({"sum": row.sum, "id": row.id,
-                                                                    "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status})
+                    result[f"weapon_mode_{mode}_challenges"][row.id] = {"sum": row.sum, "id": row.id,
+                                                                    "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
         except:
             result[f"weapon_mode_{mode}"] = []
-            result[f"weapon_mode_{mode}_challenges"] = []
-        
+            result[f"weapon_mode_{mode}_challenges"] = {}
+
         query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
                         userchallenges.id, \
                         userchallengesdimensiontable.mode_id, \
