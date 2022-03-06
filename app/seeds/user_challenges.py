@@ -229,6 +229,21 @@ def seed_user_challenge():
                         db.session.add(dim_table_entry)
                         db.session.commit()
 
+    # for user_id in user_ids:
+    #     for i in range(0, len(labels)):
+    #         entry = UserChallenge(
+    #             user_id=user_id, challenge_label=labels[i], challenge_type_id=challenge_types[i],
+    #             status="open", value=value[i])
+    #         db.session.add(entry)
+    #         db.session.commit()
+    #         for weapon in weapons[i]:
+    #             for legend in legends[i]:
+    #                 dim_table_entry = UserChallengeDimensionTable(
+    #                     user_challenge_id=entry.id, weapon_id=weapon, mode_id=1,
+    #                     legend_id=legend, value=value[i]
+    #                 )
+    #                 db.session.add(dim_table_entry)
+    #                 db.session.commit()
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY

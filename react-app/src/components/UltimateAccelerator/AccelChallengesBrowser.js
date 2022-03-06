@@ -15,7 +15,7 @@ function AccelChallengesBrowser({ challenges }) {
         dispatch(userActions.getOneUser(userId));
     }, [dispatch, userId])
     const currUser = useSelector(state => state?.session?.user)
-    const isUser = Boolean(userId == currUser.id)
+    const isUser = Boolean(+userId === currUser.id)
     return (<>
         <div className="challenges">
             <div className="challenges-header">Associated Battle Pass Challenge(s)</div>

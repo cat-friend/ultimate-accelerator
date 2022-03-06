@@ -40,13 +40,13 @@ function UltimateAccelerator() {
         let maxCalcText
         const stringArray = legendsString(accelData.mode_1.legends.max, legendsDict)
         if (stringArray[0] > 1) maxCalcText = `Play as any of these characters to earn ${accelData.mode_1.legends.max[0].sum} stars: ` + stringArray[1];
-        else maxCalcText = `Play as any of this character to earn ${accelData.mode_1.legends.max[0].sum} stars: ` + stringArray[1];
+        else maxCalcText = `Play as this character to earn ${accelData.mode_1.legends.max[0].sum} stars: ` + stringArray[1];
         battleRoyale.push(
             <div className="content" key="mode1leg">
                 {accelData && (
                     <>
                         <h3>
-                            {maxCalcText}
+                            {maxCalcText}.
                         </h3>
                         <AccelChallengesBrowser challenges={accelData.mode_1?.legends?.challenges} />
                     </>
@@ -61,7 +61,7 @@ function UltimateAccelerator() {
         const stringArray = weaponsString(accelData.mode_1.weapons.max, weaponsDict)
 
         if (accelData.mode_1.legends.max.length)
-            if (accelData.mode_1.misc.challenges.length > 1) {
+            if (accelData.mode_1.weapons.max.length > 1) {
                 maxCalcText = `... and use any of these weapons to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else {
@@ -78,7 +78,7 @@ function UltimateAccelerator() {
                 {accelData && (
                     <>
                         <h3>
-                            {maxCalcText} to earn {accelData?.mode_1.weapons.max[0].sum} stars.
+                            {maxCalcText}.
                         </h3>
                         <AccelChallengesBrowser challenges={accelData.mode_1.weapons.challenges} />
                     </>
@@ -143,14 +143,14 @@ function UltimateAccelerator() {
         let maxCalcText;
         const stringArray = weaponsString(accelData.mode_2.weapons.max, weaponsDict)
         if (accelData.mode_2.legends.max.length)
-            if (accelData.mode_2.misc.challenges.length > 1) {
+            if (accelData.mode_2.weapons.challenges.length > 1) {
                 maxCalcText = `... and use any of these weapons to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else {
                 maxCalcText = `... and use this weapon to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
             }
         else {
-            if (accelData.mode_2.misc.challenges.length > 1) {
+            if (accelData.mode_2.weapons.challenges.length > 1) {
                 maxCalcText = `Use any of these weapons to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else maxCalcText = `Use this weapon to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
@@ -226,14 +226,14 @@ function UltimateAccelerator() {
         let maxCalcText;
         const stringArray = weaponsString(accelData.mode_3.weapons.max, weaponsDict)
         if (accelData.mode_3.legends.max.length)
-            if (accelData.mode_3.misc.challenges.length > 1) {
+            if (accelData.mode_3.weapons.challenges.length > 1) {
                 maxCalcText = `... and use any of these weapons to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else {
                 maxCalcText = `... and use this weapon to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
             }
         else {
-            if (accelData.mode_3.misc.challenges.length > 1) {
+            if (accelData.mode_3.weapons.challenges.length > 1) {
                 maxCalcText = `Use any of these weapons to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else maxCalcText = `Use this weapon to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
@@ -243,7 +243,7 @@ function UltimateAccelerator() {
                 {accelData && (
                     <>
                         <h3>
-                            {maxCalcText} to earn {accelData?.mode_3.weapons.max[0].sum} stars.
+                            {maxCalcText}.
                         </h3>
                         <AccelChallengesBrowser challenges={accelData.mode_3?.weapons?.challenges} />
                     </>
