@@ -2,20 +2,22 @@ from app.models import db, UserChallenge, UserChallengeDimensionTable
 
 
 def seed_user_challenge():
-    labels = ["Finish in the top 3 as Pathfinder, Loba or Revenant",
-              "Deal 5000 damage with light machine guns",
-              "Deal 5000 damage",
-              "Get 15 kills as Bangalore, Seer or Rampart",
-              "Get 30 knockdowns with sub machine guns",
-              "Get 35 knockdowns with assault rifles",
-              "Get 50 kills or assists",
-              "Survive 20 ring closings",
-              "Deal 7500 damage with Bangalore"]
+    labels = ["Deal 1000 damage with pistols",
+              "Place 12 matches as Bangalore, Mad Maggie, or Wattson",
+              "Deal 5000 damage as Pathfinder, Horizon, or Revenant",
+              "Get 40 knockdowns with sub machine guns",
+              "Get 20 kills as Wraith, Fuse, or Mirage",
+              "Survive 30 ring closings",
+              "Finish in the top-3 1 time getting at least 3 kills, knockdowns or assists",
+              "Neurolink: Scan 10 enemies as Crypto",
+              "Deal 10000 damage with assault rifles",
+              "Play 12 matches as Gibraltar, Octane, or Loba",
+              "Deal 5000 damage as Pathfinder, Mad Maggie, or Mirage", ]
     challenge_types = [4, 3, 3, 6, 6, 6, 6, 11, 3]
     status = ["open", "open", "open", "in progress",
               "completed", "open", "in progress", "open", "in progress"]
     value = [10, 10, 5, 10, 10, 5, 10, 2, 5]
-    user_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    user_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     weapons = [[None],
                [8, 18, 28, 31, 32],
                [None],

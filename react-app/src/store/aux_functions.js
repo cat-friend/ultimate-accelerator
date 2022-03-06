@@ -11,7 +11,7 @@
                 challenges: {}
             },
             misc: {
-                challenges: []
+                challenges: {}
             },
         },
         mode_2: {
@@ -24,7 +24,7 @@
                 challenges: {}
             },
             misc: {
-                challenges: []
+                challenges: {}
             },
         },
         mode_3: {
@@ -37,7 +37,7 @@
                 challenges: {}
             },
             misc: {
-                challenges: []
+                challenges: {}
             },
         }
     }
@@ -113,15 +113,15 @@
     }
 
     if (payload.misc_mode_1_challenges.length) {
-        result.mode_1.misc.challenges = payload.misc_mode_1_challenges;
+        payload.misc_mode_1_challenges.forEach((ele) => result.mode_1.misc.challenges[ele.id] = ele)
     }
 
     if (payload.misc_mode_2_challenges.length) {
-        result.mode_2.misc.challenges = payload.misc_mode_2_challenges;
+        payload.misc_mode_2_challenges.forEach((ele) => result.mode_2.misc.challenges[ele.id] = ele)
     }
 
     if (payload.misc_mode_3_challenges.length) {
-        result.mode_3.misc.challenges = payload.misc_mode_3_challenges;
+        payload.misc_mode_3_challenges.forEach((ele) => result.mode_3.misc.challenges[ele.id] = ele)
     }
     return result
 }

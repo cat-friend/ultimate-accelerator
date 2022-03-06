@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as challengeActions from "../../store/challenge";
 import "./DeleteChallengeForm.css"
+import { useLocation } from "react-router-dom";
+import { accelerate } from "../../store/accelerate";
 
 function DeleteChallengeForm({ setShowModal, challenge }) {
+    const location = useLocation();
     const dispatch = useDispatch();
     const { userId } = useParams();
     const currUserId = useSelector(state => state.session.user.id);
@@ -31,7 +34,9 @@ function DeleteChallengeForm({ setShowModal, challenge }) {
                         setTimeout(() => {
                             setShowModal(false);
                             dispatch(challengeActions.deleteOneChallenge(challenge))
-                        }, 1000);
+                            if (location.pathname.includes("accelerate")) dispatch(accelerate(userId));
+                            return;
+                        }, 750);
 
 
                         return;

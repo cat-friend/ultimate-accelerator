@@ -7,6 +7,7 @@ const loadAcceleration = payload => ({
     acceleration: payload
 })
 
+
 export const accelerate = (id) => async (dispatch) => {
     const response = await fetch(`/api/challenges/accelerate/${id}`)
     const accelerate = await response.json();

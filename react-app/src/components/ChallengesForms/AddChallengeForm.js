@@ -155,8 +155,7 @@ function AddChallengeForm() {
                                     required
                                     value={stars} />
                             </div>
-                        </div>
-                        <div className="button-div">
+                            <div className="button-div">
                             <button
                                 type="button"
                                 onClick={() => {
@@ -176,8 +175,9 @@ function AddChallengeForm() {
                                 }}>
                                 RESET
                             </button>
-
                         </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

@@ -7,7 +7,8 @@
 }
 
 .add-challenge-container {
-    width: 100%;
+    width: fit-content;
+    margin: 0 auto;
     display: grid;
     grid-template:
         "a b b b c" auto

@@ -201,6 +201,14 @@ button {
     color: black;
 }
 
+button:hover {
+    border: 1px solid black;
+    background-color: #333;
+    box-shadow: inset 0 0 .2em white;
+    border-radius: 3px;
+    color: white;
+}
+
 .button-div {
     width: 100%;
     margin: 1rem auto 0rem auto;

@@ -17,6 +17,9 @@ function UltimateAccelerator() {
     }, [userId, dispatch])
     const user = useSelector((state) => state.session.user);
     const accelData = useSelector((state) => state.accelerate);
+    const mode1Misc = accelData?.mode_1?.misc?.challenges ? Object.values(accelData.mode_1.misc.challenges) : undefined;
+    const mode2Misc = accelData?.mode_2?.misc?.challenges ? Object.values(accelData.mode_2.misc.challenges) : undefined;
+    const mode3Misc = accelData?.mode_3?.misc?.challenges ? Object.values(accelData.mode_3.misc.challenges) : undefined;
     const isUser = user.id === +userId;
     const legendsDict = useSelector((state) => state.legends);
     const weaponsDict = useSelector((state) => state.weapons);
@@ -65,7 +68,7 @@ function UltimateAccelerator() {
                 maxCalcText = `... and use this weapon to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
             }
         else {
-            if (accelData.mode_1.misc.challenge.length > 1) {
+            if (accelData.mode_1.misc.challenges.length > 1) {
                 maxCalcText = `Use any of these weapons to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else maxCalcText = `Use this weapon to earn ${accelData.mode_1.weapons.max[0].sum} stars: ` + stringArray[1];
@@ -85,23 +88,23 @@ function UltimateAccelerator() {
         mode1Sum += accelData.mode_1.weapons.max[0].sum;
     }
 
-    if (accelData.mode_1?.misc?.challenges?.length) {
+    if (mode1Misc && mode1Misc.length) {
         let miscSum = 0;
         let maxCalcText;
         if (accelData.mode_1.weapons.max.length || accelData.mode_1.legends.max.length)
-            if (accelData.mode_1.misc.challenges.length > 1) {
+            if (mode1Misc.length > 1) {
                 maxCalcText = "... and complete these"
             }
             else {
                 maxCalcText = "... and complete this"
             }
         else {
-            if (accelData.mode_1.misc.challenge.length > 1) {
+            if (mode1Misc.length > 1) {
                 maxCalcText = "Complete these"
             }
             else maxCalcText = "Complete this"
         }
-        accelData.mode_1.misc.challenges.forEach((ele) => miscSum += ele.sum);
+        mode1Misc.forEach((ele) => miscSum += ele.sum);
         battleRoyale.push(
             <div className="content" key="mode1misc">
                 {accelData && (
@@ -109,7 +112,7 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText} to earn {miscSum} stars.
                         </h3>
-                        <AccelChallengesBrowser challenges={accelData.mode_1.misc.challenges} />
+                        <AccelChallengesBrowser challenges={mode1Misc} />
                     </>
                 )}
             </div>
@@ -147,7 +150,7 @@ function UltimateAccelerator() {
                 maxCalcText = `... and use this weapon to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
             }
         else {
-            if (accelData.mode_2.misc.challenge.length > 1) {
+            if (accelData.mode_2.misc.challenges.length > 1) {
                 maxCalcText = `Use any of these weapons to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else maxCalcText = `Use this weapon to earn ${accelData.mode_2.weapons.max[0].sum} stars: ` + stringArray[1];
@@ -167,23 +170,23 @@ function UltimateAccelerator() {
         mode2Sum += accelData.mode_2.weapons.max[0].sum;
     }
 
-    if (accelData.mode_2?.misc?.challenges?.length) {
+    if (mode2Misc && mode2Misc.length) {
         let miscSum = 0;
         let maxCalcText;
         if (accelData.mode_2.weapons.max.length || accelData.mode_2.legends.max.length)
-            if (accelData.mode_2.misc.challenges.length > 1) {
+            if (mode2Misc.length > 1) {
                 maxCalcText = "... and complete these"
             }
             else {
                 maxCalcText = "... and complete this"
             }
         else {
-            if (accelData.mode_2.misc.challenge.length > 1) {
+            if (mode2Misc.length > 1) {
                 maxCalcText = "Complete these"
             }
             else maxCalcText = "Complete this"
         }
-        accelData.mode_2.misc.challenges.forEach((ele) => miscSum += ele.sum);
+        mode2Misc.forEach((ele) => miscSum += ele.sum);
         arena.push(
             <div className="content" key="mode1misc">
                 {accelData && (
@@ -191,7 +194,7 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText} to earn {miscSum} stars.
                         </h3>
-                        <AccelChallengesBrowser challenges={accelData.mode_2.misc.challenges} />
+                        <AccelChallengesBrowser challenges={mode2Misc} />
                     </>
                 )}
             </div>
@@ -230,7 +233,7 @@ function UltimateAccelerator() {
                 maxCalcText = `... and use this weapon to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
             }
         else {
-            if (accelData.mode_3.misc.challenge.length > 1) {
+            if (accelData.mode_3.misc.challenges.length > 1) {
                 maxCalcText = `Use any of these weapons to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
             }
             else maxCalcText = `Use this weapon to earn ${accelData.mode_3.weapons.max[0].sum} stars: ` + stringArray[1];
@@ -250,23 +253,23 @@ function UltimateAccelerator() {
         mode3Sum += accelData.mode_3.weapons.max[0].sum;
     }
 
-    if (accelData.mode_3?.misc?.challenges?.length) {
+    if (mode3Misc && mode3Misc.length) {
         let miscSum = 0;
         let maxCalcText;
         if (accelData.mode_3.weapons.max.length || accelData.mode_3.legends.max.length)
-            if (accelData.mode_3.misc.challenges.length > 1) {
+            if (mode3Misc.length > 1) {
                 maxCalcText = "... and complete these"
             }
             else {
                 maxCalcText = "... and complete this"
             }
         else {
-            if (accelData.mode_3.misc.challenges.length > 1) {
+            if (mode3Misc.length > 1) {
                 maxCalcText = "Complete these"
             }
             else maxCalcText = "Complete this"
         }
-        accelData.mode_3.misc.challenges.forEach((ele) => miscSum += ele.sum);
+        mode3Misc.forEach((ele) => miscSum += ele.sum);
         LTM.push(
             <div className="content" key="mode3misc">
                 {accelData && (
@@ -274,7 +277,7 @@ function UltimateAccelerator() {
                         <h3>
                             {maxCalcText} to earn {miscSum} stars.
                         </h3>
-                        <AccelChallengesBrowser challenges={accelData.mode_3.misc.challenges} />
+                        <AccelChallengesBrowser challenges={mode3Misc} />
                     </>
                 )}
             </div>
@@ -283,14 +286,14 @@ function UltimateAccelerator() {
     }
 
     return (
-        <>{mode1Sum && (<>
+        <>{mode1Sum > 0 && (<>
             <div className="header-parent">
                 <div className="left-corner"></div>
                 <div className="header-child"><h2>Battle Royale: {mode1Sum} possible stars</h2></div>
                 <div className="right-corner"></div>
             </div>
             <div className="bp-container">{battleRoyale}</div></>)}
-            {mode2Sum && (
+            {mode2Sum > 0 && (
                 <>
                     <div className="header-parent">
                         <div className="left-corner-b"></div>
@@ -299,7 +302,7 @@ function UltimateAccelerator() {
                     </div>
                     <div className="bp-container">{arena}</div></>
             )}
-            {mode3Sum && (
+            {mode3Sum > 0 && (
                 <>
                     <div className="header-parent">
                         <div className="left-corner"></div>

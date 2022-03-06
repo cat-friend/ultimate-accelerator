@@ -107,7 +107,7 @@ const challengeReducer = (state = {}, action) => {
         }
         case DELETE_CHALLENGE: {
             const allChallenges = { ...state };
-            delete allChallenges[action.challenge.id]
+            delete allChallenges[action.challenge.id];
             return allChallenges;
         }
         default: return state;
