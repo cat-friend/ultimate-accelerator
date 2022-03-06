@@ -37,3 +37,17 @@ div[class$="label-1"] {
 .trash-label-1>a {
     color: white;
 }
+
+ul {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+li {
+    list-style: none;
+    font-size: 1.2rem;
+    margin: .5rem;
+}
