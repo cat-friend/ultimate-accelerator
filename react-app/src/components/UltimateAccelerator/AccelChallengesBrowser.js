@@ -14,7 +14,6 @@ function AccelChallengesBrowser({ challenges }) {
         dispatch(challengeActions.loadChallenges(userId));
         dispatch(userActions.getOneUser(userId));
     }, [dispatch, userId])
-    const thisUser = useSelector(state => state?.user)
     const currUser = useSelector(state => state?.session?.user)
     const isUser = Boolean(userId == currUser.id)
     return (<>

@@ -11,8 +11,10 @@ const loadAcceleration = payload => ({
 export const accelerate = (id) => async (dispatch) => {
     const response = await fetch(`/api/challenges/accelerate/${id}`)
     const accelerate = await response.json();
+    console.log("from BE", accelerate)
     if (response.ok) {
         const results = accelArray(accelerate)
+        console.log("after process by accelArray", results)
         dispatch(loadAcceleration(results));
     }
     return accelerate;
