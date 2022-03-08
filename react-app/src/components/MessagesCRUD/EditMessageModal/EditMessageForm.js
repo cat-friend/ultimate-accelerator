@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import * as clanActions from "../../store/clan"
+import * as clanActions from "../../../store/clan"
 
-function EditMessageForm({ setShowModal, clan }) {
+function EditMessageForm({ setShowModal, clan, message }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false)
-    const [message, setMessage] = useState(clan.message);
+    const [newMessage, setNewMessage] = useState(message.message);
     const userId = useSelector(state => state.session.user.id)
 
     const handleSubmit = (e) => {
@@ -14,10 +14,10 @@ function EditMessageForm({ setShowModal, clan }) {
         e.stopPropagation();
         setErrors([]);
         const payload = {
-            message_id: clan.message.id,
+            message_id: message.message.id,
             user_id: userId,
             clan_id: clan.id,
-            message
+            message: newMessage
         }
         return (dispatch(clanActions.editClan(payload)).then(
             (response) => {
@@ -42,9 +42,8 @@ function EditMessageForm({ setShowModal, clan }) {
             </div>
             <div className="content-container">
                 <div className="content">
-                    <h2>Preview:</h2>
-                    <h3>Message:</h3>
-                    <div> {message}</div>
+                    <h2>Message Preview:</h2>
+                    <div> {newMessage}</div><br/>
                     <h2 className="success">{showSuccess && "GREAT SUCCESS!"}</h2>
                     <ul className="error-list">
                         {errors.map((error, idx) => (
@@ -53,10 +52,11 @@ function EditMessageForm({ setShowModal, clan }) {
                     </ul>
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div>
+                            <h2>Edit:</h2>
                             <textarea
                                 data-lpignore="true"
-                                value={description}
-                                onChange={(e) => setMessage(e.target.value)}
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
                                 required
                                 placeholder="Send a way cool encouraging message to your clanmates or remind them of their heal misplay in Energy Depot"
                                 className="input" />
@@ -70,7 +70,7 @@ function EditMessageForm({ setShowModal, clan }) {
                             <button
                                 type="button"
                                 onClick={() => {
-                                    setMessage(clan.message);
+                                    setNewMessage(message.message);
                                 }}
                                 className="">
                                 RESET
@@ -78,7 +78,7 @@ function EditMessageForm({ setShowModal, clan }) {
                             <button
                                 type="button"
                                 onClick={() => {
-                                    setMessage(clan.message);
+                                    setNewMessage(message.message);
                                     setShowModal(false);
                                 }}
                                 className="">
@@ -91,4 +91,4 @@ function EditMessageForm({ setShowModal, clan }) {
         </>)
 }
 
-export default EditMessageForm
+export default EditMessageForm;

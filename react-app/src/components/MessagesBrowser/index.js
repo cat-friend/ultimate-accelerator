@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 // import * as messageActions from "../../store/challenge";
+import EditMessageModal from "../MessagesCRUD/EditMessageModal";
 import './Messages.css';
 
 function MessagesBrowser() {
     const { clanId } = useParams()
     const dispatch = useDispatch();
     const messages = useSelector(state => state.clans.messages ? Object.values(state.clans.messages) : null);
+    const clans = useSelector(state => Object.values(state.clans))
     const userId = useSelector(state => state.session.user.id);
     return (<>
         <div className="header-parent">
@@ -23,11 +25,10 @@ function MessagesBrowser() {
                             {ele.message}
                             <div className="message-info">
                                 <div>{ele.username}</div>
-                                {userId === ele.user_id && (<>
-                                    <div>
-                                        edit
+                                {userId === ele.user_id && (<><div className={`clan-${i % 2}`}>
+                                    <EditMessageModal clan={clans} message={ele}/>
                                     </div>
-                                    <div>
+                                    <div className={`clan-${i % 2}`}>
                                         delete
                                     </div>
                                 </>)}

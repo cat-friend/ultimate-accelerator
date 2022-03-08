@@ -42,7 +42,7 @@ function accelArray(payload) {
         }
     }
     if (payload.legend_mode_1.length) {
-        result.mode_1.legends.max = payload.legend_mode_1
+        result.mode_1.legends.max = payload.legend_mode_1;
         result.mode_1.legends.challenges = payload.legend_mode_1_challenges;
     }
     if (payload.legend_mode_2.length) {
