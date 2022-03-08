@@ -2,31 +2,32 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import * as clanActions from "../../../store/clan"
 
-function EditMessageForm({ setShowModal, clan, message }) {
+function EditMessageForm({ setShowModal, clanId, message }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false)
     const [newMessage, setNewMessage] = useState(message.message);
     const userId = useSelector(state => state.session.user.id)
-
+    console.log("message", message)
     const handleSubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
         setErrors([]);
         const payload = {
-            message_id: message.message.id,
+            message_id: message.id,
             user_id: userId,
-            clan_id: clan.id,
+            clan_id: clanId,
             message: newMessage
         }
-        return (dispatch(clanActions.editClan(payload)).then(
+        console.log("payload", payload)
+        return (dispatch(clanActions.editMessage(payload)).then(
             (response) => {
                 if (response.errors) {
                     setErrors(response.errors);
                     return
                 }
                 setShowSuccess(true);
-                dispatch(clanActions.getOneClan(clan.id));
+                dispatch(clanActions.getOneClan(clanId));
                 setTimeout(() => {
                     setShowModal(false);
                 }, 750);

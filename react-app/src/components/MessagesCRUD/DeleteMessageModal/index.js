@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Modal } from "../../../context/Modal";
-import EditMessageForm from "./EditMessageForm";
+import DeleteMessageForm from "./DeleteMessageForm";
 import { NavLink } from 'react-router-dom'
 
-function DeleteMessageModal({ clan, message }) {
+function DeleteMessageModal({ clanId, message }) {
     const [showModal, setShowModal] = useState(false);
     return (<>
         <NavLink onClick={() => setShowModal(true)} to="#">
@@ -12,7 +12,7 @@ function DeleteMessageModal({ clan, message }) {
         {
             showModal &&
             (<Modal onClose={() => setShowModal(false)}>
-                <EditMessageForm setShowModal={setShowModal} clan={clan} message={message} />
+                <DeleteMessageForm setShowModal={setShowModal} clanId={clanId} message={message} />
             </Modal>)
         }
     </>)

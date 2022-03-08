@@ -3,7 +3,7 @@ import { Modal } from "../../../context/Modal";
 import EditMessageForm from "./EditMessageForm";
 import { NavLink } from 'react-router-dom'
 
-function EditMessageModal({ clan, message }) {
+function EditMessageModal({ clanId, message }) {
     const [showModal, setShowModal] = useState(false);
     return (<>
 
@@ -13,7 +13,7 @@ function EditMessageModal({ clan, message }) {
         {
             showModal &&
             (<Modal onClose={() => setShowModal(false)}>
-                <EditMessageForm setShowModal={setShowModal} clan={clan} message={message} />
+                <EditMessageForm setShowModal={setShowModal} clanId={clanId} message={message} />
             </Modal>)
         }
     </>)

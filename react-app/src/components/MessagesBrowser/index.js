@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 // import * as messageActions from "../../store/challenge";
 import EditMessageModal from "../MessagesCRUD/EditMessageModal";
+import DeleteMessageModal from "../MessagesCRUD/DeleteMessageModal";
 import './Messages.css';
 
 function MessagesBrowser() {
     const { clanId } = useParams()
-    const dispatch = useDispatch();
     const messages = useSelector(state => state.clans.messages ? Object.values(state.clans.messages) : null);
     const clans = useSelector(state => Object.values(state.clans))
     const userId = useSelector(state => state.session.user.id);
@@ -25,19 +25,22 @@ function MessagesBrowser() {
                             {ele.message}
                             <div className="message-info">
                                 <div>{ele.username}</div>
-                                {userId === ele.user_id && (<><div className={`clan-${i % 2}`}>
-                                    <EditMessageModal clan={clans} message={ele}/>
-                                    </div>
-                                    <div className={`clan-${i % 2}`}>
-                                        delete
-                                    </div>
-                                </>)}
+                                {userId === ele.user_id && (
+                                    <>
+                                        <div className={`clan-${i % 2}`}>
+                                            <EditMessageModal clanId={clanId} message={ele} />
+                                        </div>
+                                        <div className={`clan-${i % 2}`}>
+                                            <DeleteMessageModal clanId={clanId} message={ele} />
+                                        </div>
+                                    </>
+                                )}
                                 <div> {(ele.updated_at && `Updated: ${ele.updated_at}`) || (ele.created_at && `Posted: ${ele.created_at}`)}</div>
                             </div>
                         </div>
                     )
                 })
-                : "No messages posted!"}
+                    : "No messages posted!"}
             </div>
         </div>
     </>
