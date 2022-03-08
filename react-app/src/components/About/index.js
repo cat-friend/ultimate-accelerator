@@ -29,7 +29,9 @@ function About() {
                             <li>
                                 my coworkers Yu Ra Kim, Daniel LaVergne, Cameron Whiteside, Bryan Arnold, Fiona Choi, Justin Sweeney, Suhayl Khan, Peter Shin, Jenn Dijaili, and Christy Chen -- this bootcamp has been one of the most enjoyable and pivotal experiences of my life and you played a huge role in that. Every morning for six (6) months, I woke up and open palm slammed a giant smile on my face because I was blessed with the opportunity to learn and develop alongside very compassionate, talented, and intelligent people and to make you laugh so hard via Discord that you have to shut your camera off in Zoom;
                             </li>
-                            <li>the strong women in my life:  Francesca W., Leah W., and Rebecca S. -- thank you for your infinite patience, love, empathy, and support especially when I insist on learning everything the hard way.</li>
+                            <li>
+                                the strong women in my life:  Francesca W., Leah W., and Rebecca S. -- thank you for your infinite patience, love, empathy, and support especially when I insist on learning everything the hard way.
+                            </li>
                         </ul>
                     </div>
                 </div>
