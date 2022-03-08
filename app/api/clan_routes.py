@@ -1,6 +1,7 @@
 from flask import Blueprint, session, request
 from app.models import Clan, ClanUsers, User, db
 from app.forms import ClanForm, EditClanForm, DeleteClanForm, JoinClan, LeaveClan
+from app.models.message import Message
 
 clan_routes = Blueprint('clans', __name__)
 
@@ -85,7 +86,7 @@ def join_leave_clan(id):
 @clan_routes.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def one_clan(id):
     """
-    GET request returns one (1) clan with clan_id of `id`, includes members.
+    GET request returns one (1) clan with clan_id of `id`, includes members and messages.
     PUT request updates the clan with clan_id of `id` and returns that clan.
     DLETE request deletes the clan from the database.
     PUT and DELETE return a list of errors if either fail data validation.
@@ -94,7 +95,8 @@ def one_clan(id):
         clan = Clan.query.get(id)
         clan_members = ClanUsers.query.join(
             User).filter(ClanUsers.clan_id == id).all()
-        return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
+        messages = Message.query.filter(Message.clan_id==id).join(User).all()
+        return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members], "clan_messages": [message.to_dict() for message in messages]}
     if request.method == 'PUT':
         form = EditClanForm()
         form['csrf_token'].data = request.cookies['csrf_token']

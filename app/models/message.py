@@ -13,12 +13,11 @@ class Message(db.Model):
 
     user = db.relationship("User", back_populates="clan_message_user")
     clan = db.relationship("Clan", back_populates="clan_messages")
-    
+
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.name,
-            'clan_id': self.type,
+            'user': self.user.clan(),
             'message': self.message,
             'created_at': self.created_at,
             'updated_at': self.updated_at

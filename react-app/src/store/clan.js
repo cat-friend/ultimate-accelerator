@@ -68,6 +68,7 @@ export const getOneClan = (id) => async (dispatch) => {
             headers: { "Content-Type": "application/json" }
         });
     const clan_data = await response.json();
+    console.log("clan data pre-process", clan_data)
     const clan = {};
     if (response.ok) {
         clan.id = clan_data.clan.id;
@@ -79,6 +80,10 @@ export const getOneClan = (id) => async (dispatch) => {
         clan_data.clan_members.forEach((ele) => {
             clan.members[ele.user_id] = { user_id: ele.user_id, username: ele.member.username }
         });
+        clan.messages = {};
+        clan_data.clan_messages.forEach((ele) => {
+            clan.messages[ele.id] = {id: ele.id, username: ele.user.username, user_id: ele.user.user_id, message: ele.message, created_at: ele.created_at, updated_at: ele.updated_at}
+        })
         dispatch(loadOneClan(clan));
         return clan;
     }
@@ -105,6 +110,10 @@ export const editClan = (payload) => async (dispatch) => {
         clan_data.clan_members.forEach((ele) => {
             clan.members[ele.user_id] = { user_id: ele.user_id, username: ele.member.username }
         });
+        clan.messages = {};
+        clan_data.clan_messages.forEach((ele) => {
+            clan.messages[ele.id] = {id: ele.id, username: ele.user.username, user_id: ele.user.user_id, message: ele.message, created_at: ele.created_at, updated_at: ele.updated_at}
+        })
         dispatch(addOneClan(clan));
         return clan;
     }
