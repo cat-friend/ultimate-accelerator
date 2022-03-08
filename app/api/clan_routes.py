@@ -66,7 +66,6 @@ def join_leave_clan(id):
             clan_members = ClanUsers.query.join(User).filter(ClanUsers.clan_id == id).all()
             db.session.add(new_member)
             db.session.commit()
-            print("clan_members", [clan_member.to_dict() for clan_member in clan_members])
             return {"clan_members": [clan_member.to_dict() for clan_member in clan_members]}
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
