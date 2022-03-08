@@ -228,7 +228,7 @@ export const deleteMessage = (payload) => async (dispatch) => {
             "Content-Type": "application/json"
         }
     });
-    if (getMessage.ok)  {
+    if (getMessage.ok) {
         const delMessage = await fetch(`/api/messages/${payload.message_id}`,
             {
                 method: 'DELETE',
@@ -272,6 +272,14 @@ const clanReducer = (state = {}, action) => {
             const newState = { ...state };
             delete newState.members[action.payload.user_id];
             return newState;
+        }
+        case ADD_ONE_MESSAGE: {
+            const newState = { ...state};
+            newState.messages[action.payload.id] = action.payload;
+        }
+        case DELETE_ONE_MESSAGE: {
+            const newState = {...state};
+            delete newState.messages[action.payload.id];
         }
         default: return state;
     }
