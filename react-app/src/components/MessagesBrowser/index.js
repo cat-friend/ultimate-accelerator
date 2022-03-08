@@ -9,7 +9,6 @@ function MessagesBrowser() {
     const dispatch = useDispatch();
     const messages = useSelector(state => state.clans.messages ? Object.values(state.clans.messages) : null);
     const userId = useSelector(state => state.session.user.id);
-
     return (<>
         <div className="header-parent">
             <div className="left-corner-b"></div>
@@ -18,7 +17,7 @@ function MessagesBrowser() {
         </div>
         <div className="bp-container">
             <div className="content clan">
-                {messages && messages.map((ele, i) => {
+                {messages?.length ? messages.map((ele, i) => {
                     return (
                         <div key={i} className="message">
                             {ele.message}
@@ -36,8 +35,8 @@ function MessagesBrowser() {
                             </div>
                         </div>
                     )
-                })}
-                {!messages && "No messages posted!"}
+                })
+                : "No messages posted!"}
             </div>
         </div>
     </>
