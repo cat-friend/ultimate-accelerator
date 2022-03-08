@@ -2,12 +2,11 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import * as clanActions from "../../store/clan"
 
-function EditClanForm({ setShowModal, message }) {
+function EditMessageForm({ setShowModal, clan }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false)
-    const [description, setDescription] = useState(clan.description);
-    const [message, setMessage] = useState(message);
+    const [message, setMessage] = useState(clan.message);
     const userId = useSelector(state => state.session.user.id)
 
     const handleSubmit = (e) => {
@@ -15,9 +14,8 @@ function EditClanForm({ setShowModal, message }) {
         e.stopPropagation();
         setErrors([]);
         const payload = {
-            description: description,
-            owner_user_id: clan.owner_user_id,
-            curr_user_id: userId,
+            message_id: clan.message.id,
+            user_id: userId,
             clan_id: clan.id,
             message
         }
@@ -93,4 +91,4 @@ function EditClanForm({ setShowModal, message }) {
         </>)
 }
 
-export default EditClanForm
+export default EditMessageForm
