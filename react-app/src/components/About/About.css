@@ -15,3 +15,7 @@
 p > i {
     color: #ff5252;
 }
+
+li {
+    margin: .5rem;
+}
