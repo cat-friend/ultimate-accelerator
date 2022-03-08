@@ -5,6 +5,7 @@ import * as clanActions from "../../store/clan"
 
 import DeleteClanModal from "../DeleteClanModal";
 import EditClanModal from "../EditClanModal";
+import MessagesBrowser from "../MessagesBrowser";
 import JoinClan from "./JoinClan";
 import LeaveClan from "./LeaveClan";
 
@@ -48,6 +49,7 @@ function ClanPage() {
                 })}
             </div>
         </div>
+        <MessagesBrowser />
     </>
     )
 }

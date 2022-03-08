@@ -1,0 +1,19 @@
+.clan {
+    display: block;
+    min-width: 100%;
+}
+
+.message {
+    border: solid #999 1px;
+    border-radius: 2px;
+    margin-bottom: .5rem;
+    padding: 1rem;
+}
+
+.message-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px white solid;
+    margin-top: .3rem;
+}
