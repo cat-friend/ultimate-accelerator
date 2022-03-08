@@ -4,6 +4,18 @@ const LOAD_CLAN_MEMBERS = "ultimate-accelerator/clans/LOAD_CLAN_MEMBERS";
 const DELETE_CLAN = "ultimate-accelerator/clans/DEL_CLAN"
 const DELETE_CLAN_MEMBER = "ultimate-accelerator/clans/DEL_CLAN_MEMBER"
 const LOAD_ONE_CLAN = "ultimate-accelerator/clans/LOAD_ONE_CLAN"
+const ADD_ONE_MESSAGE = "ultimate-accelerator/clans/ADD_ONE_MESSAGE"
+const DELETE_ONE_MESSAGE = "ultimate-accelerator/clans/DELETE_ONE_MESSAGE"
+
+export const deleteOneMessage = message => ({
+    type: DELETE_ONE_MESSAGE,
+    message
+})
+
+const addMessage = message => ({
+    type: ADD_ONE_MESSAGE,
+    message
+})
 
 const loadAllClans = clans => ({
     type: LOAD_CLANS,
@@ -37,6 +49,9 @@ export const deleteOneClan = clan => ({
     type: DELETE_CLAN,
     clan
 });
+
+// Clan thunks
+
 
 export const createClan = (payload) => async (dispatch) => {
     const response = await fetch("/api/clans/",
@@ -82,7 +97,7 @@ export const getOneClan = (id) => async (dispatch) => {
         });
         clan.messages = {};
         clan_data.clan_messages.forEach((ele) => {
-            clan.messages[ele.id] = {id: ele.id, username: ele.user.username, user_id: ele.user.user_id, message: ele.message, created_at: ele.created_at, updated_at: ele.updated_at}
+            clan.messages[ele.id] = { id: ele.id, username: ele.user.username, user_id: ele.user.user_id, message: ele.message, created_at: ele.created_at, updated_at: ele.updated_at }
         })
         dispatch(loadOneClan(clan));
         return clan;
@@ -112,7 +127,7 @@ export const editClan = (payload) => async (dispatch) => {
         });
         clan.messages = {};
         clan_data.clan_messages.forEach((ele) => {
-            clan.messages[ele.id] = {id: ele.id, username: ele.user.username, user_id: ele.user.user_id, message: ele.message, created_at: ele.created_at, updated_at: ele.updated_at}
+            clan.messages[ele.id] = { id: ele.id, username: ele.user.username, user_id: ele.user.user_id, message: ele.message, created_at: ele.created_at, updated_at: ele.updated_at }
         })
         dispatch(addOneClan(clan));
         return clan;
@@ -144,6 +159,8 @@ export const deleteClan = (payload) => async (dispatch) => {
     return getCurrClan.json()
 }
 
+// Clan member thunks
+
 export const addClanMember = (payload) => async (dispatch) => {
     const response = await fetch(`/api/clans/${payload.clan_id}/join`, {
         method: 'POST',
@@ -161,6 +178,8 @@ export const addClanMember = (payload) => async (dispatch) => {
     return data;
 }
 
+
+
 export const removeClanMember = (payload) => async (dispatch) => {
     const response = await fetch(`/api/clans/${payload.clan_id}/join`, {
         method: 'DELETE',
@@ -174,6 +193,58 @@ export const removeClanMember = (payload) => async (dispatch) => {
     return data;
 
 }
+
+// messages thunks
+
+export const postMessage = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/messages/`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+    const message = await response.json();
+    if (response.ok) {
+        dispatch(addMessage(message));
+    }
+    return message;
+}
+
+export const editMessage = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/messages/${payload.message_id}`, {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+    const message = await response.json();
+    if (response.ok) {
+        dispatch(addMessage(message));
+    }
+    return message;
+}
+
+export const deleteMessage = (payload) => async (dispatch) => {
+    const getMessage = await fetch(`/api/messages/${payload.message_id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (getMessage.ok)  {
+        const delMessage = await fetch(`/api/messages/${payload.message_id}`,
+            {
+                method: 'DELETE',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }
+        );
+        if (delMessage.ok) {
+            const challenge = await getMessage.json();
+            return challenge;
+        }
+        else return delMessage.json()
+    }
+    return getMessage.json();
+}
+
 const clanReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_CLANS: {
