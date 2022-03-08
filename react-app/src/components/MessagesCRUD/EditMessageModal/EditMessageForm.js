@@ -27,9 +27,9 @@ function EditMessageForm({ setShowModal, clanId, message }) {
                     return
                 }
                 setShowSuccess(true);
-                dispatch(clanActions.getOneClan(clanId));
                 setTimeout(() => {
                     setShowModal(false);
+                    dispatch(clanActions.addMessage(response));
                 }, 750);
             }))
     }

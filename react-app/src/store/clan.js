@@ -12,7 +12,7 @@ export const deleteOneMessage = message => ({
     message
 })
 
-const addMessage = message => ({
+export const addMessage = message => ({
     type: ADD_ONE_MESSAGE,
     message
 })
@@ -216,9 +216,6 @@ export const editMessage = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     });
     const message = await response.json();
-    if (response.ok) {
-        dispatch(addMessage(message));
-    }
     return message;
 }
 
@@ -275,12 +272,12 @@ const clanReducer = (state = {}, action) => {
         }
         case ADD_ONE_MESSAGE: {
             const newState = { ...state};
-            newState.messages[action.payload.id] = action.payload;
+            newState.messages[action.message.id] = action.message;
             return newState;
         }
         case DELETE_ONE_MESSAGE: {
             const newState = {...state};
-            delete newState.messages[action.payload.id];
+            delete newState.messages[action.message.id];
             return newState;
         }
         default: return state;

@@ -17,3 +17,8 @@
     border-top: 1px white solid;
     margin-top: .3rem;
 }
+
+
+.line-break {
+    white-space: pre-line;
+}

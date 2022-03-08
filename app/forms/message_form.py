@@ -6,8 +6,8 @@ from app.models import Clan, ClanUsers, Message
 
 
 def check_membership(form, field):
-    clan_id = form['clan_id']
-    user_id = field.data['user_id']
+    clan_id = form.data['clan_id']
+    user_id = field.data
     user_check = ClanUsers.query.filter_by(
         user_id=user_id, clan_id=clan_id).first()
     if not user_check:
@@ -16,7 +16,7 @@ def check_membership(form, field):
 
 
 def check_ownership(form, field):
-    id = field.data['message_id']
+    id = field.data
     user_id = form.data['user_id']
     owner_check = Message.query.get(id)
     if owner_check.user_id != user_id:

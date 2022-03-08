@@ -1,5 +1,5 @@
 from flask import Blueprint, session, request
-from app.models import Message, User, db
+from app.models import Message, db
 from app.forms import MessageForm, EditMessageForm, DeleteMessageForm
 
 message_routes = Blueprint('messages', __name__)
@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@message_routes.route('/messages', methods=['POST'])
+@message_routes.route('/', methods=['POST'])
 def new_message():
     """
     Responds to POST requests by posting a new message to a specific clan and returns
@@ -38,7 +38,7 @@ def new_message():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@message_routes.route('/messages/<int:id>', methods=['PUT', 'DELETE'])
+@message_routes.route('/<int:id>', methods=['PUT', 'DELETE'])
 def one_message(id):
     """
     Responds to PUT requests by editing a message, returns the message.
