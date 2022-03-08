@@ -276,10 +276,12 @@ const clanReducer = (state = {}, action) => {
         case ADD_ONE_MESSAGE: {
             const newState = { ...state};
             newState.messages[action.payload.id] = action.payload;
+            return newState;
         }
         case DELETE_ONE_MESSAGE: {
             const newState = {...state};
             delete newState.messages[action.payload.id];
+            return newState;
         }
         default: return state;
     }
