@@ -72,9 +72,9 @@ function ChallengesBrowser() {
         {completeChallenges?.length > 0 && (
             <>
                 <div className="header-parent">
-                    <div className="left-corner-b"></div>
-                    <div className="header-child-b"><h2>{isUser ? "Your Completed Battle Pass Challenges" : `${thisUser?.username}'s Completed Battle Pass Challenges`}</h2></div>
-                    <div className="right-corner-b"></div>
+                    <div className="left-corner"></div>
+                    <div className="header-child"><h2>{isUser ? "Your Completed Battle Pass Challenges" : `${thisUser?.username}'s Completed Battle Pass Challenges`}</h2></div>
+                    <div className="right-corner"></div>
                 </div>
                 <div className="bp-container">
                     <div className="content">
