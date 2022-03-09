@@ -235,7 +235,7 @@ button:hover {
 }
 
 textarea.input {
-    min-height: 2rem;
+    min-height: 3rem;
 }
 
 @font-face {

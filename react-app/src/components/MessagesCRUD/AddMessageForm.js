@@ -14,13 +14,10 @@ function AddMessageForm() {
         e.preventDefault();
         e.stopPropagation();
         setErrors([]);
-        const newMessage = message.replace(/\n/g, "<br>");
-
         const payload = {
-            message_id: message.id,
             user_id: userId,
             clan_id: clanId,
-            message: newMessage
+            message
         }
         return (dispatch(clanActions.postMessage(payload)).then(
             (response) => {
@@ -39,8 +36,7 @@ function AddMessageForm() {
     return (
         <>
             <div className="content">
-                <h2>Message Preview:</h2>
-                <div className="line-break"> {message}</div><br />
+                <h2>Post a message!</h2>
                 <h2 className="success">{showSuccess && "GREAT SUCCESS!"}</h2>
                 <ul className="error-list">
                     {errors.map((error, idx) => (
@@ -49,7 +45,6 @@ function AddMessageForm() {
                 </ul>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div>
-                        <h2>Edit:</h2>
                         <textarea
                             data-lpignore="true"
                             value={message}
@@ -68,6 +63,7 @@ function AddMessageForm() {
                             type="button"
                             onClick={() => {
                                 setMessage("");
+                                setErrors([]);
                             }}
                             className="">
                             RESET
