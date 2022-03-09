@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required
 from app.models import User, db, UserChallenge
-from app.forms import UserForm
+from app.forms import UserForm, SeedUserForm
+from app.seeds import seed_one_user
 
 user_routes = Blueprint('users', __name__)
 
@@ -48,3 +49,17 @@ def user(id):
         elif form.errors:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     return user.to_dict()
+
+@user_routes.lroute('/<int:id>/import', methods=['POST'])
+@login_required
+def s12_import(id):
+    """
+    Responds to POST requests by importing current S12 challenges for a user.
+    If the user already has challenges, they will not be able to import
+    """
+    form = SeedUserForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        seed_one_user(id)
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -10,7 +10,7 @@ from .modes import seed_modes, undo_modes
 from .weapon_types import seed_weapon_types, undo_weapon_types
 from .weapons import seed_weapon, undo_weapon
 from .users import seed_users, undo_users
-from .user_challenges import seed_user_challenge, undo_user_challenge
+from .user_challenges import seed_user_challenge, undo_user_challenge, seed_one_user
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`

@@ -223,3 +223,4 @@ def calc_max(id):
         result[f"misc_mode_{mode}_challenges"] = [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id,
                                                    "challenge_label": row.challenge_label, "status": row.status} for row in query_result]
     return result
+
