@@ -215,10 +215,24 @@ button:hover {
     display: flex;
     justify-content: space-around;
 }
-.button-div > div {
+
+.button-div>div {
     display: block;
 }
 
+.a-0 {
+    transition: all .5s ease-in;
+    text-decoration: none;
+    color: rgb(255, 237, 132);
+    font-size: 1.1rem;
+}
+
+.a-1 {
+    transition: all .5s ease-in;
+    text-decoration: none;
+    color: #fff242;
+    font-size: 1.1rem;
+}
 
 
 @font-face {
