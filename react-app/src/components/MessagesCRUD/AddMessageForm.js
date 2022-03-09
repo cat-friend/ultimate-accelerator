@@ -16,6 +16,7 @@ function AddMessageForm() {
         setErrors([]);
         console.log("message", message)
         setMessage(message.replace(`\n`, "<br>"))
+        console.log("message", message)
         const payload = {
             message_id: message.id,
             user_id: userId,
