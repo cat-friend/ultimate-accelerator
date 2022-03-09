@@ -47,7 +47,7 @@ function UserPage() {
                         {hasClan ?
                             <NavLink to={`/clans/${user.clan_id}`} className={`a-${userId % 2}`}>{`${clan?.name}`}</NavLink> :
                             isUser ?
-                                <>"Hey, you're not in a clan yet! Check out the <NavLink to="/clans" className={`a-${userId % 2}`}>clans page</NavLink>  to find a clan to join"</> :
+                                <>Hey, you're not in a clan yet! Check out the <NavLink to="/clans" className={`a-${userId % 2}`}>clans page</NavLink>  to find a clan to join</> :
                                 `${user.username} hasn't joined a clan yet.`
                         }
                     </p>

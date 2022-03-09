@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import * as clanActions from "../../store/clan"
 
 import DeleteClanModal from "../DeleteClanModal";
@@ -45,7 +45,7 @@ function ClanPage() {
             <div className="content">
                 <h3>Members:</h3>
                 {clan_members && clan_members.map((ele, i) => {
-                    return <div key={i} className={`member-${i % 2}`}>{ele.username}{ele.user_id === clan?.owner_user_id && (<> - Admin</>)}</div>
+                    return <div key={i} className={`member-${i % 2}`}><NavLink to={`/users/${ele.user_id}`} className={`a-${i % 2}`}>{ele.username}{ele.user_id === clan?.owner_user_id && (<> - Admin</>)}</NavLink></div>
                 })}
             </div>
         </div>

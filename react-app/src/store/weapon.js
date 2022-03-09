@@ -7,7 +7,7 @@ const loadWeapons = weapons => ({
 
 export const getAllWeapons = () => async (dispatch) => {
     // fetch weapons from backend
-    const response = await fetch('/api/weapons');
+    const response = await fetch('/api/weapons/');
     const data = await response.json();
     const weapons = {}
     // map through array and set weapon id: weapon_name

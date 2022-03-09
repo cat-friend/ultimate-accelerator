@@ -7,7 +7,7 @@ const loadLegends = legends => ({
 
 export const getAllLegends = () => async (dispatch) => {
     // fetch legends from backend
-    const response = await fetch('/api/legends');
+    const response = await fetch('/api/legends/');
     const data = await response.json();
     const legends = {}
     // map through array and set legend id: legend_name
