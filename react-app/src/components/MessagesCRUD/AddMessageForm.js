@@ -14,14 +14,13 @@ function AddMessageForm() {
         e.preventDefault();
         e.stopPropagation();
         setErrors([]);
-        console.log("message", message)
-        setMessage(message.replace(`\n`, "<br>"))
-        console.log("message", message)
+        const newMessage = message.replace(/\n/g, "<br>");
+
         const payload = {
             message_id: message.id,
             user_id: userId,
             clan_id: clanId,
-            message: message
+            message: newMessage
         }
         return (dispatch(clanActions.postMessage(payload)).then(
             (response) => {

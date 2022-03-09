@@ -38,13 +38,16 @@ def new_message():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@message_routes.route('/<int:id>', methods=['PUT', 'DELETE'])
+@message_routes.route('/<int:id>', methods=['PUT', 'DELETE', 'GET'])
 def one_message(id):
     """
     Responds to PUT requests by editing a message, returns the message.
     Responds to DELETE requests by delete a message, returns empty dict and 200 status.
     If request fails validation, returns errors.
     """
+    if request.method == 'GET':
+        message = Message.query.get(id)
+        return message.to_dict()
     if request.method == 'PUT':
         form = EditMessageForm()
         form['csrf_token'].data = request.cookies['csrf_token']
