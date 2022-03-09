@@ -5,9 +5,6 @@ import { useSelector } from 'react-redux';
 
 function About() {
     const user = useSelector(state => state.session.user)
-
-
-
     return (<>{user &&
         <>
             <div id="title">
