@@ -27,6 +27,29 @@ export const getOneUser = (id) => async (dispatch) => {
     }
 }
 
+export const editOneUser = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/users/${payload.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+        const user = await response.json();
+        user.clan_id = user.clan_id.clan_id;
+        dispatch(loadOneUser(user));
+        return user;
+    }
+    else if (response.status < 500) {
+        const data = await response.json();
+        return data
+    }
+    else {
+        return ['An error occurred. Please try again.']
+    }
+}
+
 export default function userReducer(state = {}, action) {
     switch (action.type) {
         case LOAD_USER:

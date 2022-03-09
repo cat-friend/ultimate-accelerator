@@ -40,7 +40,6 @@ def user(id):
     if request.method == "PUT":
         form = UserForm()
         form['csrf_token'].data = request.cookies['csrf_token']
-
         if form.validate_on_submit():
             bio = form.data["bio"]
             user.bio = bio

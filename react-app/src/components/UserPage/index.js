@@ -36,10 +36,10 @@ function UserPage() {
                         <button onClick={() => {
                             setShowEditForm(true);
                             setShowEditButton(false)
-                        }}>
+                        }}>EDIT
                         </button>
                     </div>}
-                    {showEditForm && <EditBio />}
+                    {showEditForm && <EditBio user={user} setShowEditForm={setShowEditForm} setShowEditButton={setShowEditButton} />}
                 </div>
                 <div className="content">
                     <h3>Clan:</h3>

@@ -234,6 +234,9 @@ button:hover {
     font-size: 1.1rem;
 }
 
+textarea.input {
+    min-height: 2rem;
+}
 
 @font-face {
     font-family: 'apexregular';
