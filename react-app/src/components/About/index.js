@@ -2,11 +2,14 @@ import title from './title.svg'
 import "./About.css"
 import { useSelector } from 'react-redux';
 
+
 function About() {
     const user = useSelector(state => state.session.user)
 
-    return (
-        (<>{user && <>
+
+
+    return (<>{user &&
+        <>
             <div id="title">
                 <img src={title} alt="Ultimate Accelerator title" />
                 <div className="bp-container">
@@ -36,8 +39,7 @@ function About() {
                     </div>
                 </div>
             </div></>}
-        </>
-        )
+    </>
     );
 }
 

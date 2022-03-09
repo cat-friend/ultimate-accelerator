@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NavBar from './components/NavBar'
 import ProtectedRoute from './components/Auth/ProtectedRoute';
@@ -32,37 +32,51 @@ function App() {
 
   return (<>
     <nav><NavBar /></nav>
-    <div className='root'>
-      <Switch>
-        <Route path='/' exact={true}>
+    <Switch>
+      <Route path='/' exact={true}>
+        <div id='root'>
           <Auth loaded={loaded} />
-          <About loaded={loaded} />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        </div>
+        <About loaded={loaded} />
+      </Route>
+      <ProtectedRoute path='/users' exact={true} >
+        <div id='root'>
           <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/challenges' exact={true} >
+        </div>
+      </ProtectedRoute>
+      <ProtectedRoute path='/users/:userId/challenges' exact={true} >
+        <div id='root'>
           <Challenges />
-        </ProtectedRoute>
-        <ProtectedRoute path='/challenges' exact={true} >
+        </div>
+      </ProtectedRoute>
+      <ProtectedRoute path='/challenges' exact={true} >
+        <div id='root'>
           <AddChallengeForm />
-        </ProtectedRoute>
-        <ProtectedRoute path='/clans' exact={true} >
+        </div>
+      </ProtectedRoute>
+      <ProtectedRoute path='/clans' exact={true} >
+        <div id='root'>
           <Clans />
-        </ProtectedRoute>
-        <ProtectedRoute path='/clans/:clanId' exact={true} >
+        </div>
+      </ProtectedRoute>
+      <ProtectedRoute path='/clans/:clanId' exact={true} >
+        <div id='root'>
           <ClanPage />
-        </ProtectedRoute>
-        <ProtectedRoute path='/tutorial' exact={true} >
+        </div>
+      </ProtectedRoute>
+      <ProtectedRoute path='/tutorial' exact={true} >
+        <div id='root'>
           <Tutorial />
-        </ProtectedRoute>
-        <ProtectedRoute path='/accelerate/:userId' exact={true} >
+        </div>
+      </ProtectedRoute>
+      <ProtectedRoute path='/accelerate/:userId' exact={true} >
+        <div id='root'>
           <UltimateAccelerator />
-        </ProtectedRoute>
-        <Route>
-        </Route>
-      </Switch>
-    </div>
+        </div>
+      </ProtectedRoute>
+      <Route>
+      </Route>
+    </Switch>
     <Footer />
   </>
   );
