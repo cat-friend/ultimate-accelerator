@@ -15,7 +15,7 @@ const NavBar = () => {
         (
           <>
             <div className="nav-link">
-              <h1>hi, {sessionUser.username} :)</h1>
+              <NavLink to={`/users/${sessionUser.id}`}><h1>hi, {sessionUser.username} :]</h1></NavLink>
               {isQT && <p>sup qt 3.14</p>}
             </div>
             <div className="nav-link">
@@ -40,12 +40,12 @@ const NavBar = () => {
           <div className="nav-link"></div>
         </>)
       }
-        {/* <div id="left-icon">
+      {/* <div id="left-icon">
         </div> */}
-        {/* <div id="icon">
+      {/* <div id="icon">
           <img src={logo} id="logo" />
         </div> */}
-        <NavLink to="/"><img src={logo} id="logo" alt="Ultimate Accelerator logo that, when clicked, redirects user to the splash page"/></NavLink>
+      <NavLink to="/"><img src={logo} id="logo" alt="Ultimate Accelerator logo that, when clicked, redirects user to the splash page" /></NavLink>
     </>)
 }
 export default NavBar;
