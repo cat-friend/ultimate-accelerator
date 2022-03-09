@@ -23,9 +23,10 @@ body {
     padding-bottom: 5rem;
 }
 
-div.root {
+div#root {
     margin: 2rem auto 2rem auto;
     max-width: 1000px;
+    width: fit-content;
     min-width: 40%;
     padding: 3rem 3rem 0 3rem;
     min-height: 100%;

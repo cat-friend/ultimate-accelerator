@@ -2,11 +2,11 @@ import title from './title.svg'
 import "./About.css"
 import { useSelector } from 'react-redux';
 
+
 function About() {
     const user = useSelector(state => state.session.user)
-
-    return (
-        (<>{user && <>
+    return (<>{user &&
+        <>
             <div id="title">
                 <img src={title} alt="Ultimate Accelerator title" />
                 <div className="bp-container">
@@ -17,11 +17,11 @@ function About() {
                         <p align="center"><i className="fa-solid fa-star"></i> <i className="fa-solid fa-star"></i> <i className="fa-solid fa-star"></i> Complete Challenges &gt; Earn Stars &gt; Level Up Battle Pass &gt; Earn Rewards <i className="fa-solid fa-star"></i> <i className="fa-solid fa-star"></i> <i className="fa-solid fa-star"></i></p>
                         <p>Ulimate Accelerator is an app that helps players determine the most efficient way to play <i>Apex Legends</i> by determining the combination of challenges that can be completed simultaneously that maximizes the number of stars that they can accrue. Players enter their outstanding challenges. They can view, update, and delete their challenges.</p>
                         <p>Ultimate Accelerator also gives players a way to connect with other <i>Apex Legends</i> players. They can create and join clans and post messages on their clan's page.</p>
-                        <p>This project was created as my capstone project for App Academy's 24-week full-stack software engineering bootcamp.</p>
+                        <p>I developed Ultimate Accelerator for my capstone project for App Academy's 24-week full-stack software engineering bootcamp. It started as a labor of love for Dolph Squid so that he can complete as many Battle Pass Challenges as possible during the dregs of a season but has come to represent so much more. It's my best work to date and a project that I genuinely love working on and improving for my friends.</p>
                     </div>
                     <div className="content">
                         <h3>Dedication</h3>
-                        <p>This project is dedicated to:</p>
+                        <p>Ultimate Accelerator is dedicated to:</p>
                         <ul>
                             <li className="dedication">
                                 my buddies Dolph Squid, Blueberry Smith, Green Pepper, Yellow Yoshi, and Umbasa Nova -- you are the Apex Legends of my life. I love you so much, thanks for playing with me even though I fall off the map all the time;
@@ -36,8 +36,7 @@ function About() {
                     </div>
                 </div>
             </div></>}
-        </>
-        )
+    </>
     );
 }
 
