@@ -13,6 +13,7 @@ function UserPage() {
     const isUser = Boolean(sessionUser.id === +userId)
     const userBio = user ? user.bio : null;
     const hasClan = Boolean(user.clan_id)
+    const clan = useSelector(state => state.clans)
     useEffect(() => {
         dispatch(getOneUser(userId));
         if (user?.clan_id) dispatch(getOneClan(user.clan_id));
@@ -20,9 +21,9 @@ function UserPage() {
     return (
         <>
             <div className="header-parent">
-                <div className="left-corner-b"></div>
-                <div className="header-child-b"><h2>{user?.username}</h2></div>
-                <div className="right-corner-b"></div>
+                <div className="left-corner"></div>
+                <div className="header-child"><h2>{user?.username}</h2></div>
+                <div className="right-corner"></div>
             </div>
             <div className="content-container">
                 <div className="content">
@@ -32,16 +33,13 @@ function UserPage() {
                     <h3>Clan:</h3>
                     <p>
                         {hasClan ?
-                            <NavLink to={`/clans/${user.clan_id}`} /> :
+                            <NavLink to={`/clans/${user.clan_id}`} className="clan-0">{`${clan?.name}`}</NavLink> :
                             isUser ?
-                                `Hey, you're not in a clan yet! Check out the ${<NavLink to="/clans" className="clan-1">clans page</NavLink>}  to find a clan to join` :
+                                <>"Hey, you're not in a clan yet! Check out the <NavLink to="/clans" className="clan-1">clans page</NavLink>  to find a clan to join"</> :
                                 `${user.username} hasn't joined a clan yet.`
                         }
                     </p>
                 </div>
-                {/* <div className="content">
-                    <h3>STATS</h3>
-                </div> */}
             </div>
             <ChallengesBrowser />
         </>

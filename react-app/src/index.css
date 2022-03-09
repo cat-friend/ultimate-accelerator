@@ -35,13 +35,12 @@ div#root {
 a {
     transition: all .5s ease-in;
     text-decoration: none;
-    color: red;
+    color: rgb(238, 255, 0);
     font-size: 1.1rem;
 }
 
 a:hover {
-    color: black;
-    font-size: 1.2rem;
+    color: rgb(255, 255, 255);
     text-decoration: underline
 }
 
