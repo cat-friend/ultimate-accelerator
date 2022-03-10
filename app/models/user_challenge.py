@@ -1,5 +1,5 @@
 from .db import db
-from sqlalchemy.sql import func
+from sqlalchemy.sql import func, text
 
 
 class UserChallenge(db.Model):
@@ -11,6 +11,7 @@ class UserChallenge(db.Model):
     challenge_type_id = db.Column(db.Integer, db.ForeignKey("challengetypes.id"), nullable=False)
     status = db.Column(db.String(16), default="open")
     value = db.Column(db.Integer, nullable=False)
+    season = db.Column(db.Integer, nullable=False, server_default=text("12"))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, onupdate=func.now())
 
