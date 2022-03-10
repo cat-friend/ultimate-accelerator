@@ -1,15 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 // import * as messageActions from "../../store/challenge";
 import EditMessageModal from "../MessagesCRUD/EditMessageModal";
 import DeleteMessageModal from "../MessagesCRUD/DeleteMessageModal";
 import './Messages.css';
 import AddMessageForm from "../MessagesCRUD/AddMessageForm";
+import * as clanActions from "../../store/clan"
 
 function MessagesBrowser() {
-    const { clanId } = useParams()
+    const dispatch = useDispatch();
+    const { clanId } = useParams();
     const messages = useSelector(state => state.clans.messages ? Object.values(state.clans.messages) : null);
+    useEffect(() => {
+        dispatch(clanActions.getOneClan(clanId));
+    }, [dispatch, clanId, messages?.length])
+
     const user = useSelector(state => state.session.user);
     const userId = user?.id
     const isMember = user.clan_id === +clanId;
