@@ -235,7 +235,7 @@ def s12_import(id):
     form = SeedUserForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        seed_one_user(id)
+        seed_one_user([id])
         user_challenges = UserChallenge.query.filter(
             UserChallenge.user_id == id).all()
         return {"challenges": [user_challenge.to_dict() for user_challenge in user_challenges]}

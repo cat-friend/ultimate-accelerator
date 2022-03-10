@@ -1,7 +1,7 @@
 #pic {
     margin: auto auto;
     border: solid white 2px;
-    border-radius:  120px / 10px 100px;
+    border-radius: 120px / 10px 100px;
     aspect-ratio: 4/6;
     background: url(./smol.png);
     background-repeat: no-repeat;
@@ -14,4 +14,12 @@
 
 .bio {
     display: grid;
+}
+
+#skills {
+    display: grid;
+    grid-column: 1/3;
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-between;
+    align-content: center
 }
