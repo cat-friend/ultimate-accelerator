@@ -23,7 +23,6 @@ function AddChallengeForm() {
         setChecked(updatedCheckedState)
         checkedModes = modes.filter((ele, i) => {
             if (updatedCheckedState[i]) {
-                console.log(updatedCheckedState[i]);
                 return true};
             return false;
         })

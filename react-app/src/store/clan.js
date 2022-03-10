@@ -83,7 +83,6 @@ export const getOneClan = (id) => async (dispatch) => {
             headers: { "Content-Type": "application/json" }
         });
     const clan_data = await response.json();
-    console.log("clan data pre-process", clan_data)
     const clan = {};
     if (response.ok) {
         clan.id = clan_data.clan.id;
