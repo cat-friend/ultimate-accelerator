@@ -1,0 +1,17 @@
+div.message {
+    width: fit-content;
+    border: 0;
+    margin: 0;
+    padding: .5rem;
+}
+
+div.inbox {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media (max-width: 800px) {
+    div.inbox {
+        width: 100%;
+    }
+}
