@@ -15,6 +15,7 @@ import About from './components/About';
 import Tutorial from "./components/Tutorial"
 import UltimateAccelerator from './components/UltimateAccelerator';
 import UserPage from './components/UserPage';
+import Denise from './components/Denise';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -78,6 +79,11 @@ function App() {
       <ProtectedRoute path="/users/:userId" exact={true}>
         <div id="root">
           <UserPage />
+        </div>
+      </ProtectedRoute>
+      <ProtectedRoute path="/denise" exact={true}>
+        <div id="root">
+          <Denise />
         </div>
       </ProtectedRoute>
       <Route>

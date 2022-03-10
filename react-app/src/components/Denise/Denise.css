@@ -1,0 +1,17 @@
+#pic {
+    margin: auto auto;
+    border: solid white 2px;
+    border-radius:  120px / 10px 100px;
+    aspect-ratio: 4/6;
+    background: url(./smol.png);
+    background-repeat: no-repeat;
+    max-width: 300px;
+    min-width: 150px;
+    background-size: 100%;
+    background-position: center center;
+    align-self: center;
+}
+
+.bio {
+    display: grid;
+}
