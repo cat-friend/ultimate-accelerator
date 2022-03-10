@@ -15,8 +15,6 @@ function AddChallengeForm() {
     const [stars, setStars] = useState("");
     const user = useSelector(state => state.session.user);
     const history = useHistory();
-
-
     const modeNames = ["Battle Royale", "Arena", "LTM"]
     const modes = [1, 2, 3]
     let checkedModes

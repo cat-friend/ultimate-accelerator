@@ -12,7 +12,6 @@ function ChallengesBrowser() {
     const dispatch = useDispatch();
     const { userId } = useParams();
     const history = useHistory();
-
     const allChallenges = useSelector(state => {
         return Object.values(state.challenges)
     });
@@ -25,7 +24,6 @@ function ChallengesBrowser() {
     const currUser = useSelector(state => state?.session?.user)
     const isUser = Boolean(+userId === currUser.id)
     const hasChallenges = Boolean(incompleteChallenges.length);
-
     const completeChallenges = allChallenges.filter((ele) => ele.status === 'completed');
 
     return (<>
@@ -105,8 +103,7 @@ function ChallengesBrowser() {
                 </>
             )
         }
-    </>
-    )
+    </>)
 }
 
 export default ChallengesBrowser
