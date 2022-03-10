@@ -1,9 +1,8 @@
-from http.cookiejar import LWPCookieJar
 from flask import Blueprint, request
-from jinja2 import Undefined
-from sqlalchemy import null
 from app.models import UserChallenge, db, UserChallengeDimensionTable
 from app.forms import ChallengeForm, EditChallengeForm, DeleteChallengeForm
+from app.seeds import seed_one_user
+from app.forms import SeedUserForm
 
 challenge_routes = Blueprint('challenges', __name__)
 
@@ -131,7 +130,8 @@ def calc_max(id):
             result[f"legend_mode_{mode}"] = [
                 {"sum": row.results, "legend_id": row.legend_id, "mode_id": row.mode_id} for row in query_result]
             max = result[f"legend_mode_{mode}"][0]["sum"]
-            result[f"legend_mode_{mode}"] = list(filter(lambda ele: ele["sum"] == max, result[f"legend_mode_{mode}"]))
+            result[f"legend_mode_{mode}"] = list(
+                filter(lambda ele: ele["sum"] == max, result[f"legend_mode_{mode}"]))
             lookup_list = []
             result[f"legend_mode_{mode}_challenges"] = {}
             for row in result[f"legend_mode_{mode}"]:
@@ -176,7 +176,8 @@ def calc_max(id):
             result[f"weapon_mode_{mode}"] = [
                 {"sum": row.results, "weapon_id": row.weapon_id, "mode_id": row.mode_id} for row in query_result]
             max = result[f"weapon_mode_{mode}"][0]["sum"]
-            result[f"weapon_mode_{mode}"] = list(filter(lambda ele: ele["sum"] == max, result[f"weapon_mode_{mode}"]))
+            result[f"weapon_mode_{mode}"] = list(
+                filter(lambda ele: ele["sum"] == max, result[f"weapon_mode_{mode}"]))
             lookup_list = []
             result[f"weapon_mode_{mode}_challenges"] = {}
             for row in result[f"weapon_mode_{mode}"]:
@@ -199,7 +200,7 @@ def calc_max(id):
                     ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'weapon_id': weapon_id}).fetchall()
                 for row in query_result:
                     result[f"weapon_mode_{mode}_challenges"][row.id] = {"sum": row.sum, "id": row.id,
-                                                                    "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
+                                                                        "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
         except:
             result[f"weapon_mode_{mode}"] = []
             result[f"weapon_mode_{mode}_challenges"] = {}
@@ -224,3 +225,19 @@ def calc_max(id):
                                                    "challenge_label": row.challenge_label, "status": row.status} for row in query_result]
     return result
 
+
+@challenge_routes.route('/import/<int:id>', methods=['POST'])
+def s12_import(id):
+    """
+    Responds to POST requests by importing current S12 challenges for a user.
+    If the user already has challenges, they will not be able to import
+    """
+    form = SeedUserForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        seed_one_user(id)
+        user_challenges = UserChallenge.query.filter(
+            UserChallenge.user_id == id).all()
+        return {"challenges": [user_challenge.to_dict() for user_challenge in user_challenges]}
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401

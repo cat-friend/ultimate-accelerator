@@ -17,7 +17,7 @@ function AddChallengeForm() {
     const history = useHistory();
 
 
-    const modeNames = ["Battle\n Royale", "Arena", "LTM"]
+    const modeNames = ["Battle Royale", "Arena", "LTM"]
     const modes = [1, 2, 3]
     let checkedModes
     const handleCheckboxOnChange = (index) => {
@@ -72,7 +72,7 @@ function AddChallengeForm() {
                     setChecked(new Array(3).fill(false))
                     setTimeout(() => {
                         setShowSuccess(false);
-                    }, 1000);
+                    }, 750);
                 }
             );
     };

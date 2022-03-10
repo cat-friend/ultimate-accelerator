@@ -46,7 +46,7 @@ function CreateClan() {
                 {errors.map((error, idx) => (
                     <p key={idx} className="errors">{error}</p>
                 ))}
-                {showSuccess && (<h2>Success!</h2>)}
+                {showSuccess && (<h2>GREAT SUCCESS!</h2>)}
                 <form onSubmit={(e) => handleSubmit(e)} className="clans">
                     <div>
                         <input

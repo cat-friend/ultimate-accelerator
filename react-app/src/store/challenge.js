@@ -13,10 +13,25 @@ const addOneChallenge = challenge => ({
     challenge
 });
 
+
 export const deleteOneChallenge = challenge => ({
     type: DELETE_CHALLENGE,
     challenge
 });
+
+export const importSeasonChallenges = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/challenges/import/${payload.user_id}`,
+        {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+    const challenges = await response.json();
+    if (response.ok) {
+        dispatch(loadAllChallenges(challenges));
+    }
+    return challenges;
+};
 
 export const createChallenge = (payload) => async (dispatch) => {
     const response = await fetch("/api/challenges/",
@@ -49,7 +64,6 @@ export const getOneChallenge = (id) => async (dispatch) => {
     }
     return challenge;
 }
-
 
 export const editChallenge = (payload) => async (dispatch) => {
     const response = await fetch(`/api/challenges/${payload.user_challenge_id}`,
