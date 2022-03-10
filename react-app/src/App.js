@@ -81,11 +81,11 @@ function App() {
           <UserPage />
         </div>
       </ProtectedRoute>
-      <ProtectedRoute path="/denise" exact={true}>
+      <Route path="/denise" exact={true}>
         <div id="root">
           <Denise />
         </div>
-      </ProtectedRoute>
+      </Route>
       <Route>
       </Route>
     </Switch>

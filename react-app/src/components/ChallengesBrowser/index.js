@@ -12,19 +12,18 @@ function ChallengesBrowser() {
     const dispatch = useDispatch();
     const { userId } = useParams();
     const history = useHistory();
+    const allChallenges = useSelector(state => {
+        return Object.values(state.challenges)
+    });
+    const incompleteChallenges = allChallenges.filter((ele) => ele.status !== 'completed');
     useEffect(() => {
         dispatch(challengeActions.loadChallenges(userId));
         dispatch(userActions.getOneUser(userId));
     }, [dispatch, userId])
-    const allChallenges = useSelector(state => {
-        return Object.values(state.challenges)
-    });
     const thisUser = useSelector(state => state?.user)
     const currUser = useSelector(state => state?.session?.user)
     const isUser = Boolean(+userId === currUser.id)
-    const incompleteChallenges = allChallenges.filter((ele) => ele.status !== 'completed');
     const hasChallenges = Boolean(incompleteChallenges.length);
-
     const completeChallenges = allChallenges.filter((ele) => ele.status === 'completed');
 
     return (<>
@@ -104,8 +103,7 @@ function ChallengesBrowser() {
                 </>
             )
         }
-    </>
-    )
+    </>)
 }
 
 export default ChallengesBrowser

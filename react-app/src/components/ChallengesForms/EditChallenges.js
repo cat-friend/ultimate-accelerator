@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ChallengesForms.css"
 import * as challengeActions from "../../store/challenge"
 
-
 function EditChallenge({ challengeId }) {
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch();
@@ -30,9 +29,10 @@ function EditChallenge({ challengeId }) {
                         }, 2000);
                         return
                     }
-                    dispatch(challengeActions.getOneChallenge(challengeId))
                     setShowSuccess(true);
                     setTimeout(() => {
+                        dispatch(challengeActions.loadChallenges(curr_user_id));
+                        setNewStatus(status);
                         setShowSuccess(false);
                     }, 500);
                 }

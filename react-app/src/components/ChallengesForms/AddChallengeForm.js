@@ -15,8 +15,6 @@ function AddChallengeForm() {
     const [stars, setStars] = useState("");
     const user = useSelector(state => state.session.user);
     const history = useHistory();
-
-
     const modeNames = ["Battle Royale", "Arena", "LTM"]
     const modes = [1, 2, 3]
     let checkedModes
@@ -25,8 +23,8 @@ function AddChallengeForm() {
         setChecked(updatedCheckedState)
         checkedModes = modes.filter((ele, i) => {
             if (updatedCheckedState[i]) {
-                return true
-            };
+                console.log(updatedCheckedState[i]);
+                return true};
             return false;
         })
     }

@@ -1,14 +1,6 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getOneUser } from "../../store/user";
-import { getOneClan } from "../../store/clan";
 import "./Denise.css";
 
 function Denise() {
-    const { userId } = useParams();
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
     return (
         <>
             <div className="header-parent">
@@ -23,7 +15,7 @@ function Denise() {
                     the
                     Kalahari Desert as a wildlife researcher and aboard commercial fishing boats in the Bering Sea as a
                     fisheries biologist and worked as an environmental scientist in Los Angeles, CA (see my first React/Redux
-                    project, <a href="https://dpl-wildr.herokuapp.com" target="_blank" rel="noopener">Wildr</a>, for photos from my field biologist
+                    project, <a href="https://dpl-wildr.herokuapp.com" target="_blank" rel="noreferrer">Wildr</a>, for photos from my field biologist
                     days).<br /><br />
                     I'm intense. I'm resourceful. I get stuff done.<br /><br />
                     <h2><a href="https://denisepli.com" target="_blank" rel="noreferrer" style={{ fontSize: "1.5rem" }}>Website</a></h2><br/>
