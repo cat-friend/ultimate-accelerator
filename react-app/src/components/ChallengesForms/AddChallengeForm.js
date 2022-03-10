@@ -59,7 +59,6 @@ function AddChallengeForm() {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
 
-<<<<<<< Updated upstream
         return dispatch(challengeActions.createChallenge(payload))
             .then(
                 (response) => {
@@ -76,25 +75,6 @@ function AddChallengeForm() {
                     }, 750);
                 }
             );
-=======
-        console.log("payload", payload)
-        // return dispatch(challengeActions.createChallenge(payload))
-        //     .then(
-        //         (response) => {
-        //             if (response.errors) {
-        //                 setErrors(response.errors)
-        //                 return
-        //             }
-        //             setShowSuccess(true);
-        //             setInput("")
-        //             setStars("")
-        //             setChecked(new Array(3).fill(false))
-        //             setTimeout(() => {
-        //                 setShowSuccess(false);
-        //             }, 1000);
-        //         }
-        //     );
->>>>>>> Stashed changes
     };
 
     return (
