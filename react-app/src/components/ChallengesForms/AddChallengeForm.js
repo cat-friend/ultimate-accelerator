@@ -156,26 +156,26 @@ function AddChallengeForm() {
                                     value={stars} />
                             </div>
                             <div className="button-div">
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    history.push("/tutorial")
-                                }}
-                            >TUTORIAL</button>
-                            <button
-                                type="submit"
-                                disabled={showSuccess}>
-                                {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setInput("");
-                                    setChecked(new Array(3).fill(true));
-                                    setStars("")
-                                }}>
-                                RESET
-                            </button>
-                        </div>
+                                <button
+                                    type="submit"
+                                    disabled={showSuccess}>
+                                    {showSuccess ? "SUCCESS!" : "SUBMIT"}</button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setInput("");
+                                        setChecked(new Array(3).fill(true));
+                                        setStars("")
+                                    }}>
+                                    RESET
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        history.push("/tutorial")
+                                    }}
+                                >TUTORIAL</button>
+                            </div>
                         </div>
                     </form>
                 </div>
