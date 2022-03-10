@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -5,7 +6,7 @@ function Footer() {
         <div id="footer">
             <div id="skewed">
                 <div id="bio-links">
-                    <div><a href="https://denisepli.com" target="_blank" rel="noreferrer">Denise Li</a></div>
+                    <div><Link to="/denise">Denise P. Li</Link></div>
                     <div><a href="mailto:denisepli@gmail.com">Email</a></div>
                     <div><a href="https://github.com/cat-friend/ultimate-accelerator" target="_blank" rel="noreferrer">GitHub</a></div>
                     <div><a href="https://www.linkedin.com/in/denise-li-45350320/" target="_blank" id="end" rel="noreferrer">LinkedIn</a></div>
