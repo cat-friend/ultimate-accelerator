@@ -34,7 +34,7 @@ function Denise() {
                 <div className="content">
                     <div id="pic" alt="div with background image of my big dumb face"></div>
                 </div>
-                <div className="content" style={{gridColumn: "1/3", display: "grid", gridTemplateColumns: "repeat(3, auto)", justifyContent: "space-between", alignContent: "center"}}>
+                <div className="content" id="skills">
                     <h3 style={{gridColumn: "1/4"}}>Skills:</h3>
                     <div>Team Leadership</div>
                     <div>Project Management</div>
