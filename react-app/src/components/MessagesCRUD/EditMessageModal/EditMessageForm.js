@@ -8,7 +8,6 @@ function EditMessageForm({ setShowModal, clanId, message }) {
     const [showSuccess, setShowSuccess] = useState(false)
     const [newMessage, setNewMessage] = useState(message.message);
     const userId = useSelector(state => state.session.user.id)
-    console.log("message", message)
     const handleSubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -19,7 +18,6 @@ function EditMessageForm({ setShowModal, clanId, message }) {
             clan_id: clanId,
             message: newMessage
         }
-        console.log("payload", payload)
         return (dispatch(clanActions.editMessage(payload)).then(
             (response) => {
                 if (response.errors) {
@@ -30,6 +28,7 @@ function EditMessageForm({ setShowModal, clanId, message }) {
                 setTimeout(() => {
                     setShowModal(false);
                     dispatch(clanActions.addMessage(response));
+                    dispatch(clanActions.getOneClan(clanId));
                 }, 750);
             }))
     }
