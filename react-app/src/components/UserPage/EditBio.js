@@ -44,7 +44,7 @@ function EditBio({ user, setShowEditButton, setShowEditForm }) {
                     <textarea
                         value={bio}
                         onChange={(e) => setBio(e.target.value)}
-                        placeholder="Clan description (optional)"
+                        placeholder="VERY C OOL WORDS ABOUT HOW COOL YOU ARE"
                         className="input"
                     />
                 </div>
