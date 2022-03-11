@@ -48,15 +48,16 @@ function AddChallengeForm() {
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
         const legendsArray = input.toLowerCase().match(legendsRegex)
         const weaponsArray = input.toLowerCase().match(weaponsRegex)
-
-        payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : abilitiesArray ? 1 :
+        console.log("challengeArray", challengeArray)
+        console.log("abilities array", abilitiesArray)
+        payload.challenge_type_id = (challengeArray[0] ? challengeTypeDict[challengeArray[0]] : abilitiesArray[0] ? 1 :
             0
         );
         payload.weapon_id = weaponsArray ? weaponsDict[weaponsArray[0]] : [null];
         legendsArray ? legendsArray.forEach((ele) => {
             payload.legend_id.push(...legendsDict[ele])
         }) : payload.legend_id.push(null);
-
+        console.log("payload", payload)
         return dispatch(challengeActions.createChallenge(payload))
             .then(
                 (response) => {
