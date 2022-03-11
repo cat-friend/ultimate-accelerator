@@ -5,7 +5,11 @@ import { useDispatch } from "react-redux";
 function ImportForm({ userId }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
+    const [buttonText, setButtonText] = useState("IMPORT");
+    const [isDisabled, setIsDisabled] = useState(false);
     const handleSubmit = () => {
+        setButtonText("LOADING");
+        setIsDisabled(true)
         const payload = {
             user_id: userId
         }
@@ -14,6 +18,7 @@ function ImportForm({ userId }) {
                 (response) => {
                     if (response.errors) {
                         setErrors(response.errors);
+                        setIsDisabled(false);
                         return;
                     }
                     return;
@@ -32,8 +37,9 @@ function ImportForm({ userId }) {
                 <button
                     type="button"
                     onClick={() => handleSubmit()}
+                    disabled={isDisabled}
                 >
-                    IMPORT
+                    {buttonText}
                 </button>
             </div>
         </>
