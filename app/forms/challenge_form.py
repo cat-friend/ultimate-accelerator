@@ -9,7 +9,7 @@ class ListField(Field):
 
 def is_present(form, field):
     challenge_type_id = field.data
-    if not challenge_type_id:
+    if challenge_type_id < 1:
         raise ValidationError("No challenge type detected. Please enter a valid Apex Legends battle pass challenge!")
 
 
