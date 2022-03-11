@@ -45,9 +45,9 @@ function AddChallengeForm() {
         setErrors([]);
         const challengeArray = input.toLowerCase().match(challengeTypeRegex)
         const abilitiesArray = input.toLowerCase().match(abilitiesRegex)
-        const legendsArray = input.toLowerCase().match(legendsRegex)
-        const weaponsArray = input.toLowerCase().match(weaponsRegex)
-        payload.challenge_type_id = (challengeArray[0] ? challengeTypeDict[challengeArray[0]] : abilitiesArray[0] ? 1 :
+        const legendsArray = input.toLowerCase().match(legendsRegex);
+        const weaponsArray = input.toLowerCase().match(weaponsRegex);
+        payload.challenge_type_id = (challengeArray ? challengeTypeDict[challengeArray[0]] : abilitiesArray[0] ? 1 :
             0
         );
         payload.weapon_id = weaponsArray ? weaponsDict[weaponsArray[0]] : [null];
