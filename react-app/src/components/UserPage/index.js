@@ -5,7 +5,6 @@ import { getOneUser } from "../../store/user";
 import { getOneClan } from "../../store/clan";
 import ChallengesBrowser from "../ChallengesBrowser";
 import EditBio from "./EditBio";
-import InboxModal from "../InboxModal";
 
 function UserPage() {
     const { userId } = useParams();
@@ -24,8 +23,6 @@ function UserPage() {
         if (user?.clan_id) dispatch(getOneClan(user.clan_id));
     }, [dispatch, userId, user.clan_id]);
 
-    const egg = new Set([2, 3, 5, 8, 10])
-    const hasEgg = egg.has(sessionUser?.id)
 
 
 
@@ -42,9 +39,6 @@ function UserPage() {
             </div>
             <div className="content-container">
                 <div className="content">
-                {
-                        hasEgg && <InboxModal userId={sessionUser.id}/>
-                    }
                     <h3>Bio:</h3>
                     <p>{userBio ? userBio : isUser ? "You haven't entered anything for your bio... yet! Please tell people how incredible you are :]" : `${user.username} hasn't entered anything for their bio... yet! But they're probably an incredible person :]`}</p>
                     {isUser && showEditButton && <div className="button-div">
