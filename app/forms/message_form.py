@@ -35,9 +35,9 @@ class MessageForm(FlaskForm):
 
 class EditMessageForm(FlaskForm):
     message_id = IntegerField("", validators=[DataRequired(
-        message="ACK! No message id detected! Please try again")])
+        message="ACK! No message id detected! Please try again"), check_ownership])
     user_id = IntegerField("", validators=[DataRequired(
-        message="Oops! No user id detected!"), check_ownership])
+        message="Oops! No user id detected!")])
     clan_id = IntegerField("", validators=[DataRequired(
         message="Ruh-roh! No clan id detected! Please try again")])
     message = TextAreaField("", validators=[Length(
