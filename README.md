@@ -30,7 +30,7 @@
    SECRET_KEY=<<YOUR-SECRET_KEY>>
    DATABASE_URL=postgresql://ultimate_accel_dev:<<PASSWORD>>@localhost/ultimate_accel_db
 ```
-4. Set up your PostgreSQL user (`ultimate_accel_dev`), password, and database (`ultimate_accel_db`). Make sure that these values match your .env file!
+4. Set up your PostgreSQL user (`ultimate_accel_dev`), password, and database (`ultimate_accel_db`). Make sure that these values match your `.env` file!
 
 5. Access your `pipenv shell`, migrate your database, seed your database, and run your flask app with the following commands:
 ```
