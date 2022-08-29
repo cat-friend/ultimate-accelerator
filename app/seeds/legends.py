@@ -5,7 +5,7 @@ def seed_legends():
     names = ['Bloodhound', 'Gibraltar', 'Lifeline', 'Pathfinder', 'Wraith',
              'Bangalore', 'Caustic', 'Octane', 'Mirage', 'Wattson', 'Crypto',
              'Revenant', 'Loba', 'Rampart', 'Horizon', 'Fuse', 'Valkyrie',
-             'Seer', 'Ash', 'Mad Maggie']
+             'Seer', 'Ash', 'Mad Maggie', 'Newcastle', 'Vantage']
     types = ['Recon', 'Defense', 'Support', 'Recon', 'Assault', 'Assault',
              'Defense', 'Assault', 'Assault', 'Defense', 'Recon', 'Assault',
              'Support', 'Defense', 'Assault', 'Assault', 'Recon', 'Recon',
