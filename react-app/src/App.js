@@ -56,16 +56,6 @@ function App() {
           <AddChallengeForm />
         </div>
       </ProtectedRoute>
-      <ProtectedRoute path='/clans' exact={true} >
-        <div id='root'>
-          <Clans />
-        </div>
-      </ProtectedRoute>
-      <ProtectedRoute path='/clans/:clanId' exact={true} >
-        <div id='root'>
-          <ClanPage />
-        </div>
-      </ProtectedRoute>
       <ProtectedRoute path='/tutorial' exact={true} >
         <div id='root'>
           <Tutorial />

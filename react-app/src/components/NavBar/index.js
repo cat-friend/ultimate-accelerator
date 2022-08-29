@@ -7,7 +7,6 @@ import LogoutButton from '../Auth/LogoutButton';
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
-  const isQT = sessionUser?.id === 5;
 
   return (
     <>
@@ -16,16 +15,12 @@ const NavBar = () => {
           <>
             <div className="nav-link">
               <NavLink to={`/users/${sessionUser.id}`}><h1>hi, {sessionUser.username} :]</h1></NavLink>
-              {isQT && <p>sup qt 3.14</p>}
             </div>
             <div className="nav-link">
               <NavLink to={"/tutorial"}>TUTORIAL</NavLink>
             </div>
             <div className="nav-link">
               <NavLink to={`/users/${sessionUser.id}/challenges`}>BATTLE PASS CHALLENGES</NavLink>
-            </div>
-            <div className="nav-link">
-              <NavLink to="/clans">CLANS</NavLink>
             </div>
             <div className="nav-link">
               <LogoutButton />
