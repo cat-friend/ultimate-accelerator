@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .models import db, User
-from .api import auth_routes, clan_routes, challenge_routes, message_routes, search_routes, user_routes, legend_routes, weapon_routes
+from .api import auth_routes, challenge_routes, search_routes, user_routes, legend_routes, weapon_routes
 from .seeds import seed_commands
 
 from .config import Config
@@ -29,8 +29,6 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(challenge_routes, url_prefix='/api/challenges')
-app.register_blueprint(clan_routes, url_prefix='/api/clans')
-app.register_blueprint(message_routes, url_prefix='/api/messages')
 app.register_blueprint(search_routes, url_prefix='/api/search')
 app.register_blueprint(legend_routes, url_prefix='/api/legends')
 app.register_blueprint(weapon_routes, url_prefix='/api/weapons')
