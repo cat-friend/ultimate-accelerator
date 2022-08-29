@@ -28,9 +28,6 @@ def seed():
     seed_weapon_types()
     seed_weapon()
     seed_modes()
-    seed_clans()
-    seed_clan_users()
-    seed_messages()
     seed_one_user([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
                    16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
 
@@ -43,9 +40,6 @@ def undo():
     undo_weapon_types()
     undo_weapon()
     undo_modes()
-    undo_clans()
-    undo_clan_users()
-    undo_messages()
     undo_user_challenge()
 
 
@@ -60,9 +54,6 @@ def reset():
     undo_weapon_types()
     undo_weapon()
     undo_modes()
-    undo_clans()
-    undo_clan_users()
-    undo_messages()
     undo_user_challenge()
     seed_challenge_types()
     seed_users()
@@ -70,8 +61,5 @@ def reset():
     seed_weapon_types()
     seed_weapon()
     seed_modes()
-    seed_clans()
-    seed_clan_users()
-    seed_messages()
     seed_one_user([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
                    16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
