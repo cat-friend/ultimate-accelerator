@@ -44,6 +44,8 @@ const legendsDict = {
     seer: [18],
     ash: [19],
     maggie: [20],
+    newcastle: [21],
+    vantage: [22],
     recon: [1, 4, 11, 17, 18],
     beacons: [1, 4, 11, 17, 18]
 }
