@@ -11,6 +11,10 @@
 
 ### Prerequisites
  - [Node.js 16.13.1](https://nodejs.org/en/)
+ - [Python3](https://www.python.org/)
+ - [PostgreSQL 12](https://www.postgresql.org/)
+ - [Pipenv](https://pipenv.pypa.io/en/latest/)
+ 
 
 ### Getting Started
 
