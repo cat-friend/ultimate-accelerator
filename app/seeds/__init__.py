@@ -2,10 +2,7 @@ from flask.cli import AppGroup
 
 
 from .challenge_types import seed_challenge_types, undo_challenge_types
-from .clans import seed_clans, undo_clans
-from .clan_users import seed_clan_users, undo_clan_users
 from .legends import seed_legends, undo_legends
-from .messages import seed_messages, undo_messages
 from .modes import seed_modes, undo_modes
 from .weapon_types import seed_weapon_types, undo_weapon_types
 from .weapons import seed_weapon, undo_weapon
@@ -60,5 +57,4 @@ def reset():
     seed_weapon_types()
     seed_weapon()
     seed_modes()
-    seed_one_user([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-                   16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
+    seed_one_user([1])
