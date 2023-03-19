@@ -23,6 +23,7 @@ const challengeTypeDict = {
     outlive: 11,
     survive: 11
 }
+
 const legendsDict = {
     bloodhound: [1],
     gibraltar: [2],
@@ -92,4 +93,13 @@ const weaponsDict = {
     sniper: [7, 16, 17, 19, 20, 30]
 }
 
+const allWeaponsArray = ['30-30 Repeater', 'Alternator', 'Bocek', 'CAR', 'Charge Rifle', 'Devotion', 'EVA-8', 'Flatline', 'G7 Scout', 'Havoc', 'Hemlok', 'Kraber', 'L-STAR', 'Longbow DMR', 'Mastiff', 'Mozambique', 'Nemesis', 'P2020', 'Peacekeeper', 'Prowler', 'R-301', 'R-99', 'Rampage', 'RE-45', 'Sentinel', 'Spitfire', 'Triple Take', 'Volt', 'Wingman' ]
+
+const weaponTypesArray = ['pistol', 'AR', 'LMG', 'SMG', 'shotgun', 'marksman', 'sniper', 'red-tier', 'craftable']
+
+
+
+const weaponTypesDict = {
+    'assault rifle': ['flatline', 'havoc', 'nemesis', 'r-301', 'r301']
+}
 export {challengeTypeDict, legendsDict, weaponsDict}
