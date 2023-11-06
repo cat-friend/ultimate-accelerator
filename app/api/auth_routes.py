@@ -2,6 +2,7 @@ from flask import Blueprint, session, request
 from app.models import User, db, ClanUsers
 from app.forms import LoginForm, SignUpForm
 from flask_login import current_user, login_user, logout_user
+from user_repository import create_user
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -73,15 +74,13 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user = User(
+        user = create_user(
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password']
         )
-        db.session.add(user)
-        db.session.commit()
         login_user(user)
-        return user.to_dict()
+        return user
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
