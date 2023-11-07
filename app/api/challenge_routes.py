@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from app.api.user_challenge import user_challenge_repository
 from app.models import UserChallenge, db, UserChallengeDimensionTable
 from app.forms import ChallengeForm, EditChallengeForm, DeleteChallengeForm
 from app.seeds import seed_one_user
@@ -67,10 +68,12 @@ def get_challenge(id):
     """
     Responds to GET requests with a specific user's UserChallenge.
     """
-    user_challenge = UserChallenge.query.get(id)
+    user_challenge = user_challenge_repository.get_challenge(id)
     return user_challenge.to_dict()
 
 
+# this should be PATCH since we're only changing the status
+# when we make ALL fields editable (except name/challenge str), it will still be a PATCH
 @challenge_routes.route('/<int:id>', methods=['PUT'])
 def edit_challenge(id):
     """
