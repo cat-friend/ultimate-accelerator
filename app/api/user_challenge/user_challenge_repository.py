@@ -36,7 +36,7 @@ class challenge_repository():
         return challenge
 
     def delete_challenge(self, challenge_id):
-        challenge = self.get_challenge
+        challenge = self.get_challenge(challenge_id)
         db.session.delete(challenge)
         db.session.commit()
         return { 'success': True }

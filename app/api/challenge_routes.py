@@ -107,6 +107,12 @@ def delete_challenge(id):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+# should this be its own resource?
+# it's basically getting the challenges from the dimension table and then returning the most efficient way to play,
+# so the resource is the challenges
+# ok to stay here?
+# maybe turn this into a query instead of a nested resource?
+# also omg this is so messy -- gurl abstract this!!!
 @challenge_routes.route('/accelerate/<int:id>', methods=['GET'])
 def calc_max(id):
     modes = [1, 2, 3]
