@@ -11,6 +11,11 @@ class challenge_repository():
         challenge = UserChallenge.query.get(id)
         return challenge
 
+    def get_user_challenges(user_id: str):
+        user_challenges = UserChallenge.query.filter(
+        UserChallenge.user_id == user_id).all()
+        return user_challenges
+
     # positional args suck, turn this into a dict
     def create_challenge(challenge_label: str, challenge_type_id: str, user_id: str, value: int):
         new_challenge = UserChallenge(

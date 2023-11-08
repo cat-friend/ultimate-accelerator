@@ -1,3 +1,4 @@
+# get rid of this
 from flask import Blueprint, session, request
 from app.models import Clan, ClanUsers, User, db
 from app.forms import ClanForm, EditClanForm, DeleteClanForm, JoinClan, LeaveClan

@@ -1,11 +1,11 @@
 from flask import Blueprint, request
 from flask_login import login_required
+from app.api.user_challenge import user_challenge_repository
 from app.models import User, db, UserChallenge
 from app.forms import UserForm
 
 
 user_routes = Blueprint('users', __name__)
-
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -25,13 +25,13 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
+# move this to the challenges route and turn this into a /challenges/?user=id route instead
 @user_routes.route('/<int:id>/challenges', methods=['GET'])
 def user_challenges(id):
     """
     GET request retrieves all challenges for the user.
     """
-    user_challenges = UserChallenge.query.filter(
-        UserChallenge.user_id == id).all()
+    user_challenges = user_challenge_repository.get_user_challenges(id)
     return {"challenges": [user_challenge.to_dict() for user_challenge in user_challenges]}
 
 
