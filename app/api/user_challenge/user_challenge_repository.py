@@ -25,4 +25,18 @@ class challenge_repository():
     # get challenge
     # if challenge not found, 404 err
     # update
-    def update_challenge():
+    def update_challenge(self, challenge_id, status):
+        challenge = self.get_challenge(challenge_id)
+        if not challenge:
+            # replace with ResourceNotFoundError
+            raise ValueError('Resource not found')
+        challenge.status = status
+        db.session.add(challenge)
+        db.session.commit()
+        return challenge
+
+    def delete_challenge(self, challenge_id):
+        challenge = self.get_challenge
+        db.session.delete(challenge)
+        db.session.commit()
+        return { 'success': True }

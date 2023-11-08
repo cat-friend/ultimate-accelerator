@@ -84,10 +84,7 @@ def edit_challenge(id):
     form = EditChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user_challenge = UserChallenge.query.get(id)
-        user_challenge.status = form.data['status']
-        db.session.add(user_challenge)
-        db.session.commit()
+        user_challenge = user_challenge_repository.update_challenge(id, form.data['status'])
         return user_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -103,10 +100,9 @@ def delete_challenge(id):
     form = DeleteChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user_challenge = UserChallenge.query.get(id)
-        db.session.delete(user_challenge)
-        db.session.commit()
-        return {}, 200
+        challenge = user_challenge_repository(id)
+        if challenge.success:
+            return {}, 200
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
