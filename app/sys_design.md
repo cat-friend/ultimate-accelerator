@@ -19,12 +19,17 @@ flowchart LR
             - makes denormalized data,
             sends to UserChallenge
              dimension table`"]
+            CR[ChallengeRepoLayer]
+            DRepoLayer["`UserChallenge
+            denormalized data
+            repo layer`"]
             Database[(Database)]
+            DTable[(UserChallenge denormalized data)]
+            U --> DRepoLayer
+            DRepoLayer <--> DTable
             Controller --> U
-            U <--> Database[("`Database
-            - UserChallenge table
-            - UserChallenge dimension table
-            `")]
+            U --> CR
+            CR <--> Database[("UserChallenge table")]
         end
         API -- error response --> F
     end
