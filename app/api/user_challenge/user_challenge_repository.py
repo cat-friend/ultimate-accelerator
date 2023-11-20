@@ -1,4 +1,4 @@
-from app.models import UserChallenge, db, UserChallengeDimensionTable
+from app.models import UserChallenge, commit_document_to_db, delete_document_from_db
 
 class challenge_repository():
     def __init__(self):
@@ -23,8 +23,7 @@ class challenge_repository():
             challenge_type_id=challenge_type_id,
             user_id=user_id,
             value=value)
-        db.session.add(new_challenge)
-        db.session.commit()
+        commit_document_to_db(new_challenge)
         return new_challenge
 
     # get challenge
@@ -36,12 +35,14 @@ class challenge_repository():
             # replace with ResourceNotFoundError
             raise ValueError('Resource not found')
         challenge.status = status
-        db.session.add(challenge)
-        db.session.commit()
+        commit_document_to_db(challenge)
         return challenge
 
     def delete_challenge(self, challenge_id):
         challenge = self.get_challenge(challenge_id)
-        db.session.delete(challenge)
-        db.session.commit()
+        # if challenge not found, 404 err
+        if not challenge:
+            # replace with ResourceNotFoundError
+            raise ValueError('Resource not found')
+        delete_document_from_db(challenge)
         return { 'success': True }
