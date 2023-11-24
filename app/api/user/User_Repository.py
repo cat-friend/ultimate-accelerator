@@ -1,6 +1,6 @@
 from app.models import User, db
 
-class user_repository():
+class User_Repository():
     def __init__(self):
         pass
 

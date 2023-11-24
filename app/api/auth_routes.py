@@ -1,8 +1,8 @@
-from flask import Blueprint, session, request
-from app.models import User, db, ClanUsers
+from flask import Blueprint, request
+from app.models import ClanUsers
 from app.forms import LoginForm, SignUpForm
 from flask_login import current_user, login_user, logout_user
-from app.api.user.user_repository import user_repository
+from .user.User_Repository import User_Repository
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -47,7 +47,7 @@ def login():
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user = user_repository.login(form.data['email'], form.data['password'])
+        user = User_Repository.login(form.data['email'], form.data['password'])
         # Add the user to the session, we are logged in!
         login_user(user)
         return user.to_dict()
@@ -71,7 +71,7 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user = user_repository.create_user(
+        user = User_Repository.create_user(
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password']
