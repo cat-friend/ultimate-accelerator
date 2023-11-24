@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import ClanUsers
+from app.models import ClanUsers, commit_document_to_db
 from app.forms import LoginForm, SignUpForm
 from flask_login import current_user, login_user, logout_user
 from .user.User_Repository import User_Repository
@@ -76,6 +76,7 @@ def sign_up():
             email=form.data['email'],
             password=form.data['password']
         )
+        commit_document_to_db(user)
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
