@@ -1,10 +1,8 @@
 from flask import Blueprint, request
-from app.api.user_challenge import user_challenge_repository
-from app.models import UserChallenge, db
+from app.api.user_challenge import User_Challenge_Repository
 from app.forms import ChallengeForm, EditChallengeForm, DeleteChallengeForm
-from app.seeds import seed_one_user
-from app.forms import SeedUserForm
-from app.api.user_challenge_dimension_table.user_challenge_dimension_repository import create_dimension_table_entry, get_entries
+from app.api.user_challenge import User_Challenge_Repository
+from app.api.denormalized_user_challenge import Denormalized_User_Challenge_Repository
 from app.api.utils.queries import queries, QueryOptions
 
 challenge_routes = Blueprint('challenges', __name__)
@@ -41,13 +39,11 @@ def all_challenges():
         challenge_type_id = form.data['challenge_type_id']
         user_id = form.data['user_id']
         value = form.data['value']
-        new_challenge = UserChallenge(
+        new_challenge = User_Challenge_Repository.create_challenge(
             challenge_label=challenge_label,
             challenge_type_id=challenge_type_id,
             user_id=user_id,
             value=value)
-        db.session.add(new_challenge)
-        db.session.commit()
         weapon_id = form.data['weapon_id']
         mode_id = form.data['mode_id']
         legend_id = form.data['legend_id']
@@ -64,7 +60,7 @@ def get_challenge(id):
     """
     Responds to GET requests with a specific user's UserChallenge.
     """
-    user_challenge = user_challenge_repository.get_challenge(id)
+    user_challenge = User_Challenge_Repository.get_challenge(id)
     return user_challenge.to_dict()
 
 
@@ -80,7 +76,7 @@ def edit_challenge(id):
     form = EditChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user_challenge = user_challenge_repository.update_challenge(id, form.data['status'])
+        user_challenge = User_Challenge_Repository.update_challenge(id, form.data['status'])
         return user_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -116,8 +112,7 @@ def calc_max(user_id):
     mode_ids = [1, 2, 3]
     result = {}
     for mode_id in mode_ids:
-        query_result = get_entries(queries.challenges_by_legend, QueryOptions.user_mode(**{user_id, mode_id}))
-
+        query_result = Denormalized_User_Challenge_Repository.get_entries(queries.challenges_by_legend, QueryOptions.user_mode(**{user_id, mode_id}))
         try:
             result[f"legend_mode_{mode_id}"] = [
                 {
@@ -146,8 +141,7 @@ def calc_max(user_id):
         except:
             result[f"legend_mode_{mode_id}"] = []
             result[f"legend_mode_{mode_id}_challenges"] = {}
-        # userid, mode
-        query_result = db.session.execute(queries.challenges_by_weapon, QueryOptions.user_mode(**{user_id, mode_id})).fetchall()
+        query_result = Denormalized_User_Challenge_Repository.get_entries(queries.challenges_by_weapon, QueryOptions.user_mode(**{user_id, mode_id}))
         try:
             result[f"weapon_mode_{mode_id}"] = [
                 {
@@ -165,7 +159,7 @@ def calc_max(user_id):
                 lookup_list.append(row["weapon_id"])
 
             for weapon_id in lookup_list:
-                query_result = get_entries(queries.mode_and_weapon_specific, QueryOptions.user_mode_weapon(**{user_id, mode_id, weapon_id}))
+                query_result = Denormalized_User_Challenge_Repository.get_entries(queries.mode_and_weapon_specific, QueryOptions.user_mode_weapon(**{user_id, mode_id, weapon_id}))
                 for row in query_result:
                     result[f"weapon_mode_{mode_id}_challenges"][row.id] = {
                         "sum": row.sum,
@@ -177,7 +171,7 @@ def calc_max(user_id):
         except:
             result[f"weapon_mode_{mode_id}"] = []
             result[f"weapon_mode_{mode_id}_challenges"] = {}
-        query_result = db.session.execute(queries.weapon_and_legend_agnostic, QueryOptions.user_mode(**{user_id, mode_id})).fetchall()
+        query_result = Denormalized_User_Challenge_Repository.get_entries(queries.weapon_and_legend_agnostic, QueryOptions.user_mode(**{user_id, mode_id}))
         result[f"misc_mode_{mode_id}_challenges"] = [
             {
                 "sum": row.sum,
@@ -188,20 +182,3 @@ def calc_max(user_id):
             } for row in query_result
         ]
     return result
-
-# deprecate this
-@challenge_routes.route('/import/<int:id>', methods=['POST'])
-def s12_import(id):
-    """
-    Responds to POST requests by importing current S12 challenges for a user.
-    If the user already has challenges, they will not be able to import
-    """
-    form = SeedUserForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        seed_one_user([id])
-        user_challenges = UserChallenge.query.filter(
-            UserChallenge.user_id == id).all()
-        return {"challenges": [user_challenge.to_dict() for user_challenge in user_challenges]}
-    else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401

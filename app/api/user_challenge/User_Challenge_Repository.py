@@ -1,6 +1,6 @@
 from app.models import UserChallenge, commit_document_to_db, delete_document_from_db
 
-class challenge_repository():
+class User_Challenge_Repository():
     def __init__(self):
         pass
 
@@ -16,7 +16,7 @@ class challenge_repository():
         UserChallenge.user_id == user_id).all()
         return user_challenges
 
-    # positional args suck, turn this into a dict
+
     def create_challenge(challenge_label: str, challenge_type_id: str, user_id: str, value: int):
         new_challenge = UserChallenge(
             challenge_label=challenge_label,

@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.api.user_challenge import user_challenge_repository
+from app.api.user_challenge import User_Challenge_Repository
 from app.models import User, db, UserChallenge
 from app.forms import UserForm
 
@@ -31,7 +31,7 @@ def user_challenges(id):
     """
     GET request retrieves all challenges for the user.
     """
-    user_challenges = user_challenge_repository.get_user_challenges(id)
+    user_challenges = User_Challenge_Repository.get_user_challenges(id)
     return {"challenges": [user_challenge.to_dict() for user_challenge in user_challenges]}
 
 
