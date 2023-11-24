@@ -1,4 +1,4 @@
-from .db import db
+from .database import db
 from sqlalchemy.sql import func
 
 class Message(db.Model):

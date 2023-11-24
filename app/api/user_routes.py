@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required
 from app.api.user_challenge import User_Challenge_Repository
-from app.models import User, db, UserChallenge
+from app.models import User, database, UserChallenge
 from app.forms import UserForm
 
 
@@ -49,8 +49,8 @@ def user(id):
         if form.validate_on_submit():
             bio = form.data["bio"]
             user.bio = bio
-            db.session.add(user)
-            db.session.commit()
+            database.session.add(user)
+            database.session.commit()
         elif form.errors:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     return user.to_dict()

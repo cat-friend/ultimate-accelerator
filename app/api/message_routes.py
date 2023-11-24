@@ -1,5 +1,5 @@
 from flask import Blueprint, session, request
-from app.models import Message, db
+from app.models import Message, database
 from app.forms import MessageForm, EditMessageForm, DeleteMessageForm
 
 message_routes = Blueprint('messages', __name__)
@@ -31,8 +31,8 @@ def new_message():
         message = form.data['message']
         new_message = Message(
             user_id=user_id, clan_id=clan_id, message=message)
-        db.session.add(new_message)
-        db.session.commit()
+        database.session.add(new_message)
+        database.session.commit()
         return new_message.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -55,8 +55,8 @@ def one_message(id):
             curr_message = Message.query.get(id)
             message = form.data['message']
             curr_message.message = message
-            db.session.add(curr_message)
-            db.session.commit()
+            database.session.add(curr_message)
+            database.session.commit()
             return curr_message.to_dict()
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -65,8 +65,8 @@ def one_message(id):
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             message = Message.query.get(id)
-            db.session.delete(message)
-            db.session.commit()
+            database.session.delete(message)
+            database.session.commit()
             return {}, 200
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -1,5 +1,4 @@
-from .db import db
-
+from .database import db
 
 class ChallengeType(db.Model):
     __tablename__ = 'challengetypes'
