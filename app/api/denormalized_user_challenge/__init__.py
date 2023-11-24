@@ -1,0 +1,1 @@
+from .Denormalized_User_Challenge_Repository import Denormalized_User_Challenge_Repository

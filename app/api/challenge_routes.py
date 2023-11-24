@@ -1,8 +1,9 @@
 from flask import Blueprint, request
-from app.models import UserChallenge, db, UserChallengeDimensionTable
+from app.api.user_challenge import User_Challenge_Repository
 from app.forms import ChallengeForm, EditChallengeForm, DeleteChallengeForm
-from app.seeds import seed_one_user
-from app.forms import SeedUserForm
+from app.api.user_challenge import User_Challenge_Repository
+from app.api.denormalized_user_challenge import Denormalized_User_Challenge_Repository
+from app.api.utils.queries import queries, QueryOptions
 
 challenge_routes = Blueprint('challenges', __name__)
 
@@ -19,13 +20,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 def new_dimension_table_entry(user_challenge_id, value, weapon_ids=[], mode_ids=[], legend_ids=[]):
-    for weapon_id in weapon_ids:
-        for mode_id in mode_ids:
-            for legend_id in legend_ids:
-                new_entry = UserChallengeDimensionTable(
-                    user_challenge_id=user_challenge_id, weapon_id=weapon_id, mode_id=mode_id, legend_id=legend_id, value=value)
-                db.session.add(new_entry)
-                db.session.commit()
+    Denormalized_User_Challenge_Repository.create_entry(**{user_challenge_id, value, weapon_ids, mode_ids, legend_ids})
     return
 
 
@@ -44,19 +39,17 @@ def all_challenges():
         challenge_type_id = form.data['challenge_type_id']
         user_id = form.data['user_id']
         value = form.data['value']
-        new_challenge = UserChallenge(
+        new_challenge = User_Challenge_Repository.create_challenge(
             challenge_label=challenge_label,
             challenge_type_id=challenge_type_id,
             user_id=user_id,
             value=value)
-        db.session.add(new_challenge)
-        db.session.commit()
-        weapon_id = form.data['weapon_id']
-        mode_id = form.data['mode_id']
-        legend_id = form.data['legend_id']
+        weapon_ids = form.data['weapon_id']
+        mode_ids = form.data['mode_id']
+        legend_ids = form.data['legend_id']
         user_challenge_id = new_challenge.id
-        new_dimension_table_entry(
-            user_challenge_id, value, weapon_id, mode_id, legend_id)
+        Denormalized_User_Challenge_Repository.create_entry(
+            **{user_challenge_id, value, weapon_ids, mode_ids, legend_ids})
         return new_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -67,10 +60,12 @@ def get_challenge(id):
     """
     Responds to GET requests with a specific user's UserChallenge.
     """
-    user_challenge = UserChallenge.query.get(id)
+    user_challenge = User_Challenge_Repository.get_challenge(id)
     return user_challenge.to_dict()
 
 
+# this should be PATCH since we're only changing the status
+# when we make ALL fields editable (except name/challenge str), it will still be a PATCH
 @challenge_routes.route('/<int:id>', methods=['PUT'])
 def edit_challenge(id):
     """
@@ -81,10 +76,7 @@ def edit_challenge(id):
     form = EditChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user_challenge = UserChallenge.query.get(id)
-        user_challenge.status = form.data['status']
-        db.session.add(user_challenge)
-        db.session.commit()
+        user_challenge = User_Challenge_Repository.update_challenge(id, form.data['status'])
         return user_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -100,144 +92,93 @@ def delete_challenge(id):
     form = DeleteChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user_challenge = UserChallenge.query.get(id)
-        db.session.delete(user_challenge)
-        db.session.commit()
-        return {}, 200
+        challenge = User_Challenge_Repository.delete_challenge(id)
+        if challenge.success:
+            return {}, 200
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+# should this be its own resource?
+# it's basically getting the challenges from the dimension table and then returning the most efficient way to play,
+# so the resource is the challenges
+# ok to stay here?
+# maybe turn this into a query instead of a nested resource?
+# todo: gurl abstract this!!!
+# todo: better route naming
 @challenge_routes.route('/accelerate/<int:id>', methods=['GET'])
-def calc_max(id):
-    modes = [1, 2, 3]
+def calc_max(user_id):
+    # todo: change this to an enum/db call
+    mode_ids = [1, 2, 3]
     result = {}
-    for mode in modes:
-        query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as results, \
-                             userchallengesdimensiontable.legend_id, \
-                             userchallengesdimensiontable.mode_id\
-                             FROM userchallenges\
-                             JOIN userchallengesdimensiontable\
-                             ON userchallenges.id=userchallengesdimensiontable.user_challenge_id\
-                             WHERE userchallenges.user_id=:user_id AND\
-                             NOT userchallenges.status=\'completed\'\
-                             AND legend_id > 0\
-                             AND mode_id=:mode_id\
-                             GROUP BY userchallengesdimensiontable.legend_id,\
-                             userchallengesdimensiontable.mode_id\
-                             ORDER BY results desc;', {'user_id': id, 'mode_id': mode}).fetchall()
+    for mode_id in mode_ids:
+        query_result = Denormalized_User_Challenge_Repository.get_entries(queries.challenges_by_legend, QueryOptions.user_mode(**{user_id, mode_id}))
         try:
-            result[f"legend_mode_{mode}"] = [
-                {"sum": row.results, "legend_id": row.legend_id, "mode_id": row.mode_id} for row in query_result]
-            max = result[f"legend_mode_{mode}"][0]["sum"]
-            result[f"legend_mode_{mode}"] = list(
-                filter(lambda ele: ele["sum"] == max, result[f"legend_mode_{mode}"]))
+            result[f"legend_mode_{mode_id}"] = [
+                {
+                    "sum": row.results,
+                    "legend_id": row.legend_id,
+                    "mode_id": row.mode_id
+                } for row in query_result
+            ]
+            max = result[f"legend_mode_{mode_id}"][0]["sum"]
+            result[f"legend_mode_{mode_id}"] = list(
+                filter(lambda ele: ele["sum"] == max, result[f"legend_mode_{mode_id}"]))
             lookup_list = []
-            result[f"legend_mode_{mode}_challenges"] = {}
-            for row in result[f"legend_mode_{mode}"]:
+            result[f"legend_mode_{mode_id}_challenges"] = {}
+            for row in result[f"legend_mode_{mode_id}"]:
                 lookup_list.append(row["legend_id"])
             for legend_id in lookup_list:
-                query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
-                    userchallenges.id, \
-                    userchallengesdimensiontable.mode_id, \
-                    userchallenges.challenge_label, \
-                    userchallenges.status \
-                    FROM userchallenges \
-                    JOIN userchallengesdimensiontable \
-                    ON userchallenges.id=userchallengesdimensiontable.user_challenge_id \
-                    WHERE userchallenges.user_id=:user_id AND \
-                    NOT userchallenges.status=\'completed\' \
-                    AND legend_id=:legend_id \
-                    AND mode_id=:mode_id \
-                    GROUP BY userchallenges.id, \
-                    userchallengesdimensiontable.mode_id \
-                    ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'legend_id': legend_id}).fetchall()
+                query_result = (queries.mode_and_legend_specific, QueryOptions.user_mode_legend(**{user_id, mode_id, legend_id})).fetchall()
                 for row in query_result:
-                    result[f"legend_mode_{mode}_challenges"][row.id] = {"sum": row.sum, "id": row.id,
-                                                                        "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
+                    result[f"legend_mode_{mode_id}_challenges"][row.id] = {
+                        "sum": row.sum,
+                        "id": row.id,
+                        "mode_id": row.mode_id,
+                        "challenge_label": row.challenge_label,
+                        "status": row.status
+                    }
         except:
-            result[f"legend_mode_{mode}"] = []
-            result[f"legend_mode_{mode}_challenges"] = {}
-
-        query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as results, \
-                             userchallengesdimensiontable.weapon_id, \
-                             userchallengesdimensiontable.mode_id\
-                             FROM userchallenges\
-                             JOIN userchallengesdimensiontable\
-                             ON userchallenges.id=userchallengesdimensiontable.user_challenge_id\
-                             WHERE userchallenges.user_id=:user_id AND\
-                             NOT userchallenges.status=\'completed\'\
-                             AND weapon_id > 0\
-                             AND mode_id=:mode_id\
-                             GROUP BY userchallengesdimensiontable.weapon_id,\
-                             userchallengesdimensiontable.mode_id\
-                             ORDER BY results desc;', {'user_id': id, 'mode_id': mode}).fetchall()
+            result[f"legend_mode_{mode_id}"] = []
+            result[f"legend_mode_{mode_id}_challenges"] = {}
+        query_result = Denormalized_User_Challenge_Repository.get_entries(queries.challenges_by_weapon, QueryOptions.user_mode(**{user_id, mode_id}))
         try:
-            result[f"weapon_mode_{mode}"] = [
-                {"sum": row.results, "weapon_id": row.weapon_id, "mode_id": row.mode_id} for row in query_result]
-            max = result[f"weapon_mode_{mode}"][0]["sum"]
-            result[f"weapon_mode_{mode}"] = list(
-                filter(lambda ele: ele["sum"] == max, result[f"weapon_mode_{mode}"]))
+            result[f"weapon_mode_{mode_id}"] = [
+                {
+                    "sum": row.results,
+                    "weapon_id": row.weapon_id,
+                    "mode_id": row.mode_id
+                } for row in query_result
+            ]
+            max = result[f"weapon_mode_{mode_id}"][0]["sum"]
+            result[f"weapon_mode_{mode_id}"] = list(
+                filter(lambda ele: ele["sum"] == max, result[f"weapon_mode_{mode_id}"]))
             lookup_list = []
-            result[f"weapon_mode_{mode}_challenges"] = {}
-            for row in result[f"weapon_mode_{mode}"]:
+            result[f"weapon_mode_{mode_id}_challenges"] = {}
+            for row in result[f"weapon_mode_{mode_id}"]:
                 lookup_list.append(row["weapon_id"])
+
             for weapon_id in lookup_list:
-                query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
-                    userchallenges.id, \
-                    userchallengesdimensiontable.mode_id, \
-                    userchallenges.challenge_label, \
-                    userchallenges.status \
-                    FROM userchallenges \
-                    JOIN userchallengesdimensiontable \
-                    ON userchallenges.id=userchallengesdimensiontable.user_challenge_id \
-                    WHERE userchallenges.user_id=:user_id AND \
-                    NOT userchallenges.status=\'completed\' \
-                    AND weapon_id=:weapon_id \
-                    AND mode_id=:mode_id \
-                    GROUP BY userchallenges.id, \
-                    userchallengesdimensiontable.mode_id \
-                    ORDER BY sum desc; ', {'user_id': id, 'mode_id': mode, 'weapon_id': weapon_id}).fetchall()
+                query_result = Denormalized_User_Challenge_Repository.get_entries(queries.mode_and_weapon_specific, QueryOptions.user_mode_weapon(**{user_id, mode_id, weapon_id}))
                 for row in query_result:
-                    result[f"weapon_mode_{mode}_challenges"][row.id] = {"sum": row.sum, "id": row.id,
-                                                                        "mode_id": row.mode_id, "challenge_label": row.challenge_label, "status": row.status}
+                    result[f"weapon_mode_{mode_id}_challenges"][row.id] = {
+                        "sum": row.sum,
+                        "id": row.id,
+                        "mode_id": row.mode_id,
+                        "challenge_label": row.challenge_label,
+                        "status": row.status
+                        }
         except:
-            result[f"weapon_mode_{mode}"] = []
-            result[f"weapon_mode_{mode}_challenges"] = {}
-
-        query_result = db.session.execute('SELECT SUM(userchallengesdimensiontable.value) as sum, \
-                        userchallenges.id, \
-                        userchallengesdimensiontable.mode_id, \
-                        userchallenges.challenge_label, \
-                        userchallenges.status \
-                    FROM userchallenges \
-                    JOIN userchallengesdimensiontable \
-	                    ON userchallenges.id=userchallengesdimensiontable.user_challenge_id \
-	                    WHERE userchallenges.user_id=:user_id AND \
-	                    NOT userchallenges.status=\'completed\' \
-	                    AND userchallengesdimensiontable.weapon_id IS NULL \
-                        AND userchallengesdimensiontable.legend_id IS NULL \
-                        AND mode_id=:mode_id \
-	                    GROUP BY userchallenges.id, \
-                        userchallengesdimensiontable.mode_id \
-                        ORDER BY sum desc;', {'user_id': id, 'mode_id': mode}).fetchall()
-        result[f"misc_mode_{mode}_challenges"] = [{"sum": row.sum, "id": row.id, "mode_id": row.mode_id,
-                                                   "challenge_label": row.challenge_label, "status": row.status} for row in query_result]
+            result[f"weapon_mode_{mode_id}"] = []
+            result[f"weapon_mode_{mode_id}_challenges"] = {}
+        query_result = Denormalized_User_Challenge_Repository.get_entries(queries.weapon_and_legend_agnostic, QueryOptions.user_mode(**{user_id, mode_id}))
+        result[f"misc_mode_{mode_id}_challenges"] = [
+            {
+                "sum": row.sum,
+                "id": row.id,
+                "mode_id": row.mode_id,
+                "challenge_label": row.challenge_label,
+                "status": row.status
+            } for row in query_result
+        ]
     return result
-
-
-@challenge_routes.route('/import/<int:id>', methods=['POST'])
-def s12_import(id):
-    """
-    Responds to POST requests by importing current S12 challenges for a user.
-    If the user already has challenges, they will not be able to import
-    """
-    form = SeedUserForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        seed_one_user([id])
-        user_challenges = UserChallenge.query.filter(
-            UserChallenge.user_id == id).all()
-        return {"challenges": [user_challenge.to_dict() for user_challenge in user_challenges]}
-    else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
