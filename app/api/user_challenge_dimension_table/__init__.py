@@ -1,0 +1,1 @@
+from user_challenge_dimension_repository import create_dimension_table_entry, get_entries
