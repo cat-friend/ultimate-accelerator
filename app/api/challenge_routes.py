@@ -20,7 +20,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 def new_dimension_table_entry(user_challenge_id, value, weapon_ids=[], mode_ids=[], legend_ids=[]):
-    create_dimension_table_entry(**{user_challenge_id, value, weapon_ids, mode_ids, legend_ids})
+    Denormalized_User_Challenge_Repository.create_entry(**{user_challenge_id, value, weapon_ids, mode_ids, legend_ids})
     return
 
 
@@ -44,12 +44,12 @@ def all_challenges():
             challenge_type_id=challenge_type_id,
             user_id=user_id,
             value=value)
-        weapon_id = form.data['weapon_id']
-        mode_id = form.data['mode_id']
-        legend_id = form.data['legend_id']
+        weapon_ids = form.data['weapon_id']
+        mode_ids = form.data['mode_id']
+        legend_ids = form.data['legend_id']
         user_challenge_id = new_challenge.id
-        new_dimension_table_entry(
-            user_challenge_id, value, weapon_id, mode_id, legend_id)
+        Denormalized_User_Challenge_Repository.create_entry(
+            **{user_challenge_id, value, weapon_ids, mode_ids, legend_ids})
         return new_challenge.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -92,7 +92,7 @@ def delete_challenge(id):
     form = DeleteChallengeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        challenge = delete_challenge(id)
+        challenge = User_Challenge_Repository.delete_challenge(id)
         if challenge.success:
             return {}, 200
     else:

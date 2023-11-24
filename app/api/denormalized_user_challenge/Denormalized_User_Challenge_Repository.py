@@ -6,7 +6,7 @@ class Denormalized_User_Challenge_Repository():
     def __init__(self):
         pass
 
-    def create_dimension_table_entry(user_challenge_id, value, weapon_ids=[], mode_ids=[], legend_ids=[]):
+    def create_entry(user_challenge_id, value, weapon_ids=[], mode_ids=[], legend_ids=[]):
         for weapon_id in weapon_ids:
             for mode_id in mode_ids:
                 for legend_id in legend_ids:
