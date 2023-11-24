@@ -1,4 +1,5 @@
-from .database import db
+from app.models import user_challenge_dimension_table
+from .db import db
 
 
 class Legend(db.Model):

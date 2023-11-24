@@ -1,6 +1,6 @@
 # get rid of this
 from flask import Blueprint, session, request
-from app.models import Clan, ClanUsers, User, database
+from app.models import Clan, ClanUsers, User, db
 from app.forms import ClanForm, EditClanForm, DeleteClanForm, JoinClan, LeaveClan
 from app.models.message import Message
 
@@ -38,11 +38,11 @@ def default():
             description = form.data['description']
             new_clan = Clan(owner_user_id=user_id, name=name,
                             description=description)
-            database.session.add(new_clan)
-            database.session.commit()
+            db.session.add(new_clan)
+            db.session.commit()
             new_member = ClanUsers(user_id=user_id, clan_id=new_clan.id)
-            database.session.add(new_member)
-            database.session.commit()
+            db.session.add(new_member)
+            db.session.commit()
             return new_clan.to_dict()
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -65,8 +65,8 @@ def join_leave_clan(id):
             clan_id = id
             new_member = ClanUsers(user_id=user_id, clan_id=clan_id)
             clan_members = ClanUsers.query.join(User).filter(ClanUsers.clan_id == id).all()
-            database.session.add(new_member)
-            database.session.commit()
+            db.session.add(new_member)
+            db.session.commit()
             return {"clan_members": [clan_member.to_dict() for clan_member in clan_members]}
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -76,8 +76,8 @@ def join_leave_clan(id):
         if form.validate_on_submit():
             user_id = form.data['user_id']
             member = ClanUsers.query.filter_by(user_id=user_id).first()
-            database.session.delete(member)
-            database.session.commit()
+            db.session.delete(member)
+            db.session.commit()
             return {}, 200
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -108,8 +108,8 @@ def one_clan(id):
             name = form.data['name']
             clan.description = description
             clan.name = name
-            database.session.add(clan)
-            database.session.commit()
+            db.session.add(clan)
+            db.session.commit()
             return {"clan": clan.to_dict(), "clan_members": [clan_member.to_dict() for clan_member in clan_members]}
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -118,8 +118,8 @@ def one_clan(id):
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             clan = Clan.query.get(id)
-            database.session.delete(clan)
-            database.session.commit()
+            db.session.delete(clan)
+            db.session.commit()
             return {}, 200
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401

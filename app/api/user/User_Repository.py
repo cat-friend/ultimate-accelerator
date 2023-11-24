@@ -1,4 +1,4 @@
-from app.models import User, database
+from app.models import User, db
 
 class User_Repository():
     def __init__(self):
@@ -20,7 +20,6 @@ class User_Repository():
         # check the password
         if not user or not user.check_password(password):
             raise ValueError('Invalid login credentials')
-        database.add_user_to_session(user)
         return user
 
     def create_user(self, username: str, email: str, password: str):
@@ -31,5 +30,6 @@ class User_Repository():
         if existing_user:
             raise ValueError('Email address already in use.')
         user = User(username, email, password)
-        database.add_user_to_session(user)
+        db.session.add(user)
+        db.session.commit()
         return user

@@ -1,5 +1,5 @@
 from flask import Blueprint, session, request
-from app.models import User, Clan, UserChallenge, database
+from app.models import User, Clan, UserChallenge, db
 # from app.forms import SearchForm
 
 search_routes = Blueprint('search', __name__)
