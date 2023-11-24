@@ -1,4 +1,4 @@
-from app.models import User, db
+from app.models import User, db, commit_document_to_db
 
 class User_Repository():
     def __init__(self):
@@ -30,6 +30,5 @@ class User_Repository():
         if existing_user:
             raise ValueError('Email address already in use.')
         user = User(username, email, password)
-        db.session.add(user)
-        db.session.commit()
+        commit_document_to_db(user)
         return user
