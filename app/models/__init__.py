@@ -1,4 +1,4 @@
-from .db import db, commit_document_to_db, delete_document_from_db
+from .db import db, commit_document_to_db, delete_document_from_db, query_db
 from .user import User
 from .challenge_type import ChallengeType
 from .clan import Clan

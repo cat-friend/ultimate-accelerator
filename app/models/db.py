@@ -9,3 +9,6 @@ def commit_document_to_db(document):
 def delete_document_from_db(document):
     db.sesesion.delete(document)
     db.session.commit()
+
+def query_db(query, options):
+    return db.session.execute(query, options).fetchall()
