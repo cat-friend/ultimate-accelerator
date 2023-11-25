@@ -1,12 +1,12 @@
 from operator import itemgetter
-from app.api.denormalized_user_challenge import Denormalized_User_Challenge_Repository
+from app.api.denormalized_user_challenge import Denormalized_User_Challenge_Service
 from .User_Challenge_Repository import User_Challenge_Repository
 from app.api.utils.queries import queries, QueryOptions
 
 class User_Challenge_Service:
     def __init__(self):
         self.user_challenge_repository = User_Challenge_Repository()
-        self.denormalized_user_challenge_repository = Denormalized_User_Challenge_Repository()
+        self.denormalized_user_challenge_service = Denormalized_User_Challenge_Service()
 
     def create_challenge(self, data):
         challenge_label, challenge_type_id, user_id, value, weapon_ids, mode_ids, legend_ids = itemgetter('challenge_label', 'challenge_type_id', 'user_id', 'value', 'weapon_id', 'mode_id', 'legend_id')(data)
@@ -16,7 +16,7 @@ class User_Challenge_Service:
             user_id,
             value)
         user_challenge_id = new_challenge.id
-        self.denormalized_user_challenge_repository.create_entry(
+        self.denormalized_user_challenge_service.create_entries(
             **{ user_challenge_id, value, weapon_ids, mode_ids, legend_ids })
         return new_challenge
 
@@ -41,11 +41,12 @@ class User_Challenge_Service:
         self.user_challenge_repository.delete_challenge(challenge)
         return { 'success': True }
 
+    # todo: abstract this into more helpers
     def get_efficient_challenges(self, user_id):
         mode_ids = [1, 2, 3]
         result = {}
         for mode_id in mode_ids:
-            query_result = self.denormalized_user_challenge_repository.get_entries(queries.challenges_by_legend, QueryOptions.user_mode(**{user_id, mode_id}))
+            query_result = self.denormalized_user_challenge_service.get_entries(queries.challenges_by_legend, QueryOptions.user_mode(**{user_id, mode_id}))
             try:
                 result[f"legend_mode_{mode_id}"] = [
                     {
@@ -62,7 +63,7 @@ class User_Challenge_Service:
                 for row in result[f"legend_mode_{mode_id}"]:
                     lookup_list.append(row["legend_id"])
                 for legend_id in lookup_list:
-                    query_result = (queries.mode_and_legend_specific, QueryOptions.user_mode_legend(**{user_id, mode_id, legend_id})).fetchall()
+                    query_result = self.denormalized_user_challenge_service.get_entries(queries.mode_and_legend_specific, QueryOptions.user_mode_legend(**{user_id, mode_id, legend_id}))
                     for row in query_result:
                         result[f"legend_mode_{mode_id}_challenges"][row.id] = {
                             "sum": row.sum,
@@ -74,7 +75,7 @@ class User_Challenge_Service:
             except:
                 result[f"legend_mode_{mode_id}"] = []
                 result[f"legend_mode_{mode_id}_challenges"] = {}
-            query_result = self.denormalized_user_challenge_repository.get_entries(queries.challenges_by_weapon, QueryOptions.user_mode(**{user_id, mode_id}))
+            query_result = self.denormalized_user_challenge_service.get_entries(queries.challenges_by_weapon, QueryOptions.user_mode(**{user_id, mode_id}))
             try:
                 result[f"weapon_mode_{mode_id}"] = [
                     {
@@ -92,7 +93,7 @@ class User_Challenge_Service:
                     lookup_list.append(row["weapon_id"])
 
                 for weapon_id in lookup_list:
-                    query_result = self.denormalized_user_challenge_repository.get_entries(queries.mode_and_weapon_specific, QueryOptions.user_mode_weapon(**{user_id, mode_id, weapon_id}))
+                    query_result = self.denormalized_user_challenge_service.get_entries(queries.mode_and_weapon_specific, QueryOptions.user_mode_weapon(**{user_id, mode_id, weapon_id}))
                     for row in query_result:
                         result[f"weapon_mode_{mode_id}_challenges"][row.id] = {
                             "sum": row.sum,
@@ -104,7 +105,7 @@ class User_Challenge_Service:
             except:
                 result[f"weapon_mode_{mode_id}"] = []
                 result[f"weapon_mode_{mode_id}_challenges"] = {}
-            query_result = Denormalized_User_Challenge_Repository.get_entries(queries.weapon_and_legend_agnostic, QueryOptions.user_mode(**{user_id, mode_id}))
+            query_result = self.denormalized_user_challenge_service.get_entries(queries.weapon_and_legend_agnostic, QueryOptions.user_mode(**{user_id, mode_id}))
             result[f"misc_mode_{mode_id}_challenges"] = [
                 {
                     "sum": row.sum,

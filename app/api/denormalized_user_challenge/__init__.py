@@ -1,1 +1,1 @@
-from .Denormalized_User_Challenge_Repository import Denormalized_User_Challenge_Repository
+from .Denormalized_User_Challenge_Repository import Denormalized_User_Challenge_Repository, Denormalized_User_Challenge_Service
