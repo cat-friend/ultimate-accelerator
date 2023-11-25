@@ -11,10 +11,10 @@ class User_Challenge_Repository():
         challenge = UserChallenge.query.get(id)
         return challenge
 
-    def get_user_challenges(user_id: str):
+    def get_users_challenges(user_id: str):
         user_challenges = UserChallenge.query.filter(
         UserChallenge.user_id == user_id).all()
-        return user_challenges
+        return user_challenges.to_dict()
 
 
     def create_challenge(challenge_label: str, challenge_type_id: str, user_id: str, value: int):
@@ -24,25 +24,14 @@ class User_Challenge_Repository():
             user_id=user_id,
             value=value)
         commit_document_to_db(new_challenge)
-        return new_challenge
+        return new_challenge.to_dict()
 
     # get challenge
     # if challenge not found, 404 err
     # update
-    def update_challenge(self, challenge_id, status):
-        challenge = self.get_challenge(challenge_id)
-        if not challenge:
-            # replace with ResourceNotFoundError
-            raise ValueError('Resource not found')
-        challenge.status = status
+    def update_challenge(self, challenge):
         commit_document_to_db(challenge)
-        return challenge
+        return challenge.to_dict()
 
-    def delete_challenge(self, challenge_id):
-        challenge = self.get_challenge(challenge_id)
-        # if challenge not found, 404 err
-        if not challenge:
-            # replace with ResourceNotFoundError
-            raise ValueError('Resource not found')
+    def delete_challenge(self, challenge):
         delete_document_from_db(challenge)
-        return { 'success': True }
